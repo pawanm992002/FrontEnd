@@ -1,0 +1,28 @@
+.double-line-bottom{
+    position: relative;
+    padding: 10px 0px;
+    margin-bottom: 25px;
+    top: 0px;
+}
+
+.double-line-bottom::before{
+    border-radius: 8px;
+    bottom: 1px;
+    content: "";
+    height: 2px;
+    left: 0px;
+    position: absolute;
+    width: 150px;
+    background-color: #002147;
+}
+
+.double-line-bottom::after{
+    border-radius: 8px;
+    bottom: -1px;
+    content: "";
+    height: 6px;
+    left: 20px;
+    position: absolute;
+    width: 35px;
+    background-color: #fb572a;
+}

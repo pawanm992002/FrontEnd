@@ -1,7 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   text-decoration: none;
+  box-sizing: border-box;
+
+  /* ----------- Define the font family to globally  */
+  font-family: "Poppins", sans-serif;
+  /* font-weight: 500;
+  font-style: normal; */
 }
 
 :root {
@@ -14,6 +22,57 @@
   --text-highlight: salmon;
   --primary-bg: #47476b;
 }
+
+/* ------------------ Fonts/Typography Specific stuff ----------------- X  */
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-bold-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;

@@ -7,9 +7,9 @@ import Layout from "./components/Layout/Layout";
 
 //----------- Pages Specific Stuff
 import Home from "./pages/Home";
-import About from "./pages/About";
 import Error from "./pages/Error";
 import Department from "./pages/departments/Department";
+import AboutPageRoutes from "./pages/About/AboutPageRoutes";
 
 const AppRoutes = () => {
   return (
@@ -25,14 +25,10 @@ const AppRoutes = () => {
                 </Layout>
               }
             />
-            <Route
-              path="about"
-              element={
-                <Layout>
-                  <About />{" "}
-                </Layout>
-              }
-            />
+           
+               {/* ------------------- About pages route ---------------X */}
+               {AboutPageRoutes}
+
             <Route
               path="computer"
               element={
@@ -52,6 +48,9 @@ const AppRoutes = () => {
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>
+
+     
+
       </BrowserRouter>
     </>
   );

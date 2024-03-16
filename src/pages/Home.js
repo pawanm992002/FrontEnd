@@ -6,10 +6,13 @@ import Achievement from "../components/Home/Achievement";
 import { Box, Typography } from "@mui/material";
 import PrincipalMsg from "../components/Home/PrincipalMsg";
 import AboutECA from "../components/Home/AboutECA";
+import Header from "../components/Layout/Header";
 
 const Home = () => {
   return (
     <>
+    {/* ------------- Header of home page  ------------------ */}
+    <Header />
       <main>
         <Box sx={{ bgcolor: "var(--darkBG)" }}>
           <Box
