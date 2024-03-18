@@ -200,8 +200,7 @@ export default function Department({ comp }) {
             </Box>
           </TabPanel>
           <TabPanel value={value} index={3}>
-            Item Four
-            {/* <DepTables /> */}
+            <DepTables />
           </TabPanel>
           <TabPanel value={value} index={4}>
             Item Five
