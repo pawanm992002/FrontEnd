@@ -7,6 +7,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 
+import '../../styles/style.css'
+
+
 export default function PrincipalMsg() {
   const [fullShow, setFullShow] = useState(false);
   const message = `The journey of a thousand miles begins with a single step. The first step which a student takes with this institute of excellence goes a long way in shaping his destiny . As Mahatma Gandhi said, "By Education I mean an all round drawing out of the best in child and man-body, mind and spirit". The ultimate goal of education is the discovery of the meaning of life and the fulfillment of life for all mankind as well as for oneself. The quest of education is knowledge, humanity, culture, wisdom and sharpness but it should be noted that knowledge is not given but earned and character is not granted but cultivated. Engineering College Ajmer with its dedicated team of faculty members leaves no stone unturned in shaping the future of its students. It is not an institute but a family that takes care of every member, gives personal attention to their overall personality development and academic growth. We accord prime importance to the behavioral discipline, moral integrity and cognitive development of our students.
@@ -30,22 +33,14 @@ export default function PrincipalMsg() {
         maxWidth: "var(--maxWidth)",
         borderRadius: "8px",
         padding: "15px",
-        boxShadow: "2px 4px 3px black",
+        // boxShadow: "2px 4px 3px black",
       }}
     >
-      <Typography
-        variant="h4"
-        component="h4"
-        sx={{
-          justifyContent: "center",
-          fontWeight: "bold",
-          display: "flex",
-          color: "var(--darkText)",
-        }}
-      >
-        PRINCIPAL'S MESSAGE
-      </Typography>
-      <Card sx={{ maxWidth: 400, boxShadow: "2px 4px 3px black" }}>
+      
+
+      <Typography variant='h5' className='double-line-bottom' sx={{marginBottom:'20px'}}  >Principal Message</Typography>
+
+      <Card sx={{ maxWidth: 400,margin:'9px 0',boxShadow:'2px 3px 9px black' }}>
         <CardMedia
           sx={{ height: 250 }}
           image="/images/principal.jpg"

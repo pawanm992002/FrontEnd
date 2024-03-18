@@ -37,36 +37,36 @@ const images = [
 
 
 const Header = () => {
-    const theme = useTheme();
-    const [activeStep, setActiveStep] = useState(0);
-    const maxSteps = images.length;
-  
-    const handleNext = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-  
-    const handleBack = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-  
-    const handleStepChange = (step) => {
-      setActiveStep(step);
-    };
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = useState(0);
+  const maxSteps = images.length;
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleStepChange = (step) => {
+    setActiveStep(step);
+  };
   return (
     <>
-        <Box sx={{ maxWidth: "100%", flexGrow: 1 }}>
+      <Box sx={{ maxWidth: "100%", flexGrow: 1 }}>
         <Paper
           square
           elevation={0}
           sx={{
             display: "flex",
             alignItems: "center",
-            height: 50,
+            // height: 50,
             pl: 2,
             bgcolor: "background.default",
           }}
         >
-          <Typography>{images[activeStep].label}</Typography>
+          {/* <Typography>{images[activeStep].label}</Typography> */}
         </Paper>
         <AutoPlaySwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
@@ -80,7 +80,7 @@ const Header = () => {
                 <Box
                   component="img"
                   sx={{
-                    height: 550,
+                    height: 350,
                     display: "block",
                     maxWidth: "100%",
                     overflow: "hidden",
@@ -93,39 +93,16 @@ const Header = () => {
             </div>
           ))}
         </AutoPlaySwipeableViews>
-        <MobileStepper
-          steps={maxSteps}
-          position="static"
-          activeStep={activeStep}
-          nextButton={
-            <Button
-              size="small"
-              onClick={handleNext}
-              disabled={activeStep === maxSteps - 1}
-            >
-              Next
-              {theme.direction === "rtl" ? (
-                <KeyboardArrowLeft />
-              ) : (
-                <KeyboardArrowRight />
-              )}
-            </Button>
-          }
-          backButton={
-            <Button
-              size="small"
-              onClick={handleBack}
-              disabled={activeStep === 0}
-            >
-              {theme.direction === "rtl" ? (
-                <KeyboardArrowRight />
-              ) : (
-                <KeyboardArrowLeft />
-              )}
-              Back
-            </Button>
-          }
-        />
+
+
+        <MobileStepper  steps={maxSteps} position="static" activeStep={activeStep}
+         nextButton={ <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1} >  
+              {theme.direction === "rtl" ? ( <KeyboardArrowLeft />  ) : ( <KeyboardArrowRight />  )}
+            </Button>  }
+
+          backButton={ <Button size="small"  onClick={handleBack}  disabled={activeStep === 0} >
+              {theme.direction === "rtl" ? ( <KeyboardArrowRight />) : (  <KeyboardArrowLeft />  )}  </Button>  }  />
+
       </Box>
     </>
   )

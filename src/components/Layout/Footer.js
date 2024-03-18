@@ -59,7 +59,7 @@ const Footer = () => {
             {/* ----------- End of the footer line  */}
             <Box className="container-fluid" sx={{ my: 2 }}>
 
-                <Box className="container" sx={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', backgroundColor: '#47476b', p: 1 }}>
+                <Box className="container" sx={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', backgroundColor: 'var(--main-primary)', p: 1 }}>
                     <FooterLineLink link={'nodalofficer'} title={'nodal officer'} />
                     <FooterLineLink link={'projects'} title={'projects grants'} />
                     <FooterLineLink link={'feedback'} title={'feedback'} />

@@ -13,7 +13,10 @@ const Home = () => {
     <>
     {/* ------------- Header of home page  ------------------ */}
     <Header />
+
+    {/* ------------- Home page contents ---------------  */}
       <main>
+
         <Box sx={{ bgcolor: "var(--darkBG)" }}>
           <Box
             sx={{
@@ -28,9 +31,11 @@ const Home = () => {
             <section id="principalMessage">
               <PrincipalMsg />
             </section>
-            <section id="principalMessage">
+
+            <section id="aboutECA">
               <AboutECA />
             </section>
+
           </Box>
           <section id="news">
             <Scrollables />
@@ -42,10 +47,10 @@ const Home = () => {
         </Box>
 
         {/* --------------- Achievement section: to show our college or students achievements */}
-        <section id="achievements">
+        {/* <section id="achievements">
           <Typography variant="h5">Achievements</Typography>
           <Achievement />
-        </section>
+        </section> */}
       </main>
     </>
   );

@@ -1,27 +1,33 @@
-import { Box, List, ListItem } from "@mui/material";
+import { Box, Button, List, ListItem } from "@mui/material";
 
+const NavbarDropDownListData = [
+  ['home' , []],
+  ['about us',['history','vision & mission','pos & peos','how to reach','sight seeing','contact us']],
+  ['administration',['bog','principal','registrar','proctor','examination section','account section']],
+  ['academics', ['academic section','academic calendar','ug courses','pg courses','research','first year','syllabus','time table and class management']],
+  ['departments', ['civil engineering','electrical engineering']],
+  ['greivance', ['sc/st/obc']],
+  ['student corner', ['scholarship details','ncc']],
+  ['cells ', ['aicte cell','alumni cell']],
+  ['tpo' , []]
+]
 
 const Navbar = () => {
 
 
   return (
-    <div style={{ backgroundColor: "white" }}>
+    < >
       <Box
         sx={{
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-          mb: "50px",
+          // mb: "50px",
         }}
       >
-        <img
-          src="https://www.ecajmer.ac.in/images//white%20logo.png"
-          alt="gygjh"
-          srcset=""
-          width="500"
-          height="150"
+        <img src="https://www.ecajmer.ac.in/images//white%20logo.png" alt="ecajmer_logo"  srcset="" width="50%" style={{margin:'auto'}}
         />
-        <List
+        {/* <List
           sx={{
             display: "flex",
             gap: "10px",
@@ -75,126 +81,21 @@ const Navbar = () => {
           >
             HINDI
           </ListItem>
-        </List>
+        </List> */}
       </Box>
 
-      <Box bgcolor="white" sx={{ width: "80%", margin: "auto" }}>
-        <List
-          sx={{
-            display: "flex",
-            justifyContent: "space-around",
-            gap: "5px",
-            color: "#fff",
-            height: "30px",
-            fontSize: "15px",
-          }}
-        >
-          <ListItem
-            sx={{
-              justifyContent: "center",
-              bgcolor: "skyblue",
-              p: "0 3px",
-              cursor: "pointer",
-              height: "100%",
-              minWidth: "fit-content",
-            }}
-          >
-            HOME
-          </ListItem>
-          <ListItem
-            sx={{
-              justifyContent: "center",
-              bgcolor: "skyblue",
-              p: "0 3px",
-              cursor: "pointer",
-              height: "100%",
-            }}
-          >
-            About us
-          </ListItem>
-          <ListItem
-            sx={{
-              justifyContent: "center",
-              bgcolor: "skyblue",
-              p: "0 3px",
-              cursor: "pointer",
-              height: "100%",
-            }}
-          >
-            Administration
-          </ListItem>
-          <ListItem
-            sx={{
-              justifyContent: "center",
-              bgcolor: "skyblue",
-              p: "0 3px",
-              cursor: "pointer",
-              height: "100%",
-            }}
-          >
-            Acadmics
-          </ListItem>
-          <ListItem
-            sx={{
-              justifyContent: "center",
-              bgcolor: "skyblue",
-              p: "0 3px",
-              cursor: "pointer",
-              height: "100%",
-            }}
-          >
-            Departments
-          </ListItem>
-          <ListItem
-            sx={{
-              justifyContent: "center",
-              bgcolor: "skyblue",
-              p: "0 3px",
-              cursor: "pointer",
-              height: "100%",
-            }}
-          >
-            Grievance
-          </ListItem>
-          <ListItem
-            sx={{
-              justifyContent: "center",
-              bgcolor: "skyblue",
-              p: "0 3px",
-              cursor: "pointer",
-              height: "100%",
-            }}
-          >
-            Student Corner
-          </ListItem>
-          <ListItem
-            sx={{
-              justifyContent: "center",
-              bgcolor: "skyblue",
-              p: "0 3px",
-              cursor: "pointer",
-              height: "100%",
-            }}
-          >
-            Cells
-          </ListItem>
-          <ListItem
-            sx={{
-              justifyContent: "center",
-              bgcolor: "skyblue",
-              p: "0 3px",
-              cursor: "pointer",
-              height: "100%",
-              minWidth: "fit-content",
-            }}
-          >
-            Training & Placement
-          </ListItem>
+      <Box bgcolor="green" sx={{ width: "100%"}}>
+
+        <List  sx={{display: "flex",justifyContent: "space-around",alignItems:'center',width:"80%",margin:'auto',fontSize:'15px',color: "#fff"}}>
+
+{NavbarDropDownListData?.map((item,i)=>( <ListItem key={i} sx={{paddingTop:'5px',textTransform:'capitalize',cursor: "pointer",'&:hover':{color:'black'}}}> {item[0]}   </ListItem> ))}
+
         </List>
+
       </Box>
 
     
-    </div>
+    </>
   );
 };
 

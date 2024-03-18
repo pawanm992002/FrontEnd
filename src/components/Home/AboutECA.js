@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export default function AboutECA() {
-  const [expanded, setExpanded] = useState("panel2");
+
+  const [expanded, setExpanded] = useState("panel1");
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -84,175 +85,166 @@ export default function AboutECA() {
     },
   ];
   return (
-    <Box
-      sx={{
+    <Box >
+
+      <Typography variant='h5' className='double-line-bottom' sx={{ marginBottom: '20px' }}  >About ECA</Typography>
+
+      <Box sx={{
         maxWidth: "var(--maxWidth)",
         borderRadius: "8px",
         padding: "15px",
-        boxShadow: "2px 4px 3px black",
-      }}
-    >
-      <Typography
-        variant="h4"
-        component="h4"
-        sx={{
-          justifyContent: "center",
-          fontWeight: "bold",
-          display: "flex",
-          color: "var(--darkText)",
-        }}
-      >
-        ABOUT ECA
-      </Typography>
-      <Accordion
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-          sx={{ bgcolor: "var(--darkBG2)", color: "var(--darkText)" }}
+        boxShadow: '2px 3px 9px black',
+        color:'white'
+      }}>
+
+        <Accordion
+          expanded={expanded === "panel1"}
+          onChange={handleChange("panel1")}
         >
-          ECA TOUR
-        </AccordionSummary>
-        <AccordionDetails sx={{ bgcolor: "var(--darkBG3)" }}>
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/jSUaKvf4iO0?si=i3K-NqSqscWbHG_E"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel2"}
-        onChange={handleChange("panel2")}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-          sx={{ bgcolor: "var(--darkBG2)", color: "var(--darkText)" }}
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon  />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+            sx={{ bgcolor: "var(--main-primary)",color:'white'}}
+          >            ECA TOUR     </AccordionSummary>
+          <AccordionDetails sx={{ bgcolor: "var(--main-primary)" }}>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/jSUaKvf4iO0?si=i3K-NqSqscWbHG_E"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </AccordionDetails>
+        </Accordion>
+
+        <Accordion
+          expanded={expanded === "panel2"}
+          onChange={handleChange("panel2")}
         >
-          Undergraduate Courses (B.Tech.)
-        </AccordionSummary>
-        <AccordionDetails sx={{ bgcolor: "var(--darkBG3)" }}>
-          <List
-            className="scrollbar-hide"
-            sx={{ maxHeight: 250, overflowY: "auto" }}
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+            sx={{ bgcolor: "var(--darkBG2)", color: "var(--darkText)" }}
           >
-            {UGBranches.map((val, i) => (
-              <ListItem key={i}>
-                <ListItemText
-                  primary={
-                    <Link style={{ color: "var(--darkText)" }} to={val.link}>
-                      {i + 1 + ". " + val.text}
-                    </Link>
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel3"}
-        onChange={handleChange("panel3")}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-          sx={{ bgcolor: "var(--darkBG2)", color: "var(--darkText)" }}
+            Undergraduate Courses (B.Tech.)
+          </AccordionSummary>
+          <AccordionDetails sx={{ bgcolor: "var(--darkBG3)" }}>
+            <List
+              className="scrollbar-hide"
+              sx={{ maxHeight: 250, overflowY: "auto" }}
+            >
+              {UGBranches.map((val, i) => (
+                <ListItem key={i}>
+                  <ListItemText
+                    primary={
+                      <Link style={{ color: "var(--darkText)" }} to={val.link}>
+                        {i + 1 + ". " + val.text}
+                      </Link>
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion
+          expanded={expanded === "panel3"}
+          onChange={handleChange("panel3")}
         >
-          Postgraduate Courses
-        </AccordionSummary>
-        <AccordionDetails sx={{ bgcolor: "var(--darkBG3)" }}>
-          <List
-            className="scrollbar-hide"
-            sx={{ maxHeight: 250, overflowY: "auto" }}
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+            sx={{ bgcolor: "var(--darkBG2)", color: "var(--darkText)" }}
           >
-            {PGBranches.map((val, i) => (
-              <ListItem key={i}>
-                <ListItemText
-                  primary={
-                    <Link style={{ color: "#c7eaed" }} to={val.link}>
-                      {i + 1 + ". " + val.text}
-                    </Link>
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel4"}
-        onChange={handleChange("panel4")}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-          sx={{ bgcolor: "var(--darkBG2)", color: "var(--darkText)" }}
+            Postgraduate Courses
+          </AccordionSummary>
+          <AccordionDetails sx={{ bgcolor: "var(--darkBG3)" }}>
+            <List
+              className="scrollbar-hide"
+              sx={{ maxHeight: 250, overflowY: "auto" }}
+            >
+              {PGBranches.map((val, i) => (
+                <ListItem key={i}>
+                  <ListItemText
+                    primary={
+                      <Link style={{ color: "black" }} to={val.link}>
+                        {i + 1 + ". " + val.text}
+                      </Link>
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion
+          expanded={expanded === "panel4"}
+          onChange={handleChange("panel4")}
         >
-          PhD Research Center
-        </AccordionSummary>
-        <AccordionDetails sx={{ bgcolor: "var(--darkBG3)" }}>
-          <List
-            className="scrollbar-hide"
-            sx={{ maxHeight: 250, overflowY: "auto" }}
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+            sx={{ bgcolor: "var(--darkBG2)", color: "var(--darkText)" }}
           >
-            {PhDResearch.map((val, i) => (
-              <ListItem key={i}>
-                <ListItemText
-                  primary={
-                    <Link style={{ color: "#c7eaed" }} to={val.link}>
-                      {i + 1 + ". " + val.text}
-                    </Link>
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel5"}
-        onChange={handleChange("panel5")}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-          sx={{ bgcolor: "var(--darkBG2)", color: "var(--darkText)" }}
+            PhD Research Center
+          </AccordionSummary>
+          <AccordionDetails sx={{ bgcolor: "var(--darkBG3)" }}>
+            <List
+              className="scrollbar-hide"
+              sx={{ maxHeight: 250, overflowY: "auto" }}
+            >
+              {PhDResearch.map((val, i) => (
+                <ListItem key={i}>
+                  <ListItemText
+                    primary={
+                      <Link style={{ color: "var(--darkText)" }} to={val.link}>
+                        {i + 1 + ". " + val.text}
+                      </Link>
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion
+          expanded={expanded === "panel5"}
+          onChange={handleChange("panel5")}
         >
-          Employee Corner
-        </AccordionSummary>
-        <AccordionDetails sx={{ bgcolor: "var(--darkBG3)" }}>
-          <List
-            className="scrollbar-hide"
-            sx={{ maxHeight: 250, overflowY: "auto" }}
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+            sx={{ bgcolor: "var(--darkBG2)", color: "var(--darkText)" }}
           >
-            {EmployeeCorner.map((val, i) => (
-              <ListItem key={i}>
-                <ListItemText
-                  primary={
-                    <Link style={{ color: "#c7eaed" }} to={val.link}>
-                      {i + 1 + ". " + val.text}
-                    </Link>
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-        </AccordionDetails>
-      </Accordion>
+            Employee Corner
+          </AccordionSummary>
+          <AccordionDetails sx={{ bgcolor: "var(--darkBG3)" }}>
+            <List
+              className="scrollbar-hide"
+              sx={{ maxHeight: 250, overflowY: "auto" }}
+            >
+              {EmployeeCorner.map((val, i) => (
+                <ListItem key={i}>
+                  <ListItemText
+                    primary={
+                      <Link style={{ color: "var(--darkText)" }} to={val.link}>
+                        {i + 1 + ". " + val.text}
+                      </Link>
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </AccordionDetails>
+        </Accordion>
+      </Box>
     </Box>
-    // </Box>
   );
 }
