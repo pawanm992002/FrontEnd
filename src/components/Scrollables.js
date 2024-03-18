@@ -123,7 +123,7 @@ export default function Scrollables() {
             <Tab label="FORMATS" {...a11yProps(3)} />
           </Tabs>
 
-          <Box sx={{ width: "100%", bgcolor: "#757572" }}>
+          <Box sx={{ width: "100%", bgcolor: "var(--darkBG3)" }}>
             <TabPanel value={value} index={0}>
               <List
                 className="scrollbar-hide"
@@ -133,7 +133,7 @@ export default function Scrollables() {
                   <ListItem key={i}>
                     <ListItemText
                       primary={
-                        <Link style={{ color: "white" }} to={val.link}>
+                        <Link style={{ color: "black" }} to={val.link}>
                           {i + 1 + ". " + val.text}{" "}
                         </Link>
                       }

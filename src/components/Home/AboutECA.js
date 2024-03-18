@@ -105,9 +105,9 @@ export default function AboutECA() {
             expandIcon={<ExpandMoreIcon  />}
             aria-controls="panel1-content"
             id="panel1-header"
-            sx={{ bgcolor: "var(--main-primary)",color:'white'}}
+            sx={{ bgcolor: "var(--darkBG2)",color:'white'}}
           >            ECA TOUR     </AccordionSummary>
-          <AccordionDetails sx={{ bgcolor: "var(--main-primary)" }}>
+          <AccordionDetails sx={{ bgcolor: "var(--darkBG3)" }}>
             <iframe
               width="560"
               height="315"

@@ -1,102 +1,177 @@
-import { Box, Button, List, ListItem } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  IconButton,
+  Toolbar,
+  useMediaQuery,
+  Typography,
+  Stack,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import MyDropdown from "../utilily/MyDropdown";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const NavbarDropDownListData = [
-  ['home' , []],
-  ['about us',['history','vision & mission','pos & peos','how to reach','sight seeing','contact us']],
-  ['administration',['bog','principal','registrar','proctor','examination section','account section']],
-  ['academics', ['academic section','academic calendar','ug courses','pg courses','research','first year','syllabus','time table and class management']],
-  ['departments', ['civil engineering','electrical engineering']],
-  ['greivance', ['sc/st/obc']],
-  ['student corner', ['scholarship details','ncc']],
-  ['cells ', ['aicte cell','alumni cell']],
-  ['tpo' , []]
-]
+  ["home", []],
+  [
+    "about us",
+    [
+      { name: "history", link: "/History" },
+      { name: "vision & mission", link: "/vision" },
+      { name: "pos & peos", link: "/peo" },
+      { name: "how to reach", link: "/HowtoReach" },
+      { name: "sight seeing", link: "/Sightseeing" },
+      { name: "contact us", link: "contact" },
+    ],
+  ],
+  [
+    "administration",
+    [
+      { name: "bog" },
+      { name: "principal" },
+      { name: "registrar" },
+      { name: "proctor" },
+      { name: "examination section" },
+      { name: "account section" },
+    ],
+  ],
+  [
+    "academics",
+    [
+      { name: "academic section" },
+      { name: "academic calendar" },
+      { name: "ug courses" },
+      { name: "pg courses" },
+      { name: "research" },
+      { name: "first year" },
+      { name: "syllabus" },
+      { name: "time table and class management" },
+    ],
+  ],
+  [
+    "departments",
+    [
+      { name: "civil engineering", link: "/civil" },
+      { name: "electrical engineering", link: "/electrical" },
+      { name: "Computer Science and Engineering", link: "/computer" },
+    ],
+  ],
+  ["greivance", [{ name: "sc/st/obc" }]],
+  ["student corner", [{ name: "scholarship details" }, { name: "ncc" }]],
+  ["cells ", [{ name: "aicte cell" }, { name: "alumni cell" }]],
+  ["tpo", []],
+];
 
-const Navbar = () => {
-
-
+export default function Navbar () {
+  const navView = useMediaQuery("(min-width:1100px)");
+  const [showNav, setShowNav] = useState(false);
   return (
-    < >
+    <>
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          // mb: "50px",
+          justifyContent: "center",
+          bgcolor: "var(--darkBG)",
         }}
       >
-        <img src="https://www.ecajmer.ac.in/images//white%20logo.png" alt="ecajmer_logo"  srcset="" width="50%" style={{margin:'auto'}}
-        />
-        {/* <List
+        <Box
           sx={{
+            maxWidth: "var(--maxWidth)",
             display: "flex",
-            gap: "10px",
-            p: "2px 5px",
-            mt: "5px",
-            fontSize: "13px",
-            color: "#fff",
-            mr: 3,
-            height: "40px",
-            borderRadius: 2,
-            bgcolor: "#d9d9d9",
+            flexDirection: "column",
           }}
         >
-          <ListItem
-            sx={{
-              minWidth: "fit-content",
-              p: "0px 5px",
-              m: 0,
-              cursor: "pointer",
-            }}
-          >
-            Btech Admission Enquiry
-          </ListItem>
-          <ListItem
-            sx={{
-              minWidth: "fit-content",
-              p: "0px 5px",
-              m: 0,
-              cursor: "pointer",
-            }}
-          >
-            Screen Reader
-          </ListItem>
-          <ListItem
-            sx={{
-              minWidth: "fit-content",
-              p: "0px 5px",
-              m: 0,
-              cursor: "pointer",
-            }}
-          >
-            ECA Ajmer
-          </ListItem>
-          <ListItem
-            sx={{
-              minWidth: "fit-content",
-              p: "0px 5px",
-              m: 0,
-              cursor: "pointer",
-            }}
-          >
-            HINDI
-          </ListItem>
-        </List> */}
+          <img
+            src="https://www.ecajmer.ac.in/images//white%20logo.png"
+            alt="ecajmer_logo"
+            srcset=""
+            width="50%"
+            style={{ margin: "auto", minHeight: "100px" }}
+          />
+          {navView ? (
+            <Stack
+              direction="row"
+              bgcolor="#5bb55b"
+              sx={{ width: "100%", justifyContent: "center" }}
+            >
+              {/* <Button> Home </Button> */}
+              {NavbarDropDownListData?.map((item, i) => (
+                <MyDropdown
+                  key={i}
+                  dropdownName={item[0]}
+                  dropdownList={item[1]}
+                />
+              ))}
+            </Stack>
+          ) : (
+            <Box>
+              <AppBar position="static" sx={{ bgcolor: "#5bb55b" }}>
+                <Toolbar>
+                  <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ flexGrow: 1 }}
+                  >
+                    <Link
+                      to="/"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
+                      <img
+                        src="/images/mobileLogo.png"
+                        style={{ width: "50px", borderRadius: "50%" }}
+                      />
+                      <Typography color="white">ECA</Typography>
+                    </Link>
+                  </Typography>
+                  <IconButton
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ position: "relative" }}
+                    onClick={() => setShowNav(!showNav)}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                </Toolbar>
+                {showNav && (
+                  <div
+                    style={{ position: "absolute", top: "170px", right: "20px" }}
+                  >
+                    {NavbarDropDownListData?.map((item, i) => (
+                      <Accordion style={{ width: "220px", margin:'0px' }}>
+                        <AccordionSummary
+                          expandIcon={<ExpandMoreIcon />}
+                          aria-controls="panel1-content"
+                          id="panel1-header"
+                        >
+                          <Typography>{item[0]}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          {item[1].map((inItem, j) => (
+                            <Link to={inItem.link} style={{color:'black'}}>
+                              <Typography key={j}> {inItem.name} </Typography>
+                            </Link>
+                          ))}
+                        </AccordionDetails>
+                      </Accordion>
+                    ))}
+                  </div>
+                )}
+              </AppBar>
+            </Box>
+          )}
+        </Box>
       </Box>
-
-      <Box bgcolor="green" sx={{ width: "100%"}}>
-
-        <List  sx={{display: "flex",justifyContent: "space-around",alignItems:'center',width:"80%",margin:'auto',fontSize:'15px',color: "#fff"}}>
-
-{NavbarDropDownListData?.map((item,i)=>( <ListItem key={i} sx={{paddingTop:'5px',textTransform:'capitalize',cursor: "pointer",'&:hover':{color:'black'}}}> {item[0]}   </ListItem> ))}
-
-        </List>
-
-      </Box>
-
-    
     </>
   );
 };
 
-export default Navbar;
