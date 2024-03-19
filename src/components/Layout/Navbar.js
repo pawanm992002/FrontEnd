@@ -6,6 +6,7 @@ import {
   useMediaQuery,
   Typography,
   Stack,
+  Button,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import MyDropdown from "../utilily/MyDropdown";
@@ -17,16 +18,15 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const NavbarDropDownListData = [
-  ["home", []],
   [
     "about us",
     [
-      { name: "history", link: "/History" },
-      { name: "vision & mission", link: "/vision" },
-      { name: "pos & peos", link: "/peo" },
-      { name: "how to reach", link: "/HowtoReach" },
-      { name: "sight seeing", link: "/Sightseeing" },
-      { name: "contact us", link: "contact" },
+      { name: "history", link: "/about/History" },
+      { name: "vision & mission", link: "/about/vision" },
+      { name: "pos & peos", link: "/about/peo" },
+      { name: "how to reach", link: "/about/HowtoReach" },
+      { name: "sight seeing", link: "/about/Sightseeing" },
+      { name: "contact us", link: "/contact" },
     ],
   ],
   [
@@ -64,10 +64,9 @@ const NavbarDropDownListData = [
   ["greivance", [{ name: "sc/st/obc" }]],
   ["student corner", [{ name: "scholarship details" }, { name: "ncc" }]],
   ["cells ", [{ name: "aicte cell" }, { name: "alumni cell" }]],
-  ["tpo", []],
 ];
 
-export default function Navbar () {
+export default function Navbar() {
   const navView = useMediaQuery("(min-width:1100px)");
   const [showNav, setShowNav] = useState(false);
   return (
@@ -99,7 +98,24 @@ export default function Navbar () {
               bgcolor="#5bb55b"
               sx={{ width: "100%", justifyContent: "center" }}
             >
-              {/* <Button> Home </Button> */}
+              <Link
+                to="/"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginRight: "2px",
+                  marginLeft: "2px",
+                  color: "black",
+                  fontWeight: 600,
+                  fontSize: "0.875rem",
+                  margin: "8px 6px",
+                  transition: "all 150ms ease",
+                  cursor: "pointer",
+                  padding: "8px 6px",
+                }}
+              >
+                Home
+              </Link>
               {NavbarDropDownListData?.map((item, i) => (
                 <MyDropdown
                   key={i}
@@ -107,6 +123,24 @@ export default function Navbar () {
                   dropdownList={item[1]}
                 />
               ))}
+              <Link
+                to="http://tpo.ecajmer.ac.in/"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginRight: "2px",
+                  marginLeft: "2px",
+                  color: "black",
+                  fontWeight: 600,
+                  fontSize: "0.875rem",
+                  margin: "8px 6px",
+                  transition: "all 150ms ease",
+                  cursor: "pointer",
+                  padding: "8px 6px",
+                }}
+              >
+                TPO
+              </Link>
             </Stack>
           ) : (
             <Box>
@@ -144,10 +178,14 @@ export default function Navbar () {
                 </Toolbar>
                 {showNav && (
                   <div
-                    style={{ position: "absolute", top: "170px", right: "20px" }}
+                    style={{
+                      position: "absolute",
+                      top: "170px",
+                      right: "20px",
+                    }}
                   >
                     {NavbarDropDownListData?.map((item, i) => (
-                      <Accordion style={{ width: "220px", margin:'0px' }}>
+                      <Accordion style={{ width: "220px", margin: "0px" }}>
                         <AccordionSummary
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1-content"
@@ -157,7 +195,7 @@ export default function Navbar () {
                         </AccordionSummary>
                         <AccordionDetails>
                           {item[1].map((inItem, j) => (
-                            <Link to={inItem.link} style={{color:'black'}}>
+                            <Link to={inItem.link} style={{ color: "black" }}>
                               <Typography key={j}> {inItem.name} </Typography>
                             </Link>
                           ))}
@@ -173,5 +211,4 @@ export default function Navbar () {
       </Box>
     </>
   );
-};
-
+}

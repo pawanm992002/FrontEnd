@@ -12,12 +12,12 @@ import SightSeeing from './SightSeeing'
 import HowToReach from './HowToReach'
 
 const AboutPageRoutes = [
-    <Route exact path='/about/history' element={<Layout>  <History /></Layout>} />,
+    <Route exact path='/about/History' element={<Layout>  <History /></Layout>} />,
     <Route exact path='/about/vision' element={<Layout>  <Vision /></Layout>} />,
-    <Route exact path='/about/contact' element={<Layout>  <Contact /></Layout>} />,
-    <Route exact path='/about/sightSeeing' element={<Layout>  <SightSeeing /></Layout>} />,
-    <Route exact path='/about/howToReach' element={<Layout>  <HowToReach /></Layout>} />,
-    <Route exact path='/about/peos' element={<Layout>  <PEOs /></Layout>} />
+    <Route exact path='/contact' element={<Layout>  <Contact /></Layout>} />,
+    <Route exact path='/about/Sightseeing' element={<Layout>  <SightSeeing /></Layout>} />,
+    <Route exact path='/about/HowtoReach' element={<Layout>  <HowToReach /></Layout>} />,
+    <Route exact path='/about/peo' element={<Layout>  <PEOs /></Layout>} />
 ]
 
 export default AboutPageRoutes
