@@ -5,8 +5,7 @@ import {
   Toolbar,
   useMediaQuery,
   Typography,
-  Stack,
-  Button,
+  Stack
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import MyDropdown from "../utilily/MyDropdown";
@@ -32,12 +31,12 @@ const NavbarDropDownListData = [
   [
     "administration",
     [
-      { name: "bog" },
-      { name: "principal" },
-      { name: "registrar" },
-      { name: "proctor" },
-      { name: "examination section" },
-      { name: "account section" },
+      { name: "bog" ,link:'/administration/bog' },
+      { name: "principal" ,link:'/administration/principal' },
+      { name: "registrar",link:'/administration/registrar'  },
+      { name: "proctor" ,link:'/administration/proctor' },
+      { name: "examination section",link:'/administration/examinationSection'  },
+      { name: "account section",link:'/administration/accounts'  },
     ],
   ],
   [
@@ -59,11 +58,20 @@ const NavbarDropDownListData = [
       { name: "civil engineering", link: "/civil" },
       { name: "electrical engineering", link: "/electrical" },
       { name: "Computer Science and Engineering", link: "/computer" },
+      { name: "elctronic instrumentation and control engineering", link: "/computer" },
+      { name: "electronics & communication engineering", link: "/computer" },
+      { name: "mechanical engineering", link: "/computer" },
+      { name: "computer applications", link: "/computer" },
+      { name: "managment studies", link: "/computer" },
     ],
   ],
-  ["greivance", [{ name: "sc/st/obc" }]],
-  ["student corner", [{ name: "scholarship details" }, { name: "ncc" }]],
-  ["cells ", [{ name: "aicte cell" }, { name: "alumni cell" }]],
+  ["greivance", [{ name: "sc/st/obc",link:'category' },{
+    name:'student/Parent/Employee grievance cell',link:'/parentmeets'
+  }]],
+  ["student corner", [{ name: "scholarship details",link:'/scholarship' }, { name: "ncc",link:'/ncc' },{
+    name:'creative art society',link:'/society'
+  },{name:'nss',link:'/nss'},{name:'sports',link:'/sports'}]],
+  ["cells ", [{ name: "aicte cell",link:'/aicte' }, { name: "alumni cell",link:'/alumni' },{name:'campus development & planning cell',link:'/campusDev'},{name:'control library',link:'/controlLibrary'},{name:'eap cell',link:'/eapCell'}]],
 ];
 
 export default function Navbar() {
@@ -76,11 +84,13 @@ export default function Navbar() {
           display: "flex",
           justifyContent: "center",
           bgcolor: "var(--darkBG)",
+          width:'100%',
+          padding:'5'
         }}
       >
         <Box
           sx={{
-            maxWidth: "var(--maxWidth)",
+            // maxWidth: "var(--maxWidth)",
             display: "flex",
             flexDirection: "column",
           }}
@@ -162,6 +172,7 @@ export default function Navbar() {
                     >
                       <img
                         src="/images/mobileLogo.png"
+                        alt="@eca"
                         style={{ width: "50px", borderRadius: "50%" }}
                       />
                       <Typography color="white">ECA</Typography>

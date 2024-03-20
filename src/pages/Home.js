@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <>
     {/* ------------- Header of home page  ------------------ */}
-    {/* <Header /> */}
+    <Header />
 
     {/* ------------- Home page contents ---------------  */}
       <main>

@@ -16,11 +16,11 @@ export default function MyDropdown({ dropdownList, dropdownName }) {
 
   return (
     <Dropdown>
-      <MenuButton sx={{background:'none', border: 'none'}}> {dropdownName} <ExpandMoreIcon /> </MenuButton>
+      <MenuButton sx={{background:'none',cursor:'pointer', border: 'none',textTransform:'capitalize'}}> {dropdownName} <ExpandMoreIcon /> </MenuButton>
       
       <Menu slots={{ listbox: Listbox }}>
-        {dropdownList?.map((item,i) => (<Link key={i} to={item.link} style={{color:'black'}}>
-          <MenuItem onClick={createHandleMenuClick(item.name)}>{item.name}</MenuItem>
+        {dropdownList?.map((item,i) => (<Link key={i} to={item.link} style={{color:'black',cursor:'pointer',textTransform:'capitalize'}}>
+          <MenuItem sx={{cursor:'pointer'}} onClick={createHandleMenuClick(item.name)}>{item.name}</MenuItem>
         </Link>))}
       </Menu>
     </Dropdown>

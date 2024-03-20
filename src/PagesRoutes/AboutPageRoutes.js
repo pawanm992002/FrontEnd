@@ -3,13 +3,13 @@ import { Route } from 'react-router-dom'
 
 
 //---------- About pages routes 
-import History from './History'
-import Layout from '../../components/Layout/Layout'
-import Vision from './Vision'
-import PEOs from './PEOs'
-import Contact from './Contact'
-import SightSeeing from './SightSeeing'
-import HowToReach from './HowToReach'
+import History from '../pages/About/History'
+import Layout from '../components/Layout/Layout'
+import Vision from '../pages/About/Vision'
+import PEOs from '../pages/About/PEOs'
+import Contact from '../pages/About/Contact'
+import SightSeeing from '../pages/About/SightSeeing'
+import HowToReach from '../pages/About/HowToReach'
 
 const AboutPageRoutes = [
     <Route exact path='/about/History' element={<Layout>  <History /></Layout>} />,

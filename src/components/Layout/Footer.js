@@ -14,7 +14,8 @@ const Footer = () => {
       >
         <Box
           sx={{
-            maxWidth: "var(--maxWidth)",
+            // maxWidth: "var(--maxWidth)",
+            width:'100%',
             display: "flex",
             flexDirection: "column",
           }}

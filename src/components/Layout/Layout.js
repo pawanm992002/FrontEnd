@@ -2,7 +2,6 @@ import React from 'react'
 
 //------- Component Specific Stuff
 import Navbar from './Navbar'
-import Navbar2 from './Navbar2'
 import Footer from './Footer'
 
 
@@ -11,8 +10,6 @@ const Layout = ({ children }) => {
         <>
             {/* ------- Navbar Component  */}
             <Navbar />
-
-            {/* <Navbar2 /> */}
 
             {/* ------- Our page content  */}
             {children}

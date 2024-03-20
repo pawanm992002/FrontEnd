@@ -9,7 +9,11 @@ import Layout from "./components/Layout/Layout";
 import Home from "./pages/Home";
 import Error from "./pages/Error";
 import Department from "./pages/departments/Department";
-import AboutPageRoutes from "./pages/About/AboutPageRoutes";
+
+//---------- Routes Specific Stuff
+import AboutPageRoutes from "./PagesRoutes/AboutPageRoutes"; 
+import AdministrationPageRoutes from "./PagesRoutes/AdministrationPageRoutes";
+
 
 const AppRoutes = () => {
   return (
@@ -28,6 +32,10 @@ const AppRoutes = () => {
            
                {/* ------------------- About pages route ---------------X */}
                {AboutPageRoutes}
+
+               {/* ----------- Administration Pages routes ------------- X */}
+               {AdministrationPageRoutes}
+
 
             <Route
               path="computer"
