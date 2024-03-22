@@ -8,7 +8,7 @@ const Footer = () => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center",
+          alignItems:'center',
           bgcolor: "var(--darkBG)",
         }}
       >
@@ -21,12 +21,13 @@ const Footer = () => {
           }}
         >
       <section id="FooterRowLinks" className="container">
+
         <Box
           sx={{
             display: "flex",
-            alignItems: "flex-start",
-            flexWrap: "wrap",
-            justifyContent: "space-around",
+            alignItems: ["flex-start",'center'],
+            flexWrap: ["wrap",'no-wrap'],
+            justifyContent: ['space-around','flex-start'],
           }}
         >
           <FooterColumnLinks
@@ -105,10 +106,11 @@ const Footer = () => {
           className="container"
           sx={{
             display: "flex",
-            justifyContent: "space-evenly",
+            justifyContent: ["center",'space-evenly'],
             alignItems: "center",
             backgroundColor: "var(--main-primary)",
             p: 1,
+            flexWrap:'wrap'
           }}
         >
           <FooterLineLink link={"nodalofficer"} title={"nodal officer"} />
@@ -129,7 +131,7 @@ const Footer = () => {
         {/* -------- More info, like name, and sitemap  */}
         <Box
           className="container"
-          sx={{ display: "flex", justifyContent: "space-around" }}
+          sx={{ display: "flex", justifyContent: ['space-around','center'] }}
         >
           <Typography>Visitor Number : 3444123</Typography>
           <Typography>
@@ -149,8 +151,11 @@ const Footer = () => {
             </Link>
           </Typography>
         </Box>
+
       </Box>
-      </Box></Box>
+      </Box>
+      
+      </Box>
   );
 };
 
@@ -307,7 +312,7 @@ export const FooterColumnLinks = ({
 export const FooterLineLink = ({ link, title }) => {
   return (
     <>
-      <Typography sx={{ textTransform: "capitalize" }}>
+      <Typography sx={{ textTransform: "capitalize",margin:'4px' }}>
         <Link to={`/${link}`} style={{ color: "white" }}>
           {title}
         </Link>

@@ -13,6 +13,7 @@ import Department from "./pages/departments/Department";
 //---------- Routes Specific Stuff
 import AboutPageRoutes from "./PagesRoutes/AboutPageRoutes"; 
 import AdministrationPageRoutes from "./PagesRoutes/AdministrationPageRoutes";
+import AcademicsPageRoutes from "./PagesRoutes/AcademicsPageRoutes";
 
 
 const AppRoutes = () => {
@@ -35,6 +36,9 @@ const AppRoutes = () => {
 
                {/* ----------- Administration Pages routes ------------- X */}
                {AdministrationPageRoutes}
+
+               {/* --------------- Academic Pages Routes ----------------- X */}
+               {AcademicsPageRoutes}
 
 
             <Route
