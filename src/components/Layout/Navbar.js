@@ -42,14 +42,14 @@ const NavbarDropDownListData = [
   [
     "academics",
     [
-      { name: "academic section" },
-      { name: "academic calendar" },
-      { name: "ug courses" },
-      { name: "pg courses" },
-      { name: "research" },
-      { name: "first year" },
-      { name: "syllabus" },
-      { name: "time table and class management" },
+      { name: "academic section",link:'/academics/section' },
+      { name: "academic calendar",link:'/academics/calender' },
+      { name: "ug courses",link:'/academics/ugCourses' },
+      { name: "pg courses",link:'/academics/pgCourses' },
+      { name: "research",link:'/academics/research' },
+      { name: "first year",link:'/academics/firstYear' },
+      { name: "syllabus",link:'https://btu.ac.in/home/SYLLABUS-FOR-UNDERGRADUATE-PROGRAMME2020-2129' },
+      { name: "time table and class management" ,link:'/academics/timeTables'},
     ],
   ],
   [
