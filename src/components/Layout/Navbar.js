@@ -65,9 +65,11 @@ const NavbarDropDownListData = [
       { name: "managment studies", link: "/computer" },
     ],
   ],
-  ["greivance", [{ name: "sc/st/obc",link:'category' },{
-    name:'student/Parent/Employee grievance cell',link:'/parentmeets'
+
+  ["greivance", [{ name: "sc/st/obc",link:'/grievance/category' },{
+    name:'student/Parent/Employee grievance cell',link:'/grievance/parentsmeets'
   }]],
+
   ["student corner", [{ name: "scholarship details",link:'/scholarship' }, { name: "ncc",link:'/ncc' },{
     name:'creative art society',link:'/society'
   },{name:'nss',link:'/nss'},{name:'sports',link:'/sports'}]],

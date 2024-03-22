@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { SectionSimulator } from '../Administration/Principal'
 import Members from '../../components/Members';
 
-const UGCourses = () => {
+const AcademicSection = () => {
     const [active, setActive] = useState('members');
 
     const sectionMembers = [
@@ -49,7 +49,7 @@ const UGCourses = () => {
     )
 }
 
-export default UGCourses
+export default AcademicSection
 
 
 //----------------------- Details of post graduate programs
