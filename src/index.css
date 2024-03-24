@@ -86,3 +86,10 @@
   scrollbar-width: none; /* Firefox */
   overflow: auto;
 }
+
+
+/* -------------------- Global Classes of css  */
+.flex {
+  display: flex;
+  align-items: 'center';
+}
