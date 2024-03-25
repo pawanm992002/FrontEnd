@@ -31,11 +31,12 @@ const Home = () => {
             <section id="principalMessage">
               <PrincipalMsg />
             </section>
-
+{/*
             <section id="aboutECA">
               <AboutECA />
             </section>
 
+*/}
           </Box>
           <section id="news">
             <Scrollables />

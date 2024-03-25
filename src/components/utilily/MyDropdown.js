@@ -99,8 +99,8 @@ const MenuItem = styled(BaseMenuItem)(
 
 const MenuButton = styled(BaseMenuButton)(
   ({ theme }) => `
-  font-weight: 600;
-  font-size: 0.875rem;
+  font-weight: 500;
+  font-size: 0.8rem;
   margin: 8px 6px;
   transition: all 150ms ease;
   cursor: pointer;

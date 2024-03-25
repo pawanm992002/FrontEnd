@@ -5,8 +5,11 @@ import {
   Toolbar,
   useMediaQuery,
   Typography,
-  Stack
+  Stack,
+  Divider,
+  Button,
 } from "@mui/material";
+import ListIcon from '@mui/icons-material/List';
 import MenuIcon from "@mui/icons-material/Menu";
 import MyDropdown from "../utilily/MyDropdown";
 import { Link } from "react-router-dom";
@@ -15,6 +18,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Mail, Phone } from "@mui/icons-material";
 
 const NavbarDropDownListData = [
   [
@@ -28,28 +32,37 @@ const NavbarDropDownListData = [
       { name: "contact us", link: "/contact" },
     ],
   ],
-  [
-    "administration",
-    [
-      { name: "bog" ,link:'/administration/bog' },
-      { name: "principal" ,link:'/administration/principal' },
-      { name: "registrar",link:'/administration/registrar'  },
-      { name: "proctor" ,link:'/administration/proctor' },
-      { name: "examination section",link:'/administration/examinationSection'  },
-      { name: "account section",link:'/administration/accounts'  },
-    ],
-  ],
+  // [
+  //   "administration",
+  //   [
+  //     { name: "bog", link: "/administration/bog" },
+  //     { name: "principal", link: "/administration/principal" },
+  //     { name: "registrar", link: "/administration/registrar" },
+  //     { name: "proctor", link: "/administration/proctor" },
+  //     {
+  //       name: "examination section",
+  //       link: "/administration/examinationSection",
+  //     },
+  //     { name: "account section", link: "/administration/accounts" },
+  //   ],
+  // ],
   [
     "academics",
     [
-      { name: "academic section",link:'/academics/section' },
-      { name: "academic calendar",link:'/academics/calender' },
-      { name: "ug courses",link:'/academics/ugCourses' },
-      { name: "pg courses",link:'/academics/pgCourses' },
-      { name: "research",link:'/academics/research' },
-      { name: "first year",link:'/academics/firstYear' },
-      { name: "syllabus",link:'https://btu.ac.in/home/SYLLABUS-FOR-UNDERGRADUATE-PROGRAMME2020-2129' },
-      { name: "time table and class management" ,link:'/academics/timeTables'},
+      { name: "academic section", link: "/academics/section" },
+      { name: "academic calendar", link: "/academics/calender" },
+      { name: "ug courses", link: "/academics/ugCourses" },
+      { name: "pg courses", link: "/academics/pgCourses" },
+      { name: "research", link: "/academics/research" },
+      { name: "first year", link: "/academics/firstYear" },
+      {
+        name: "syllabus",
+        link: "https://btu.ac.in/home/SYLLABUS-FOR-UNDERGRADUATE-PROGRAMME2020-2129",
+      },
+      {
+        name: "time table and class management",
+        link: "/academics/timeTables",
+      },
     ],
   ],
   [
@@ -58,7 +71,10 @@ const NavbarDropDownListData = [
       { name: "civil engineering", link: "/civil" },
       { name: "electrical engineering", link: "/electrical" },
       { name: "Computer Science and Engineering", link: "/computer" },
-      { name: "elctronic instrumentation and control engineering", link: "/computer" },
+      {
+        name: "elctronic instrumentation and control engineering",
+        link: "/computer",
+      },
       { name: "electronics & communication engineering", link: "/computer" },
       { name: "mechanical engineering", link: "/computer" },
       { name: "computer applications", link: "/computer" },
@@ -66,14 +82,40 @@ const NavbarDropDownListData = [
     ],
   ],
 
-  ["greivance", [{ name: "sc/st/obc",link:'/grievance/category' },{
-    name:'student/Parent/Employee grievance cell',link:'/grievance/parentsmeets'
-  }]],
+  // [
+  //   "greivance",
+  //   [
+  //     { name: "sc/st/obc", link: "/grievance/category" },
+  //     {
+  //       name: "student/Parent/Employee grievance cell",
+  //       link: "/grievance/parentsmeets",
+  //     },
+  //   ],
+  // ],
 
-  ["student corner", [{ name: "scholarship details",link:'/scholarship' }, { name: "ncc",link:'/ncc' },{
-    name:'creative art society',link:'/society'
-  },{name:'nss',link:'/nss'},{name:'sports',link:'/sports'}]],
-  ["cells ", [{ name: "aicte cell",link:'/aicte' }, { name: "alumni cell",link:'/alumni' },{name:'campus development & planning cell',link:'/campusDev'},{name:'control library',link:'/controlLibrary'},{name:'eap cell',link:'/eapCell'}]],
+  [
+    "student corner",
+    [
+      { name: "scholarship details", link: "/scholarship" },
+      { name: "ncc", link: "/ncc" },
+      {
+        name: "creative art society",
+        link: "/society",
+      },
+      { name: "nss", link: "/nss" },
+      { name: "sports", link: "/sports" },
+    ],
+  ],
+  [
+    "Resources ",
+    [
+      { name: "aicte cell", link: "/aicte" },
+      { name: "alumni cell", link: "/alumni" },
+      { name: "campus development & planning cell", link: "/campusDev" },
+      { name: "control library", link: "/controlLibrary" },
+      { name: "eap cell", link: "/eapCell" },
+    ],
+  ],
 ];
 
 export default function Navbar() {
@@ -86,10 +128,47 @@ export default function Navbar() {
           display: "flex",
           justifyContent: "center",
           bgcolor: "var(--darkBG)",
-          width:'100%',
-          padding:'5'
+          width: "100%",
+          padding: "5",
+          flexDirection: "column",
         }}
       >
+        <Box
+          sx={{
+            width:'80%',
+            display:'flex',
+            margin:'auto',
+            justifyContent:'space-between',
+            alignItems:'center'
+          }}
+         >
+          <img
+            src="https://www.ecajmer.ac.in/images//white%20logo.png"
+            alt="ecajmer_logo"
+            srcset=""
+            width="400px"
+            height={70}
+          />
+          <Box 
+            sx={{
+              display:'flex',
+              gap:2
+            }}
+          >
+          <Box sx={{display:'flex',alignItems:'center',gap:1}}>
+           <Mail fontSize={'small'}/>
+          <Typography>info@ecajmer.ac.in</Typography>
+          </Box>
+          <Divider orientation="vertical" flexItem />
+          <Box sx={{display:'flex',alignItems:'center',gap:1}}>
+          <Phone/>
+          <Typography>645948465168</Typography>
+          </Box>
+          <Divider orientation="vertical" flexItem />
+          <ListIcon fontSize="large" sx={{mr:1}} />
+          </Box>
+        </Box>
+        <Divider flexItem  sx={{bgcolor:'black'}}/>
         <Box
           sx={{
             // maxWidth: "var(--maxWidth)",
@@ -97,33 +176,26 @@ export default function Navbar() {
             flexDirection: "column",
           }}
         >
-          <img
-            src="https://www.ecajmer.ac.in/images//white%20logo.png"
-            alt="ecajmer_logo"
-            srcset=""
-            width="50%"
-            style={{ margin: "auto", minHeight: "100px" }}
-          />
           {navView ? (
             <Stack
               direction="row"
-              bgcolor="#5bb55b"
-              sx={{ width: "100%", justifyContent: "center" }}
+              bgcolor="#white"
+              sx={{ width: "80%", justifyContent: "center",margin:'auto',alignItems:'center' }}
             >
+            <Box sx={{display:"flex",flex:1,alignItems:'baseline'}}>
               <Link
                 to="/"
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  marginRight: "2px",
-                  marginLeft: "2px",
                   color: "black",
-                  fontWeight: 600,
-                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                  fontSize: "0.8rem",
                   margin: "8px 6px",
                   transition: "all 150ms ease",
                   cursor: "pointer",
-                  padding: "8px 6px",
+                  marginLeft:20
+                  // padding: "8px 6px",
                 }}
               >
                 Home
@@ -133,8 +205,10 @@ export default function Navbar() {
                   key={i}
                   dropdownName={item[0]}
                   dropdownList={item[1]}
+                  
                 />
               ))}
+{/* 
               <Link
                 to="http://tpo.ecajmer.ac.in/"
                 style={{
@@ -153,7 +227,13 @@ export default function Navbar() {
               >
                 TPO
               </Link>
+*/}
+</Box>
+{/*//*/}
+<Button sx={{ height:45,textTransform:'uppercase',fontSize:'0.8rem' }}>Admission</Button>
+              
             </Stack>
+
           ) : (
             <Box>
               <AppBar position="static" sx={{ bgcolor: "#5bb55b" }}>
