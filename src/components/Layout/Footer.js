@@ -1,322 +1,88 @@
-import { Box, Typography } from "@mui/material";
-import React from "react";
+import { Typography,Box, Container, Divider, List, ListItem } from '@mui/material'
+import React from 'react'
 
-import { Link } from "react-router-dom";
+import { FaFacebook,FaLinkedin } from "react-icons/fa";
+import { FaXTwitter,FaInstagram  } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-      <Box
-        sx={{
-          display: "flex",
-          alignItems:'center',
-          bgcolor: "var(--darkBG)",
-        }}
-      >
-        <Box
-          sx={{
-            // maxWidth: "var(--maxWidth)",
-            width:'100%',
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-      <section id="FooterRowLinks" className="container">
+    <>
+      <section id="Footer">
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: ["flex-start",'center'],
-            flexWrap: ["wrap",'no-wrap'],
-            justifyContent: ['space-around','flex-start'],
-          }}
-        >
-          <FooterColumnLinks
-            title={"usefull links"}
-            l1link={"audit"}
-            l1text={"Audit Report & Balance Sheets"}
-            l2link={"mandatorydis"}
-            l2text={"Mandatory Disclosure"}
-            l3link={"ar"}
-            l3text={"Annual Reports"}
-            l4link={"audit"}
-            l4text={"Higher Education Policy"}
-            l5link={"audit"}
-            l5text={"MoUs with Compaines"}
-            l6link={"audit"}
-            l6text={"National Innovation and Startup Policy"}
-            l7link={"audit"}
-            l7text={"Gallery"}
-          />
+        {/* <Box  sx={{background:'grey',color:'white',padding:'9px'}}> */}
+        <Box sx={{background:'url(https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/group-diverse-grads-throwing-caps-up-sky-1.jpg) center/cover no-repeat',height:'300px',lineHeight:'29px'}} >
 
-          <FooterColumnLinks
-            title={"quick links"}
-            l1link={"audit"}
-            l1text={"MOOC Courses"}
-            l2link={"audit"}
-            l2text={"E-resources"}
-            l3link={"audit"}
-            l3text={"E-learning"}
-            l4link={"audit"}
-            l4text={"Non Teaching Staff"}
-            l5link={"audit"}
-            l5text={"TEQIP"}
-            l6link={"audit"}
-            l6text={"Workshop/Hackathon"}
-            l7link={"audit"}
-            l7text={"RTI"}
-          />
+          <Box sx={{width:'100%',height:'100%',backdropFilter:'blur(2px)',background:'#213153EB',color:'white'}} >
 
-          <FooterColumnLinks
-            title={"external links"}
-            l1link={"audit"}
-            l1text={"BTU, Bikaner"}
-            l2link={"audit"}
-            l2text={"RTU,Kota"}
-            l3link={"audit"}
-            l3text={"AICTE"}
-            l4link={"audit"}
-            l4text={"SWAYAM"}
-            l5link={"audit"}
-            l5text={"DigiLocker"}
-            l6link={"audit"}
-            l6text={"Online RTI Portal, Rajasthan"}
-            l7link={"audit"}
-            l7text={"B.Tech. Admissions"}
-          />
+            <Container sx={{width:'90%',margin:'auto'}} >
 
-          <FooterColumnLinks
-            title={"contact"}
-            l1link={"audit"}
-            l1text={"Badliya Chouraha, N.H.8, Ajmer"}
-            l2link={"audit"}
-            l2text={"principal@ecajmer.ac.in"}
-            l3link={"audit"}
-            l3text={"principal.eca@rajasthan.gov.in"}
-            l4link={"audit"}
-            l4text={"+911452971024"}
-            l5link={"audit"}
-            l5text={"GST No: 08AABAP0959P1ZZ"}
-          />
+<Box sx={{display:'flex',alignItems:'flex-start',justifyContent:'space-around',paddingTop:'17px',lineHeight:'43px'}} >
+            <Box sx={{width:'40%',border:'0px solid black',margin:'5px 10px'}} >
+              <small>Engineering College Ajmer</small>
+              <Typography variant='h4'  >ECA</Typography>
+              <p> 🏫 231 Badlya Choraya, Nareli Ajmer, 305001, Rajasthan</p>
+              <Box sx={{marginTop:'7px'}} >
+                <Box sx={{display:'flex',alignItems:'center',justifyContent:'space-between',cursor:'pointer'}}>
+              <FaFacebook  size={'30px'}  />
+              <FaLinkedin  size={'30px'} />
+              <FaXTwitter  size={'30px'} />
+              <FaInstagram  size={'30px'} />
+
+                </Box>
+              </Box>
+            </Box>
+
+            {/* <Divider style={{border:'0.59px solid white',height:'auto'}} ></Divider> */}
+
+
+            <Box sx={{width:'40%',border:'0px solid black',margin:'5px 10px'}} >
+              <Typography variant='h4'  >Contact US</Typography>
+              <p> Tel:  {"(+0145),"} 923943  </p>
+              <p>Can contact through the address, OR</p>
+
+<Typography sx={{margin:'5px 0'}} >
+
+              <a href="https://maps.app.goo.gl/gcoE27ERDKXeiqjt5" target='map' style={{cursor:'pointer',color:'white'}} > 🎯 Get Direction</a>
+</Typography>
+<Typography>
+              <a href='mailTo:eca@gmail.com' target='mail' style={{cursor:'pointer',color:'white'}} > 📩 Send Us A Mail</a>
+</Typography>
+
+            </Box>
+
+            {/* <Divider style={{border:'0.59px solid white',height:'100%'}} ></Divider> */}
+
+            <Box sx={{width:'40%',border:'0px solid black',margin:'5px 10px'}} >
+              <Typography variant='h4' >Usefull Links</Typography>
+
+              <Box>
+                <List>
+                  <ListItem> <Link style={{color:'white'}} >About US</Link> </ListItem>
+                  <ListItem> <Link style={{color:'white'}} >Departments</Link> </ListItem>
+                  <ListItem> <Link style={{color:'white'}} >Administration</Link> </ListItem>
+                </List>
+              </Box>
+
+            </Box>
+            </Box>
+
+
+            </Container>
+
+
+          </Box>
+
         </Box>
+
+        <Box sx={{background:'black',padding:'19px',display:'flex',alignItems:'center',justifyContent:'space-between',color:'white'}} >
+          <Typography> <b>Visitor</b> 134902 </Typography>
+          <Typography> Copyright &copy; 2024 <span style={{fontWeight:'bold',color:'#1976d2'}} >ECA</span> | All rights reserved </Typography>
+        </Box>
+
       </section>
-
-      {/* ----------- End of the footer line  */}
-      <Box className="container-fluid" sx={{ my: 2 }}>
-        <Box
-          className="container"
-          sx={{
-            display: "flex",
-            justifyContent: ["center",'space-evenly'],
-            alignItems: "center",
-            backgroundColor: "var(--main-primary)",
-            p: 1,
-            flexWrap:'wrap'
-          }}
-        >
-          <FooterLineLink link={"nodalofficer"} title={"nodal officer"} />
-          <FooterLineLink link={"projects"} title={"projects grants"} />
-          <FooterLineLink link={"feedback"} title={"feedback"} />
-          <FooterLineLink
-            link={
-              "https://www.ecajmer.ac.in/Content/Orders/Regis/Files/holiday2023.pdf"
-            }
-            title={"holidays"}
-          />
-          <FooterLineLink link={"press"} title={"press"} />
-          <FooterLineLink link={"noaudit"} title={"no audit"} />
-          <FooterLineLink link={"policies"} title={"policies"} />
-          <FooterLineLink link={"webteam"} title={"web team"} />
-        </Box>
-
-        {/* -------- More info, like name, and sitemap  */}
-        <Box
-          className="container"
-          sx={{ display: "flex", justifyContent: ['space-around','center'] }}
-        >
-          <Typography>Visitor Number : 3444123</Typography>
-          <Typography>
-            Copyright ©: All Rights Reserved | Engineering College, Ajmer
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{ ":hover": { color: "salmon" } }}
-            textTransform={"capitalize"}
-          >
-            {" "}
-            <Link
-              to={`/sitemap`}
-              style={{ color: "inherit", textDecoration: "none" }}
-            >
-              sitemap{" "}
-            </Link>
-          </Typography>
-        </Box>
-
-      </Box>
-      </Box>
-      
-      </Box>
-  );
-};
-
-export default Footer;
-
-//------------ Footer Column Links
-export const FooterColumnLinks = ({
-  title,
-  l1link,
-  l1text,
-  l2link,
-  l2text,
-  l3link,
-  l3text,
-  l4link,
-  l4text,
-  l5link,
-  l5text,
-  l6link,
-  l6text,
-  l7link,
-  l7text,
-}) => {
-  return (
-    <>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "flex-start",
-          flexDirection: "column",
-          m: 2,
-        }}
-      >
-        <Typography
-          variant="h6"
-          fontWeight={"bold"}
-          textTransform={"uppercase"}
-        >
-          {title}
-        </Typography>
-
-        <Typography
-          variant="body2"
-          sx={{ ":hover": { color: "salmon" } }}
-          textTransform={"capitalize"}
-        >
-          {" "}
-          <Link
-            to={`/${l1link}`}
-            style={{ color: "inherit", textDecoration: "none" }}
-          >
-            {" "}
-            {l1text}{" "}
-          </Link>
-        </Typography>
-
-        <Typography
-          variant="body2"
-          sx={{ ":hover": { color: "salmon" } }}
-          textTransform={"capitalize"}
-        >
-          {" "}
-          <Link
-            to={`/${l2link}`}
-            style={{ color: "inherit", textDecoration: "none" }}
-          >
-            {" "}
-            {l2text}{" "}
-          </Link>
-        </Typography>
-
-        <Typography
-          variant="body2"
-          sx={{ ":hover": { color: "salmon" } }}
-          textTransform={"capitalize"}
-        >
-          {" "}
-          <Link
-            to={`/${l3link}`}
-            style={{ color: "inherit", textDecoration: "none" }}
-          >
-            {" "}
-            {l3text}{" "}
-          </Link>
-        </Typography>
-
-        <Typography
-          variant="body2"
-          sx={{ ":hover": { color: "salmon" } }}
-          textTransform={"capitalize"}
-        >
-          {" "}
-          <Link
-            to={`/${l4link}`}
-            style={{ color: "inherit", textDecoration: "none" }}
-          >
-            {" "}
-            {l4text}{" "}
-          </Link>
-        </Typography>
-
-        <Typography
-          variant="body2"
-          sx={{ ":hover": { color: "salmon" } }}
-          textTransform={"capitalize"}
-        >
-          {" "}
-          <Link
-            to={`/${l5link}`}
-            style={{ color: "inherit", textDecoration: "none" }}
-          >
-            {" "}
-            {l5text}{" "}
-          </Link>
-        </Typography>
-        {l6link && (
-          <Typography
-            variant="body2"
-            sx={{ ":hover": { color: "salmon" } }}
-            textTransform={"capitalize"}
-          >
-            {" "}
-            <Link
-              to={`/${l6link}`}
-              style={{ color: "inherit", textDecoration: "none" }}
-            >
-              {" "}
-              {l6text}{" "}
-            </Link>
-          </Typography>
-        )}
-        {l7link && (
-          <Typography
-            variant="body2"
-            sx={{ ":hover": { color: "salmon" } }}
-            textTransform={"capitalize"}
-          >
-            {" "}
-            <Link
-              to={`/${l7link}`}
-              style={{ color: "inherit", textDecoration: "none" }}
-            >
-              {" "}
-              {l7text}{" "}
-            </Link>
-          </Typography>
-        )}
-      </Box>
     </>
-  );
-};
+  )
+}
 
-//------------- Footer Line Link
-export const FooterLineLink = ({ link, title }) => {
-  return (
-    <>
-      <Typography sx={{ textTransform: "capitalize",margin:'4px' }}>
-        <Link to={`/${link}`} style={{ color: "white" }}>
-          {title}
-        </Link>
-      </Typography>
-    </>
-  );
-};
+export default Footer
