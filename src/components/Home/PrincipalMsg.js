@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
+import Backdrop from '@mui/material/Backdrop';
+import Fade from '@mui/material/Fade';
 
 import '../../styles/style.css'
 import { Link } from "react-router-dom";
 import { message } from "../../pages/Administration/Principal";
+import ModalComponent from "../Modal";
 
 
 export default function PrincipalMsg() {
-
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
-    
+    <>
     <Box
       sx={{
         maxWidth: "var(--maxWidth)",
@@ -26,9 +31,9 @@ export default function PrincipalMsg() {
 
       <Typography variant='h5' className='double-line-bottom' sx={{marginBottom:'20px'}}  >Principal Message</Typography>
 
-      <Card sx={{ maxWidth: 400,margin:'9px 0',boxShadow:'2px 3px 9px black' }}>
+      <Card sx={{ margin:'5px 0',boxShadow:'2px 3px 9px black',display:'flex' }} >
         <CardMedia
-          sx={{ height: 250 }}
+          sx={{ height: 250,width:800 }}
           image="/images/principal.jpg"
           title="green iguana"
         />
@@ -51,7 +56,9 @@ export default function PrincipalMsg() {
           </Typography>
           <Typography gutterBottom variant="body2" color="text.secondary">
             {message.slice(0, 350)} {" "}
-            <Link to='/administration/principal' style={{color:'blue'}} >Read More...</Link>
+    {/*    <Link to='/administration/principal' style={{color:'blue'}} >Read More...</Link> */}
+            <Typography onClick={()=>setOpen(true)}>Read More...</Typography>
+            
           </Typography>
           <Typography fontWeight="bold" variant="body2">
             "We cannot always build the future for our youth, but we can build
@@ -60,6 +67,16 @@ export default function PrincipalMsg() {
         </CardContent>
       </Card>
     </Box>
+    <ModalComponent open={open} handleClose={handleClose} content={
+      <>
+        <Box sx={{ width: '80%', margin: 'auto' }}>
+    
+          <Typography>thrhsrthdrtd</Typography>
+    
+        </Box>
+      </>
+    } />
+    </>
     // </Box>
   );
 }

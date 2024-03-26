@@ -30,7 +30,6 @@ export const ModalComponent = ({ open, handleClose, content }) => {
         >
           <Box sx={style}>
             {content}
-  
           </Box>
         </Modal>
       </>

@@ -1,12 +1,12 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PlacementSection from '../components/Home/PlacementSection';
 import GallerySection from '../components/Home/GallerySection';
 import { Box, Typography,Modal } from '@mui/material';
-import Cards from '../components/Cards';
 import EventsNews from '../components/Home/EventsNews';
-import AboutECA from '../components/Home/AboutECA'
 import PrincipalMsg from "../components/Home/PrincipalMsg"
+import Header from '../components/Layout/Header';
+import Cards from "../components/Cards";
 
 const Home = () => {
   const events = [
@@ -63,11 +63,57 @@ const Home = () => {
           </Box>
         </Modal>
       }
+    <Header />
+
+    <main>
+
+    <Box sx={{ bgcolor: "var(--darkBG)" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          width: "100%",
+          justifyContent: "center",
+          gap: "40px",
+          margin: "10px auto",
+        }}
+      >
+        <section id="principalMessage">
+          <PrincipalMsg />
+        </section>
+        <PlacementSection />
+{/*
+        <section id="aboutECA">
+          <AboutECA />
+        </section>
+
+*/}
+      </Box>
+      <section id="news">
+       {/*<Scrollables />*/} 
+      </section>
+{
+/*
+  <section id="web-portal">
+  <Cards />
+  </section>
+*/
+
+}
+
+      </Box>
+
+    {/* --------------- Achievement section: to show our college or students achievements */}
+    {/* <section id="achievements">
+      <Typography variant="h5">Achievements</Typography>
+      <Achievement />
+    </section> */}
+  </main>
+
       {/* ------------- Placement section  */}
-      <PlacementSection />
+     
 
       {/* ------------- Gallery section of the home page  */}
-      <GallerySection />
 
       <Box sx={{ bgcolor: "var(--darkBG)" }}>
         <Box
@@ -110,7 +156,7 @@ const Home = () => {
           <Cards />
         </section>
       </Box>
-
+      <GallerySection />
     </>
   )
 }
