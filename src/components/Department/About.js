@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 export default function About({ comp }) {
   if (comp === "computer")
     return (
-      <Box>
+      <Box sx={{overflowY:'auto', height:'600px'}}>
         <Typography variant="h6">About Us</Typography>
         <Typography variant="body2">
           The Department of Computer Science and Engineering at Engineering
@@ -112,5 +112,5 @@ export default function About({ comp }) {
         </Typography>
       </Box>
     );
-  else if (comp === "electrical") return <Box>jdljdljj</Box>;
+  else if (comp === "electrical") return <Box sx={{overflowY:'auto', height:'600px'}}>jdljdljj</Box>;
 }

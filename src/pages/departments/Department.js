@@ -117,10 +117,6 @@ export default function Department({ comp }) {
     },
   ];
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   return (
     <Box
       sx={{
@@ -148,7 +144,7 @@ export default function Department({ comp }) {
             orientation="vertical"
             variant="scrollable"
             value={value}
-            onChange={handleChange}
+            onChange={(event, newValue) => setValue(newValue)}
             aria-label="Vertical tabs example"
             sx={{
               borderRight: Mobile && 2,
@@ -172,7 +168,7 @@ export default function Department({ comp }) {
             <About comp={comp} />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Box>
+          <Box sx={{overflowY:'auto', height:'600px'}}>
               <Typography variant="h5" fontWeight="bold">
                 Head Of Department
               </Typography>
@@ -194,13 +190,15 @@ export default function Department({ comp }) {
             </Box>
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: "12px", overflowY:'auto', height:'600px' }}>
               {labs?.length > 0 &&
                 labs.map((lab) => <Lab key={lab?.id} lab={lab} />)}
             </Box>
           </TabPanel>
           <TabPanel value={value} index={3}>
+          {/* <Box sx={{overflowY:'auto', height:'600px'}}> */}
             <DepTables />
+            {/* </Box> */}
           </TabPanel>
           <TabPanel value={value} index={4}>
             Item Five
