@@ -7,6 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import { Box } from "@mui/material";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -71,8 +72,8 @@ export default function DepTables() {
   };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+    <Box sx={{background:'grey', width: '60%', maxWidth:'800px'}}>
+      <TableContainer sx={{ maxHeight: 440, width: '60%', background:'yellow' }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -118,6 +119,6 @@ export default function DepTables() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </Paper>
+    </Box>
   );
 }
