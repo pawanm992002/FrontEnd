@@ -10,7 +10,7 @@ export default function AboutECA() {
 
   const [expanded, setExpanded] = useState("panel1");
   const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+    setExpanded(isExpanded ? panel : "panel1");
   };
   const UGBranches = [
     {
@@ -84,17 +84,21 @@ export default function AboutECA() {
       link: "https://btu.ucanapply.com/smartexam/public/",
     },
   ];
-  return (
-    <Box >
-
-      <Typography variant='h5' className='double-line-bottom' sx={{ marginBottom: '20px' }}  >About ECA</Typography>
-
+  return (<>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        // bgcolor: "var(--darkBG)",
+        padding: "10px 0",
+      }}
+    >
       <Box sx={{
         maxWidth: "var(--maxWidth)",
         borderRadius: "8px",
         padding: "15px",
-        boxShadow: '2px 3px 9px black',
-        color:'white'
+        // boxShadow: '2px 3px 9px black',
+        // color:'white'
       }}>
 
         <Accordion
@@ -102,11 +106,12 @@ export default function AboutECA() {
           onChange={handleChange("panel1")}
         >
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon  />}
+            expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
             aria-controls="panel1-content"
             id="panel1-header"
-            sx={{ bgcolor: "var(--darkBG2)",color:'white'}}
-          >            ECA TOUR     </AccordionSummary>
+            sx={{ bgcolor: "var(--cardBG)", color: 'white' }}
+          >            ECA TOUR     
+          </AccordionSummary>
           <AccordionDetails sx={{ bgcolor: "var(--darkBG3)" }}>
             <iframe
               width="560"
@@ -119,7 +124,6 @@ export default function AboutECA() {
             ></iframe>
           </AccordionDetails>
         </Accordion>
-
         <Accordion
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
@@ -128,7 +132,7 @@ export default function AboutECA() {
             expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
             aria-controls="panel1-content"
             id="panel1-header"
-            sx={{ bgcolor: "var(--darkBG2)", color: "var(--darkText)" }}
+            sx={{ bgcolor: "var(--cardBG)", color: 'white' }}
           >
             Undergraduate Courses (B.Tech.)
           </AccordionSummary>
@@ -159,7 +163,7 @@ export default function AboutECA() {
             expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
             aria-controls="panel1-content"
             id="panel1-header"
-            sx={{ bgcolor: "var(--darkBG2)", color: "var(--darkText)" }}
+            sx={{ bgcolor: "var(--cardBG)", color: 'white' }}
           >
             Postgraduate Courses
           </AccordionSummary>
@@ -190,7 +194,7 @@ export default function AboutECA() {
             expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
             aria-controls="panel1-content"
             id="panel1-header"
-            sx={{ bgcolor: "var(--darkBG2)", color: "var(--darkText)" }}
+            sx={{ bgcolor: "var(--cardBG)", color: 'white' }}
           >
             PhD Research Center
           </AccordionSummary>
@@ -221,7 +225,7 @@ export default function AboutECA() {
             expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
             aria-controls="panel1-content"
             id="panel1-header"
-            sx={{ bgcolor: "var(--darkBG2)", color: "var(--darkText)" }}
+            sx={{ bgcolor: "var(--cardBG)", color: 'white' }}
           >
             Employee Corner
           </AccordionSummary>
@@ -246,5 +250,5 @@ export default function AboutECA() {
         </Accordion>
       </Box>
     </Box>
-  );
+  </>);
 }
