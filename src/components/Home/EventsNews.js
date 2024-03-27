@@ -22,7 +22,7 @@ export default function EventsNews({events,name}) {
             <CardContent>
               {events?.map((item, i) => (
                 <Box key={i}>
-                  <Typography sx={{fontWeight:'10px', fontSize:'17px', mt:1}} variant="h6">{item?.text}</Typography>
+                  <Typography sx={{fontWeight:'10px', fontSize:'17px', mt:1,lineClamp:1}} variant="h6">{item?.text}</Typography>
                   <Box
                     sx={{
                       display: "flex",

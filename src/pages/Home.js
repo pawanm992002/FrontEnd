@@ -16,6 +16,8 @@ const Home = () => {
     },
     { text: "news 2 jd jjd kkjb", date: new Date("2023").toDateString() },
     { text: "news 3 jd jjd kkjb", date: new Date("2022").toDateString() },
+    { text: "news 2 jd jjd kkjb", date: new Date("2023").toDateString() },
+    { text: "news 3 jd jjd kkjb", date: new Date("2022").toDateString() },
   ];
   const circulars = [
     {
@@ -24,12 +26,16 @@ const Home = () => {
     },
     { text: "news 2 jd jjd kkjb", date: new Date("2023").toDateString() },
     { text: "news 3 jd jjd kkjb", date: new Date("2023").toDateString() },
+    { text: "news 2 jd jjd kkjb", date: new Date("2023").toDateString() },
+    { text: "news 3 jd jjd kkjb", date: new Date("2023").toDateString() },
   ];
   const news = [
     {
       text: "news 1 jd jjd kkjb l h jhgbnjk mkiugv mkiugv mkiugv nmjugvc ",
       date: new Date().toDateString(),
     },
+    { text: "news 2 jd jjd kkjb", date: new Date("2023").toDateString() },
+    { text: "news 3 jd jjd kkjb", date: new Date("2023").toDateString() },
     { text: "news 2 jd jjd kkjb", date: new Date("2023").toDateString() },
     { text: "news 3 jd jjd kkjb", date: new Date("2023").toDateString() },
   ];
@@ -130,19 +136,22 @@ const Home = () => {
             <AboutECA />
           </section> */}
         </Box>
-        <section id="news">
+        <section id="news" >
           {/* <Scrollables /> */}
           <Box
             sx={{
               display: "flex",
               justifyContent: "center",
-              bgcolor: "var(--darkBG)",
-              padding: "10px 0",
+              // bgcolor: "var(--darkBG)",
+              bgcolor:'#cbd3dd',
+              padding: "20px 0",
+              minHeight:'500px'
+              
             }}
           >
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' ,justifyContent:'center'}}>
 
-              <Typography variant='h5' className='double-line-bottom' sx={{ marginBottom: '20px' }} > Latest@ECA </Typography>
+              {/* <Typography variant='h5' className='double-line-bottom' sx={{ marginBottom: '20px' }} > Latest@ECA </Typography> */}
               <Box sx={{ maxWidth: "var(--maxWidth)", display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
                 <EventsNews events={events} name="Events" />
                 <EventsNews events={circulars} name="Circulars" />
@@ -156,6 +165,7 @@ const Home = () => {
           <Cards />
         </section>
       </Box>
+
       <GallerySection />
     </>
   )

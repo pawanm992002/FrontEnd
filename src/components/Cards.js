@@ -57,8 +57,7 @@ export default function Cards() {
     >
       <Box sx={{ maxWidth: "var(--maxWidth)" }}>
         <Typography
-          variant="h4"
-          component="h4"
+          variant="h3"
           sx={{
             justifyContent: "center",
             fontWeight: "bold",
@@ -66,7 +65,7 @@ export default function Cards() {
             color: "var(--darkText)",
           }}
         >
-          ECA Web Portal's
+          Study @ECA
         </Typography>
         <Box
           sx={{
