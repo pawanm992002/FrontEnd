@@ -1,5 +1,5 @@
-import { Link} from "react-router-dom";
-import { Box, Typography, Modal, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Box, Typography, Modal, Button, ListItem, ListItemText, ListSubheader, List } from "@mui/material";
 import Groups2 from "@mui/icons-material/Groups2";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import Description from "@mui/icons-material/Description";
@@ -8,6 +8,8 @@ import School from "@mui/icons-material/School";
 import PersonPinCircle from "@mui/icons-material/PersonPinCircle";
 import { useState } from "react";
 import AboutECA from "./Home/AboutECA";
+import { MyList } from "./utilily/MyList";
+
 
 
 export default function Cards() {
@@ -24,27 +26,34 @@ export default function Cards() {
     },
     {
       icon: <AccessAlarmIcon sx={{ fontSize: "50px" }} />,
-      text: "Alumni",
+      text: "Notes",
       // link: "/Accounts",
     },
     {
       icon: <PersonPinCircle sx={{ fontSize: "50px" }} />,
-      text: "Placement",
+      text: "Admission",
       // link: "/media_news",
     },
     {
       icon: <Badge sx={{ fontSize: "50px" }} />,
-      text: "Admission",
+      text: "Department",
       // link: "/facultylogin",
     },
   ];
+  const departments = [{ name: 'Computer Science', link: '/computer' }, { name: 'Electical', }, { name: 'Civil' }, { name: 'Mechanical' }, { name: 'Electronics' }]
+  const notes = [{ name: 'Note 1', link: '' }, { name: 'Note 2', }, { name: 'Note 3' }, { name: 'Note 4' }, { name: 'Note 5' }]
   const [openAbout, setOpenAbout] = useState(false);
+  const [openDep, setOpenDep] = useState(false);
+  const [openNotes, setOpenNotes] = useState(false);
   const handleClick = (comp) => {
-    if (comp === "Admission") {
-      
+    if (comp === "Department") {
+      setOpenDep(true)
     } else if (comp === "About ECA") {
       setOpenAbout(true)
+    } else if (comp === 'Notes') {
+      setOpenNotes(true)
     }
+
   }
   return (
     <Box
@@ -94,12 +103,72 @@ export default function Cards() {
               boxShadow: 24,
               maxHeight: '800px',
               display: 'flex',
-              flexDirection:'column'
+              flexDirection: 'column'
             }} id="modal-modal-description">
               <Button variant="contained" onClick={() => setOpenAbout(false)}>Close</Button>
 
               <AboutECA />
 
+            </Box>
+          </Modal>
+          <Modal
+            open={openDep}
+            onClose={() => setOpenDep(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              bgcolor: 'background.paper',
+              overflowY: 'auto',
+              height: '90%',
+              borderRadius: '8px',
+              boxShadow: 24,
+              maxHeight: '800px',
+              display: 'flex',
+              flexDirection: 'column',
+              width: '80%',
+              maxWidth: '350px'
+            }} id="modal-modal-description">
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '15px 8px', bgcolor: 'var(--cardBG)', color: 'var(--darkBG)' }}>
+
+                <Typography variant="h5">Department's</Typography>
+                <Button variant="contained" onClick={() => setOpenDep(false)}>Close</Button>
+              </Box>
+              <MyList list={departments} />
+            </Box>
+          </Modal>
+          <Modal
+            open={openNotes}
+            onClose={() => setOpenNotes(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              bgcolor: 'background.paper',
+              overflowY: 'auto',
+              height: '90%',
+              borderRadius: '8px',
+              boxShadow: 24,
+              maxHeight: '800px',
+              display: 'flex',
+              flexDirection: 'column',
+              width: '80%',
+              maxWidth: '350px'
+            }} id="modal-modal-description">
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '15px 8px', bgcolor: 'var(--cardBG)', color: 'var(--darkBG)' }}>
+
+                <Typography variant="h5">Note's</Typography>
+                <Button variant="contained" onClick={() => setOpenNotes(false)}>Close</Button>
+              </Box>
+              <MyList list={notes} />
             </Box>
           </Modal>
           {cards.map((val, i) => (

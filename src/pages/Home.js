@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import PlacementSection from '../components/Home/PlacementSection';
 import GallerySection from '../components/Home/GallerySection';
-import { Box, Typography,Modal } from '@mui/material';
+import { Box, Typography, Modal } from '@mui/material';
 import EventsNews from '../components/Home/EventsNews';
 import PrincipalMsg from "../components/Home/PrincipalMsg"
 import Header from '../components/Layout/Header';
@@ -56,68 +56,71 @@ const Home = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
-            // bgcolor: 'background.paper',
-            // border: '2px solid #000',
-            // boxShadow: 24,
+            bgcolor: 'background.paper',
+            borderRadius: 2,
+            boxShadow: 24,
             p: 4,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
+            <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight='bold' color='blue'>
+              Current Achievement's
             </Typography>
-            <img src='/images/principal.jpg' style={{width:'60%'}} />
+            <img src='/images/homeModel.jpeg' style={{width: '400px', height: '400px', objectFit:'fill'}} />
           </Box>
         </Modal>
       }
-    <Header />
+      <Header />
 
-    <main>
+      <main>
 
-    <Box sx={{ bgcolor: "var(--darkBG)" }}>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          width: "100%",
-          justifyContent: "center",
-          gap: "40px",
-          margin: "10px auto",
-        }}
-      >
-        <section id="principalMessage">
-          <PrincipalMsg />
-        </section>
-        <PlacementSection />
-{/*
+        <Box sx={{ bgcolor: "var(--darkBG)" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              width: "100%",
+              justifyContent: "center",
+              gap: "40px",
+              margin: "10px auto",
+            }}
+          >
+            <section id="principalMessage">
+              <PrincipalMsg />
+            </section>
+            <PlacementSection />
+            {/*
         <section id="aboutECA">
           <AboutECA />
         </section>
 
 */}
-      </Box>
-      <section id="news">
-       {/*<Scrollables />*/} 
-      </section>
-{
-/*
-  <section id="web-portal">
-  <Cards />
-  </section>
-*/
+          </Box>
+          <section id="news">
+            {/*<Scrollables />*/}
+          </section>
+          {
+            /*
+              <section id="web-portal">
+              <Cards />
+              </section>
+            */
 
-}
+          }
 
-      </Box>
+        </Box>
 
-    {/* --------------- Achievement section: to show our college or students achievements */}
-    {/* <section id="achievements">
+        {/* --------------- Achievement section: to show our college or students achievements */}
+        {/* <section id="achievements">
       <Typography variant="h5">Achievements</Typography>
       <Achievement />
     </section> */}
-  </main>
+      </main>
 
       {/* ------------- Placement section  */}
-     
+
 
       {/* ------------- Gallery section of the home page  */}
 
