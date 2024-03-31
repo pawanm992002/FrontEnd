@@ -15,6 +15,7 @@ import AboutPageRoutes from "./PagesRoutes/AboutPageRoutes";
 import AdministrationPageRoutes from "./PagesRoutes/AdministrationPageRoutes";
 import AcademicsPageRoutes from "./PagesRoutes/AcademicsPageRoutes";
 import GrievancePageRoutes from "./PagesRoutes/GrievancePageRoutes";
+import StudentCornerRoutes from "./PagesRoutes/StudentCornerRoutes";
 
 
 const AppRoutes = () => {
@@ -43,6 +44,9 @@ const AppRoutes = () => {
 
                {/* ------------ Grievance Pages Routes ------------------ X  */}
                {GrievancePageRoutes}
+
+               {/* ------------ Student Corner Pages Routes ------------------ X  */}
+               {StudentCornerRoutes}
 
 
             <Route

@@ -13,16 +13,16 @@ import {
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 export default function EventsNews({events,name}) {
+  // const mobileView = 
   
   return (
-
         <Card sx={{ maxWidth: 345, minWidth: "240px", boxShadow:'2px 1px 6px 2px black' }}>
           <CardActionArea>
             <CardHeader title={name} sx={{ bgcolor: "var(--cardBG)", color:'var(--darkBG)' }} />
             <CardContent>
               {events?.map((item, i) => (
                 <Box key={i}>
-                  <Typography sx={{fontWeight:'10px', fontSize:'17px', mt:1}} variant="h6">{item?.text}</Typography>
+                  <Typography sx={{fontWeight:'10px', fontSize:'17px', mt:1}} variant="h6">{item?.text?.slice(0, 30)}...</Typography>
                   <Box
                     sx={{
                       display: "flex",
