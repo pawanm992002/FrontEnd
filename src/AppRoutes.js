@@ -15,6 +15,7 @@ import AboutPageRoutes from "./PagesRoutes/AboutPageRoutes";
 import AdministrationPageRoutes from "./PagesRoutes/AdministrationPageRoutes";
 import AcademicsPageRoutes from "./PagesRoutes/AcademicsPageRoutes";
 import GrievancePageRoutes from "./PagesRoutes/GrievancePageRoutes";
+import Alumni from "./pages/Alumni/Alumni";
 
 
 const AppRoutes = () => {
@@ -27,7 +28,7 @@ const AppRoutes = () => {
               index
               element={
                 <Layout>
-                  <Home />{" "}
+                  <Home />
                 </Layout>
               }
             />
@@ -155,6 +156,14 @@ const AppRoutes = () => {
               element={
                 <Layout>
                   <Department comp="economics" />
+                </Layout>
+              }
+            />
+            <Route
+              path="alumni"
+              element={
+                <Layout>
+                  <Alumni />
                 </Layout>
               }
             />

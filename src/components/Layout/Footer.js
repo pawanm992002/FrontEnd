@@ -19,11 +19,11 @@ const Footer = () => {
 
 <Box sx={{display:'flex',alignItems:'flex-start',justifyContent:'space-around',paddingTop:'17px',lineHeight:'43px'}} >
             <Box sx={{width:'40%',border:'0px solid black',margin:'5px 10px'}} >
-              <small>Engineering College Ajmer</small>
-              <Typography variant='h4'  >ECA</Typography>
-              <p> 🏫 231 Badlya Choraya, Nareli Ajmer, 305001, Rajasthan</p>
+             {/* <small>Engineering College Ajmer</small>  */}
+              <Typography variant='h4'>ECA</Typography>
+              <p>231 Badlya Choraya, Nareli Ajmer, 305001, Rajasthan</p>
               <Box sx={{marginTop:'7px'}} >
-                <Box sx={{display:'flex',alignItems:'center',justifyContent:'space-between',cursor:'pointer'}}>
+                <Box sx={{display:'flex',alignItems:'center',justifyContent:'space-between',cursor:'pointer',width:'50%'}}>
               <FaFacebook  size={'30px'}  />
               <FaLinkedin  size={'30px'} />
               <FaXTwitter  size={'30px'} />
@@ -58,9 +58,9 @@ const Footer = () => {
 
               <Box>
                 <List>
-                  <ListItem> <Link style={{color:'white'}} >About US</Link> </ListItem>
-                  <ListItem> <Link style={{color:'white'}} >Departments</Link> </ListItem>
-                  <ListItem> <Link style={{color:'white'}} >Administration</Link> </ListItem>
+                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',}} >About US</Link> </ListItem>
+                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',}} >Departments</Link> </ListItem>
+                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',}} >Administration</Link> </ListItem>
                 </List>
               </Box>
 

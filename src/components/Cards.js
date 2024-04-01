@@ -56,18 +56,10 @@ export default function Cards() {
       }}
     >
       <Box sx={{ maxWidth: "var(--maxWidth)" }}>
-        <Typography
-          variant="h4"
-          component="h4"
-          sx={{
-            justifyContent: "center",
-            fontWeight: "bold",
-            display: "flex",
-            color: "var(--darkText)",
-          }}
-        >
-          ECA Web Portal's
-        </Typography>
+      <Box sx={{ display:'flex',margin:'auto',width:'100%',justifyContent:'center' }} >
+      <Typography variant='h5' className='double-line-bottom' > Student@ECA </Typography>
+      </Box>
+
         <Box
           sx={{
             display: "flex",

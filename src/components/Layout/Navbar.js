@@ -19,6 +19,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Mail, Phone } from "@mui/icons-material";
+import Drawer from "../helper/Drawer";
 
 const NavbarDropDownListData = [
   [
@@ -107,12 +108,11 @@ const NavbarDropDownListData = [
     ],
   ],
   [
-    "Resources ",
+    "cell ",
     [
-      { name: "aicte cell", link: "/aicte" },
       { name: "alumni cell", link: "/alumni" },
-      { name: "campus development & planning cell", link: "/campusDev" },
-      { name: "control library", link: "/controlLibrary" },
+      // { name: "campus development & planning cell", link: "/campusDev" },
+      { name: "central library", link: "/centralLibrary" },
       { name: "eap cell", link: "/eapCell" },
     ],
   ],
@@ -121,6 +121,12 @@ const NavbarDropDownListData = [
 export default function Navbar() {
   const navView = useMediaQuery("(min-width:1100px)");
   const [showNav, setShowNav] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const toggleDrawerOpen = () => setOpen(true);
+  const toggleDrawerClose  = () => setOpen(false);
+
+
   return (
     <>
       <Box
@@ -165,9 +171,10 @@ export default function Navbar() {
           <Typography>645948465168</Typography>
           </Box>
           <Divider orientation="vertical" flexItem />
-          <ListIcon fontSize="large" sx={{mr:1}} />
+          <ListIcon fontSize="large" sx={{mr:1}} onClick={toggleDrawerOpen} />
           </Box>
         </Box>
+        <Drawer open={open} toggleDrawerOpen={toggleDrawerOpen} toggleDrawerClose={toggleDrawerClose} />
         <Divider flexItem  sx={{bgcolor:'black'}}/>
         <Box
           sx={{

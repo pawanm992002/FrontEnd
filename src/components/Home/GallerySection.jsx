@@ -43,26 +43,28 @@ const GallerySection = () => {
 
 <Box>
 
-  <Typography sx={{ textAlign: 'center', margin: '7px 0' }} variant='h2' >Gallery</Typography>
+<Box sx={{ display:'flex',marginBottom:'10px', width:'100%',justifyContent:'center' }} >
+<Typography variant='h5' className='double-line-bottom' > Galery@ECA </Typography>
+</Box>
 
-  <Container sx={{ width: '90%', margin: 'auto' }} >
-    <Grid container sx={{ width: '100%', margin: 'auto' }}  >
+  <Container sx={{ width: '80%', margin: 'auto',p:0 }} >
+    <Grid container sx={{ display:'grid',gridTemplateColumns:'1fr 1fr 1fr', width: '100%', margin: 'auto',gap:'5px' }}  >
 
-      <Grid item xs={12} md={3} sx={{ border: '1px solid black', height: '175px', width: '30px', padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/young-students-painting-on-canvas-during-lesson-in-faculty-of-arts-university.jpg" alt="gallery" width={'100%'} />
+      <Grid item  sx={{ border: '1px solid black', height: '175px', width:'100%' , padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/young-students-painting-on-canvas-during-lesson-in-faculty-of-arts-university.jpg" alt="gallery" width={'100%'} />
       </Grid>
-      <Grid item xs={12} md={4} sx={{ border: '1px solid black', height: '175px', width: '30px', padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/doctor-examines-the-patient-s-pulse-with-stethoscope-and-records-the-results-health-medical-checkup.jpg" alt="gallery" width={'100%'} />
+      <Grid item  sx={{ border: '1px solid black', height: '175px', width:'100%' , padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/doctor-examines-the-patient-s-pulse-with-stethoscope-and-records-the-results-health-medical-checkup.jpg" alt="gallery" width={'100%'} />
       </Grid>
-      <Grid item xs={12} md={4} sx={{ border: '1px solid black', height: '175px', width: '30px', padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/university-students-using-laptops-and-digital-tablet-working-together.jpg" alt="gallery" width={'100%'} />
+      <Grid item  sx={{ border: '1px solid black', height: '175px', width:'100%' , padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/university-students-using-laptops-and-digital-tablet-working-together.jpg" alt="gallery" width={'100%'} />
       </Grid>
-      <Grid item xs={12} md={3} sx={{ border: '1px solid black', height: '175px', width: '30px', padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/university-students-using-laptops-and-digital-tablet-working-together.jpg" alt="gallery" width={'100%'} />
+      <Grid item  sx={{ border: '1px solid black', height: '175px', width:'100%' , padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/university-students-using-laptops-and-digital-tablet-working-together.jpg" alt="gallery" width={'100%'} />
       </Grid>
-      <Grid item xs={12} md={4} sx={{ border: '1px solid black', height: '175px', width: '30px', padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/young-students-painting-on-canvas-during-lesson-in-faculty-of-arts-university.jpg" alt="gallery" width={'100%'} />
+      <Grid item  sx={{ border: '1px solid black', height: '175px', width:'100%' , padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/young-students-painting-on-canvas-during-lesson-in-faculty-of-arts-university.jpg" alt="gallery" width={'100%'} />
       </Grid>
-      <Grid item xs={12} md={4} sx={{ border: '1px solid black', height: '175px', width: '30px', padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/university-students-using-laptops-and-digital-tablet-working-together.jpg" alt="gallery" width={'100%'} />
+      <Grid item  sx={{ border: '1px solid black', height: '175px', width:'100%' , padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/university-students-using-laptops-and-digital-tablet-working-together.jpg" alt="gallery" width={'100%'} />
       </Grid>
-      <Grid item xs={12} md={3} sx={{ border: '1px solid black', height: '175px', width: '30px', padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/university-students-using-laptops-and-digital-tablet-working-together.jpg" alt="gallery" width={'100%'} />
+      <Grid item  sx={{ border: '1px solid black', height: '175px', width:'100%' , padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/university-students-using-laptops-and-digital-tablet-working-together.jpg" alt="gallery" width={'100%'} />
       </Grid>
-      <Grid item xs={12} md={3} sx={{ border: '1px solid black', height: '175px', width: '30px', padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/doctor-examines-the-patient-s-pulse-with-stethoscope-and-records-the-results-health-medical-checkup.jpg" alt="gallery" width={'100%'} />
+      <Grid item  sx={{ border: '1px solid black', height: '175px', width:'100%' , padding: '0', overflow: 'hidden', margin: '2px' }} ><img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/doctor-examines-the-patient-s-pulse-with-stethoscope-and-records-the-results-health-medical-checkup.jpg" alt="gallery" width={'100%'} />
       </Grid>
 
     </Grid>
