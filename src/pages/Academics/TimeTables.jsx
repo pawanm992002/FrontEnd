@@ -24,14 +24,14 @@ const TimeTables = () => {
 
                     <SectionSimulator title={'Time Tables & Class Management'} />
 
-                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', width: '100%' }} >
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', width: '100%',margin:'10px 0' }} >
 
-                        <Box onClick={() => setActive('abouts')} style={{ background: `${active === 'abouts' ? 'green' : 'white'}`, color: `${active === 'abouts' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
+                        <Box onClick={() => setActive('abouts')} style={{ background: `${active === 'abouts' ? 'var(--main-primary)' : 'white'}`, color: `${active === 'abouts' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
                             <Typography variant='h6' textAlign={'center'} >About</Typography>
                         </Box>
 
 
-                        <Box onClick={() => setActive('members')} style={{ background: `${active === 'members' ? 'green' : 'white'}`, color: `${active === 'members' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
+                        <Box onClick={() => setActive('members')} style={{ background: `${active === 'members' ? 'var(--main-primary)' : 'white'}`, color: `${active === 'members' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
                             <Typography variant='h6' textAlign={'center'} >Members</Typography>
                         </Box>
                     </Box>
@@ -56,7 +56,7 @@ export default TimeTables
 const TimeTableAboutSection = () => {
     return (
         <>
-            <Box sx={{marginLeft:'15px'}}>
+            <Box sx={{marginLeft:'15px',marginBottom:'13px'}}>
                 <ul style={{listStyleType:'number',lineHeight:'29px'}} >
                     <li>To Prepare institute time table at all levels including individual faculty memeber and lecture room.</li>
                     <li>To coordinate and finalize the department time tables.</li>

@@ -28,12 +28,12 @@ const UGCourses = () => {
                     <SectionSimulator title={'Under Graduate Programs'} />
 
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', width: '100%' }} >
-                        <Box onClick={() => setActive('circulars')} style={{ background: `${active === 'circulars' ? 'green' : 'white'}`, color: `${active === 'circulars' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
+                        <Box onClick={() => setActive('circulars')} style={{ background: `${active === 'circulars' ? 'var(--main-primary)' : 'white'}`, color: `${active === 'circulars' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
                             <Typography variant='h6' textAlign={'center'} >Circulars</Typography>
                         </Box>
 
 
-                        <Box onClick={() => setActive('details')} style={{ background: `${active === 'details' ? 'green' : 'white'}`, color: `${active === 'details' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
+                        <Box onClick={() => setActive('details')} style={{ background: `${active === 'details' ? 'var(--main-primary)' : 'white'}`, color: `${active === 'details' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
                             <Typography variant='h6' textAlign={'center'} >Details</Typography>
                         </Box>
                     </Box>

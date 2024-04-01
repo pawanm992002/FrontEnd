@@ -23,12 +23,12 @@ const ParentsMeetings = () => {
                     <SectionSimulator title={'Student/Parent/Employe Cell'} />
 
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', width: '100%' }} >
-                        <Box onClick={() => setActive('members')} style={{ background: `${active === 'members' ? 'green' : 'white'}`, color: `${active === 'members' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
+                        <Box onClick={() => setActive('members')} style={{ background: `${active === 'members' ? 'var(--main-primary)' : 'white'}`, color: `${active === 'members' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
                             <Typography variant='h6' textAlign={'center'} >Members</Typography>
                         </Box>
 
 
-                        <Box onClick={() => setActive('details')} style={{ background: `${active === 'details' ? 'green' : 'white'}`, color: `${active === 'details' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
+                        <Box onClick={() => setActive('details')} style={{ background: `${active === 'details' ? 'var(--main-primary)' : 'white'}`, color: `${active === 'details' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
                             <Typography variant='h6' textAlign={'center'} >Details</Typography>
                         </Box>
                     </Box>
@@ -56,7 +56,7 @@ export default ParentsMeetings
 const MeetsMembersDetails = () => {
     return (
         <>
-            <Container >
+            <Container sx={{margin:'14px 0'}} >
 
                 <p>The primary objective of grievance cell is to resolve the complaints of students, parents, and employees. This Institution aims to provide mechanism to the students for redressal of their grievances with regard to their complaints on academic and non-academic matters, grievances related to assessment, attendance, conducting of examinations, and harassment by colleague students etc.</p>
 

@@ -100,7 +100,7 @@ export default function Principal() {
 export const SectionSimulator = ({title,active=true})=>{
     return (
         <>
-          <Box style={{ background: `${active ? 'green':'white'}`, color: `${active ? 'white':'black'}`, margin: '15px 0',cursor:'pointer' }}>
+          <Box style={{ background: `${active ? 'var(--main-primary)':'white'}`, color: `${active ? 'white':'black'}`, margin: '15px 0',cursor:'pointer',padding:'10px 0' }}>
                 <Typography variant='h4' textAlign={'center'} >{title}</Typography>
             </Box>
         </>

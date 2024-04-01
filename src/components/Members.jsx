@@ -7,8 +7,9 @@ const Members = ({ members,designation='Designation',name='Name',sno="S.No." }) 
 
   return (
     <>
-      <Table>
+      <Table sx={{margin:'13px 0'}} >
         <TableHead>
+          
 
             
             <TableRow>

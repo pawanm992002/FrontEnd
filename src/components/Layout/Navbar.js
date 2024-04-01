@@ -32,20 +32,20 @@ const NavbarDropDownListData = [
       { name: "contact us", link: "/contact" },
     ],
   ],
-  // [
-  //   "administration",
-  //   [
-  //     { name: "bog", link: "/administration/bog" },
-  //     { name: "principal", link: "/administration/principal" },
-  //     { name: "registrar", link: "/administration/registrar" },
-  //     { name: "proctor", link: "/administration/proctor" },
-  //     {
-  //       name: "examination section",
-  //       link: "/administration/examinationSection",
-  //     },
-  //     { name: "account section", link: "/administration/accounts" },
-  //   ],
-  // ],
+  [
+    "administration",
+    [
+      { name: "bog", link: "/administration/bog" },
+      { name: "principal", link: "/administration/principal" },
+      { name: "registrar", link: "/administration/registrar" },
+      { name: "proctor", link: "/administration/proctor" },
+      {
+        name: "examination section",
+        link: "/administration/examinationSection",
+      },
+      { name: "account section", link: "/administration/accounts" },
+    ],
+  ],
   [
     "academics",
     [
@@ -82,16 +82,16 @@ const NavbarDropDownListData = [
     ],
   ],
 
-  // [
-  //   "greivance",
-  //   [
-  //     { name: "sc/st/obc", link: "/grievance/category" },
-  //     {
-  //       name: "student/Parent/Employee grievance cell",
-  //       link: "/grievance/parentsmeets",
-  //     },
-  //   ],
-  // ],
+  [
+    "greivance",
+    [
+      { name: "sc/st/obc", link: "/grievance/category" },
+      {
+        name: "student/Parent/Employee grievance cell",
+        link: "/grievance/parentsmeets",
+      },
+    ],
+  ],
 
   [
     "student corner",

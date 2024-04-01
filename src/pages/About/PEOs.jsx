@@ -90,15 +90,15 @@ const PEOs = () => {
                     <Box>
                         <Typography className='double-line-bottom' margin={'5px 0'} variant="h5" >POs</Typography>
 
-                        <TableContainer>
-                            <Table>
+                        <TableContainer  >
+                            <Table sx={{margin:'9px 0'}}>
                                 {PosRowData?.map((item, i) => (
 
                                     <TableRow key={i}>
-                                        <TableCell>{item?.Etitle}</TableCell>
-                                        <TableCell>{item?.Edescription}</TableCell>
-                                        <TableCell>{item?.Htitle}</TableCell>
-                                        <TableCell>{item?.Hdescription}</TableCell>
+                                        <TableCell sx={{border:'1px solid black'}} >{item?.Etitle}</TableCell>
+                                        <TableCell sx={{border:'1px solid black'}}>{item?.Edescription}</TableCell>
+                                        <TableCell sx={{border:'1px solid black'}}>{item?.Htitle}</TableCell>
+                                        <TableCell sx={{border:'1px solid black'}}>{item?.Hdescription}</TableCell>
                                     </TableRow>
                                 ))}
                             </Table>

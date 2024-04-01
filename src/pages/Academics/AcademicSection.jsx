@@ -22,13 +22,13 @@ const AcademicSection = () => {
 
                     <SectionSimulator title={'Academic Section'} />
 
-                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', width: '100%' }} >
-                        <Box onClick={() => setActive('members')} style={{ background: `${active === 'members' ? 'green' : 'white'}`, color: `${active === 'members' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', width: '100%',margin:'9px 0' }} >
+                        <Box onClick={() => setActive('members')} style={{ background: `${active === 'members' ? 'var(--main-primary)' : 'white'}`, color: `${active === 'members' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
                             <Typography variant='h6' textAlign={'center'} >Members</Typography>
                         </Box>
 
 
-                        <Box onClick={() => setActive('details')} style={{ background: `${active === 'details' ? 'green' : 'white'}`, color: `${active === 'details' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
+                        <Box onClick={() => setActive('details')} style={{ background: `${active === 'details' ? 'var(--main-primary)' : 'white'}`, color: `${active === 'details' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
                             <Typography variant='h6' textAlign={'center'} >Details</Typography>
                         </Box>
                     </Box>
@@ -56,7 +56,7 @@ export default AcademicSection
 const SectionDetails = () => {
     return (
         <>
-            <Container >
+            <Container  sx={{margin:"12px 0"}}>
                 <Box>
 
                     <Typography variant='h5' sx={{ margin: '4px 0' }} > U.G.</Typography>

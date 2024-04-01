@@ -44,7 +44,7 @@ export default AcademicCalender
 const AcademicCalenderTable = ({data,name='Name',sno="S. No.",designation='Designation'})=>{
     return (
         <>
-              <Table>
+              <Table sx={{margin:"9px 0"}} >
         <TableHead>
 
             

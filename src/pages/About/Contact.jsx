@@ -17,7 +17,7 @@ const Contact = () => {
 
                 <section id="contact">
 
-                <Box style={{background:'green',color:'white',margin:'15px 0'}}>
+                <Box style={{background:'var(--main-primary)',color:'white',margin:'15px 0'}}>
                     <Typography variant='h4' textAlign={'center'} >Contact</Typography>
                 </Box>
 
@@ -26,7 +26,7 @@ const Contact = () => {
                         <Grid item xs={12} md={6}  >
 
                             <TableContainer >
-                                <Box style={{ background: 'green', color: 'white', padding: '10px', margin: 'auto', width: '100%', display: 'block' }} >
+                                <Box style={{ background: 'var(--main-primary)', color: 'white', padding: '10px', margin: 'auto', width: '100%', display: 'block' }} >
 
                                     <Typography textAlign={'center'} >ENGINEERING COLLEGE AJMER</Typography>
                                     <Typography textAlign={'center'}> {"("} An Autonomous Institution Of Government Of Rajasthan {")"}</Typography>
@@ -59,7 +59,7 @@ const Contact = () => {
                         <Grid item xs={12} md={6}  >
 
                             <TableContainer >
-                                <Box style={{ background: 'green', color: 'white', padding: '10px', margin: 'auto', width: '100%', display: 'block' }} >
+                                <Box style={{ background: 'var(--main-primary)', color: 'white', padding: '10px', margin: 'auto', width: '100%', display: 'block' }} >
 
                                     <Typography textAlign={'center'} >Google Map Location</Typography>
 

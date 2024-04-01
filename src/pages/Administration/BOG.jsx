@@ -58,12 +58,12 @@ const BOG = () => {
                     {/* <marquee style={{cursor:'pointer'}} >For Any Inquiries Mail to <a href="mailto:draccounts@ecajmer.ac.in">draccounts@ecajmer.ac.in</a> </marquee> */}
 
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', width: '100%' }} >
-                        <Box onClick={() => setActive('bogs')} style={{ background: `${active === 'bogs' ? 'green' : 'white'}`, color: `${active === 'bogs' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
+                        <Box onClick={() => setActive('bogs')} style={{ background: `${active === 'bogs' ? 'var(--main-primary)' : 'white'}`, color: `${active === 'bogs' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
                             <Typography variant='h6' textAlign={'center'} >BoGs Society</Typography>
                         </Box>
 
 
-                        <Box onClick={() => setActive('meetings')} style={{ background: `${active === 'meetings' ? 'green' : 'white'}`, color: `${active === 'meetings' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
+                        <Box onClick={() => setActive('meetings')} style={{ background: `${active === 'meetings' ? 'var(--main-primary)' : 'white'}`, color: `${active === 'meetings' ? 'white' : 'black'}`, margin: '15px 0', cursor: 'pointer', width: '50%' }}>
                             <Typography variant='h6' textAlign={'center'} >Minutes's Meetings</Typography>
                         </Box>
                     </Box>
@@ -89,7 +89,7 @@ export default BOG
 export const BogMinutesMeetings = ({ columns, data }) => {
     return (
         <>
-            <Table>
+            <Table sx={{margin:'14px 0'}}>
                 <TableHead>
 
                     <TableRow >
