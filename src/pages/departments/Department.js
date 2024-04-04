@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import People from "../../components/Department/People";
 import { useMediaQuery } from "@mui/material";
 import Lab from "../../components/Department/Lab";
-import DepTables from "../../components/Department/DepTables";
+import MyTable from "../../components/utilily/MyTable";
 import About from "../../components/Department/About";
 
 function TabPanel(props) {
@@ -117,6 +117,13 @@ export default function Department({ comp }) {
     },
   ];
 
+  const announcement = [
+    {SNO: '1', DATE: "24/09/2019", ANNOUNCEMENT: '0-1 Knapsack -Dynamic Programing', CATEGORY: 'Study Material', BY: 'Dr. Satya Narayan Tazi'},
+    {SNO: '2', DATE: "24/09/2019", ANNOUNCEMENT: '0-1 Knapsack -Dynamic Programing', CATEGORY: 'Study Material', BY: 'Dr. Satya Narayan Tazi'},
+    {SNO: '3', DATE: "24/09/2019", ANNOUNCEMENT: '0-1 Knapsack -Dynamic Programing', CATEGORY: 'Study Material', BY: 'Dr. Satya Narayan Tazi'},
+    {SNO: '4', DATE: "24/09/2019", ANNOUNCEMENT: '0-1 Knapsack -Dynamic Programing', CATEGORY: 'Study Material', BY: 'Dr. Satya Narayan Tazi'},
+  ]
+
   return (
     <Box
       sx={{
@@ -196,9 +203,7 @@ export default function Department({ comp }) {
             </Box>
           </TabPanel>
           <TabPanel value={value} index={3}>
-          {/* <Box sx={{overflowY:'auto', height:'600px'}}> */}
-            <DepTables />
-            {/* </Box> */}
+            <MyTable data={announcement} />
           </TabPanel>
           <TabPanel value={value} index={4}>
             Item Five
