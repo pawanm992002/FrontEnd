@@ -19,6 +19,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Mail, Phone } from "@mui/icons-material";
+import Drawer from "../helper/Drawer";
 
 const NavbarDropDownListData = [
   [
@@ -107,12 +108,11 @@ const NavbarDropDownListData = [
     ],
   ],
   [
-    "Resources ",
+    "cell ",
     [
-      { name: "aicte cell", link: "/aicte" },
       { name: "alumni cell", link: "/alumni" },
-      { name: "campus development & planning cell", link: "/campusDev" },
-      { name: "control library", link: "/controlLibrary" },
+      // { name: "campus development & planning cell", link: "/campusDev" },
+      { name: "central library", link: "/centralLibrary" },
       { name: "eap cell", link: "/eapCell" },
     ],
   ],
@@ -121,6 +121,12 @@ const NavbarDropDownListData = [
 export default function Navbar() {
   const navView = useMediaQuery("(min-width:1100px)");
   const [showNav, setShowNav] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const toggleDrawerOpen = () => setOpen(true);
+  const toggleDrawerClose  = () => setOpen(false);
+
+
   return (
     <>
       <Box
@@ -129,25 +135,30 @@ export default function Navbar() {
           justifyContent: "center",
           bgcolor: "var(--darkBG)",
           width: "100%",
-          padding: "5",
+          padding: !navView?"5px 0":"",
           flexDirection: "column",
+          bgcolor:!navView?"var(--cardBG)":"",
+          color:!navView?"white":""
         }}
       >
         <Box
           sx={{
-            width:'80%',
+            width:!navView?"100%":"80%",
             display:'flex',
-            margin:'auto',
+            padding:!navView?"0 5px":"auto",
             justifyContent:'space-between',
-            alignItems:'center'
+            alignItems:'center',
+            margin:'auto'
           }}
          >
           <img
-            src="https://www.ecajmer.ac.in/images//white%20logo.png"
+            src= {!navView?"/images/mobileLogo.png":"https://www.ecajmer.ac.in/images//white%20logo.png"}
             alt="ecajmer_logo"
             srcset=""
-            width="400px"
-            height={70}
+            width= {!navView?"50px":"400px"}
+            height={!navView?"50px":"80px"}
+            
+            style={{borderRadius:!navView?"50%":""}}
           />
           <Box 
             sx={{
@@ -165,10 +176,11 @@ export default function Navbar() {
           <Typography>645948465168</Typography>
           </Box>
           <Divider orientation="vertical" flexItem />
-          <ListIcon fontSize="large" sx={{mr:1}} />
+          <ListIcon fontSize="large" sx={{mr:1}} onClick={toggleDrawerOpen} />
           </Box>
         </Box>
-        <Divider flexItem  sx={{bgcolor:'black'}}/>
+        <Drawer open={open} toggleDrawerOpen={toggleDrawerOpen} toggleDrawerClose={toggleDrawerClose} />
+       {navView && <Divider flexItem  sx={{bgcolor:'black'}}/> }
         <Box
           sx={{
             // maxWidth: "var(--maxWidth)",
@@ -176,7 +188,7 @@ export default function Navbar() {
             flexDirection: "column",
           }}
         >
-          {navView ? (
+          {navView && 
             <Stack
               direction="row"
               bgcolor="#white"
@@ -208,98 +220,11 @@ export default function Navbar() {
                   
                 />
               ))}
-{/* 
-              <Link
-                to="http://tpo.ecajmer.ac.in/"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginRight: "2px",
-                  marginLeft: "2px",
-                  color: "black",
-                  fontWeight: 600,
-                  fontSize: "0.875rem",
-                  margin: "8px 6px",
-                  transition: "all 150ms ease",
-                  cursor: "pointer",
-                  padding: "8px 6px",
-                }}
-              >
-                TPO
-              </Link>
-*/}
 </Box>
-{/*//*/}
 <Button sx={{ height:45,textTransform:'uppercase',fontSize:'0.8rem' }}>Admission</Button>
               
             </Stack>
-
-          ) : (
-            <Box>
-              <AppBar position="static" sx={{ bgcolor: "#5bb55b" }}>
-                <Toolbar>
-                  <Typography
-                    variant="h6"
-                    noWrap
-                    component="div"
-                    sx={{ flexGrow: 1 }}
-                  >
-                    <Link
-                      to="/"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                      }}
-                    >
-                      <img
-                        src="/images/mobileLogo.png"
-                        alt="@eca"
-                        style={{ width: "50px", borderRadius: "50%" }}
-                      />
-                      <Typography color="white">ECA</Typography>
-                    </Link>
-                  </Typography>
-                  <IconButton
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ position: "relative" }}
-                    onClick={() => setShowNav(!showNav)}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                </Toolbar>
-                {showNav && (
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "170px",
-                      right: "20px",
-                    }}
-                  >
-                    {NavbarDropDownListData?.map((item, i) => (
-                      <Accordion style={{ width: "220px", margin: "0px" }}>
-                        <AccordionSummary
-                          expandIcon={<ExpandMoreIcon />}
-                          aria-controls="panel1-content"
-                          id="panel1-header"
-                        >
-                          <Typography>{item[0]}</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                          {item[1].map((inItem, j) => (
-                            <Link to={inItem.link} style={{ color: "black" }}>
-                              <Typography key={j}> {inItem.name} </Typography>
-                            </Link>
-                          ))}
-                        </AccordionDetails>
-                      </Accordion>
-                    ))}
-                  </div>
-                )}
-              </AppBar>
-            </Box>
-          )}
+              }
         </Box>
       </Box>
     </>
