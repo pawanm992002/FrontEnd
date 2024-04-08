@@ -10,6 +10,7 @@ import {
   CardActions,
   CardHeader,
   Modal,
+  useMediaQuery,
 } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { MyList } from "../utilily/MyList";
@@ -17,12 +18,12 @@ import { Link } from "react-router-dom";
 
 export default function EventsNews({ events, name }) {
   const [open, setOpen] = useState(false);
+  const Small = useMediaQuery("(max-width:900px)");
 
-  console.log(events);
   return (
     <Card
       sx={{
-        maxWidth: 345,
+        width: Small ? "90%" : "30%",
         minWidth: "240px",
         boxShadow: "2px 1px 6px 2px black",
       }}
@@ -33,44 +34,41 @@ export default function EventsNews({ events, name }) {
           sx={{ bgcolor: "var(--cardBG)", color: "var(--darkBG)" }}
         />
         <CardContent>
-          {events?.map(
-            (item, i) =>
-              i < 4 && (
-                <Box key={i}>
-                  <Typography
-                    sx={{ fontWeight: "10px", fontSize: "17px", mt: 1 }}
-                    variant="h6"
-                  >
-                    {item?.text?.slice(0, 30)}...
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{
-                        display: "flex",
-                        textAlign: "center",
-                        verticalAlign: "middle",
-                      }}
-                    >
-                      <CalendarMonthIcon fontSize="small" /> {item?.date}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: "blue", fontSize: "12px" }}
-                    >
-                      NEW
-                    </Typography>
-                  </Box>
-                </Box>
-              )
-          )}
+          {events?.map((item, i) => (
+            <Box key={i}>
+              <Typography
+                sx={{ fontWeight: "10px", fontSize: "17px", mt: 1 }}
+                variant="h6"
+              >
+                {item?.text?.slice(0, 30)}...
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{
+                    display: "flex",
+                    textAlign: "center",
+                    verticalAlign: "middle",
+                  }}
+                >
+                  <CalendarMonthIcon fontSize="small" /> {item?.date}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ color: "blue", fontSize: "12px" }}
+                >
+                  NEW
+                </Typography>
+              </Box>
+            </Box>
+          ))}
         </CardContent>
       </CardActionArea>
       <CardActions>
@@ -94,14 +92,14 @@ export default function EventsNews({ events, name }) {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              width: '90%',
-              maxWidth: "400px"
+              width: "90%",
+              maxWidth: "400px",
             }}
           >
             <h2 id="parent-modal-title"> {name} </h2>
             <p id="parent-modal-description">
               {events?.map((item, i) => (
-                <Box key={i} sx={{borderBottom: '1px solid black'}}>
+                <Box key={i} sx={{ borderBottom: "1px solid black" }}>
                   <Link to={item?.link}>
                     <Typography
                       sx={{ fontWeight: "10px", fontSize: "17px", mt: 1 }}

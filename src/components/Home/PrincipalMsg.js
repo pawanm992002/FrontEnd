@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
 
@@ -17,6 +17,7 @@ export default function PrincipalMsg() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navView = useMediaQuery("(min-width:1100px)");
   return (
     <>
     <Box
@@ -31,9 +32,9 @@ export default function PrincipalMsg() {
 
       <Typography variant='h5' className='double-line-bottom' sx={{marginBottom:'20px'}}  >Principal Message</Typography>
 
-      <Card sx={{ margin:'5px 0',boxShadow:'2px 3px 9px black',display:'flex' }} >
+      <Card sx={{ margin:'5px 0',boxShadow:'2px 3px 9px black',display:'flex',flexDirection: navView?'row':'column' }} >
         <CardMedia
-          sx={{ height: 250,width:800 }}
+          sx={{height: !navView?0: 250,width:'100%' }}
           image="/images/principal.jpg"
           title="green iguana"
         />

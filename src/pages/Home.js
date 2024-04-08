@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import PlacementSection from '../components/Home/PlacementSection';
 import GallerySection from '../components/Home/GallerySection';
-import { Box, Typography, Modal } from '@mui/material';
+import { Box, Typography, Modal, useMediaQuery } from '@mui/material';
 import EventsNews from '../components/Home/EventsNews';
 import PrincipalMsg from "../components/Home/PrincipalMsg"
 import Header from '../components/Layout/Header';
@@ -42,12 +42,12 @@ const Home = () => {
     { text: "news 3 jd jjd kkjb", date: new Date("2023").toDateString() },
   ];
 
-  const [homeModel, setHomeModal] = useState(true)
-
+  const [homeModel, setHomeModal] = useState(true);
+  const navView = useMediaQuery("(min-width:1100px)");
   return (
     <>
-      {
-        homeModel && <Modal
+      {homeModel &&
+        <Modal
           open={homeModel}
           onClose={() => setHomeModal(false)}
           aria-labelledby="modal-modal-title"
@@ -58,61 +58,58 @@ const Home = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            bgcolor: 'background.paper',
-            borderRadius: 2,
-            boxShadow: 24,
+            width: 400,
+            // bgcolor: 'background.paper',
+            // border: '2px solid #000',
+            // boxShadow: 24,
             p: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
           }}>
-            <Typography id="modal-modal-title" variant="h6" component="h2" fontWeight='bold' color='blue'>
-              Current Achievement's
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Text in a modal
             </Typography>
-            <img src='/images/homeModel.jpeg' style={{width: '400px', height: '400px', objectFit:'fill'}} />
+            <img src='/images/principal.jpg' style={{width:'60%'}} />
           </Box>
         </Modal>
       }
-      <Header />
+    <Header />
 
-      <main>
+    <main>
 
-        <Box sx={{ bgcolor: "var(--darkBG)" }}>
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              width: "100%",
-              justifyContent: "center",
-              gap: "40px",
-              margin: "10px auto",
-            }}
-          >
-            <section id="principalMessage">
-              <PrincipalMsg />
-            </section>
-            <PlacementSection />
-            {/*
+    <Box sx={{ bgcolor: "var(--darkBG)" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          width: "100%",
+          justifyContent: "center",
+          gap: "40px",
+          margin: "10px auto",
+        }}
+      >
+        <section id="principalMessage">
+          <PrincipalMsg />
+        </section>
+        <PlacementSection />
+{/*
         <section id="aboutECA">
           <AboutECA />
         </section>
 
 */}
-          </Box>
-          <section id="news">
-            {/*<Scrollables />*/}
-          </section>
-          {
-            /*
-              <section id="web-portal">
-              <Cards />
-              </section>
-            */
+      </Box>
+      <section id="news">
+       {/*<Scrollables />*/} 
+      </section>
+{
+/*
+  <section id="web-portal">
+  <Cards />
+  </section>
+*/
 
-          }
+}
 
-        </Box>
+      </Box>
 
         {/* --------------- Achievement section: to show our college or students achievements */}
         {/* <section id="achievements">
@@ -122,7 +119,7 @@ const Home = () => {
       </main>
 
       {/* ------------- Placement section  */}
-
+     
 
       {/* ------------- Gallery section of the home page  */}
 
@@ -147,18 +144,16 @@ const Home = () => {
             sx={{
               display: "flex",
               justifyContent: "center",
-              // bgcolor: "var(--darkBG)",
-              bgcolor:'#cbd3dd',
+              // bgcolor:'#cbd3dd',
               padding: "20px 0",
-              minHeight:'500px'
-              
+              minHeight:'500px',
+              width:"100%"
             }}
           >
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' ,justifyContent:'center'}}>
+            <Box sx={{width:'100%',maxWidth:"var(--maxWidth)", display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
-              {/* <Typography variant='h5' className='double-line-bottom' sx={{ marginBottom: '20px' }} > Latest@ECA </Typography> */}
-              <Box sx={{ maxWidth: "var(--maxWidth)", display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
-                
+              <Typography variant='h5' className='double-line-bottom' sx={{ marginBottom: '20px' }} > Latest@ECA </Typography>
+              <Box sx={{ width: "100%", display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
                 <EventsNews events={events} name="Events" />
                 <EventsNews events={circulars} name="Circulars" />
                 <EventsNews events={news} name="News" />
@@ -174,7 +169,7 @@ const Home = () => {
 
       <GallerySection />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
