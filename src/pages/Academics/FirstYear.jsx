@@ -9,7 +9,7 @@ import { SectionSimulator } from '../Administration/Principal'
 const FirstYear = () => {
     return (
         <>
-            <Container>
+            <Box className='w-80'>
 
                 <section id="firstYear">
 
@@ -24,7 +24,7 @@ const FirstYear = () => {
 
                 </section>
 
-            </Container>
+            </Box>
         </>
     )
 }

@@ -84,7 +84,7 @@ const PEOs = () => {
 
     return (
         <>
-            <Container>
+            <Box  className="w-80">
 
                 <section id="POs">
                     <Box>
@@ -133,7 +133,7 @@ const PEOs = () => {
                     </Box>
 
                 </section>
-            </Container>
+            </Box>
         </>
     )
 }

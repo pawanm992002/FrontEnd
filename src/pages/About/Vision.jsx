@@ -11,7 +11,7 @@ const Vision = () => {
         <>
 
 
-            <Container >
+            <Box className='w-80' >
                 <section id="Vision">
                     <Box >
 
@@ -39,7 +39,7 @@ const Vision = () => {
 
                 </section>
 
-            </Container>
+            </Box>
         </>
     )
 }

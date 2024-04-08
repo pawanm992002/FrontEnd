@@ -13,7 +13,7 @@ const contactDetails = [
 const Contact = () => {
     return (
         <>
-            <Container style={{margin:'5px auto'}}>
+            <Box className='w-80'>
 
                 <section id="contact">
 
@@ -78,7 +78,7 @@ const Contact = () => {
 
                 </section>
 
-            </Container>
+            </Box>
         </>
     )
 }

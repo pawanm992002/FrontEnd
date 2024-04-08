@@ -24,7 +24,7 @@ const ExaminationSection = () => {
 
     return (
         <>
-            <Container>
+            <Box className='w-80'>
 
                 <section id="Accounts">
 
@@ -59,7 +59,7 @@ const ExaminationSection = () => {
 
                 </section>
 
-            </Container>
+            </Box>
         </>
     )
 }

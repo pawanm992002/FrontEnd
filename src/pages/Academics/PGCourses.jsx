@@ -21,7 +21,7 @@ const PGCourses = () => {
 
     return (
         <>
-            <Container>
+            <Box className='w-80'>
 
                 <section id="PGCourses">
 
@@ -49,7 +49,7 @@ const PGCourses = () => {
 
                 </section>
 
-            </Container>
+            </Box>
         </>
     )
 }

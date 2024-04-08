@@ -18,7 +18,7 @@ const TimeTables = () => {
 
     return (
         <>
-            <Container>
+            <Box className='w-80'>
 
                 <section id="timeTables">
 
@@ -45,7 +45,7 @@ const TimeTables = () => {
 
                 </section>
 
-            </Container>
+            </Box>
         </>
     )
 }

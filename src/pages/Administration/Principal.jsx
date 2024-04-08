@@ -20,7 +20,7 @@ export default function Principal() {
 
     return (
 
-        <Container>
+        <Box className='w-80'>
           <SectionSimulator title={'Principal Message'} />
 
             <Box
@@ -91,7 +91,7 @@ export default function Principal() {
                     </CardContent>
                 </Card>
             </Box>
-        </Container>
+        </Box>
     );
 }
 

@@ -32,7 +32,7 @@ const Registrar = () => {
 
     return (
         <>
-            <Container>
+            <Box className='w-80'>
 
                 <section id="Registrar">
 
@@ -73,7 +73,7 @@ const Registrar = () => {
 
                 </section>
 
-            </Container>
+            </Box>
         </>
     )
 }

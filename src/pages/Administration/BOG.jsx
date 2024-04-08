@@ -49,7 +49,7 @@ const BOG = () => {
 
     return (
         <>
-            <Container sx={{margin:'auto',width:'80%',padding:'5'}} >
+            <Box className='w-80' >
 
                 <section id="BOG">
 
@@ -78,7 +78,7 @@ const BOG = () => {
 
                 </section>
 
-            </Container>
+            </Box>
         </>
     )
 }

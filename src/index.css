@@ -25,6 +25,12 @@
   --main-primary:#213153EB;
 }
 
+/* ------------------------ Containerized Stuff ------------------  */
+.w-80{
+  width: 80%;
+  margin: auto;
+}
+
 /* ------------------ Fonts/Typography Specific stuff ----------------- X  */
 .poppins-regular {
   font-family: "Poppins", sans-serif;

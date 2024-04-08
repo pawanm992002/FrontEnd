@@ -20,7 +20,7 @@ const Accounts = () => {
 
     return (
         <>
-            <Container>
+            <Box className='w-80'>
 
                 <section id="Accounts">
 
@@ -49,7 +49,7 @@ const Accounts = () => {
 
                 </section>
 
-            </Container>
+            </Box>
         </>
     )
 }

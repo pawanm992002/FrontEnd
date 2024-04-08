@@ -32,7 +32,7 @@ const Proctor = () => {
 
     return (
         <>
-            <Container>
+            <Box className='w-80'>
 
                 <section id="Proctor">
 
@@ -67,7 +67,7 @@ const Proctor = () => {
 
                 </section>
 
-            </Container>
+            </Box>
         </>
     )
 }

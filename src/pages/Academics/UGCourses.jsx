@@ -21,7 +21,7 @@ const UGCourses = () => {
 
     return (
         <>
-            <Container>
+            <Box className='w-80'>
 
                 <section id="UGCourses">
 
@@ -49,7 +49,7 @@ const UGCourses = () => {
 
                 </section>
 
-            </Container>
+            </Box>
         </>
     )
 }

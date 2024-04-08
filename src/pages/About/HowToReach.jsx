@@ -4,7 +4,7 @@ import React from 'react'
 const HowToReach = () => {
   return (
     <>
-      <Container>
+      <Box className='w-80' >
 
         <section id="HowToReach">
 
@@ -53,7 +53,7 @@ const HowToReach = () => {
 
 
         </section>
-      </Container>
+      </Box>
     </>
   )
 }

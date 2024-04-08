@@ -9,7 +9,7 @@ const History = () => {
     <>
 
 
-      <Container  >
+      <Box width={"80%"} margin={'auto'} >
         <section id="History">
 
           <Box >
@@ -49,7 +49,7 @@ const History = () => {
 
         </section>
 
-      </Container>
+      </Box>
     </>
   )
 }

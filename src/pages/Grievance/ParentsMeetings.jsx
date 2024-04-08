@@ -16,7 +16,7 @@ const ParentsMeetings = () => {
 
     return (
         <>
-            <Container>
+            <Box className='w-80'>
 
                 <section id="section">
 
@@ -44,7 +44,7 @@ const ParentsMeetings = () => {
 
                 </section>
 
-            </Container>
+            </Box>
         </>
     )
 }
