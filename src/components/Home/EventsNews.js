@@ -94,18 +94,20 @@ export default function EventsNews({ events, name }) {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
+              width: '90%',
+              maxWidth: "400px"
             }}
           >
             <h2 id="parent-modal-title"> {name} </h2>
             <p id="parent-modal-description">
               {events?.map((item, i) => (
-                <Box key={i}>
+                <Box key={i} sx={{borderBottom: '1px solid black'}}>
                   <Link to={item?.link}>
                     <Typography
                       sx={{ fontWeight: "10px", fontSize: "17px", mt: 1 }}
                       variant="h6"
                     >
-                      {item?.text?.slice(0, 30)}...
+                      {item?.text}
                     </Typography>
                   </Link>
                   <Box
