@@ -17,6 +17,7 @@ import AcademicsPageRoutes from "./PagesRoutes/AcademicsPageRoutes";
 import GrievancePageRoutes from "./PagesRoutes/GrievancePageRoutes";
 import StudentCornerRoutes from "./PagesRoutes/StudentCornerRoutes";
 import Alumni from "./pages/Alumni/Alumni";
+import Admin from "./PagesRoutes/Admin";
 
 
 const AppRoutes = () => {
@@ -171,6 +172,8 @@ const AppRoutes = () => {
                 </Layout>
               }
             />
+             <Route  path='/admin/*' element={<Admin />} />
+
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>
