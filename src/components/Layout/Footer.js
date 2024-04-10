@@ -1,4 +1,4 @@
-import { Typography, Box, Container, List, ListItem } from '@mui/material'
+import { Typography,Box, Container, List, ListItem, useMediaQuery } from '@mui/material'
 import React from 'react'
 
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
@@ -6,6 +6,8 @@ import { FaXTwitter, FaInstagram } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
+  const Medium = useMediaQuery('(max-width:1150px)');
+  const small = useMediaQuery('(max-width:900px)');
   return (
     <>
       <section id="Footer">
@@ -15,19 +17,19 @@ const Footer = () => {
 
           <Box sx={{ width: '100%', height: '100%', backdropFilter: 'blur(2px)', background: '#213153EB', color: 'white' }} >
 
-            <Container sx={{ width: '90%', margin: 'auto' }} >
+            <Container sx={{width:Medium?"100%":'90%',margin:'auto'}} >
 
-              <Box sx={{ display: 'flex', alignItems: 'flex-start', paddingTop: '17px', lineHeight: '43px' }} >
-                <Box sx={{ width: '40%', border: '0px solid black', margin: '7px 10px' }} >
-                  <small>Engineering College Ajmer</small>
-                  <Typography variant='h4'  >ECA</Typography>
-                  <p> 🏫 231 Badlya Choraya, Nareli Ajmer, 305001, Rajasthan</p>
-                  <Box sx={{ marginTop: '7px' }} >
-                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', cursor: 'pointer' }}>
-                      <FaFacebook size={'30px'} />
-                      <FaLinkedin size={'30px'} />
-                      <FaXTwitter size={'30px'} />
-                      <FaInstagram size={'30px'} />
+<Box sx={{display:'flex',alignItems:'flex-start',justifyContent:'space-around',paddingTop:'17px',lineHeight:'43px'}} >
+            <Box sx={{width:small?"80%":Medium?"60%":'40%',border:'0px solid black',margin:'5px 10px'}}>
+             {/* <small>Engineering College Ajmer</small>  */}
+              <Typography variant='h4'>ECA</Typography>
+              <p>231 Badlya Choraya, Nareli Ajmer, 305001, Rajasthan</p>
+              <Box sx={{marginTop:'7px'}} >
+                <Box sx={{display:'flex',alignItems:'center',justifyContent:'space-between',cursor:'pointer',width:'50%'}}>
+              <FaFacebook  size={'30px'}  />
+              <FaLinkedin  size={'30px'} />
+              <FaXTwitter  size={'30px'} />
+              <FaInstagram  size={'30px'} />
 
                     </Box>
                   </Box>
@@ -56,13 +58,13 @@ const Footer = () => {
                 <Box sx={{ width: '40%', border: '0px solid black', margin: '7px 10px' }} >
                   <Typography variant='h4' >Usefull Links</Typography>
 
-                  <Box>
-                    <List>
-                      <ListItem> <Link style={{ color: 'white' }} >About US</Link> </ListItem>
-                      <ListItem> <Link style={{ color: 'white' }} >Departments</Link> </ListItem>
-                      <ListItem> <Link style={{ color: 'white' }} >Administration</Link> </ListItem>
-                    </List>
-                  </Box>
+              <Box>
+                <List>
+                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',}} >About US</Link> </ListItem>
+                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',}} >Departments</Link> </ListItem>
+                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',}} >Administration</Link> </ListItem>
+                </List>
+              </Box>
 
                 </Box>
               </Box>

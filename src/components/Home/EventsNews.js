@@ -9,14 +9,15 @@ import {
   CardActionArea,
   CardActions,
   CardHeader,
+  useMediaQuery,
 } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 export default function EventsNews({events,name}) {
   // const mobileView = 
-  
+  const Small = useMediaQuery("(max-width:900px)");
   return (
-        <Card sx={{ maxWidth: 345, minWidth: "240px", boxShadow:'2px 1px 6px 2px black' }}>
+        <Card sx={{ width: Small?"90%":"30%", minWidth: "240px", boxShadow:'2px 1px 6px 2px black' }}>
           <CardActionArea>
             <CardHeader title={name} sx={{ bgcolor: "var(--cardBG)", color:'var(--darkBG)' }} />
             <CardContent>
