@@ -13,26 +13,57 @@ import {
   Avatar,
   FormControl,
   FormHelperText,
-  InputRightElement
+  InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
 const Login = () => {
-    const [form,setForm] = useState({email:'',password:''})
-    const handleChange = (e) => setForm({...form,[e.target.name]:e.target.value});
+  const navigate = useNavigate();
+  const toast = useToast();
+  const [form, setForm] = useState({ username: "", password: "" });
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
-  const handleSubmit = (e)=>{
-    e.preventDefault();
-
-    console.log('fomr ',form);
-  }
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      console.log(process.env.BACKEND_URL);
+      console.log("fomr ", form);
+      const { data } = await axios.post(
+        `http://localhost:8000/api/v1/auth/admin-login`,
+        form
+      );
+      if (data) {
+        toast({
+          title: data.message,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        navigate("/admin");
+      } else {
+        throw new Error("Username or password is not valid")
+      }
+      console.log(".....................", data);
+    } catch (error) {
+      toast({
+        title: error?.message,
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
 
   return (
     <Flex
@@ -65,7 +96,12 @@ const Login = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="email" placeholder="email address" name="email" onChange={handleChange} />
+                  <Input
+                    type="text"
+                    placeholder="email address"
+                    name="username"
+                    onChange={handleChange}
+                  />
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -78,7 +114,8 @@ const Login = () => {
                   <Input
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
-                    name="password" onChange={handleChange}
+                    name="password"
+                    onChange={handleChange}
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -94,10 +131,10 @@ const Login = () => {
                 borderRadius={0}
                 type="submit"
                 variant="solid"
-                bgColor={'var(--main-primary)'}
+                bgColor={"var(--main-primary)"}
                 width="full"
-                color={'white'}
-                sx={{'&:hover':{bg:'var(--main-primary)'}}}
+                color={"white"}
+                sx={{ "&:hover": { bg: "var(--main-primary)" } }}
               >
                 Login
               </Button>
