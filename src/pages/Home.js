@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PlacementSection from '../components/Home/PlacementSection';
 import GallerySection from '../components/Home/GallerySection';
 import { Box, Typography, Modal, useMediaQuery } from '@mui/material';
@@ -7,8 +7,18 @@ import EventsNews from '../components/Home/EventsNews';
 import PrincipalMsg from "../components/Home/PrincipalMsg"
 import Header from '../components/Layout/Header';
 import Cards from "../components/Cards";
+import { getDepartmentsNotices } from '../apis/UsersApi';
 
 const Home = () => {
+
+    //------------fetch the data of the notices
+    useEffect(()=>{
+      const data = getDepartmentsNotices('cse');
+
+      console.log('data hoe ',data);
+    },[])
+
+
   const events = [
     {
       text: "news 1 jd jjd kkjb l h jhgbnjk mkiugv mkiugv mkiugv nmjugvc ",

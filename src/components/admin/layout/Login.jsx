@@ -16,22 +16,48 @@ import {
   InputRightElement
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import { handleAdminLogin } from "../../../apis/AdminApi";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
 const Login = () => {
-    const [form,setForm] = useState({email:'',password:''})
-    const handleChange = (e) => setForm({...form,[e.target.name]:e.target.value});
+
+  const navigate = useNavigate();
+
+  //-------------------- State management stuff
+  const [form, setForm] = useState({ username: '', password: '' })
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    try {
+      const data = await handleAdminLogin(form);
+      
+      if(data?.success === false)
+        toast.error(data?.message);
+      else{
+        toast.success(data?.message);
+        navigate('/admin/administration');
+      }
 
-    console.log('fomr ',form);
+    } catch (error) {
+      console.log(error)
+      // toast.error(error)
+    }
+    setLoading(false);
+
+    setForm({ username: '', password: '' })
+
   }
 
   return (
@@ -65,7 +91,7 @@ const Login = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="email" placeholder="email address" name="email" onChange={handleChange} />
+                  <Input type="text" placeholder="username address" name="username" onChange={handleChange} required minLength={5} />
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -78,7 +104,7 @@ const Login = () => {
                   <Input
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
-                    name="password" onChange={handleChange}
+                    name="password" onChange={handleChange} required minLength={5}
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -91,13 +117,14 @@ const Login = () => {
                 </FormHelperText>
               </FormControl>
               <Button
+                isLoading={loading}
                 borderRadius={0}
                 type="submit"
                 variant="solid"
                 bgColor={'var(--main-primary)'}
                 width="full"
                 color={'white'}
-                sx={{'&:hover':{bg:'var(--main-primary)'}}}
+                sx={{ '&:hover': { bg: 'var(--main-primary)' } }}
               >
                 Login
               </Button>
