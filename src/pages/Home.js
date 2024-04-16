@@ -7,9 +7,13 @@ import EventsNews from '../components/Home/EventsNews';
 import PrincipalMsg from "../components/Home/PrincipalMsg"
 import Header from '../components/Layout/Header';
 import Cards from "../components/Cards";
+
 import ModalComponent from '../components/Modal';
 
+
 const Home = () => {
+
+
   const events = [
     {
       text: "news 1 jd jjd kkjb l h jhgbnjk mkiugv mkiugv mkiugv nmjugvc ",

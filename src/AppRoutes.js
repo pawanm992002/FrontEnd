@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import {Toaster} from 'react-hot-toast'
+
 //----------- Components Specific Stuff
 import Layout from "./components/Layout/Layout";
 
@@ -43,6 +45,7 @@ const AppRoutes = () => {
               {/* ------------ Departments Pages Routes ------------------ X  */}
               {DepartmentsRoutes}
 
+<Toaster/>
               {/* ------------ Admin Pages Routes ------------------ X  */}
               <Route path="/admin/*" element={<Admin />} />
 

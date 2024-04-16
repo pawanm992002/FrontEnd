@@ -17,6 +17,8 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import { handleAdminLogin } from "../../../apis/AdminApi";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -24,49 +26,48 @@ const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
 const Login = () => {
+
   const navigate = useNavigate();
-  const toast = useToast();
-  const [form, setForm] = useState({ username: "", password: "" });
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+
+  //-------------------- State management stuff
+  const [form, setForm] = useState({ username: '', password: '' })
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
 
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      console.log(process.env.BACKEND_URL);
-      console.log("fomr ", form);
-      const { data } = await axios.post(
-        `http://localhost:8000/api/v1/auth/admin-login`,
-        form
-      );
+    
+    e.preventDefault();
+    setLoading(true);
+  
+      const data = await handleAdminLogin(form);
+  
       if (data) {
-        toast({
-          title: data.message,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
+        toast.success(data?.message);
+        
         localStorage.setItem("token",data.token)
         localStorage.setItem("_id",data.admin._id)
         localStorage.setItem("username",data.admin.username)
         localStorage.setItem("isLoggedIn",1)
-        navigate("/admin");
+        
+        navigate('/admin/administration');
+
       } else {
-        throw new Error("Username or password is not valid")
+        toast.error("Username or password is not valid");
       }
-      console.log(".....................", data);
     } catch (error) {
-      toast({
-        title: error?.message,
-        status: 'warning',
-        duration: 5000,
-        isClosable: true,
-      });
+        toast.error(error?.message);
     }
+  
+  
+    setLoading(false);
+
+    setForm({ username: '', password: '' })
   };
 
   useEffect(() => {
@@ -105,12 +106,8 @@ const Login = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input
-                    type="text"
-                    placeholder="email address"
-                    name="username"
-                    onChange={handleChange}
-                  />
+                  <Input type="text" placeholder="username address" name="username" onChange={handleChange} required minLength={5} />
+
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -123,8 +120,8 @@ const Login = () => {
                   <Input
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
-                    name="password"
-                    onChange={handleChange}
+                    name="password" onChange={handleChange} required minLength={5}
+
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -137,13 +134,14 @@ const Login = () => {
                 </FormHelperText>
               </FormControl>
               <Button
+                isLoading={loading}
                 borderRadius={0}
                 type="submit"
                 variant="solid"
                 bgColor={"var(--main-primary)"}
                 width="full"
-                color={"white"}
-                sx={{ "&:hover": { bg: "var(--main-primary)" } }}
+                color={'white'}
+                sx={{ '&:hover': { bg: 'var(--main-primary)' } }}
               >
                 Login
               </Button>
