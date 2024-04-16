@@ -7,17 +7,19 @@ import EventsNews from '../components/Home/EventsNews';
 import PrincipalMsg from "../components/Home/PrincipalMsg"
 import Header from '../components/Layout/Header';
 import Cards from "../components/Cards";
+import ModalComponent from '../components/Modal';
 
 const Home = () => {
   const events = [
     {
       text: "news 1 jd jjd kkjb l h jhgbnjk mkiugv mkiugv mkiugv nmjugvc ",
       date: new Date().toDateString(),
+      link: "hhhh"
     },
-    { text: "news 2 jd jjd kkjb", date: new Date("2023").toDateString() },
-    { text: "news 3 jd jjd kkjb", date: new Date("2022").toDateString() },
-    { text: "news 2 jd jjd kkjb", date: new Date("2023").toDateString() },
-    { text: "news 3 jd jjd kkjb", date: new Date("2022").toDateString() },
+    { text: "news 2 jd jjd kkjb", date: new Date("2023").toDateString(), link: '' },
+    { text: "news 3 jd jjd kkjb", date: new Date("2022").toDateString(), link: '' },
+    { text: "news 2 jd jjd kkjb", date: new Date("2023").toDateString(), link: '' },
+    { text: "news 3 jd jjd kkjb", date: new Date("2022").toDateString(), link: '' },
   ];
   const circulars = [
     {
