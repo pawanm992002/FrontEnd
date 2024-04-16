@@ -35,7 +35,7 @@ export default function EventsNews({ events, name }) {
         />
         <CardContent>
           {events?.map((item, i) => (
-            <Box key={i}>
+            i < 4 && <Box key={i}>
               <Typography
                 sx={{ fontWeight: "10px", fontSize: "17px", mt: 1 }}
                 variant="h6"
