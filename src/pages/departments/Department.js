@@ -9,7 +9,6 @@ import { useMediaQuery } from "@mui/material";
 import Lab from "../../components/Department/Lab";
 import MyTable from "../../components/utilily/MyTable";
 import About from "../../components/Department/About";
-import { Title } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import GallerySection from "../../components/Home/GallerySection";
 
@@ -282,6 +281,7 @@ export default function Department({ comp }) {
       <Box
         sx={{
           maxWidth: "var(--maxWidth)",
+          width: '100%'
         }}
       >
         <Box
@@ -314,11 +314,11 @@ export default function Department({ comp }) {
             <Tab label="ACHIEVEMENTS" {...a11yProps(4)} />
             <Tab label="CIRCULARS" {...a11yProps(5)} />
             <Tab label="TIMME-TABLES" {...a11yProps(6)} />
-            <Tab label="NBA" {...a11yProps(7)} />
-            <Link to="/gallery" style={{textAlign
+            <Tab label="GALLERY" {...a11yProps(7)} />
+            {/* <Link to="/gallery" style={{textAlign
             : 'center'}}>
               <Tab label="GALLERY" {...a11yProps(8)} />
-            </Link>
+            </Link> */}
           </Tabs>
           <TabPanel value={value} index={0}>
             <About comp={comp} />
@@ -405,7 +405,7 @@ export default function Department({ comp }) {
             <MyTable data={time_table} />
           </TabPanel>
           <TabPanel value={value} index={7}>
-            {/* isme kuch nhi he */}
+            <GallerySection />
           </TabPanel>
         </Box>
       </Box>
