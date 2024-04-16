@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Flex,
   Heading,
@@ -50,6 +50,10 @@ const Login = () => {
           duration: 5000,
           isClosable: true,
         });
+        localStorage.setItem("token",data.token)
+        localStorage.setItem("_id",data.admin._id)
+        localStorage.setItem("username",data.admin.username)
+        localStorage.setItem("isLoggedIn",1)
         navigate("/admin");
       } else {
         throw new Error("Username or password is not valid")
@@ -64,6 +68,11 @@ const Login = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if(JSON.parse(localStorage.getItem("isLoggedIn")) === 1) 
+      navigate('/admin')
+  },[])
 
   return (
     <Flex
