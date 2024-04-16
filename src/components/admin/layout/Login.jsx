@@ -14,66 +14,66 @@ import {
   FormControl,
   FormHelperText,
   InputRightElement,
-  useToast,
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { handleAdminLogin } from "../../../apis/AdminApi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { url } from "../../../apis/ApiIntances"
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
 const Login = () => {
-
   const navigate = useNavigate();
 
   //-------------------- State management stuff
-  const [form, setForm] = useState({ username: '', password: '' })
+  const [form, setForm] = useState({ username: "", password: "" });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
   const handleSubmit = async (e) => {
-    
-    e.preventDefault();
-    setLoading(true);
-  
-      const data = await handleAdminLogin(form);
-  
-      if (data) {
-        toast.success(data?.message);
-        
-        localStorage.setItem("token",data.token)
-        localStorage.setItem("_id",data.admin._id)
-        localStorage.setItem("username",data.admin.username)
-        localStorage.setItem("isLoggedIn",1)
-        
-        navigate('/admin/administration');
+    try {
+      e.preventDefault();
+      setLoading(true);
+      const {data} = await axios.post(`${url}/auth/admin-login`, form)
 
+      if (data) {
+        if(data?.admin) {
+          localStorage.setItem("userData", JSON.stringify(data.admin));
+          localStorage.setItem("typeOfUser", "admin");
+        }
+
+        if(data?.faculty) {
+          localStorage.setItem("userData", JSON.stringify(data.admin));
+          localStorage.setItem("typeOfUser", "faculty");
+        }
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("isLoggedIn", true)
+        
+        toast.success(data?.message);
+        navigate("/admin/administration");
       } else {
         toast.error("Username or password is not valid");
       }
     } catch (error) {
-        toast.error(error?.message);
+      toast.error(error?.message);
     }
-  
-  
     setLoading(false);
-
-    setForm({ username: '', password: '' })
+    setForm({ username: "", password: "" });
   };
 
   useEffect(() => {
-    if(JSON.parse(localStorage.getItem("isLoggedIn")) === 1) 
-      navigate('/admin')
-  },[])
+    if (JSON.parse(localStorage.getItem("isLoggedIn")))
+      navigate("/admin");
+  }, []);
 
   return (
     <Flex
@@ -106,8 +106,15 @@ const Login = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="text" placeholder="username address" name="username" onChange={handleChange} required minLength={5} />
-
+                  <Input
+                    type="text"
+                    placeholder="username address"
+                    name="username"
+                    value={form.username}
+                    onChange={handleChange}
+                    required
+                    minLength={5}
+                  />
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -120,8 +127,11 @@ const Login = () => {
                   <Input
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
-                    name="password" onChange={handleChange} required minLength={5}
-
+                    name="password"
+                    value={form.password}
+                    onChange={handleChange}
+                    required
+                    minLength={5}
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -140,8 +150,8 @@ const Login = () => {
                 variant="solid"
                 bgColor={"var(--main-primary)"}
                 width="full"
-                color={'white'}
-                sx={{ '&:hover': { bg: 'var(--main-primary)' } }}
+                color={"white"}
+                sx={{ "&:hover": { bg: "var(--main-primary)" } }}
               >
                 Login
               </Button>

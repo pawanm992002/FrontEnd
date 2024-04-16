@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import CircularCard from '../cards/CircularCard'
 import { SimpleGrid } from '@chakra-ui/react'
+import MyContext from '../../../AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 const Administration = () => {
+    const ctx = MyContext()
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        if(!ctx.isLoggedIn) {
+            navigate('/')
+        }
+    }, [])
     
     const cardData = [
         {
@@ -34,6 +44,7 @@ const Administration = () => {
 
     return (
         <>
+        {console.log('pppppppppppp', ctx)}
             <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
                 {
                     cardData.map((data) => {
