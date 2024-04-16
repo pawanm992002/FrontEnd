@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Flex,
   Heading,
@@ -13,12 +13,14 @@ import {
   Avatar,
   FormControl,
   FormHelperText,
-  InputRightElement
+  InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { handleAdminLogin } from "../../../apis/AdminApi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
@@ -33,32 +35,45 @@ const Login = () => {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     setLoading(true);
-    try {
+  
       const data = await handleAdminLogin(form);
-      
-      if(data?.success === false)
-        toast.error(data?.message);
-      else{
+  
+      if (data) {
         toast.success(data?.message);
+        
+        localStorage.setItem("token",data.token)
+        localStorage.setItem("_id",data.admin._id)
+        localStorage.setItem("username",data.admin.username)
+        localStorage.setItem("isLoggedIn",1)
+        
         navigate('/admin/administration');
-      }
 
+      } else {
+        toast.error("Username or password is not valid");
+      }
     } catch (error) {
-      console.log(error)
-      // toast.error(error)
+        toast.error(error?.message);
     }
+  
+  
     setLoading(false);
 
     setForm({ username: '', password: '' })
+  };
 
-  }
+  useEffect(() => {
+    if(JSON.parse(localStorage.getItem("isLoggedIn")) === 1) 
+      navigate('/admin')
+  },[])
 
   return (
     <Flex
@@ -92,6 +107,7 @@ const Login = () => {
                     children={<CFaUserAlt color="gray.300" />}
                   />
                   <Input type="text" placeholder="username address" name="username" onChange={handleChange} required minLength={5} />
+
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -105,6 +121,7 @@ const Login = () => {
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
                     name="password" onChange={handleChange} required minLength={5}
+
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -121,7 +138,7 @@ const Login = () => {
                 borderRadius={0}
                 type="submit"
                 variant="solid"
-                bgColor={'var(--main-primary)'}
+                bgColor={"var(--main-primary)"}
                 width="full"
                 color={'white'}
                 sx={{ '&:hover': { bg: 'var(--main-primary)' } }}

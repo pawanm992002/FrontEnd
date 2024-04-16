@@ -2,6 +2,7 @@ import { Box, List, ListItem, ListItemText, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export function MyList({list}) {
+  console.log('kjh',list)
     return (
         <List
           sx={{

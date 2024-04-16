@@ -1,8 +1,4 @@
-import React from 'react'
 import { Route } from 'react-router-dom'
-
-
-import Layout from '../components/Layout/Layout'
 
 //---------- Academics pages routes 
 import TimeTables from '../pages/Academics/TimeTables'
@@ -13,12 +9,12 @@ import UGCourses from '../pages/Academics/UGCourses'
 import AcademicSection from '../pages/Academics/AcademicSection'
 
 const AcademicsPageRoutes = [
-    <Route exact path='/academics/timeTables' element={<Layout>  <TimeTables /></Layout>} />,
-    <Route exact path='/academics/firstYear' element={<Layout>  <FirstYear /></Layout>} />,
-    <Route exact path='/academics/research' element={<Layout>  <Research /></Layout>} />,
-    <Route exact path='/academics/PGCourses' element={<Layout>  <PGCourses /></Layout>} />,
-    <Route exact path='/academics/UGCourses' element={<Layout>  <UGCourses /></Layout>} />,
-    <Route exact path='/academics/section' element={<Layout>  <AcademicSection /></Layout>} />,
+    <Route exact path='/academics/timeTables' element={<TimeTables />} />,
+    <Route exact path='/academics/firstYear' element={<FirstYear />} />,
+    <Route exact path='/academics/research' element={<Research />} />,
+    <Route exact path='/academics/PGCourses' element={<PGCourses />} />,
+    <Route exact path='/academics/UGCourses' element={<UGCourses />} />,
+    <Route exact path='/academics/section' element={<AcademicSection />} />,
 ]
 
 export default AcademicsPageRoutes
