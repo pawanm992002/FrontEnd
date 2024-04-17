@@ -45,7 +45,6 @@ const AppRoutes = () => {
               {/* ------------ Departments Pages Routes ------------------ X  */}
               {DepartmentsRoutes}
 
-<Toaster/>
               {/* ------------ Admin Pages Routes ------------------ X  */}
               <Route path="/admin/*" element={<Admin />} />
 
@@ -53,6 +52,7 @@ const AppRoutes = () => {
             </Route>
           </Routes>
         </Layout>
+<Toaster/>
       </BrowserRouter>
     </>
   );

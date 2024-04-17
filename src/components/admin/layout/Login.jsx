@@ -41,39 +41,39 @@ const Login = () => {
   const handleShowClick = () => setShowPassword(!showPassword);
 
   const handleSubmit = async (e) => {
-    
-    e.preventDefault();
-    setLoading(true);
-  
+    try {
+      e.preventDefault();
+      setLoading(true);
+
       const data = await handleAdminLogin(form);
-  
+
       if (data) {
         toast.success(data?.message);
-        
-        localStorage.setItem("token",data.token)
-        localStorage.setItem("_id",data.admin._id)
-        localStorage.setItem("username",data.admin.username)
-        localStorage.setItem("isLoggedIn",1)
-        
+
+        localStorage.setItem("token", data.token)
+        localStorage.setItem("_id", data.admin._id)
+        localStorage.setItem("username", data.admin.username)
+        localStorage.setItem("isLoggedIn", 1)
+
         navigate('/admin/administration');
 
       } else {
         toast.error("Username or password is not valid");
       }
     } catch (error) {
-        toast.error(error?.message);
+      toast.error(error?.message);
     }
-  
-  
+
+
     setLoading(false);
 
     setForm({ username: '', password: '' })
   };
 
   useEffect(() => {
-    if(JSON.parse(localStorage.getItem("isLoggedIn")) === 1) 
+    if (JSON.parse(localStorage.getItem("isLoggedIn")) === 1)
       navigate('/admin')
-  },[])
+  }, [])
 
   return (
     <Flex
