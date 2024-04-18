@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import PlacementSection from '../components/Home/PlacementSection';
 import GallerySection from '../components/Home/GallerySection';
 import { Box, Typography, Modal, useMediaQuery } from '@mui/material';
@@ -7,8 +7,6 @@ import EventsNews from '../components/Home/EventsNews';
 import PrincipalMsg from "../components/Home/PrincipalMsg"
 import Header from '../components/Layout/Header';
 import Cards from "../components/Cards";
-
-import ModalComponent from '../components/Modal';
 
 
 const Home = () => {

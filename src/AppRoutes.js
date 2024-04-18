@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import {Toaster} from 'react-hot-toast'
+import { Toaster } from "react-hot-toast";
 
 //----------- Components Specific Stuff
 import Layout from "./components/Layout/Layout";
@@ -17,42 +17,46 @@ import GrievancePageRoutes from "./PagesRoutes/GrievancePageRoutes";
 import StudentCornerRoutes from "./PagesRoutes/StudentCornerRoutes";
 import Admin from "./PagesRoutes/Admin";
 import DepartmentsRoutes from "./PagesRoutes/DepartmentsRoutes";
+import { AuthContext } from "./AuthContext";
+import { useContext } from "react";
 
 const AppRoutes = () => {
   return (
     <>
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/">
-              <Route index element={<Home />} />
+        <Toaster />
+        <AuthContext>
+          <Layout>
+            <Routes>
+              <Route path="/">
+                <Route index element={<Home />} />
 
-              {/* ------------------- About pages route ---------------X */}
-              {AboutPageRoutes}
+                {/* ------------------- About pages route ---------------X */}
+                {AboutPageRoutes}
 
-              {/* ----------- Administration Pages routes ------------- X */}
-              {AdministrationPageRoutes}
+                {/* ----------- Administration Pages routes ------------- X */}
+                {AdministrationPageRoutes}
 
-              {/* --------------- Academic Pages Routes ----------------- X */}
-              {AcademicsPageRoutes}
+                {/* --------------- Academic Pages Routes ----------------- X */}
+                {AcademicsPageRoutes}
 
-              {/* ------------ Grievance Pages Routes ------------------ X  */}
-              {GrievancePageRoutes}
+                {/* ------------ Grievance Pages Routes ------------------ X  */}
+                {GrievancePageRoutes}
 
-              {/* ------------ Student Corner Pages Routes ------------------ X  */}
-              {StudentCornerRoutes}
+                {/* ------------ Student Corner Pages Routes ------------------ X  */}
+                {StudentCornerRoutes}
 
-              {/* ------------ Departments Pages Routes ------------------ X  */}
-              {DepartmentsRoutes}
+                {/* ------------ Departments Pages Routes ------------------ X  */}
+                {DepartmentsRoutes}
 
-              {/* ------------ Admin Pages Routes ------------------ X  */}
-              <Route path="/admin/*" element={<Admin />} />
+                {/* ------------ Admin Pages Routes ------------------ X  */}
+                <Route path="/admin/*" element={<Admin />} />
 
-              <Route path="*" element={<Error />} />
-            </Route>
-          </Routes>
-        </Layout>
-<Toaster/>
+                <Route path="*" element={<Error />} />
+              </Route>
+            </Routes>
+          </Layout>
+        </AuthContext>
       </BrowserRouter>
     </>
   );
