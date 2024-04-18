@@ -19,7 +19,6 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
-  SimpleGrid,
   Center,
   Image,
 } from '@chakra-ui/react'
@@ -36,16 +35,16 @@ import {
 import { Link } from 'react-router-dom'
 
 const LinkItems = [
-  { name: 'Administration', icon: FiHome, href: '/admin/administration' },
-  { name: 'Academics', icon: FiTrendingUp, href: '/admin/academics' },
-  { name: 'Departments', icon: FiCompass, href: '/admin/departments' },
-  { name: 'Event', icon: FiStar, href: '/admin/event' },
-  { name: 'Student-Corner', icon: FiSettings, href: '/admin/student-corner' },
-  { name: 'Cells', icon: FiSettings, href: '/admin/cells' },
-  { name: 'Placement', icon: FiSettings, href: '/admin/placement' },
-  { name: 'News & Orders', icon: FiSettings, href: '/admin/news-orders' },
-  { name: 'ECA-Press', icon: FiSettings, href: '/admin/eca-press' },
-  { name: 'Web-Team', icon: FiSettings, href: '/admin/web-team' },
+  { name: 'administration', icon: FiHome, href: '/admin/administration' },
+  { name: 'academics', icon: FiTrendingUp, href: '/admin/academics' },
+  { name: 'departments', icon: FiCompass, href: '/admin/departments' },
+  { name: 'event', icon: FiStar, href: '/admin/event' },
+  { name: 'student-corner', icon: FiSettings, href: '/admin/student-corner' },
+  { name: 'cells', icon: FiSettings, href: '/admin/cells' },
+  { name: 'placement', icon: FiSettings, href: '/admin/placement' },
+  { name: 'news-orders', icon: FiSettings, href: '/admin/news-orders' },
+  { name: 'eca-press', icon: FiSettings, href: '/admin/eca-press' },
+  { name: 'web-team', icon: FiSettings, href: '/admin/web-team' },
 ]
 
 const SidebarContent = ({ onClose, ...rest }) => {
@@ -76,11 +75,20 @@ const SidebarContent = ({ onClose, ...rest }) => {
 }
 
 const NavItem = ({ icon, children, ...rest }) => {
+
+  const href = (window.location.href).split('/');
+  const activeLink = href[href?.length-1];
+
+  console.log(href,activeLink,children,'check link');
+
   return (
     <Box
       style={{ textDecoration: 'none' }}
       _focus={{ boxShadow: 'none' }}>
       <Flex
+      textTransform="capitalize"
+      bg = {activeLink === children && 'var(--main-primary)'}
+      color = {activeLink === children && 'white'}
         align="center"
         p="4"
         mx="4"
@@ -180,11 +188,13 @@ const MobileNav = ({ onOpen, ...rest }) => {
 }
 
 const Sidebar = ({ content }) => {
+
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
+
       <Drawer
         isOpen={isOpen}
         placement="left"
@@ -196,6 +206,7 @@ const Sidebar = ({ content }) => {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
+
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">

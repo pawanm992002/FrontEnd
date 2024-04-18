@@ -15,8 +15,8 @@ const Event = () => {
         <>
             <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
                 {
-                    cardData.map((data) => {
-                        return <CircularCard data={data} />
+                    cardData.map((data,i) => {
+                        return <CircularCard key={i} data={data} link={'event'} />
                     })
                 }
             </SimpleGrid>

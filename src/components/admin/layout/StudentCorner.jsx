@@ -3,14 +3,16 @@ import CircularCard from '../cards/CircularCard'
 import { Box, Flex, Heading, SimpleGrid, VStack } from '@chakra-ui/react'
 
 const StudentCorner = () => {
+    
+
     const creativeArtData = [
         {
-            title: 'Circular',
+            title: 'CreativeArtData Circular',
             length: '15',
             data: [1, 2, 3, 4, 5, 6]
         },
         {
-            title: 'Gallery',
+            title: 'CreativeArtData Gallery',
             length: '20',
             data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         },
@@ -18,12 +20,12 @@ const StudentCorner = () => {
 
     const nccData = [
         {
-            title: 'Circular',
+            title: 'NCCData Circular',
             length: '15',
             data: [1, 2, 3, 4, 5, 6]
         },
         {
-            title: 'Gallery',
+            title: 'NCCData Gallery',
             length: '20',
             data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         },
@@ -31,12 +33,12 @@ const StudentCorner = () => {
 
     const hostelData = [
         {
-            title: 'Circular',
+            title: 'HostelData Circular',
             length: '15',
             data: [1, 2, 3, 4, 5, 6]
         },
         {
-            title: 'Gallery',
+            title: 'HostelData Gallery',
             length: '20',
             data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         },
@@ -44,14 +46,14 @@ const StudentCorner = () => {
 
     const transportationData = [
         {
-            title: 'Circular',
+            title: 'TransportationData Circular',
             length: '15',
             data: [1, 2, 3, 4, 5, 6]
         },
     ]
     const studentAchievementData = [
         {
-            title: 'Achievement',
+            title: 'StudentAchievementData',
             length: '15',
             data: [1, 2, 3, 4, 5, 6]
         },
@@ -68,8 +70,8 @@ const StudentCorner = () => {
                     </Flex>
                     <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
                         {
-                            creativeArtData.map((data) => {
-                                return <CircularCard data={data} />
+                            creativeArtData.map((data,i) => {
+                                return<CircularCard key={i} data={data} link={'student-corner'} />
                             })
                         }
                     </SimpleGrid>
@@ -83,7 +85,7 @@ const StudentCorner = () => {
                     <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
                         {
                             nccData.map((data) => {
-                                return <CircularCard data={data} />
+                                return <CircularCard data={data} link={'student-corner'} />
                             })
                         }
                     </SimpleGrid>
@@ -97,7 +99,7 @@ const StudentCorner = () => {
                     <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
                         {
                             hostelData.map((data) => {
-                                return <CircularCard data={data} />
+                                return <CircularCard data={data} link={'student-corner'} />
                             })
                         }
                     </SimpleGrid>
@@ -111,7 +113,7 @@ const StudentCorner = () => {
                     <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
                         {
                             transportationData.map((data) => {
-                                return <CircularCard data={data} />
+                                return <CircularCard data={data} link={'student-corner'} />
                             })
                         }
                     </SimpleGrid>
@@ -125,7 +127,7 @@ const StudentCorner = () => {
                     <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
                         {
                             studentAchievementData.map((data) => {
-                                return <CircularCard data={data} />
+                                return <CircularCard data={data} link={'student-corner'} />
                             })
                         }
                     </SimpleGrid>

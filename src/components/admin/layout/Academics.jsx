@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CircularCard from '../cards/CircularCard'
 import { SimpleGrid } from '@chakra-ui/react'
 
 const Academics = () => {
+
+    const [tab,setTab] = useState('circular')
 
     const cardData = [
         {
@@ -21,8 +23,8 @@ const Academics = () => {
         <>
             <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
                 {
-                    cardData.map((data) => {
-                        return <CircularCard data={data} />
+                    cardData.map((data,i) => {
+                        return <CircularCard key={i} link={'academics'} data={data} />
                     })
                 }
             </SimpleGrid>
