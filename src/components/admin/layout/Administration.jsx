@@ -1,9 +1,15 @@
 import React from 'react'
+
+//-------- Packages Stuff
+import {SimpleGrid} from '@chakra-ui/react'
+
+
+//----------- Components Specific Stuff
 import CircularCard from '../cards/CircularCard'
-import { SimpleGrid } from '@chakra-ui/react'
+
 
 const Administration = () => {
-    
+
     const cardData = [
         {
             title: 'Bog Mom',
@@ -35,11 +41,13 @@ const Administration = () => {
     return (
         <>
             <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
-                {
-                    cardData.map((data) => {
-                        return <CircularCard data={data} />
-                    })
-                }
+
+                    {
+                        cardData.map((data,i) => {
+                            return <CircularCard link={'administration'} key={i} data={data} />
+                        })
+                    }
+         
             </SimpleGrid>
         </>
     )

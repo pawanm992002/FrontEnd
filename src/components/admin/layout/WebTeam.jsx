@@ -114,7 +114,7 @@ const WebTeam = () => {
         <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
           {
             cardData.map((data) => {
-              return <ProfileCard data={data} dataArray={dataArray} tableHeading={tableHeading} />
+              return <ProfileCard data={data} dataArray={dataArray} tableHeading={tableHeading} link={'web-team'} />
             })
           }
         </SimpleGrid>

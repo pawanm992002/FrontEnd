@@ -6,7 +6,7 @@ const Cells = () => {
 
     const cardData = [
         {
-            title: 'Circular',
+            title: 'Alumni Circular',
             length: '15',
             data: [1, 2, 3, 4, 5, 6]
         }
@@ -23,7 +23,7 @@ const Cells = () => {
                 <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
                     {
                         cardData.map((data) => {
-                            return <CircularCard data={data} />
+                            return <CircularCard data={data} link={'cells'} />
                         })
                     }
                 </SimpleGrid>

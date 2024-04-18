@@ -6,14 +6,14 @@ const NewsOrders = () => {
   
     const newsData = [
         {
-            title: 'Circular',
+            title: 'NewsData Circular',
             length: '15',
             data: [1, 2, 3, 4, 5, 6]
         }
     ]
     const ordersData = [
         {
-            title: 'Circular',
+            title: 'OrdersData Circular',
             length: '15',
             data: [1, 2, 3, 4, 5, 6]
         }
@@ -30,7 +30,7 @@ const NewsOrders = () => {
                 <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
                     {
                         newsData.map((data) => {
-                            return <CircularCard data={data} />
+                            return <CircularCard data={data} link={'news-orders'} />
                         })
                     }
                 </SimpleGrid>
@@ -44,7 +44,7 @@ const NewsOrders = () => {
                 <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
                     {
                         ordersData.map((data) => {
-                            return <CircularCard data={data} />
+                            return <CircularCard data={data} link={'news-orders'} />
                         })
                     }
                 </SimpleGrid>

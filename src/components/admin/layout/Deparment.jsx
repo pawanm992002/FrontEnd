@@ -120,13 +120,13 @@ const Department = () => {
         <>
             <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
                 {
-                    facultyData.map((data) => {
-                        return <ProfileCard data={data} dataArray={dataArray} tableHeading={tableHeading}/>
+                    facultyData.map((data,i) => {
+                        return <ProfileCard key={i} link="departments" data={data} dataArray={dataArray} tableHeading={tableHeading}/>
                     })
                 }
                 {
-                    cardData.map((data) => {
-                        return <CircularCard data={data} />
+                    cardData.map((data,i) => {
+                        return <CircularCard key={i} data={data} link={'departments'} />
                     })
                 }
             </SimpleGrid>
