@@ -26,36 +26,48 @@ const AppRoutes = () => {
       <BrowserRouter>
         <Toaster />
         <AuthContext>
-          <Layout>
-            <Routes>
-              <Route path="/">
-                <Route index element={<Home />} />
+          <Routes>
+            <Route path="/">
+              <Route
+                index
+                element={
+                  <Layout>
+                    <Home />
+                  </Layout>
+                }
+              />
 
-                {/* ------------------- About pages route ---------------X */}
-                {AboutPageRoutes}
+              {/* ------------------- About pages route ---------------X */}
+              {AboutPageRoutes}
 
-                {/* ----------- Administration Pages routes ------------- X */}
-                {AdministrationPageRoutes}
+              {/* ----------- Administration Pages routes ------------- X */}
+              {AdministrationPageRoutes}
 
-                {/* --------------- Academic Pages Routes ----------------- X */}
-                {AcademicsPageRoutes}
+              {/* --------------- Academic Pages Routes ----------------- X */}
+              {AcademicsPageRoutes}
 
-                {/* ------------ Grievance Pages Routes ------------------ X  */}
-                {GrievancePageRoutes}
+              {/* ------------ Grievance Pages Routes ------------------ X  */}
+              {GrievancePageRoutes}
 
-                {/* ------------ Student Corner Pages Routes ------------------ X  */}
-                {StudentCornerRoutes}
+              {/* ------------ Student Corner Pages Routes ------------------ X  */}
+              {StudentCornerRoutes}
 
-                {/* ------------ Departments Pages Routes ------------------ X  */}
-                {DepartmentsRoutes}
+              {/* ------------ Departments Pages Routes ------------------ X  */}
+              {DepartmentsRoutes}
 
-                {/* ------------ Admin Pages Routes ------------------ X  */}
-                <Route path="/admin/*" element={<Admin />} />
+              {/* ------------ Admin Pages Routes ------------------ X  */}
+              <Route path="/admin/*" element={<Admin />} />
 
-                <Route path="*" element={<Error />} />
-              </Route>
-            </Routes>
-          </Layout>
+              <Route
+                path="*"
+                element={
+                  <Layout>
+                    <Error />
+                  </Layout>
+                }
+              />
+            </Route>
+          </Routes>
         </AuthContext>
       </BrowserRouter>
     </>

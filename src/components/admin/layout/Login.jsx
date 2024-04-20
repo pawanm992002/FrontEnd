@@ -72,7 +72,7 @@ const Login = () => {
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("isLoggedIn")))
-      navigate("/admin");
+      navigate("/admin/administration");
   }, []);
 
   return (

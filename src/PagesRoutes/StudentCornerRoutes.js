@@ -11,17 +11,18 @@ import StudentAchievement from './StudentAchievements'
 import Bank from '../pages/studentCorner/Bank'
 import Transportation from '../pages/studentCorner/Transportation'
 import Hostel from '../pages/studentCorner/Hostel'
+import Layout from '../components/Layout/Layout'
 
 const StudentCornerRoutes = [
-    <Route exact path='/scholarship' element={<Scholarship />} />,
-    <Route exact path='/creativeSociety' element={<CreativeSociety />} />,
-    <Route exact path='/NCC' element={<NCC />} />,
-    <Route exact path='/NSS' element={<NSS />} />,
-    <Route exact path='/StudentActivityCenter' element={<StudentActivityCenter />} />,
-    <Route exact path='/view_student_achievement' element={<StudentAchievement />} />,
-    <Route exact path='/Bank' element={<Bank />} />,
-    <Route exact path='/Transportation' element={<Transportation />} />,
-    <Route exact path='/Hostel' element={<Hostel />} />
+    <Route exact path='/scholarship' element={<Layout><Scholarship /></Layout>} />,
+    <Route exact path='/creativeSociety' element={<Layout><CreativeSociety /></Layout>} />,
+    <Route exact path='/NCC' element={<Layout><NCC /></Layout>} />,
+    <Route exact path='/NSS' element={<Layout><NSS /></Layout>} />,
+    <Route exact path='/StudentActivityCenter' element={<Layout><StudentActivityCenter /></Layout>} />,
+    <Route exact path='/view_student_achievement' element={<Layout><StudentAchievement /></Layout>} />,
+    <Route exact path='/Bank' element={<Layout><Bank /></Layout>} />,
+    <Route exact path='/Transportation' element={<Layout><Transportation /></Layout>} />,
+    <Route exact path='/Hostel' element={<Layout><Hostel /></Layout>} />
 ]
 
 export default StudentCornerRoutes

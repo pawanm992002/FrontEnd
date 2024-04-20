@@ -18,7 +18,6 @@ const Admin = () => {
     return (
         <ChakraProvider>
             <Routes>
-
                 <Route path="/" element={<Sidebar />} />
 
                 <Route path="/administration" element={<Sidebar content={<Administration />} />} />

@@ -12,12 +12,12 @@ import Registrar from '../pages/Administration/Registrar'
 import BOG from '../pages/Administration/BOG'
 
 const AdministrationPageRoutes = [
-    <Route exact path='/administration/accounts' element={<Accounts />} />,
-    <Route exact path='/administration/principal' element={<Principal />} />,
-    <Route exact path='/administration/examinationSection' element={<ExaminationSection />} />,
-    <Route exact path='/administration/proctor' element={<Proctor />} />,
-    <Route exact path='/administration/registrar' element={<Registrar />} />,
-    <Route exact path='/administration/bog' element={<BOG />} />,
+    <Route exact path='/administration/accounts' element={<Layout><Accounts /></Layout>} />,
+    <Route exact path='/administration/principal' element={<Layout><Principal /></Layout>} />,
+    <Route exact path='/administration/examinationSection' element={<Layout><ExaminationSection /></Layout>} />,
+    <Route exact path='/administration/proctor' element={<Layout><Proctor /></Layout>} />,
+    <Route exact path='/administration/registrar' element={<Layout><Registrar /></Layout>} />,
+    <Route exact path='/administration/bog' element={<Layout><BOG /></Layout>} />,
 ]
 
 export default AdministrationPageRoutes

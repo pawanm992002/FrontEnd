@@ -5,6 +5,8 @@ import {VStack} from '@chakra-ui/react'
 
 
 import { ButtonBox, FormBox, FormInputBox } from '../FormInputBox';
+import axios from 'axios';
+import { url, AdminApiInstance } from '../../../apis/ApiIntances';
 
 //------------- Create the profile form
 export const FacultyMemberForm = () => {
@@ -19,9 +21,12 @@ export const FacultyMemberForm = () => {
         setForm({...form,profile:e.target.files[0]});
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('form', form);
+        console.log('add faculty', form);
+
+        const {data} = await AdminApiInstance.post("/department/add-member",form);
+        console.log("adddddddd", data)
 
         setLoading(true);
 
