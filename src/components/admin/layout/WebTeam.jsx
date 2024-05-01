@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ProfileCard from '../cards/ProfileCard'
 import { Box, Flex, Heading, SimpleGrid, VStack } from '@chakra-ui/react'
+import { WebTeamContext } from '../../../AdminContext/WebTeam/WebTeamContext'
+import toast from 'react-hot-toast'
 
 const WebTeam = () => {
+
+  const { webTeams, handleAddWebTeamMembers, loading, error } = useContext(WebTeamContext);
+
+  if (error) {
+    toast.error(error);
+  }
+
+
 
   const tableHeading = [
     'profile',
@@ -113,8 +123,8 @@ const WebTeam = () => {
         </Flex>
         <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
           {
-            cardData.map((data) => {
-              return <ProfileCard data={data} dataArray={dataArray} tableHeading={tableHeading} link={'web-team'} />
+            cardData.map((data, i) => {
+              return <ProfileCard key={i} data={data} dataArray={dataArray} tableHeading={tableHeading} link={'web-team'} />
             })
           }
         </SimpleGrid>
