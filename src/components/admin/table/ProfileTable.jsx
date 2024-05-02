@@ -17,6 +17,8 @@ import {
 } from '@chakra-ui/react';
 const ProfileTable = ({ tableHeading, dataArray }) => {
 
+    console.log('data array ',dataArray);
+
     const handleDelete = (id) => {
         alert(`circular ${id} deleted`)
     }
@@ -43,14 +45,14 @@ const ProfileTable = ({ tableHeading, dataArray }) => {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {dataArray.map((data, index) => (
+                            {dataArray?.map((data, index) => (
                                 <Tr key={index}>
-                                    <Td fontSize="sm"><Image width={'50px'} height={'50px'} borderRadius={'50%'} src={data.profile ? data.profile : data.image} /></Td>
-                                    <Td fontSize="sm">{data.name}</Td>
-                                    <Td fontSize="sm">{data.email}</Td>
-                                    <Td fontSize="sm">{data.department}</Td>
-                                    {data.batch ? <Td fontSize="sm">{data.batch}</Td> : ""}
-                                    <Td><Button colorScheme='red' onClick={() => handleDelete(data._id)}>Delete</Button></Td>
+                                    <Td fontSize="sm"><Image width={'50px'} height={'50px'} borderRadius={'50%'} src={data?.profile ? data?.profile : data?.image} /></Td>
+                                    <Td fontSize="sm">{data?.name}</Td>
+                                    <Td fontSize="sm">{data?.email}</Td>
+                                    <Td fontSize="sm">{data?.department ? data?.department : "Engineering"}</Td>
+                                    {data.batch ? <Td fontSize="sm">{data?.batch}</Td> : ""}
+                                    <Td><Button colorScheme='red' onClick={() => handleDelete(data?._id)}>Delete</Button></Td>
                                 </Tr>
                             ))}
                         </Tbody>

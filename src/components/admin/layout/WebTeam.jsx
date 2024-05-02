@@ -1,18 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ProfileCard from '../cards/ProfileCard'
 import { Box, Flex, Heading, SimpleGrid, VStack } from '@chakra-ui/react'
-import { WebTeamContext } from '../../../AdminContext/WebTeam/WebTeamContext'
+import { PublicApiIntance, WebTeamContext } from '../../../AdminContext/WebTeam/WebTeamContext'
 import toast from 'react-hot-toast'
 
 const WebTeam = () => {
-
-  const { webTeams, handleAddWebTeamMembers, loading, error } = useContext(WebTeamContext);
-
-  if (error) {
-    toast.error(error);
-  }
-
-
 
   const tableHeading = [
     'profile',

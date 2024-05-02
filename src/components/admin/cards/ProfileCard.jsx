@@ -14,8 +14,10 @@ const ProfileCard = ({ data, tableHeading, dataArray, link }) => {
     const [searchParams,setSearchParams] = useSearchParams();
     const section = searchParams.get('section');
 
-    console.log('link ', link, section);
+    // console.log('data ', dataArray);
 
+  const { webTeams, handleFetchWebTeamMembers, loading, error } = useContext(WebTeamContext);
+    console.log('webteam ast profile ',webTeams);
 
 
     return (
@@ -50,7 +52,7 @@ const ProfileCard = ({ data, tableHeading, dataArray, link }) => {
                     {section === 'Achievement Form' && <AchievementForm />}
 
                     {/* ----------------- WEb Team Stuff ---------------  */}
-                    {section === 'Team Member' && <CircularTable />}
+                    {section === 'Team Member' && <ProfileTable dataArray={dataArray} tableHeading={tableHeading} />}
                     {section === 'Team Member Form' && <AddWebTeamForm handleSubmit />}
 
 
