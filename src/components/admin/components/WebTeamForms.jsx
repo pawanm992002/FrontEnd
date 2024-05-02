@@ -1,41 +1,57 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 
 //-------- Packages Stuff
-import {VStack} from '@chakra-ui/react'
-
+import { VStack } from '@chakra-ui/react'
 
 import { ButtonBox, FormBox, FormInputBox } from '../FormInputBox';
 
+import toast from 'react-hot-toast';
+import { AdminApiInstance } from '../apis/ApiIntances';
+
 //------------- Create the profile form
 export const AddWebTeamForm = () => {
-    const [form,setForm] = useState({name:'',email:'',phone:'',image:'',branch:'',duration:''});
 
-    const [loading,setLoading] = useState(false);
+    const [form, setForm] = useState({ name: '', email: '', phone: '', image: '', branch: '', duration: '' });
+    const [loading, setLoading] = useState(false);
 
-    
-    const handleChange = (e)=> setForm({...form,[e.target.name]:e.target.value});
+    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
     const handleFileChange = (e) => {
-        setForm({...form,image:e.target.files[0]});
+        setForm({ ...form, image: e.target.files[0] });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('form', form);
-
         setLoading(true);
 
+        const myForm = new FormData();
+        myForm.append('name', form.name);
+        myForm.append('email', form.email);
+        myForm.append('phone', form.phone);
+        myForm.append('image', form.image);
+        myForm.append('branch', form.branch);
+        myForm.append('duration', form.duration);
+
         try {
-            
+            const { data } = await AdminApiInstance.post('/web-team', myForm);
+
+            if (data?.success === false)
+                toast.error(data?.message);
+            else toast.success(data?.message);
+
         } catch (error) {
-            
+            console.log('error ', error, error?.message);
         }
 
-        setLoading(false);
-    };
 
-    return (
-        <>
+        setLoading(true);
+        setForm({ name: '', email: '', phone: '', image: '', branch: '', duration: '' })
+    }
+
+
+
+return (
+    <>
         <FormBox title={"Adding Web Team"} >
             <form onSubmit={handleSubmit}>
                 <VStack spacing={4}>
@@ -49,7 +65,7 @@ export const AddWebTeamForm = () => {
 
                     <FormInputBox label={' Thumbnail'} type='file' handleChange={handleFileChange} name={'image'} />
 
-                  
+
                     <FormInputBox label={"Branch"} name={'branch'} placeholder={"CSE"} value={form.branch} handleChange={handleChange} />
 
                     <FormInputBox label={"Duration"} name={'duration'} placeholder={"2023-24"} value={form.duration} handleChange={handleChange} />
@@ -59,6 +75,6 @@ export const AddWebTeamForm = () => {
             </form>
 
         </FormBox>
-        </>
-    )
+    </>
+)
 }

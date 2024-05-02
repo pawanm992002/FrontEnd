@@ -22,6 +22,7 @@ export const FacultyMemberForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('form', form);
+        
 
         setLoading(true);
 

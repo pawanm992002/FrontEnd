@@ -9,6 +9,7 @@ import { AddNewEventForm } from '../components/EventsForms'
 import { useParams,Link, useSearchParams, useNavigate } from 'react-router-dom'
 import { AddCreativeArtSocietyCircular, AddCreativeArtSocietyGallery, AddHostelCircular, AddHostelGallery, AddNCCDataCircular, AddNCCDataGallery, AddStudentAchievementCircular, AddTransportationCircular } from '../components/StudentCornerForms'
 import { AddAlumniCellCircular } from '../components/CellForms'
+import { AddECAPressForm } from '../components/ECAPressForms'
 
 const CircularCard = ({ data,link }) => {
 
@@ -16,7 +17,7 @@ const CircularCard = ({ data,link }) => {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const section = searchParams.get('section');
-    console.log('params & form',section,data?.title)
+    console.log('params & form',section,data?.title,link)
 
 
     return (
@@ -36,7 +37,7 @@ const CircularCard = ({ data,link }) => {
                     <VStack>
                         <Flex alignItems={'center'} p='3' justifyContent={'space-between'} bg={'var(--main-primary)'} color={'white'} w={'full'}>
                             <h2 style={{cursor:'pointer'}}  onClick={()=>setSearchParams({section:`${data?.title}`})} fontSize='xl' textAlign='center'>
-                               {data.title}
+                               {data?.title}
                             </h2>
                             <Button onClick={()=>setSearchParams({section:`${data?.title} Form`})} colorScheme='blue' mr={3}>
                                 Add New
@@ -118,8 +119,7 @@ const CircularCard = ({ data,link }) => {
                         {/* ---------------- Transportation Data Stuff -----------------  */}
                         { section === 'StudentAchievementData' && <CircularTable /> }
                         { section === 'StudentAchievementData Form' && <AddStudentAchievementCircular /> }
-                        { section === 'TransportationData Circular Form' && <AddTransportationCircular /> }
-
+                       
                         {/* ---------------- Alumni Circular Stuff -----------------  */}
                         { section === 'Alumni Circular' && <CircularTable /> }
                         { section === 'Alumni Circular Form' && <AddAlumniCellCircular /> }
@@ -131,6 +131,11 @@ const CircularCard = ({ data,link }) => {
                         {/* ---------------- ordersData Circular Stuff -----------------  */}
                         { section === 'OrdersData Circular' && <CircularTable /> }
                         { section === 'OrdersData Circular Form' && <AddAlumniCellCircular /> }
+
+                        
+                        {/* ---------------- ECA Press Stuff -----------------  */}
+                        { section === 'News Cutting' && <CircularTable /> }
+                        { section === 'News Cutting Form' && <AddECAPressForm/> }
 
 
 

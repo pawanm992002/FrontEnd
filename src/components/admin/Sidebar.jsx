@@ -79,7 +79,7 @@ const NavItem = ({ icon, children, ...rest }) => {
   const href = (window.location.href).split('/');
   const activeLink = href[href?.length-1];
 
-  console.log(href,activeLink,children,'check link');
+  // console.log(href,activeLink,children,'check link');
 
   return (
     <Box
