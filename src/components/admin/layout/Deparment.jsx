@@ -1,137 +1,298 @@
-import React from 'react'
-import CircularCard from '../cards/CircularCard'
-import { SimpleGrid } from '@chakra-ui/react'
-import ProfileCard from '../cards/ProfileCard'
+import React, { useEffect, useState } from "react";
+import CircularCard from "../cards/CircularCard";
+import { Button, Select, SimpleGrid } from "@chakra-ui/react";
+import ProfileCard from "../cards/ProfileCard";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { AdminApiInstance } from "../apis/ApiIntances";
+
+const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
 const Department = () => {
+  const [DepartmentCirculars, setDepartmentCirculars] = useState([]);
+  const [DepartmentAchivements, setDepartmentAchivements] = useState([]);
+  const [DepartmentMembers, setDepartmentMembers] = useState([]);
+  const [DepartmentTimeTable, setDepartmentTimeTable] = useState([]);
+  const [DepartmentGallery, setDepartmentGallery] = useState([]);
+  const [DepartmentNotes, setDepartmentNotes] = useState([]);
 
-    const tableHeading=[
-        'Profile',
-        'Name',
-        'Email',
-        'Department',
-    ]
+  const [departmentValue, setDepartmentValue] = useState("cse");
 
-    const dataArray = [
-        {
-            "_id": "1",
-            "profile": "https://source.unsplash.com/random/1",
-            "name": "John Doe",
-            "email": "john.doe@example.com",
-            "department": "Engineering"
-        },
-        {
-            "_id": "2",
-            "profile": "https://source.unsplash.com/random/2",
-            "name": "Jane Smith",
-            "email": "jane.smith@example.com",
-            "department": "Marketing"
-        },
-        {
-            "_id": "3",
-            "profile": "https://source.unsplash.com/random/3",
-            "name": "David Johnson",
-            "email": "david.johnson@example.com",
-            "department": "Finance"
-        },
-        {
-            "_id": "4",
-            "profile": "https://source.unsplash.com/random/4",
-            "name": "Emily Brown",
-            "email": "emily.brown@example.com",
-            "department": "Human Resources"
-        },
-        {
-            "_id": "5",
-            "profile": "https://source.unsplash.com/random/5",
-            "name": "Michael Wilson",
-            "email": "michael.wilson@example.com",
-            "department": "Sales"
-        },
-        {
-            "_id": "6",
-            "profile": "https://source.unsplash.com/random/6",
-            "name": "Emma Taylor",
-            "email": "emma.taylor@example.com",
-            "department": "Operations"
-        },
-        {
-            "_id": "7",
-            "profile": "https://source.unsplash.com/random/7",
-            "name": "James Martinez",
-            "email": "james.martinez@example.com",
-            "department": "Customer Service"
-        },
-        {
-            "_id": "8",
-            "profile": "https://source.unsplash.com/random/8",
-            "name": "Olivia Anderson",
-            "email": "olivia.anderson@example.com",
-            "department": "Information Technology"
-        },
-        {
-            "_id": "9",
-            "profile": "https://source.unsplash.com/random/9",
-            "name": "William Thomas",
-            "email": "william.thomas@example.com",
-            "department": "Research and Development"
-        },
-        {
-            "_id": "10",
-            "profile": "https://source.unsplash.com/random/10",
-            "name": "Sophia Walker",
-            "email": "sophia.walker@example.com",
-            "department": "Public Relations"
-        }
-    ]
+  const deleteDepartmentRow = async (_id, val) => {
+    console.log("......... gal", _id, val);
+    try {
+      const { data } = await AdminApiInstance.delete(
+        `/department/${val}/${_id}`
+      );
+      toast.success(data?.message);
+    } catch (error) {
+      console.log(".......... del", error);
+      toast.error(error?.response?.data?.error);
+    }
+  };
 
-    const cardData = [
-        {
-            title: 'Achievement',
-            length: '20',
-            data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        },
-        {
-            title: 'Circular',
-            length: '20',
-            data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        },
-        {
-            title: 'Time Table',
-            length: '20',
-            data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        },
-        {
-            title: 'Gallery',
-            length: '20',
-            data: [1, 2, 3, 4, 5]
-        },
-    ]
+  useEffect(() => {
+    // for members
+    ;(async () => {
+      try {
+        const { data } = await axios.get(
+          `${url}/department-people/${departmentValue}`
+        );
+        console.log(".......... members", data);
+        setDepartmentMembers(data.result);
+      } catch (error) {
+        console.log(".......... members", error);
+      }
+    })();
 
-    const facultyData = [
-        {
-            title: 'Faculty Member',
-            length: '15',
-            data: [1, 2, 3, 4, 5, 6]
-        }
-    ]
+    // for circulars
+    ;(async () => {
+      try {
+        const { data } = await axios.get(
+          `${url}/department-notice/${departmentValue}`
+        );
+        console.log(".......... circular", data);
+        const temp = data.result.map((val, i) => {
+          return {
+            SR_NO: val.srNo,
+            Created_At: new Date(val.createdAt).toDateString(),
+            Department: val.department,
+            Title: val.title,
+            Source: (
+              <Link to={val.notice}>
+                {" "}
+                <Button>View</Button>{" "}
+              </Link>
+            ),
+            Delete: (
+              <Button onClick={() => deleteDepartmentRow(val?._id, "notice")}>
+                Delete
+              </Button>
+            ),
+          };
+        });
+        setDepartmentCirculars(temp);
+      } catch (error) {
+        console.log(".......... circular", error);
+      }
+    })();
 
-    return (
-        <>
-            <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3 }} spacing={{ base: 5, lg: 8 }}>
-                {
-                    facultyData.map((data,i) => {
-                        return <ProfileCard key={i} link="departments" data={data} dataArray={dataArray} tableHeading={tableHeading}/>
-                    })
-                }
-                {
-                    cardData.map((data,i) => {
-                        return <CircularCard key={i} data={data} link={'departments'} />
-                    })
-                }
-            </SimpleGrid>
-        </>
-    )
-}
+    // for achievements
+    ;(async () => {
+      try {
+        const { data } = await axios.get(
+          `${url}/department-achievement/${departmentValue}`
+        );
+        const temp = data.result.map((val, i) => {
+          return {
+            SR_NO: val._id,
+            Created_At: new Date(val.createdAt).toDateString(),
+            Department: val.department,
+            Achievement: val.achievement,
+            Category: val.category,
+            Delete: (
+              <Button
+                onClick={() => deleteDepartmentRow(val?._id, "achievement")}
+              >
+                Delete
+              </Button>
+            ),
+          };
+        });
+        console.log(".......... achivement", data);
+        setDepartmentAchivements(temp);
+      } catch (error) {
+        console.log(".......... achivement", error);
+      }
+    })();
 
-export default Department
+    // for timetable
+    ;(async () => {
+      try {
+        const { data } = await axios.get(
+          `${url}/department-timetable/${departmentValue}`
+        );
+        const temp = data.result.map((val, i) => {
+          return {
+            SR_NO: val.srNo,
+            Created_At: new Date(val.createdAt).toDateString(),
+            Department: val.department,
+            Title: val.title,
+            Source: (
+              <Link to={val.timeTable}>
+                <Button>View</Button>
+              </Link>
+            ),
+            Delete: (
+              <Button
+                onClick={() => deleteDepartmentRow(val?._id, "timetable")}
+              >
+                Delete
+              </Button>
+            ),
+          };
+        });
+        console.log(".......... time table", data);
+        setDepartmentTimeTable(temp);
+      } catch (error) {
+        console.log(".......... achivement", error);
+      }
+    })();
+
+    // for gallery
+    ;(async () => {
+      try {
+        const { data } = await axios.get(
+          `${url}/department-gallery/${departmentValue}`
+        );
+        console.log(".......... gallery", data.result);
+        const temp = data.result.map((val, i) => {
+          return {
+            SR_NO: val._id,
+            Created_At: new Date(val.createdAt).toDateString(),
+            Department: val.department,
+            Source: (
+              <Link to={val.photo}>
+                <Button>View</Button>
+              </Link>
+            ),
+            Delete: (
+              <Button onClick={() => deleteDepartmentRow(val?._id, "gallery")}>
+                Delete
+              </Button>
+            ),
+          };
+        });
+        setDepartmentGallery(temp);
+      } catch (error) {
+        console.log(".......... gallery", error);
+      }
+    })();
+
+    // for notes
+    ;(async () => {
+      try {
+        const { data } = await axios.get(
+          `${url}/department-notes/${departmentValue}`
+        );
+        const temp = data.result.map((val, i) => {
+          return {
+            SR_NO: val._id,
+            Created_At: new Date(val.createdAt).toDateString(),
+            Title: val.title,
+            Uploaded_By: val.faculty.name,
+            Semester: val.sem,
+            Source: (
+              <Link to={val.file}>
+                <Button>View</Button>
+              </Link>
+            ),
+            Delete: (
+              <Button onClick={() => deleteDepartmentRow(val?._id, "notes")}>
+                Delete
+              </Button>
+            ),
+          };
+        });
+        console.log(".......... notes", data);
+        setDepartmentNotes(temp);
+      } catch (error) {
+        console.log(".......... notes", error);
+      }
+    })();
+  }, [departmentValue]);
+
+  const tableHeading = ["Profile", "Name", "Email", "Department"];
+
+  const cardData = [
+    {
+      title: "Achievement",
+      length: DepartmentAchivements?.length,
+      data: DepartmentAchivements,
+    },
+    {
+      title: "Circular",
+      length: DepartmentCirculars?.length,
+      data: DepartmentCirculars,
+    },
+    {
+      title: "Time Table",
+      length: DepartmentTimeTable?.length,
+      data: DepartmentTimeTable,
+    },
+    {
+      title: "Gallery",
+      length: DepartmentGallery?.length,
+      data: DepartmentGallery,
+    },
+    {
+      title: "Notes",
+      length: DepartmentNotes?.length,
+      data: DepartmentNotes,
+    },
+  ];
+
+  const facultyData = [
+    {
+      title: "Faculty Member",
+      length: DepartmentMembers?.length,
+      data: DepartmentMembers,
+    },
+  ];
+
+  return (
+    <>
+      <div
+        style={{
+          display: "flex",
+          gap: "5px",
+          marginBottom: "10px",
+          alignItems: "center",
+        }}
+      >
+        <h3 style={{ width: "280px" }}>Select Department</h3>
+
+        <Select
+          value={departmentValue}
+          onChange={(e) => setDepartmentValue(e.target.value)}
+        >
+          <option value="cse">CSE</option>
+          <option value="civil">Civil</option>
+          <option value="eee">eee</option>
+          <option value="eic">eic</option>
+          <option value="ece">ece</option>
+          <option value="mechanical">mechanical</option>
+          <option value="mca">mca</option>
+          <option value="mba">mba</option>
+          <option value="physics">physics</option>
+          <option value="chemistry">chemistry</option>
+          <option value="maths">maths</option>
+          <option value="english">english</option>
+          <option value="economics">economics</option>
+        </Select>
+      </div>
+      <SimpleGrid
+        columns={{ base: 1, sm: 2, md: 2, lg: 3 }}
+        spacing={{ base: 5, lg: 8 }}
+      >
+        {facultyData.map((data, i) => {
+          return (
+            <ProfileCard
+              key={i}
+              link="departments"
+              data={data}
+              dataArray={DepartmentMembers}
+              tableHeading={tableHeading}
+            />
+          );
+        })}
+        {cardData.map((data, i) => {
+          return <CircularCard key={i} data={data} link={"departments"} />;
+        })}
+      </SimpleGrid>
+    </>
+  );
+};
+
+export default Department;

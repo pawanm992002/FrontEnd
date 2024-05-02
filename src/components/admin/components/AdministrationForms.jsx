@@ -8,6 +8,8 @@ import {VStack, FormControl,
 
 
 import { ButtonBox, FormBox, FormInputBox } from '../FormInputBox';
+import { AdminApiInstance } from '../apis/ApiIntances';
+import toast from 'react-hot-toast';
 
 //------------- Create the administration form
 export const AdministrationForm = () => {
@@ -21,20 +23,29 @@ export const AdministrationForm = () => {
         setForm({...form,minute:e.target.files[0]});
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
+
         e.preventDefault();
-        console.log('form', form);
 
         setLoading(true);
+        const myForm = new FormData();
+
+        myForm.append('meetingNo',form.meetingNo)
+        myForm.append('minute',form.minute)
+        myForm.append('date',form.date)
 
         try {
-            
+            const { data, status } = await AdminApiInstance.post('/administration/bog-mom', myForm);
+
+            if (status === 200) toast.success(data?.message);
+            else toast.error(data?.message)
+
         } catch (error) {
-            
+            toast.error("Internal Server Error");
         }
 
         setLoading(false);
-        setForm({meetingNo:'',minute:''});
+        setForm({meetingNo:'',date:new Date().toLocaleDateString(),minute:''})
     };
 
     return (
@@ -74,21 +85,30 @@ export const ExaminationForm = ()=>{
         setForm({...form,notice:e.target.files[0]});
     };
 
-    const handleSubmit = (e) => {
+   
+    const handleSubmit = async(e) => {
+
         e.preventDefault();
-        console.log('form', form);
 
         setLoading(true);
+        const myForm = new FormData();
 
+        myForm.append('title',form.title)
+        myForm.append('notice',form.notice)
         try {
-            
+            const { data, status } = await AdminApiInstance.post('/administration/examination-circular', myForm);
+
+            if (status === 200) toast.success(data?.message);
+            else toast.error(data?.message)
+
         } catch (error) {
-            
+            toast.error("Internal Server Error");
         }
 
         setLoading(false);
-        setForm({title:'',notice:''});
+        setForm({title:'',notice:''})
     };
+
 
 
     return(
@@ -99,7 +119,7 @@ export const ExaminationForm = ()=>{
 
                     <FormInputBox label={"Title"} name={'title'} placeholder={"examination circular"} value={form.title} handleChange={handleChange} />
 
-                    <FormInputBox label={'Notice Pdf'} type='file' handleChange={handleFileChange} name={'notice'} />
+                    <FormInputBox label={'Notice'} type='file' handleChange={handleFileChange} name={'notice'} />
 
                     <ButtonBox loading={loading} type='submit' title={'Add Examination Notice'} />
                 </VStack>
@@ -122,20 +142,28 @@ export const AccountSectionForm = ()=>{
         setForm({...form,notice:e.target.files[0]});
     };
 
-    const handleSubmit = (e) => {
+ 
+    const handleSubmit = async(e) => {
+
         e.preventDefault();
-        console.log('form', form);
 
         setLoading(true);
+        const myForm = new FormData();
 
+        myForm.append('title',form.title)
+        myForm.append('notice',form.notice)
         try {
-            
+            const { data, status } = await AdminApiInstance.post('/administration/account-circular', myForm);
+
+            if (status === 200) toast.success(data?.message);
+            else toast.error(data?.message)
+
         } catch (error) {
-            
+            toast.error("Internal Server Error");
         }
 
         setLoading(false);
-        setForm({title:'',notice:''});
+        setForm({title:'',notice:''})
     };
 
 
@@ -147,7 +175,7 @@ export const AccountSectionForm = ()=>{
 
                     <FormInputBox label={"Title"} name={'title'} placeholder={"enter circular"} value={form.title} handleChange={handleChange} />
 
-                    <FormInputBox label={'Notice Pdf'} type='file' handleChange={handleFileChange} name={'notice'} />
+                    <FormInputBox label={'Notice'} type='file' handleChange={handleFileChange} name={'notice'} />
 
                     <ButtonBox loading={loading} type='submit' title={'Add Account Section Notice'} />
                 </VStack>
@@ -170,20 +198,27 @@ export const ProctorSectionForm = ()=>{
         setForm({...form,notice:e.target.files[0]});
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
+
         e.preventDefault();
-        console.log('form', form);
 
         setLoading(true);
+        const myForm = new FormData();
 
+        myForm.append('title',form.title)
+        myForm.append('notice',form.notice)
         try {
-            
+            const { data, status } = await AdminApiInstance.post('/administration/proctor-circular', myForm);
+
+            if (status === 200) toast.success(data?.message);
+            else toast.error(data?.message)
+
         } catch (error) {
-            
+            toast.error("Internal Server Error");
         }
 
         setLoading(false);
-        setForm({title:'',notice:''});
+        setForm({title:'',notice:''})
     };
 
 
@@ -195,7 +230,7 @@ export const ProctorSectionForm = ()=>{
 
                     <FormInputBox label={"Title"} name={'title'} placeholder={"enter circular"} value={form.title} handleChange={handleChange} />
 
-                    <FormInputBox label={'Notice Pdf'} type='file' handleChange={handleFileChange} name={'notice'} />
+                    <FormInputBox label={'Notice'} type='file' handleChange={handleFileChange} name={'notice'} />
 
                     <ButtonBox loading={loading} type='submit' title={'Add Proctor Section Notice'} />
                 </VStack>
@@ -218,20 +253,27 @@ export const RegistrarSectionForm = ()=>{
         setForm({...form,notice:e.target.files[0]});
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
+
         e.preventDefault();
-        console.log('form', form);
 
         setLoading(true);
+        const myForm = new FormData();
 
+        myForm.append('title',form.title)
+        myForm.append('notice',form.notice)
         try {
-            
+            const { data, status } = await AdminApiInstance.post('/administration/registrar-circular', myForm);
+
+            if (status === 200) toast.success(data?.message);
+            else toast.error(data?.message)
+
         } catch (error) {
-            
+            toast.error("Internal Server Error");
         }
 
         setLoading(false);
-        setForm({title:'',notice:''});
+        setForm({title:'',notice:''})
     };
 
 
@@ -243,7 +285,7 @@ export const RegistrarSectionForm = ()=>{
 
                     <FormInputBox label={"Title"} name={'title'} placeholder={"enter circular"} value={form.title} handleChange={handleChange} />
 
-                    <FormInputBox label={'Notice Pdf'} type='file' handleChange={handleFileChange} name={'notice'} />
+                    <FormInputBox label={'Notice'} type='file' handleChange={handleFileChange} name={'notice'} />
 
                     <ButtonBox loading={loading} type='submit' title={'Add Registrar Section Notice'} />
                 </VStack>

@@ -17,7 +17,7 @@ export const FormBox = ({ title,children }) => {
 }
 
 
-export const FormInputBox = ({ label, name, type = 'text', handleChange, value, placeholder }) => {
+export const FormInputBox = ({ label, name, type = 'text', handleChange, value, placeholder,readonly=false }) => {
     return (
         <>
             <FormControl>
@@ -29,6 +29,7 @@ export const FormInputBox = ({ label, name, type = 'text', handleChange, value, 
                     onChange={handleChange}
                     name={name}
                     required
+                    readOnly={readonly}
                 />
             </FormControl>
         </>

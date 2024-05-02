@@ -65,7 +65,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       </Flex>
       {LinkItems.map((link) => (
         <Link key={link.name} to={link.href} style={{ width: "100%", height: '100%' }}>
-          <NavItem  icon={link.icon} >
+          <NavItem onClick={onClose}  icon={link.icon} >
             {link.name}
           </NavItem>
         </Link>

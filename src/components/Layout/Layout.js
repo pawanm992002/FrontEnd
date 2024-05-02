@@ -9,13 +9,13 @@ const Layout = ({ children }) => {
     return (
         <>
             {/* ------- Navbar Component  */}
-            {/* <Navbar /> */}
+            <Navbar />
 
             {/* ------- Our page content  */}
             {children}
 
             {/* ----- Footer Component  */}
-            {/* <Footer /> */}
+            <Footer />
 
         </>
     )

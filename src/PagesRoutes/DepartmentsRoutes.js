@@ -1,97 +1,98 @@
 import { Route } from "react-router-dom";
 import Department from "../pages/departments/Department";
 import Alumni from "../pages/Alumni/Alumni";
+import Layout from "../components/Layout/Layout";
 
 const DepartmentsRoutes = [
   <Route
     path="computer"
-    element={
+    element={ <Layout>
         <Department comp="computer" />
-    }
+    </Layout>}
   />,
   <Route
     path="electrical"
-    element={
+    element={ <Layout>
         <Department comp="electrical" />
-    }
+    </Layout>}
   />,
   <Route
     path="civil"
-    element={
+    element={ <Layout>
         <Department comp="civil" />
-    }
+    </Layout>}
   />,
   <Route
     path="EIC"
-    element={
+    element={ <Layout>
         <Department comp="EIC" />
-    }
+    </Layout>}
   />,
   <Route
     path="ECE"
-    element={
+    element={ <Layout>
         <Department comp="ECE" />
-    }
+    </Layout>}
   />,
   <Route
     path="mechanical"
-    element={
+    element={ <Layout>
         <Department comp="mechanical" />
-    }
+    </Layout>}
   />,
   <Route
     path="electrical"
-    element={
+    element={ <Layout>
         <Department comp="electrical" />
-    }
+    </Layout>}
   />,
   <Route
     path="mca"
-    element={
+    element={ <Layout>
         <Department comp="mca" />
-    }
+    </Layout>}
   />,
   <Route
     path="mba"
-    element={
+    element={ <Layout>
         <Department comp="mba" />
-    }
+    </Layout>}
   />,
   <Route
     path="physics"
-    element={
+    element={ <Layout>
         <Department comp="physics" />
-    }
+    </Layout>}
   />,
   <Route
     path="chemistry"
-    element={
+    element={ <Layout>
         <Department comp="chemistry" />
-    }
+    </Layout>}
   />,
   <Route
     path="maths"
-    element={
+    element={ <Layout>
         <Department comp="maths" />
-    }
+    </Layout>}
   />,
   <Route
     path="english"
-    element={
+    element={ <Layout>
         <Department comp="english" />
-    }
+    </Layout>}
   />,
   <Route
     path="economics"
-    element={
+    element={ <Layout>
         <Department comp="economics" />
-    }
+    </Layout>}
   />,
   <Route
     path="alumni"
-    element={
+    element={ <Layout>
         <Alumni />
-    }
+    </Layout>}
   />,
 ];
 

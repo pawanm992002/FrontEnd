@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React from 'react'
 import ProfileCard from '../cards/ProfileCard'
 import { Box, Flex, Heading, SimpleGrid, VStack } from '@chakra-ui/react'
-import { PublicApiIntance, WebTeamContext } from '../../../AdminContext/WebTeam/WebTeamContext'
-import toast from 'react-hot-toast'
 
 const WebTeam = () => {
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 
 //-------- Packages Stuff
 import { VStack } from '@chakra-ui/react'
@@ -6,15 +6,13 @@ import { VStack } from '@chakra-ui/react'
 
 import { ButtonBox, FormBox, FormInputBox } from '../FormInputBox';
 import toast from 'react-hot-toast';
-import { CellsContext } from '../../../AdminContext/CellsContext/CellsContext';
+import { AdminApiInstance } from '../apis/ApiIntances';
 
 
 //------------- Create the profile form
 export const AddAlumniCellCircular = () => {
     const [form, setForm] = useState({ title: '', notice: '' });
-
-    const { loading, error, handleAddNewAlumniCircular } = useContext(CellsContext);
-
+    const [loading,setLoading] = useState(false);
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -22,21 +20,28 @@ export const AddAlumniCellCircular = () => {
         setForm({ ...form, notice: e.target.files[0] });
     };
 
+  
     const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const myForm = new FormData();
-        myForm.append('title', form.title)
-        myForm.append('notice', form.notice)
-
-        const data = await handleAddNewAlumniCircular(myForm);
-        console.log('data ');
-
-        if (error)
-            toast.error(error);
-        else toast.success("Adding a new circular of alumni")
-
-    };
+        try {
+          e.preventDefault();
+          setLoading(true);
+          
+          const myForm = new FormData();
+          myForm.append('title',form.title)
+          myForm.append('notice',form.notice)
+    
+          const { data,status } = await AdminApiInstance.post("/cells/alumni-circular", myForm);
+    
+          if(status === 200) toast.success(data?.message);
+          else toast.error(data?.message);
+    
+        } catch (error) {
+          toast.error(error?.response?.data?.error);
+        }
+    
+        setLoading(false);
+        setForm({title:'',notice:''})
+      };
 
 
     return (
@@ -45,9 +50,9 @@ export const AddAlumniCellCircular = () => {
                 <form onSubmit={handleSubmit}>
                     <VStack spacing={4}>
 
-                        <FormInputBox label={"Circular Title"} name={'title'} placeholder={"Tarangani"} value={form.title} handleChange={handleChange} />
+                        <FormInputBox label={"Title"} name={'title'} placeholder={"Tarangani"} value={form.title} handleChange={handleChange} />
 
-                        <FormInputBox label={'Event Thumbnail'} type='file' handleChange={handleFileChange} name={'notice'} />
+                        <FormInputBox label={'Notice'} type='file' handleChange={handleFileChange} name={'notice'} />
 
                         <ButtonBox loading={loading} type='submit' title={'Add New Circular'} />
                     </VStack>

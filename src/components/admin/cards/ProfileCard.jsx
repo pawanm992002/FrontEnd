@@ -1,23 +1,17 @@
-import React, { useContext } from 'react'
-import { Box, Button, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import React from 'react'
+import { Button, Flex, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import ProfileTable from '../table/ProfileTable'
-import { AchievementForm, AddDepartmentTimeTableForm, AddNewDepartmentGalleryForm, FacultyMemberForm } from '../components/DepartmentsForms'
+import { AchievementForm,FacultyMemberForm } from '../components/DepartmentsForms'
 import AdminModal from '../AdminModal'
 import { Link, useSearchParams } from 'react-router-dom'
 import CircularTable from '../table/CircularTable'
 import { AddWebTeamForm } from '../components/WebTeamForms'
-import { WebTeamContext } from '../../../AdminContext/WebTeam/WebTeamContext'
 
 const ProfileCard = ({ data, tableHeading, dataArray, link }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const [searchParams,setSearchParams] = useSearchParams();
     const section = searchParams.get('section');
-
-    // console.log('data ', dataArray);
-
-  const { webTeams, handleFetchWebTeamMembers, loading, error } = useContext(WebTeamContext);
-    console.log('webteam ast profile ',webTeams);
 
 
     return (

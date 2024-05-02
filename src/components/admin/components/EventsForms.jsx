@@ -5,6 +5,8 @@ import {VStack} from '@chakra-ui/react'
 
 
 import { ButtonBox, FormBox, FormInputBox } from '../FormInputBox';
+import toast from 'react-hot-toast';
+import { AdminApiInstance } from '../apis/ApiIntances';
 
 //------------- Create the profile form
 export const AddNewEventForm = () => {
@@ -19,20 +21,30 @@ export const AddNewEventForm = () => {
         setForm({...form,image:e.target.files[0]});
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('form', form);
+   
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      setLoading(true);
+      
+      const myForm = new FormData();
+      myForm.append('title',form.title)
+      myForm.append('description',form.description)
+      myForm.append('date',form.date)
+      myForm.append('image',form.image)
 
-        setLoading(true);
+      const { data,status } = await AdminApiInstance.post("/event", myForm);
 
-        try {
-            
-        } catch (error) {
-            
-        }
+      if(status === 200) toast.success(data?.message);
+      else toast.error(data?.message);
 
-        setLoading(false);
-    };
+    } catch (error) {
+      toast.error(error?.response?.data?.error);
+    }
+
+    setLoading(false);
+    setForm({description:'',tile:'',date:'',image:''})
+  };
 
     return (
         <>
@@ -70,7 +82,7 @@ export const AchievementForm = ()=>{
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('form', form);
+        console.log('pawan form', form);
 
         setLoading(true);
 

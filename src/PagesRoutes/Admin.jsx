@@ -13,19 +13,12 @@ import NewsOrders from '../components/admin/layout/NewsOrders';
 import EcaPress from '../components/admin/layout/EcaPress';
 import WebTeam from '../components/admin/layout/WebTeam';
 import Login from '../components/admin/layout/Login';
-import WebTeamProvider from '../AdminContext/WebTeam/WebTeamContext';
-import CellsContextProvider from '../AdminContext/CellsContext/CellsContext';
 
 const Admin = () => {
     return (
-        <WebTeamProvider>
-            <CellsContextProvider>
-
-
-                <ChakraProvider>
-                    <Routes>
-
-                        <Route path="/" element={<Sidebar />} />
+        <ChakraProvider>
+            <Routes>
+                <Route path="/" element={<Sidebar />} />
 
                         <Route path="/administration" element={<Sidebar content={<Administration />} />} />
 
@@ -42,9 +35,6 @@ const Admin = () => {
 
                     </Routes>
                 </ChakraProvider>
-            </CellsContextProvider>
-
-        </WebTeamProvider>
     );
 }
 
