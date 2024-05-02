@@ -1,15 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
-  Box,
   Button,
   Flex,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Text,
   VStack,
   useDisclosure,
@@ -65,7 +57,19 @@ const CircularCard = ({ data, link }) => {
     "Notes",
     "Academic Calender",
     "First Year Circular",
-    "Event"
+    "Event",
+    "Bog Mom",
+    "Examination Circular",
+    "Account Section Circular",
+    "Proctor Circular",
+    "Registrar Circular",
+    "CreativeArtData Circular",
+    "NCCData Circular",
+    "NCCData Gallery",
+    "HostelData Circular",
+    "HostelData Gallery",
+    "TransportationData Circular",
+    "StudentAchievementData",
   ];
   console.log("params & form", section, data);
 
@@ -120,25 +124,20 @@ const CircularCard = ({ data, link }) => {
           {tableSection.includes(section) && <MyTable data={data.data} />}
 
           {/* ---------------- Bog Mom Stuff -----------------  */}
-          {section === "Bog Mom" && <CircularTable />}
           {section === "Bog Mom Form" && <AdministrationForm />}
 
           {/* ---------------- Examination Section Stuff -----------------  */}
-          {section === "Examination Circular" && <CircularTable />}
           {section === "Examination Circular Form" && <ExaminationForm />}
 
           {/* ---------------- Account Section Stuff -----------------  */}
-          {section === "Account Section Circular" && <CircularTable />}
           {section === "Account Section Circular Form" && (
             <AccountSectionForm />
           )}
 
           {/* ---------------- Proctor Section Stuff -----------------  */}
-          {section === "Proctor Circular" && <CircularTable />}
           {section === "Proctor Circular Form" && <ProctorSectionForm />}
 
           {/* ---------------- Proctor Section Stuff -----------------  */}
-          {section === "Registrar Circular" && <CircularTable />}
           {section === "Registrar Circular Form" && <RegistrarSectionForm />}
 
           {/* ---------------- Academic Calender Stuff -----------------  */}
@@ -160,41 +159,33 @@ const CircularCard = ({ data, link }) => {
           {section === "Event Form" && <AddNewEventForm />}
 
           {/* ---------------- Creative Art data circular Stuff -----------------  */}
-          {section === "CreativeArtData Circular" && <CircularTable />}
           {section === "CreativeArtData Circular Form" && (
             <AddCreativeArtSocietyCircular />
           )}
 
           {/* ---------------- Creative Art data gallery Stuff -----------------  */}
-          {section === "CreativeArtData Gallery" && <CircularTable />}
           {section === "CreativeArtData Gallery Form" && (
             <AddCreativeArtSocietyGallery />
           )}
 
           {/* ---------------- NCC Data circular Stuff -----------------  */}
-          {section === "NCCData Circular" && <CircularTable />}
           {section === "NCCData Circular Form" && <AddNCCDataCircular />}
 
           {/* ---------------- NCC Data Gallery Stuff -----------------  */}
-          {section === "NCCData Gallery" && <CircularTable />}
           {section === "NCCData Gallery Form" && <AddNCCDataGallery />}
 
           {/* ---------------- NCC Data circular Stuff -----------------  */}
-          {section === "HostelData Circular" && <CircularTable />}
           {section === "HostelData Circular Form" && <AddHostelCircular />}
 
           {/* ---------------- NCC Data Gallery Stuff -----------------  */}
-          {section === "HostelData Gallery" && <CircularTable />}
           {section === "HostelData Gallery Form" && <AddHostelGallery />}
 
           {/* ---------------- Transportation Data Stuff -----------------  */}
-          {section === "TransportationData Circular" && <CircularTable />}
           {section === "TransportationData Circular Form" && (
             <AddTransportationCircular />
           )}
 
           {/* ---------------- Transportation Data Stuff -----------------  */}
-          {section === "StudentAchievementData" && <CircularTable />}
           {section === "StudentAchievementData Form" && (
             <AddStudentAchievementCircular />
           )}

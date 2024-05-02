@@ -34,7 +34,7 @@ const Department = () => {
 
   useEffect(() => {
     // for members
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(
           `${url}/department-people/${departmentValue}`
@@ -47,7 +47,7 @@ const Department = () => {
     })();
 
     // for circulars
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(
           `${url}/department-notice/${departmentValue}`
@@ -79,7 +79,7 @@ const Department = () => {
     })();
 
     // for achievements
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(
           `${url}/department-achievement/${departmentValue}`
@@ -108,7 +108,7 @@ const Department = () => {
     })();
 
     // for timetable
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(
           `${url}/department-timetable/${departmentValue}`
@@ -141,7 +141,7 @@ const Department = () => {
     })();
 
     // for gallery
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(
           `${url}/department-gallery/${departmentValue}`
@@ -171,7 +171,7 @@ const Department = () => {
     })();
 
     // for notes
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(
           `${url}/department-notes/${departmentValue}`
