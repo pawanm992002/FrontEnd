@@ -6,10 +6,9 @@ const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 export const getDepartmentsNotices = async(dept_name)=>{
     try {
         
-        const res = await axios.get(`${url}/department-notice/${dept_name}`);
-        const data = await res.json();
+        const {data} = await axios.get(`${url}/department-notice/${dept_name}`);
 
-        console.log('fetch dept ',data);
+        return data;
 
     } catch (error) { throw new Error(error)  }
 }
