@@ -1,143 +1,222 @@
-import React from 'react'
-import { Box, Button, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, VStack, useDisclosure } from '@chakra-ui/react'
-import CircularTable from '../table/CircularTable'
-import AdminModal from '../AdminModal'
-import { AccountSectionForm, AdministrationForm, ExaminationForm, ProctorSectionForm, RegistrarSectionForm } from '../components/AdministrationForms'
-import { AcademicCalenderForm, FirstYearCircularForm } from '../components/AcademicsForms'
-import { AchievementForm, AddDepartmentTimeTableForm, AddNewDepartmentGalleryForm } from '../components/DepartmentsForms'
-import { AddNewEventForm } from '../components/EventsForms'
-import { useParams,Link, useSearchParams, useNavigate } from 'react-router-dom'
-import { AddCreativeArtSocietyCircular, AddCreativeArtSocietyGallery, AddHostelCircular, AddHostelGallery, AddNCCDataCircular, AddNCCDataGallery, AddStudentAchievementCircular, AddTransportationCircular } from '../components/StudentCornerForms'
-import { AddAlumniCellCircular } from '../components/CellForms'
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Button,
+  Flex,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  VStack,
+  useDisclosure,
+} from "@chakra-ui/react";
+import CircularTable from "../table/CircularTable";
+import AdminModal from "../AdminModal";
+import {
+  AccountSectionForm,
+  AdministrationForm,
+  ExaminationForm,
+  ProctorSectionForm,
+  RegistrarSectionForm,
+} from "../components/AdministrationForms";
+import {
+  AcademicCalenderForm,
+  FirstYearCircularForm,
+} from "../components/AcademicsForms";
+import {
+  AchievementForm,
+  AddDepartmentTimeTableForm,
+  AddNewDepartmentGalleryForm,
+} from "../components/DepartmentsForms";
+import { AddNewEventForm } from "../components/EventsForms";
+import {
+  useParams,
+  Link,
+  useSearchParams,
+  useNavigate,
+} from "react-router-dom";
+import {
+  AddCreativeArtSocietyCircular,
+  AddCreativeArtSocietyGallery,
+  AddHostelCircular,
+  AddHostelGallery,
+  AddNCCDataCircular,
+  AddNCCDataGallery,
+  AddStudentAchievementCircular,
+  AddTransportationCircular,
+} from "../components/StudentCornerForms";
+import { AddAlumniCellCircular } from "../components/CellForms";
+import MyTable from "../../utilily/MyTable";
 
-const CircularCard = ({ data,link }) => {
+const CircularCard = ({ data, link }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const section = searchParams.get("section");
 
-    const { isOpen, onOpen, onClose } = useDisclosure()
+  let tableSection = [
+    "Gallery",
+    "Circular",
+    "Time Table",
+    "Achievement",
+    "Notes",
+    "Academic Calender",
+    "First Year Circular",
+    "Event"
+  ];
+  console.log("params & form", section, data);
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const section = searchParams.get('section');
-    console.log('params & form',section,data?.title)
+  return (
+    <>
+      <Link
+        style={{
+          padding: 25,
+          backgroundColor: "var(--main-primary)",
+          borderWidth: 1,
+          borderRadius: "12px",
+          cursor: "pointer",
+        }}
+        to={`/admin/${link}?section=${data?.title}`}
+        onClick={onOpen}
+      >
+        <Text fontWeight="bold" fontSize="2xl" color={"white"}>
+          {data.title}
+        </Text>
+        <Text color={"white"}>{data.length}</Text>
+      </Link>
 
+      <AdminModal isOpen={isOpen} onClose={onClose} title={link}>
+        <VStack>
+          <Flex
+            alignItems={"center"}
+            p="3"
+            justifyContent={"space-between"}
+            bg={"var(--main-primary)"}
+            color={"white"}
+            w={"full"}
+          >
+            <h2
+              style={{ cursor: "pointer" }}
+              onClick={() => setSearchParams({ section: `${data?.title}` })}
+              fontSize="xl"
+              textAlign="center"
+            >
+              {data.title}
+            </h2>
+            <Button
+              onClick={() =>
+                setSearchParams({ section: `${data?.title} Form` })
+              }
+              colorScheme="blue"
+              mr={3}
+            >
+              Add New
+            </Button>
+          </Flex>
 
-    return (
-        <>
-        
-       
+          {tableSection.includes(section) && <MyTable data={data.data} />}
 
-            <Link style={{padding:25,backgroundColor:'var(--main-primary)',borderWidth:1,borderRadius:'12px',cursor:'pointer'}} to={`/admin/${link}?section=${data?.title}`} onClick={onOpen}  >
+          {/* ---------------- Bog Mom Stuff -----------------  */}
+          {section === "Bog Mom" && <CircularTable />}
+          {section === "Bog Mom Form" && <AdministrationForm />}
 
-                <Text fontWeight="bold" fontSize="2xl" color={'white'}>
-                    {data.title}
-                </Text>
-                <Text color={'white'}>{data.length}</Text>
-            </Link>
+          {/* ---------------- Examination Section Stuff -----------------  */}
+          {section === "Examination Circular" && <CircularTable />}
+          {section === "Examination Circular Form" && <ExaminationForm />}
 
-            <AdminModal isOpen={isOpen} onClose={onClose} title={link} >
-                    <VStack>
-                        <Flex alignItems={'center'} p='3' justifyContent={'space-between'} bg={'var(--main-primary)'} color={'white'} w={'full'}>
-                            <h2 style={{cursor:'pointer'}}  onClick={()=>setSearchParams({section:`${data?.title}`})} fontSize='xl' textAlign='center'>
-                               {data.title}
-                            </h2>
-                            <Button onClick={()=>setSearchParams({section:`${data?.title} Form`})} colorScheme='blue' mr={3}>
-                                Add New
-                            </Button>
-                        </Flex>
+          {/* ---------------- Account Section Stuff -----------------  */}
+          {section === "Account Section Circular" && <CircularTable />}
+          {section === "Account Section Circular Form" && (
+            <AccountSectionForm />
+          )}
 
-                        {/* ---------------- Bog Mom Stuff -----------------  */}
-                        { section === 'Bog Mom' && <CircularTable /> }
-                        { section === 'Bog Mom Form' && <AdministrationForm/> }
+          {/* ---------------- Proctor Section Stuff -----------------  */}
+          {section === "Proctor Circular" && <CircularTable />}
+          {section === "Proctor Circular Form" && <ProctorSectionForm />}
 
-                        {/* ---------------- Examination Section Stuff -----------------  */}
-                        { section === 'Examination Circular' && <CircularTable /> }
-                        { section === 'Examination Circular Form' && <ExaminationForm /> }
+          {/* ---------------- Proctor Section Stuff -----------------  */}
+          {section === "Registrar Circular" && <CircularTable />}
+          {section === "Registrar Circular Form" && <RegistrarSectionForm />}
 
-                        {/* ---------------- Account Section Stuff -----------------  */}
-                        { section === 'Account Section Circular' && <CircularTable /> }
-                        { section === 'Account Section Circular Form' && <AccountSectionForm /> }
+          {/* ---------------- Academic Calender Stuff -----------------  */}
+          {section === "Academic Calender Form" && <AcademicCalenderForm />}
 
-                        {/* ---------------- Proctor Section Stuff -----------------  */}
-                        { section === 'Proctor Circular' && <CircularTable /> }
-                        { section === 'Proctor Circular Form' && <ProctorSectionForm /> }
+          {/* ---------------- First year circular Stuff -----------------  */}
+          {section === "First Year Circular Form" && <FirstYearCircularForm />}
 
-                        {/* ---------------- Proctor Section Stuff -----------------  */}
-                        { section === 'Registrar Circular' && <CircularTable /> }
-                        { section === 'Registrar Circular Form' && <RegistrarSectionForm /> }
+          {/* ---------------- Achievement Stuff -----------------  */}
+          {section === "Achievement Form" && <AchievementForm />}
 
-                        {/* ---------------- Academic Calender Stuff -----------------  */}
-                        { section === 'Academic Calender' && <CircularTable /> }
-                        { section === 'Academic Calender Form' && <AcademicCalenderForm /> }
+          {/* ---------------- Time Table Stuff -----------------  */}
+          {section === "Time Table Form" && <AddDepartmentTimeTableForm />}
 
-                        {/* ---------------- First year circular Stuff -----------------  */}
-                        { section === 'First Year Circular' && <CircularTable /> }
-                        { section === 'First Year Circular Form' && <FirstYearCircularForm /> }
+          {/* ---------------- Gallery Stuff -----------------  */}
+          {section === "Gallery Form" && <AddNewDepartmentGalleryForm />}
 
-                        {/* ---------------- Achievement Stuff -----------------  */}
-                        { section === 'Achievement' && <CircularTable /> }
-                        { section === 'Achievement Form' && <AchievementForm /> }
+          {/* ---------------- Events Stuff -----------------  */}
+          {section === "Event Form" && <AddNewEventForm />}
 
-                        {/* ---------------- Time Table Stuff -----------------  */}
-                        { section === 'Time Table' && <CircularTable /> }
-                        { section === 'Time Table Form' && <AddDepartmentTimeTableForm /> }
+          {/* ---------------- Creative Art data circular Stuff -----------------  */}
+          {section === "CreativeArtData Circular" && <CircularTable />}
+          {section === "CreativeArtData Circular Form" && (
+            <AddCreativeArtSocietyCircular />
+          )}
 
-                        {/* ---------------- Gallery Stuff -----------------  */}
-                        { section === 'Gallery' && <CircularTable /> }
-                        { section === 'Gallery Form' && <AddNewDepartmentGalleryForm /> }
+          {/* ---------------- Creative Art data gallery Stuff -----------------  */}
+          {section === "CreativeArtData Gallery" && <CircularTable />}
+          {section === "CreativeArtData Gallery Form" && (
+            <AddCreativeArtSocietyGallery />
+          )}
 
-                        {/* ---------------- Events Stuff -----------------  */}
-                        { section === 'Event' && <CircularTable /> }
-                        { section === 'Event Form' && <AddNewEventForm /> }
+          {/* ---------------- NCC Data circular Stuff -----------------  */}
+          {section === "NCCData Circular" && <CircularTable />}
+          {section === "NCCData Circular Form" && <AddNCCDataCircular />}
 
-                        {/* ---------------- Creative Art data circular Stuff -----------------  */}
-                        { section === 'CreativeArtData Circular' && <CircularTable /> }
-                        { section === 'CreativeArtData Circular Form' && <AddCreativeArtSocietyCircular /> }
+          {/* ---------------- NCC Data Gallery Stuff -----------------  */}
+          {section === "NCCData Gallery" && <CircularTable />}
+          {section === "NCCData Gallery Form" && <AddNCCDataGallery />}
 
-                        {/* ---------------- Creative Art data gallery Stuff -----------------  */}
-                        { section === 'CreativeArtData Gallery' && <CircularTable /> }
-                        { section === 'CreativeArtData Gallery Form' && <AddCreativeArtSocietyGallery /> }
+          {/* ---------------- NCC Data circular Stuff -----------------  */}
+          {section === "HostelData Circular" && <CircularTable />}
+          {section === "HostelData Circular Form" && <AddHostelCircular />}
 
-                        {/* ---------------- NCC Data circular Stuff -----------------  */}
-                        { section === 'NCCData Circular' && <CircularTable /> }
-                        { section === 'NCCData Circular Form' && <AddNCCDataCircular /> }
+          {/* ---------------- NCC Data Gallery Stuff -----------------  */}
+          {section === "HostelData Gallery" && <CircularTable />}
+          {section === "HostelData Gallery Form" && <AddHostelGallery />}
 
-                        {/* ---------------- NCC Data Gallery Stuff -----------------  */}
-                        { section === 'NCCData Gallery' && <CircularTable /> }
-                        { section === 'NCCData Gallery Form' && <AddNCCDataGallery /> }
+          {/* ---------------- Transportation Data Stuff -----------------  */}
+          {section === "TransportationData Circular" && <CircularTable />}
+          {section === "TransportationData Circular Form" && (
+            <AddTransportationCircular />
+          )}
 
-                        {/* ---------------- NCC Data circular Stuff -----------------  */}
-                        { section === 'HostelData Circular' && <CircularTable /> }
-                        { section === 'HostelData Circular Form' && <AddHostelCircular /> }
+          {/* ---------------- Transportation Data Stuff -----------------  */}
+          {section === "StudentAchievementData" && <CircularTable />}
+          {section === "StudentAchievementData Form" && (
+            <AddStudentAchievementCircular />
+          )}
+          {section === "TransportationData Circular Form" && (
+            <AddTransportationCircular />
+          )}
 
-                        {/* ---------------- NCC Data Gallery Stuff -----------------  */}
-                        { section === 'HostelData Gallery' && <CircularTable /> }
-                        { section === 'HostelData Gallery Form' && <AddHostelGallery /> }
+          {/* ---------------- Alumni Circular Stuff -----------------  */}
+          {section === "Alumni Circular" && <CircularTable />}
+          {section === "Alumni Circular Form" && <AddAlumniCellCircular />}
 
-                        {/* ---------------- Transportation Data Stuff -----------------  */}
-                        { section === 'TransportationData Circular' && <CircularTable /> }
-                        { section === 'TransportationData Circular Form' && <AddTransportationCircular /> }
+          {/* ---------------- NewsData Circular Stuff -----------------  */}
+          {section === "NewsData Circular" && <CircularTable />}
+          {section === "NewsData Circular Form" && <AddAlumniCellCircular />}
 
-                        {/* ---------------- Transportation Data Stuff -----------------  */}
-                        { section === 'StudentAchievementData' && <CircularTable /> }
-                        { section === 'StudentAchievementData Form' && <AddStudentAchievementCircular /> }
-                        { section === 'TransportationData Circular Form' && <AddTransportationCircular /> }
+          {/* ---------------- ordersData Circular Stuff -----------------  */}
+          {section === "OrdersData Circular" && <CircularTable />}
+          {section === "OrdersData Circular Form" && <AddAlumniCellCircular />}
+        </VStack>
+      </AdminModal>
+    </>
+  );
+};
 
-                        {/* ---------------- Alumni Circular Stuff -----------------  */}
-                        { section === 'Alumni Circular' && <CircularTable /> }
-                        { section === 'Alumni Circular Form' && <AddAlumniCellCircular /> }
-
-                        {/* ---------------- NewsData Circular Stuff -----------------  */}
-                        { section === 'NewsData Circular' && <CircularTable /> }
-                        { section === 'NewsData Circular Form' && <AddAlumniCellCircular /> }
-
-                        {/* ---------------- ordersData Circular Stuff -----------------  */}
-                        { section === 'OrdersData Circular' && <CircularTable /> }
-                        { section === 'OrdersData Circular Form' && <AddAlumniCellCircular /> }
-
-
-
-                    </VStack>
-                </AdminModal>
-        </>
-    )
-}
-
-export default CircularCard
+export default CircularCard;
