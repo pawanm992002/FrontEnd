@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, Flex,Text, VStack, useDisclosure } from '@chakra-ui/react'
-import CircularTable from '../table/CircularTable'
 import AdminModal from '../AdminModal'
 import { AccountSectionForm, AdministrationForm, ExaminationForm, ProctorSectionForm, RegistrarSectionForm } from '../components/AdministrationForms'
 import { AcademicCalenderForm, FirstYearCircularForm } from '../components/AcademicsForms'
@@ -38,6 +37,12 @@ const CircularCard = ({ data, link }) => {
     "HostelData Gallery",
     "TransportationData Circular",
     "StudentAchievementData",
+    'Alumni Circular', 
+    "NewsData Circular",
+    "OrdersData Circular",
+    'News Cutting',
+    "Team Member",
+    "Faculty Member"
   ];
 
   return (
@@ -157,24 +162,19 @@ const CircularCard = ({ data, link }) => {
           )}
 
                         {/* ---------------- Transportation Data Stuff -----------------  */}
-                        { section === 'StudentAchievementData' && <CircularTable /> }
                         { section === 'StudentAchievementData Form' && <AddStudentAchievementCircular /> }
 
-                        {/* ---------------- Alumni Circular Stuff -----------------  */}
-                        { section === 'Alumni Circular' && <CircularTable /> }
-                        { section === 'Alumni Circular Form' && <AddAlumniCellCircular /> }
+          {/* ---------------- Alumni Circular Stuff -----------------  */}
+          {section === "Alumni Circular Form" && <AddAlumniCellCircular />}
 
           {/* ---------------- NewsData Circular Stuff -----------------  */}
-          {section === "NewsData Circular" && <CircularTable />}
           {section === "NewsData Circular Form" && <AddAlumniCellCircular />}
 
                         {/* ---------------- ordersData Circular Stuff -----------------  */}
-                        { section === 'OrdersData Circular' && <CircularTable /> }
                         { section === 'OrdersData Circular Form' && <AddAlumniCellCircular /> }
 
                         
                         {/* ---------------- ECA Press Stuff -----------------  */}
-                        { section === 'News Cutting' && <CircularTable /> }
                         { section === 'News Cutting Form' && <AddECAPressForm/> }
 
 
