@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-
+import {useMediaQuery} from '@mui/material';
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
@@ -41,7 +41,8 @@ function Carosel() {
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
-
+  const MaxView = useMediaQuery("(max-width:1200px)")
+  const MediumView = useMediaQuery("(max-width:800px)")
   return (
     <Box sx={{ maxWidth: '100%', flexGrow: 1 }}>
 
@@ -57,7 +58,8 @@ function Carosel() {
               <Box
                 component="img"
                 sx={{
-                  height: 'calc(100vh - 126.5px)',
+                  height: MaxView ? MediumView?"50%": 'calc(100vh - 50px)' : 'calc(100vh - 126.5px)' ,
+                  minHeight:'300px',
                   display: 'block',
                   maxWidth: '100%',
                   overflow: 'hidden',

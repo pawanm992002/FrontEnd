@@ -120,6 +120,7 @@ const NavbarDropDownListData = [
 
 export default function Navbar() {
   const navView = useMediaQuery("(min-width:1100px)");
+  const MobileView = useMediaQuery("(min-width:550px)");
   const [showNav, setShowNav] = useState(false);
 
   const [open, setOpen] = useState(false);
@@ -168,12 +169,12 @@ export default function Navbar() {
           >
           <Box sx={{display:'flex',alignItems:'center',gap:1}}>
            <Mail fontSize={'small'}/>
-          <Typography>info@ecajmer.ac.in</Typography>
+         {MobileView && <Typography>info@ecajmer.ac.in</Typography> }
           </Box>
           <Divider orientation="vertical" flexItem />
           <Box sx={{display:'flex',alignItems:'center',gap:1}}>
           <Phone/>
-          <Typography>645948465168</Typography>
+        { MobileView && <Typography>645948465168</Typography> }
           </Box>
           <Divider orientation="vertical" flexItem />
           <ListIcon fontSize="large" sx={{mr:1}} onClick={toggleDrawerOpen} />

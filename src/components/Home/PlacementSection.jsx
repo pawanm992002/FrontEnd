@@ -8,9 +8,11 @@ const PlacementSection = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const small = useMediaQuery("(max-width:660px)");
   const navView = useMediaQuery("(min-width:900px)");
   const Medium = useMediaQuery("(min-width:1300px)");
   const smallMed = useMediaQuery("(min-width:1000px)");
+
   return (
     <>
       
@@ -45,7 +47,7 @@ const PlacementSection = () => {
             </Container>
           </Box>
 
-          <Box className='flex' sx={{ display:'flex',flexWrap:Medium?"nowrap":'wrap', width: Medium?"80%":navView?"90%":'100%',margin:'auto',marginTop:'30px' }} >
+          <Box className='flex' sx={{ display:'flex',flexWrap:Medium?"nowrap":'wrap', width: Medium?"80%":navView?"90%":'100%',margin:'auto',marginTop:'30px',justifyContent:small?'space-around':"" }} >
 
             <Box sx={{ display: 'flex' ,padding: '9px 12px', border: '0px solid black', margin: 'auto 10px', fontWeight: 'bold', width: '25%',minWidth:'200px',alignItems:'center' }}>
               <Typography variant={navView?"h4":'h6'} sx={{ paddingRight: '5px' }} >A+</Typography>
