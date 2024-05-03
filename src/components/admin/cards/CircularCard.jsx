@@ -6,7 +6,6 @@ import {
   VStack,
   useDisclosure,
 } from "@chakra-ui/react";
-import CircularTable from "../table/CircularTable";
 import AdminModal from "../AdminModal";
 import {
   AccountSectionForm,
@@ -70,6 +69,12 @@ const CircularCard = ({ data, link }) => {
     "HostelData Gallery",
     "TransportationData Circular",
     "StudentAchievementData",
+    'Alumni Circular', 
+    "NewsData Circular",
+    "OrdersData Circular",
+    'News Cutting',
+    "Team Member",
+    "Faculty Member"
   ];
   console.log("params & form", section, data);
 
@@ -194,15 +199,12 @@ const CircularCard = ({ data, link }) => {
           )}
 
           {/* ---------------- Alumni Circular Stuff -----------------  */}
-          {section === "Alumni Circular" && <CircularTable />}
           {section === "Alumni Circular Form" && <AddAlumniCellCircular />}
 
           {/* ---------------- NewsData Circular Stuff -----------------  */}
-          {section === "NewsData Circular" && <CircularTable />}
           {section === "NewsData Circular Form" && <AddAlumniCellCircular />}
 
           {/* ---------------- ordersData Circular Stuff -----------------  */}
-          {section === "OrdersData Circular" && <CircularTable />}
           {section === "OrdersData Circular Form" && <AddAlumniCellCircular />}
         </VStack>
       </AdminModal>

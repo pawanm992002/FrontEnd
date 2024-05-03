@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CircularCard from "../cards/CircularCard";
 import { Button, Select, SimpleGrid } from "@chakra-ui/react";
-import ProfileCard from "../cards/ProfileCard";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -40,9 +39,25 @@ const Department = () => {
           `${url}/department-people/${departmentValue}`
         );
         console.log(".......... members", data);
-        setDepartmentMembers(data.result);
+        const temp = data.result.map((val, i) => {
+          return {
+            SR_NO: i,
+            Name: val.name,
+            Picture: (<img src={`${val.profile}`} style={{borderRadius: '50%'}} />),
+            Email: val.email,
+            Designation: val.designation,
+            Department: val.department,
+            Room_NO: val.roomNo,
+            Created_At: new Date(val.createdAt).toDateString(),
+            Delete: (
+              <Button onClick={() => deleteDepartmentRow(val?._id, "notice")}>
+                Delete
+              </Button>
+            ),
+          };
+        });
+        setDepartmentMembers(temp);
       } catch (error) {
-        console.log(".......... members", error);
       }
     })();
 
@@ -203,9 +218,12 @@ const Department = () => {
     })();
   }, [departmentValue]);
 
-  const tableHeading = ["Profile", "Name", "Email", "Department"];
-
   const cardData = [
+    {
+      title: "Faculty Member",
+      length: DepartmentMembers?.length,
+      data: DepartmentMembers,
+    },
     {
       title: "Achievement",
       length: DepartmentAchivements?.length,
@@ -233,14 +251,6 @@ const Department = () => {
     },
   ];
 
-  const facultyData = [
-    {
-      title: "Faculty Member",
-      length: DepartmentMembers?.length,
-      data: DepartmentMembers,
-    },
-  ];
-
   return (
     <>
       <div
@@ -252,7 +262,6 @@ const Department = () => {
         }}
       >
         <h3 style={{ width: "280px" }}>Select Department</h3>
-
         <Select
           value={departmentValue}
           onChange={(e) => setDepartmentValue(e.target.value)}
@@ -276,17 +285,6 @@ const Department = () => {
         columns={{ base: 1, sm: 2, md: 2, lg: 3 }}
         spacing={{ base: 5, lg: 8 }}
       >
-        {facultyData.map((data, i) => {
-          return (
-            <ProfileCard
-              key={i}
-              link="departments"
-              data={data}
-              dataArray={DepartmentMembers}
-              tableHeading={tableHeading}
-            />
-          );
-        })}
         {cardData.map((data, i) => {
           return <CircularCard key={i} data={data} link={"departments"} />;
         })}
