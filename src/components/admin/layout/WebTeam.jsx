@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Button, Flex, Heading, SimpleGrid, VStack } from '@chakra-ui/react'
 import toast from 'react-hot-toast';
-import { AdminApiInstance } from '../../../apis/ApiIntances';
+import { AdminApiInstance } from '../apis/ApiIntances';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import CircularCard from '../cards/CircularCard';

@@ -8,7 +8,7 @@ import {
   SimpleGrid,
   VStack,
 } from "@chakra-ui/react";
-import { AdminApiInstance } from "../../../apis/ApiIntances";
+import { AdminApiInstance } from '../apis/ApiIntances';
 import axios from "axios";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
