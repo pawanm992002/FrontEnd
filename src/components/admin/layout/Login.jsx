@@ -16,11 +16,10 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
-import { handleAdminLogin } from "../../../apis/AdminApi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { url } from "../../../apis/ApiIntances"
+import { url } from "../apis/ApiIntances";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);

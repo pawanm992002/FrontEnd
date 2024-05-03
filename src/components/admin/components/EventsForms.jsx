@@ -5,8 +5,8 @@ import {VStack} from '@chakra-ui/react'
 
 
 import { ButtonBox, FormBox, FormInputBox } from '../FormInputBox';
-import { AdminApiInstance } from '../../../apis/ApiIntances';
 import toast from 'react-hot-toast';
+import { AdminApiInstance } from '../apis/ApiIntances';
 
 //------------- Create the profile form
 export const AddNewEventForm = () => {
@@ -21,24 +21,30 @@ export const AddNewEventForm = () => {
         setForm({...form,image:e.target.files[0]});
     };
 
-    const handleSubmit = async (e) => {
-        try {
-          e.preventDefault();
-          setLoading(true);
-          console.log("form ..............", form);
-    
-          const { data } = await AdminApiInstance.post("/event", form);
-          if(!data?.result) {
-            toast.error("Events not Added")
-            return
-          }
-          toast.success(data?.message)
-        } catch (error) {
-            toast.error(error?.response?.data?.error);
-        }
-    
-        setLoading(false);
-      };
+   
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      setLoading(true);
+      
+      const myForm = new FormData();
+      myForm.append('title',form.title)
+      myForm.append('description',form.description)
+      myForm.append('date',form.date)
+      myForm.append('image',form.image)
+
+      const { data,status } = await AdminApiInstance.post("/event", myForm);
+
+      if(status === 200) toast.success(data?.message);
+      else toast.error(data?.message);
+
+    } catch (error) {
+      toast.error(error?.response?.data?.error);
+    }
+
+    setLoading(false);
+    setForm({description:'',tile:'',date:'',image:''})
+  };
 
     return (
         <>

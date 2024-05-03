@@ -1,8 +1,9 @@
 import React from 'react'
+import { LineChart } from '../../Home/PlacementChart'
 
 const Placement = () => {
   return (
-    <div>Placement</div>
+    <LineChart />
   )
 }
 

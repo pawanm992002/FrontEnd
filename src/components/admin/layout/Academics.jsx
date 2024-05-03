@@ -3,8 +3,8 @@ import CircularCard from "../cards/CircularCard";
 import { Button, SimpleGrid } from "@chakra-ui/react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { AdminApiInstance } from "../../../apis/ApiIntances";
 import toast from "react-hot-toast";
+import { AdminApiInstance } from "../apis/ApiIntances";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
@@ -81,7 +81,6 @@ const Academics = () => {
               ),
           };
         });
-        console.log(".......... academics", data);
         setFirstYearCircular(temp);
       } catch (error) {
         console.log(".......... academics", error);

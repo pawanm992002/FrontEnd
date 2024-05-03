@@ -9,7 +9,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import toast from "react-hot-toast";
-import { AdminApiInstance } from "../../../apis/ApiIntances";
+import { AdminApiInstance } from "../apis/ApiIntances";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -40,7 +40,7 @@ const StudentCorner = () => {
 
   useEffect(() => {
     // for creative circular
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(
           `${url}/student-corner/circular/creative`
@@ -70,7 +70,7 @@ const StudentCorner = () => {
     })();
 
     // for creative gallery
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(
           `${url}/student-corner/gallery/creative`
@@ -101,7 +101,7 @@ const StudentCorner = () => {
     })();
 
     // for ncc circular
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(`${url}/student-corner/circular/ncc`);
         const temp = data.result.map((val, i) => {
@@ -129,7 +129,7 @@ const StudentCorner = () => {
     })();
 
     // for ncc gallery
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(`${url}/student-corner/gallery/ncc`);
         const temp = data.result.map((val, i) => {
@@ -158,7 +158,7 @@ const StudentCorner = () => {
     })();
 
     // for hostel circular
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(
           `${url}/student-corner/circular/hostel`
@@ -188,7 +188,7 @@ const StudentCorner = () => {
     })();
 
     // for hostel gallery
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(
           `${url}/student-corner/gallery/hostel`
@@ -219,7 +219,7 @@ const StudentCorner = () => {
     })();
 
     // for transportation circular
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(
           `${url}/student-corner/circular/transport`
@@ -249,7 +249,7 @@ const StudentCorner = () => {
     })();
 
     // for student acheivement
-    (async () => {
+    ;(async () => {
       try {
         const { data } = await axios.get(
           `${url}/student-corner/student-achievement`

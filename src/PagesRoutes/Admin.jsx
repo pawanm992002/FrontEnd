@@ -20,21 +20,21 @@ const Admin = () => {
             <Routes>
                 <Route path="/" element={<Sidebar />} />
 
-                <Route path="/administration" element={<Sidebar content={<Administration />} />} />
-                
-                <Route path="/academics" element={<Sidebar content={<Academics />} />} />
-                <Route path="/departments" element={<Sidebar content={<Department />} />} />
-                <Route path="/event" element={<Sidebar content={<Event />} />} />
-                <Route path="/student-corner" element={<Sidebar content={<StudentCorner />} />} />
-                <Route path="/cells" element={<Sidebar content={<Cells />} />} />
-                <Route path="/placement" element={<Sidebar content={<Placement />} />} />
-                <Route path="/news-orders" element={<Sidebar content={<NewsOrders />} />} />
-                <Route path="/eca-press" element={<Sidebar content={<EcaPress />} />} />
-                <Route path="/web-team" element={<Sidebar content={<WebTeam />} />} />
-                <Route path="/login" element={<Login />} />
+                        <Route path="/administration" element={<Sidebar content={<Administration />} />} />
 
-            </Routes>
-        </ChakraProvider>
+                        <Route path="/academics" element={<Sidebar content={<Academics />} />} />
+                        <Route path="/departments" element={<Sidebar content={<Department />} />} />
+                        <Route path="/event" element={<Sidebar content={<Event />} />} />
+                        <Route path="/student-corner" element={<Sidebar content={<StudentCorner />} />} />
+                        <Route path="/cells" element={<Sidebar content={<Cells />} />} />
+                        <Route path="/placement" element={<Sidebar content={<Placement />} />} />
+                        <Route path="/news-orders" element={<Sidebar content={<NewsOrders />} />} />
+                        <Route path="/eca-press" element={<Sidebar content={<EcaPress />} />} />
+                        <Route path="/web-team" element={<Sidebar content={<WebTeam />} />} />
+                        <Route path="/login" element={<Login />} />
+
+                    </Routes>
+                </ChakraProvider>
     );
 }
 

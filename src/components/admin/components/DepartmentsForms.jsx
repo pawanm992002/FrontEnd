@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 //-------- Packages Stuff
-import { VStack } from "@chakra-ui/react";
+import {VStack } from "@chakra-ui/react";
 
 import { ButtonBox, FormBox, FormInputBox } from "../FormInputBox";
 import axios from "axios";
-import { url, AdminApiInstance } from "../../../apis/ApiIntances";
 import toast from "react-hot-toast";
+import { AdminApiInstance, url } from "../apis/ApiIntances";
 
 //------------- Create the profile form
 export const FacultyMemberForm = () => {
@@ -29,23 +29,37 @@ export const FacultyMemberForm = () => {
     setForm({ ...form, profile: e.target.files[0] });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("add faculty", form);
 
-    const { data } = await AdminApiInstance.post(
-      "/department/add-member",
-      form
-    );
-    console.log("adddddddd", data);
+  const handleSubmit = async (e) => {
+
+    e.preventDefault();
 
     setLoading(true);
+    const myForm = new FormData();
+
+    myForm.append('name', form.name)
+    myForm.append('email', form.email)
+    myForm.append('password', form.password)
+    myForm.append('designation', form.designation)
+    myForm.append('roomNo', form.roomNo)
+    myForm.append('department', form.department)
+    myForm.append('profile', form.profile)
+
 
     try {
-    } catch (error) {}
+      const { data, status } = await AdminApiInstance.post('/department/member', myForm);
+
+      console.log('achievme', data)
+
+      if (status === 200) toast.success(data?.message);
+      else toast.error(data?.message)
+
+    } catch (error) {
+      toast.error("Internal Server Error");
+    }
 
     setLoading(false);
-    setForm({ name: "", department: "", profile: "" });
+    // setForm({name:'',email:'',password:'',department:'',designation:'',roomNo:'',profile:''})
   };
 
   return (
@@ -123,7 +137,7 @@ export const AchievementForm = () => {
   const [form, setForm] = useState({
     department: "",
     achievement: "",
-    category: "",
+    category: "Department",
   });
   const [loading, setLoading] = useState(false);
 
@@ -136,17 +150,19 @@ export const AchievementForm = () => {
       setLoading(true);
       console.log("form ..............", form);
 
-      const { data } = await AdminApiInstance.post("/department/achievement", form);
-      if(!data?.result) {
-        toast.error("Achievement not Added")
-        return
-      }
-      toast.success(data?.message)
+      const { data,status } = await AdminApiInstance.post("/department/achievement", form,{headers:{
+        'Content-Type':'application/json'
+      }});
+
+      if(status === 200) toast.success(data?.message);
+      else toast.error(data?.message);
+
     } catch (error) {
-        toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.error);
     }
 
     setLoading(false);
+    setForm({department:'',achievement:'',category:'Department'})
   };
 
 
@@ -171,13 +187,16 @@ export const AchievementForm = () => {
               handleChange={handleChange}
             />
 
-            <FormInputBox
+<FormInputBox
               label={"Category"}
               name={"category"}
-              placeholder={"Student/College"}
+              placeholder={"Department"}
               value={form.category}
               handleChange={handleChange}
+              readonly = {true}
             />
+
+
 
             <ButtonBox
               loading={loading}
@@ -201,17 +220,28 @@ export const AddNewDepartmentGalleryForm = () => {
 
   const handleFileChange = (e) => setForm({ ...form, file: e.target.files[0] });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("form", form);
-
-    setLoading(true);
-
+  const handleSubmit = async (e) => {
     try {
-    } catch (error) {}
+      e.preventDefault();
+      setLoading(true);
+      
+      const myForm = new FormData();
+      myForm.append('department',form.department)
+      myForm.append('file',form.file)
+
+      const { data,status } = await AdminApiInstance.post("/department/gallery", myForm);
+
+      if(status === 200) toast.success(data?.message);
+      else toast.error(data?.message);
+
+    } catch (error) {
+      toast.error(error?.response?.data?.error);
+    }
 
     setLoading(false);
+    setForm({department:'',file:''})
   };
+
 
   return (
     <>
@@ -256,24 +286,29 @@ export const AddDepartmentTimeTableForm = () => {
   const handleFileChange = (e) =>
     setForm({ ...form, timetable: e.target.files[0] });
 
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      setLoading(true);
-      console.log("form ..............", form);
-
-      const { data } = await AdminApiInstance.post("/department/timetable", form);
-      if(!data?.result) {
-        toast.error("Time Table not Added")
-        return
-      }
-      toast.success(data?.message)
-    } catch (error) {
+ 
+    const handleSubmit = async (e) => {
+      try {
+        e.preventDefault();
+        setLoading(true);
+        
+        const myForm = new FormData();
+        myForm.append('department',form.department)
+        myForm.append('timetable',form.timetable)
+        myForm.append('title',form.title)
+  
+        const { data,status } = await AdminApiInstance.post("/department/timetable", myForm);
+  
+        if(status === 200) toast.success(data?.message);
+        else toast.error(data?.message);
+  
+      } catch (error) {
         toast.error(error?.response?.data?.error);
-    }
-
-    setLoading(false);
-  };
+      }
+  
+      setLoading(false);
+      setForm({department:'',timetable:'',title:''})
+    };
 
   return (
     <>
@@ -300,6 +335,92 @@ export const AddDepartmentTimeTableForm = () => {
               label={"Upload Timetable"}
               type="file"
               name={"timetable"}
+              handleChange={handleFileChange}
+            />
+
+            <ButtonBox
+              loading={loading}
+              type="submit"
+              title={"Upload Time Table"}
+            />
+          </VStack>
+        </form>
+      </FormBox>
+    </>
+  );
+};
+
+//------------ add department notes
+export const AddDepartmentNotesForm = () => {
+  const [form, setForm] = useState({
+   sem:'',branc:'',notes:'',
+    title: "",
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleFileChange = (e) =>
+    setForm({ ...form, notes: e.target.files[0] });
+
+ 
+    const handleSubmit = async (e) => {
+      try {
+        e.preventDefault();
+        setLoading(true);
+        
+        const myForm = new FormData();
+        myForm.append('sem',form.sem)
+        myForm.append('department',form.department)
+        myForm.append('notes',form.notes)
+        myForm.append('title',form.title)
+  
+        const { data,status } = await axios.post(`${url}/faculty/notes`,myForm);
+  
+        if(status === 200) toast.success(data?.message);
+        else toast.error(data?.message);
+  
+      } catch (error) {
+        toast.error(error?.response?.data?.error);
+      }
+  
+      setLoading(false);
+      setForm({department:'',timetable:'',title:''})
+    };
+
+  return (
+    <>
+      <FormBox title={"Add Department Notes"}>
+        <form onSubmit={handleSubmit}>
+          <VStack spacing={4}>
+            <FormInputBox
+              label={"Title"}
+              name={"title"}
+              placeholder={"title of the time table"}
+              value={form.title}
+              handleChange={handleChange}
+            />
+
+            <FormInputBox
+              label={"Department"}
+              name={"department"}
+              placeholder={"CSE"}
+              value={form.department}
+              handleChange={handleChange}
+            />
+            <FormInputBox
+              label={"Sem"}
+              name={"sem"}
+              placeholder={"even"}
+              value={form.sem}
+              handleChange={handleChange}
+            />
+
+            <FormInputBox
+              label={"Notes"}
+              type="file"
+              name={"notes"}
               handleChange={handleFileChange}
             />
 

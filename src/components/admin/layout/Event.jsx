@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CircularCard from "../cards/CircularCard";
 import { Button, SimpleGrid } from "@chakra-ui/react";
 import axios from "axios";
-import { AdminApiInstance } from "../../../apis/ApiIntances";
+import { AdminApiInstance } from "../apis/ApiIntances";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 

@@ -1,7 +1,7 @@
 import React from 'react'
-import { Box, Button, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { Button, Flex, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import ProfileTable from '../table/ProfileTable'
-import { AchievementForm, AddDepartmentTimeTableForm, AddNewDepartmentGalleryForm, FacultyMemberForm } from '../components/DepartmentsForms'
+import { AchievementForm,FacultyMemberForm } from '../components/DepartmentsForms'
 import AdminModal from '../AdminModal'
 import { Link, useSearchParams } from 'react-router-dom'
 import CircularTable from '../table/CircularTable'
@@ -12,8 +12,6 @@ const ProfileCard = ({ data, tableHeading, dataArray, link }) => {
 
     const [searchParams,setSearchParams] = useSearchParams();
     const section = searchParams.get('section');
-
-    console.log('link ', link, section);
 
 
     return (
@@ -48,8 +46,8 @@ const ProfileCard = ({ data, tableHeading, dataArray, link }) => {
                     {section === 'Achievement Form' && <AchievementForm />}
 
                     {/* ----------------- WEb Team Stuff ---------------  */}
-                    {section === 'Team Member' && <CircularTable />}
-                    {section === 'Team Member Form' && <AddWebTeamForm />}
+                    {section === 'Team Member' && <ProfileTable dataArray={dataArray} tableHeading={tableHeading} />}
+                    {section === 'Team Member Form' && <AddWebTeamForm handleSubmit />}
 
 
                 </VStack>

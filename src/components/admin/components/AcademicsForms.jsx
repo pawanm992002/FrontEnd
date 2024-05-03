@@ -5,6 +5,8 @@ import {VStack} from '@chakra-ui/react'
 
 
 import { ButtonBox, FormBox, FormInputBox } from '../FormInputBox';
+import { AdminApiInstance } from '../apis/ApiIntances';
+import toast from 'react-hot-toast';
 
 //------------- Create the calender form
 export const AcademicCalenderForm = () => {
@@ -18,20 +20,30 @@ export const AcademicCalenderForm = () => {
         setForm({...form,calender:e.target.files[0]});
     };
 
-    const handleSubmit = (e) => {
+ 
+    const handleSubmit = async(e) => {
+
         e.preventDefault();
-        console.log('form', form);
 
         setLoading(true);
+        const myForm = new FormData();
+
+        myForm.append('session',form.session)
+        myForm.append('sem',form.sem)
+        myForm.append('calender',form.calender)
 
         try {
-            
+            const { data, status } = await AdminApiInstance.post('/academic/calender', myForm);
+
+            if (status === 200) toast.success(data?.message);
+            else toast.error(data?.message)
+
         } catch (error) {
-            
+            toast.error("Internal Server Error");
         }
 
         setLoading(false);
-        setForm({session:'',sem:'',calender:''});
+        setForm({session:'',sem:'',calender:''})
     };
 
     return (
@@ -44,7 +56,7 @@ export const AcademicCalenderForm = () => {
 
                     <FormInputBox label={"Semester"} name={'sem'} placeholder={"Even"} value={form.sem} handleChange={handleChange} />
 
-                    <FormInputBox label={'calender Time-Table'} type='file' handleChange={handleFileChange} name={'calender'} />
+                    <FormInputBox label={'Calender Time-Table'} type='file' handleChange={handleFileChange} name={'calender'} />
 
 
                     <ButtonBox loading={loading} type='submit' title={'Add Calender'} />
@@ -68,22 +80,30 @@ export const FirstYearCircularForm = ()=>{
         setForm({...form,notice:e.target.files[0]});
     };
 
-    const handleSubmit = (e) => {
+   
+    const handleSubmit = async(e) => {
+
         e.preventDefault();
-        console.log('form', form);
 
         setLoading(true);
+        const myForm = new FormData();
+
+        myForm.append('title',form.title)
+        myForm.append('notice',form.notice)
 
         try {
-            
+            const { data, status } = await AdminApiInstance.post('/academic/first-year-circular', myForm);
+
+            if (status === 200) toast.success(data?.message);
+            else toast.error(data?.message)
+
         } catch (error) {
-            
+            toast.error("Internal Server Error");
         }
 
         setLoading(false);
-        setForm({title:'',notice:''});
+        setForm({title:'',notice:''})
     };
-
 
     return(
         <>
@@ -91,9 +111,9 @@ export const FirstYearCircularForm = ()=>{
             <form onSubmit={handleSubmit}>
                 <VStack spacing={4}>
 
-                    <FormInputBox label={"Title"} name={'title'} placeholder={"examination circular"} value={form.title} handleChange={handleChange} />
+                    <FormInputBox label={"Title"} name={'title'} placeholder={"circular"} value={form.title} handleChange={handleChange} />
 
-                    <FormInputBox label={'Notice Pdf'} type='file' handleChange={handleFileChange} name={'notice'} />
+                    <FormInputBox label={'Notice'} type='file' handleChange={handleFileChange} name={'notice'} />
 
                     <ButtonBox loading={loading} type='submit' title={'Add First Year Notice'} />
                 </VStack>
