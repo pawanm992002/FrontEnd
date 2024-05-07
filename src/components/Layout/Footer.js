@@ -7,7 +7,10 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const Medium = useMediaQuery('(max-width:1150px)');
-  const small = useMediaQuery('(max-width:900px)');
+  const medsmall = useMediaQuery('(max-width:900px)');
+  const small = useMediaQuery('(max-width:800px)');
+  const extraSmall = useMediaQuery('(max-width:620px)');
+  const ExtraSmall = useMediaQuery('(max-width:600px)');
   return (
     <>
       <section id="Footer">
@@ -17,19 +20,19 @@ const Footer = () => {
 
           <Box sx={{ width: '100%', height: '100%', backdropFilter: 'blur(2px)', background: '#213153EB', color: 'white' }} >
 
-            <Container sx={{width:Medium?"100%":'90%',margin:'auto'}} >
+            <Container sx={{width:Medium?"100%":'90%',margin:'auto',padding:'0 10px'}} >
 
-<Box sx={{display:'flex',alignItems:'flex-start',justifyContent:'space-around',paddingTop:'17px',lineHeight:'43px'}} >
-            <Box sx={{width:small?"80%":Medium?"60%":'40%',border:'0px solid black',margin:'5px 10px'}}>
+<Box sx={{display:'flex' , alignItems:'flex-start',justifyContent:'space-around',paddingTop:small?'10px':'17px',lineHeight:small?'30px':'43px'}} >
+            <Box sx={{width:small?"60%":Medium?"60%":'40%',border:'0px solid black',margin:'5px 10px'}}>
              {/* <small>Engineering College Ajmer</small>  */}
-              <Typography variant='h4'>ECA</Typography>
-              <p>231 Badlya Choraya, Nareli Ajmer, 305001, Rajasthan</p>
+              <Typography variant={'h4'} fontSize={small?25:30}>ECA</Typography>
+              <p style={{fontSize:extraSmall?'13px':""}}>231 Badlya Choraya, Nareli Ajmer, 305001, Rajasthan</p>
               <Box sx={{marginTop:'7px'}} >
-                <Box sx={{display:'flex',alignItems:'center',justifyContent:'space-between',cursor:'pointer',width:'50%'}}>
-              <FaFacebook  size={'30px'}  />
-              <FaLinkedin  size={'30px'} />
-              <FaXTwitter  size={'30px'} />
-              <FaInstagram  size={'30px'} />
+                <Box sx={{display:'flex',alignItems:'center',justifyContent:'space-between',cursor:'pointer',width:'50%',minWidth:extraSmall?'130px':'175px'}}>
+              <FaFacebook  size={extraSmall?'23px':'30px'}  />
+              <FaLinkedin  size={extraSmall?'23px':'30px'} />
+              <FaXTwitter  size={extraSmall?'23px':'30px'} />
+              <FaInstagram  size={extraSmall?'23px':'30px'} />
 
                     </Box>
                   </Box>
@@ -39,34 +42,35 @@ const Footer = () => {
 
 
                 <Box sx={{ width: '40%', border: '0px solid black', margin: '7px 10px' }} >
-                  <Typography variant='h4'  >Contact US</Typography>
-                  <p> Tel:  {"(+0145),"} 923943  </p>
-                  <p>Can contact through the address, OR</p>
+                  <Typography variant='h4' fontSize={small?25:30} >Contact US</Typography>
+                  {!small && <span> Tel: </span> } <span style={{fontSize:extraSmall?'14px':""}}> {"(+0145),"} 923943  </span>
+                 
+                 {!small && <p>Can contact through the address, OR</p> }
 
                   <Typography sx={{ margin: '5px 0' }} >
 
-                    <a href="https://maps.app.goo.gl/gcoE27ERDKXeiqjt5" target='map' style={{ cursor: 'pointer', color: 'white' }} > 🎯 Get Direction</a>
+                    <a href="https://maps.app.goo.gl/gcoE27ERDKXeiqjt5" target='map' style={{ cursor: 'pointer', color: 'white',fontSize:extraSmall?'14px':"" }} > 🎯 Get Direction</a>
                   </Typography>
                   <Typography>
-                    <a href='mailTo:eca@gmail.com' target='mail' style={{ cursor: 'pointer', color: 'white' }} > 📩 Send Us A Mail</a>
+                    <a href='mailTo:eca@gmail.com' target='mail' style={{ cursor: 'pointer', color: 'white',fontSize:extraSmall?'14px':"" }} > 📩 Send Us A Mail</a>
                   </Typography>
-
                 </Box>
 
                 {/* <Divider style={{border:'0.59px solid white',height:'100%'}} ></Divider> */}
-
+{ !ExtraSmall &&
                 <Box sx={{ width: '40%', border: '0px solid black', margin: '7px 10px' }} >
-                  <Typography variant='h4' >Usefull Links</Typography>
+                  <Typography variant='h4' fontSize={small?25:30}>Usefull Links</Typography>
 
               <Box>
-                <List>
-                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',}} >About US</Link> </ListItem>
-                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',}} >Departments</Link> </ListItem>
-                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',}} >Administration</Link> </ListItem>
+                <List style={{padding:0}}>
+                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',fontSize:extraSmall?'14px':""}} >About US</Link> </ListItem>
+                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',fontSize:extraSmall?'14px':""}} >Departments</Link> </ListItem>
+                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',fontSize:extraSmall?'14px':""}} >Administration</Link> </ListItem>
                 </List>
               </Box>
 
                 </Box>
+}
               </Box>
 
 

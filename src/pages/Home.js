@@ -7,10 +7,11 @@ import EventsNews from '../components/Home/EventsNews';
 import PrincipalMsg from "../components/Home/PrincipalMsg"
 import Header from '../components/Layout/Header';
 import Cards from "../components/Cards";
-
+import { Facebook, LinkedIn, YouTube } from '@mui/icons-material';
+import './Home.css';
+// import { calc } from '@chakra-ui/react';
 
 const Home = () => {
-
 
   const events = [
     {
@@ -57,19 +58,15 @@ const Home = () => {
         >
           <Box sx={{
             position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 400,
-            // bgcolor: 'background.paper',
-            // border: '2px solid #000',
-            // boxShadow: 24,
-            p: 4,
+            width: '80vw',
+            height:'80vh',
+            left:'10%',
+            top:'10%',
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
           }}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <img src='https://images.app.goo.gl/ijVR7siWWJmhZyRU8' style={{width:'80%'}} />
+            <img src='/images/principal.jpg' style={{width:'100%',height:'100%'}} />
           </Box>
         </Modal>
       }
@@ -168,7 +165,11 @@ const Home = () => {
           <Cards />
         </section>
       </Box>
-
+      <div style={{position:'fixed',top:'50%',color:'white'}}>
+      <div className="box"  style={{backgroundColor:'red', top:'calc( 50% - 80px)'}} ><span>Youtube</span>  <YouTube htmlColor="white" fontSize="large"/>  </div>
+      <div className="box"  style={{backgroundColor:'skyblue',top:'calc( 50% - 40px)'}}><span>Linkedin</span> <LinkedIn htmlColor="white" fontSize="large"/> </div>
+      <div className="box" style={{backgroundColor:'blue'}}><span>Facebook</span> <Facebook htmlColor="white" fontSize="large"/> </div>
+      </div>
       <GallerySection />
     </>
   );

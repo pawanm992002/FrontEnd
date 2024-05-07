@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Box, Typography, Modal, Button, ListItem, ListItemText, ListSubheader, List } from "@mui/material";
+import { Box, Typography, Modal, Button, ListItem, ListItemText, ListSubheader, List,useMediaQuery } from "@mui/material";
 import Groups2 from "@mui/icons-material/Groups2";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import Description from "@mui/icons-material/Description";
@@ -55,6 +55,7 @@ export default function Cards() {
     }
 
   }
+  const ExtraSmall = useMediaQuery('(max-width:450px)');
   return (
     <Box
       sx={{
@@ -170,8 +171,8 @@ export default function Cards() {
                 sx={{
                   bgcolor: "var(--cardBG)",
                   minWidth: "160px",
-                  width: "200px",
-                  height: "130px",
+                  width: ExtraSmall?'90vw':"200px",
+                  height: ExtraSmall?'150px':"130px",
                   borderRadius: "8px",
                   alignItems: "center",
                   justifyContent: "center",
