@@ -7,7 +7,7 @@ const DepartmentsRoutes = [
   <Route
     path="computer"
     element={ <Layout>
-        <Department comp="computer" />
+        <Department comp="cse" />
     </Layout>}
   />,
   <Route

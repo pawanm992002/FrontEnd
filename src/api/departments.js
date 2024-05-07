@@ -1,7 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import { AdminApiInstance } from "../components/admin/apis/ApiIntances";
-import { Button } from "@chakra-ui/react";
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
@@ -32,7 +32,6 @@ export const fetchMembers = async (departmentValue, setRefresh=null) => {
         Designation: val.designation,
         Department: val.department,
         Room_NO: val.roomNo,
-        Created_At: new Date(val.createdAt).toDateString(),
         Delete: (
           <Button
             key={val?._id}
@@ -59,7 +58,6 @@ export const fetchCircular = async (departmentValue, setRefresh=null) => {
     const temp = data.result.map((val, i) => {
       return {
         SR_NO: val.srNo,
-        Created_At: new Date(val.createdAt).toDateString(),
         Department: val.department,
         Title: val.title,
         Source: (
@@ -92,7 +90,6 @@ export const fetchAchievements = async (departmentValue, setRefresh=null) => {
     const temp = data.result.map((val, i) => {
       return {
         SR_NO: val._id,
-        Created_At: new Date(val.createdAt).toDateString(),
         Department: val.department,
         Achievement: val.achievement,
         Category: val.category,
@@ -121,7 +118,6 @@ export const fetchTimetable = async (departmentValue, setRefresh=null) => {
     const temp = data.result.map((val, i) => {
       return {
         SR_NO: val.srNo,
-        Created_At: new Date(val.createdAt).toDateString(),
         Department: val.department,
         Title: val.title,
         Source: (
@@ -154,7 +150,6 @@ export const fetchGallery = async (departmentValue, setRefresh=null) => {
     const temp = data.result.map((val, i) => {
       return {
         SR_NO: val._id,
-        Created_At: new Date(val.createdAt).toDateString(),
         Department: val.department,
         Source: (
           <Link key={val?._id} to={val.photo}>
@@ -186,7 +181,6 @@ export const fetchNotes = async (departmentValue, setRefresh=null) => {
     const temp = data.result.map((val, i) => {
       return {
         SR_NO: val._id,
-        Created_At: new Date(val.createdAt).toDateString(),
         Title: val.title,
         Uploaded_By: val.faculty.name,
         Semester: val.sem,

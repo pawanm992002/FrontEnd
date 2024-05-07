@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Button } from "@chakra-ui/react";
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AdminApiInstance } from "../components/admin/apis/ApiIntances";
