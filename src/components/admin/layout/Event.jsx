@@ -5,52 +5,20 @@ import axios from "axios";
 import { AdminApiInstance } from "../apis/ApiIntances";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { fetchEvents } from "../../../api/events";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
 const Event = () => {
   const [Events, setEvents] = useState([]);
-  const deleteEventRow = async (_id) => {
-    console.log("......... gal", _id);
-    try {
-      const { data } = await AdminApiInstance.delete(`/event/${_id}`);
-      toast.success(data?.message);
-    } catch (error) {
-      console.log(".......... del", error);
-      toast.error(error?.response?.data?.error);
-    }
-  };
+  const [refresh, setRefresh] = useState([]);
   useEffect(() => {
     // for events
-    (async () => {
-      try {
-        const { data } = await axios.get(`${url}/event`);
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: i,
-            Title: val.title,
-            Description: val.description,
-            Date: new Date(val.date).toDateString(),
-            Created_At: new Date(val.createdAt).toDateString(),
-            Source: (
-              <Link to={val.image}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button onClick={() => deleteEventRow(val?._id)}>
-                Delete
-              </Button>
-            ),
-          };
-        });
-        console.log(".......... events", data);
-        setEvents(temp);
-      } catch (error) {
-        console.log(".......... events", error);
-      }
+    ;(async () => {
+      const events = await fetchEvents(setRefresh);
+      setEvents(events);
     })();
-  }, []);
+  }, [refresh]);
   const cardData = [
     {
       title: "Event",

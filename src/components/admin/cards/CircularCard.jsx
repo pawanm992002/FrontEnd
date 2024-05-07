@@ -16,34 +16,34 @@ const CircularCard = ({ data, link }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section");
 
-  let tableSection = [
-    "Gallery",
-    "Circular",
-    "Time Table",
-    "Achievement",
-    "Notes",
-    "Academic Calender",
-    "First Year Circular",
-    "Event",
-    "Bog Mom",
-    "Examination Circular",
-    "Account Section Circular",
-    "Proctor Circular",
-    "Registrar Circular",
-    "CreativeArtData Circular",
-    "NCCData Circular",
-    "NCCData Gallery",
-    "HostelData Circular",
-    "HostelData Gallery",
-    "TransportationData Circular",
-    "StudentAchievementData",
-    'Alumni Circular', 
-    "NewsData Circular",
-    "OrdersData Circular",
-    'News Cutting',
-    "Team Member",
-    "Faculty Member"
-  ];
+  // let tableSection = [
+  //   "Gallery",
+  //   "Circular",
+  //   "Time Table",
+  //   "Achievement",
+  //   "Notes",
+  //   "Academic Calender",
+  //   "First Year Circular",
+  //   "Event",
+  //   "Bog Mom",
+  //   "Examination Circular",
+  //   "Account Section Circular",
+  //   "Proctor Circular",
+  //   "Registrar Circular",
+  //   "CreativeArtData Circular",
+  //   "NCCData Circular",
+  //   "NCCData Gallery",
+  //   "HostelData Circular",
+  //   "HostelData Gallery",
+  //   "TransportationData Circular",
+  //   "StudentAchievementData",
+  //   'Alumni Circular', 
+  //   "NewsData Circular",
+  //   "OrdersData Circular",
+  //   'News Cutting',
+  //   "Team Member",
+  //   "Faculty Member"
+  // ];
 
   return (
     <>
@@ -93,7 +93,8 @@ const CircularCard = ({ data, link }) => {
             </Button>
           </Flex>
 
-          {tableSection.includes(section) && <MyTable data={data.data} />}
+          {/* {tableSection.includes(section) && <MyTable data={data.data} />} */}
+          <MyTable data={data.data} />
 
           {/* ---------------- Bog Mom Stuff -----------------  */}
           {section === "Bog Mom Form" && <AdministrationForm />}

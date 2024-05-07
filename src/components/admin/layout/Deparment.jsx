@@ -2,221 +2,52 @@ import React, { useEffect, useState } from "react";
 import CircularCard from "../cards/CircularCard";
 import { Button, Select, SimpleGrid } from "@chakra-ui/react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AdminApiInstance } from "../apis/ApiIntances";
+import {
+  fetchAchievements,
+  fetchCircular,
+  fetchGallery,
+  fetchMembers,
+  fetchNotes,
+  fetchTimetable,
+} from "../../../api/departments";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
 const Department = () => {
+  const navigate = useNavigate()
   const [DepartmentCirculars, setDepartmentCirculars] = useState([]);
   const [DepartmentAchivements, setDepartmentAchivements] = useState([]);
   const [DepartmentMembers, setDepartmentMembers] = useState([]);
   const [DepartmentTimeTable, setDepartmentTimeTable] = useState([]);
   const [DepartmentGallery, setDepartmentGallery] = useState([]);
   const [DepartmentNotes, setDepartmentNotes] = useState([]);
-
   const [departmentValue, setDepartmentValue] = useState("cse");
-
-  const deleteDepartmentRow = async (_id, val) => {
-    console.log("......... gal", _id, val);
-    try {
-      const { data } = await AdminApiInstance.delete(
-        `/department/${val}/${_id}`
-      );
-      toast.success(data?.message);
-    } catch (error) {
-      console.log(".......... del", error);
-      toast.error(error?.response?.data?.error);
-    }
-  };
+  const [refresh, setRefresh] = useState();
 
   useEffect(() => {
-    // for members
-    ;(async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/department-people/${departmentValue}`
-        );
-        console.log(".......... members", data);
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: i,
-            Name: val.name,
-            Picture: (<img src={`${val.profile}`} style={{borderRadius: '50%'}} />),
-            Email: val.email,
-            Designation: val.designation,
-            Department: val.department,
-            Room_NO: val.roomNo,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Delete: (
-              <Button onClick={() => deleteDepartmentRow(val?._id, "notice")}>
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setDepartmentMembers(temp);
-      } catch (error) {
-      }
-    })();
+    (async () => {
+      const members = await fetchMembers(departmentValue, setRefresh);
+      setDepartmentMembers(members);
 
-    // for circulars
-    ;(async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/department-notice/${departmentValue}`
-        );
-        console.log(".......... circular", data);
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: val.srNo,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Department: val.department,
-            Title: val.title,
-            Source: (
-              <Link to={val.notice}>
-                {" "}
-                <Button>View</Button>{" "}
-              </Link>
-            ),
-            Delete: (
-              <Button onClick={() => deleteDepartmentRow(val?._id, "notice")}>
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setDepartmentCirculars(temp);
-      } catch (error) {
-        console.log(".......... circular", error);
-      }
-    })();
+      const achievements = await fetchAchievements(departmentValue, setRefresh);
+      setDepartmentAchivements(achievements);
 
-    // for achievements
-    ;(async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/department-achievement/${departmentValue}`
-        );
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: val._id,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Department: val.department,
-            Achievement: val.achievement,
-            Category: val.category,
-            Delete: (
-              <Button
-                onClick={() => deleteDepartmentRow(val?._id, "achievement")}
-              >
-                Delete
-              </Button>
-            ),
-          };
-        });
-        console.log(".......... achivement", data);
-        setDepartmentAchivements(temp);
-      } catch (error) {
-        console.log(".......... achivement", error);
-      }
-    })();
+      const circulars = await fetchCircular(departmentValue, setRefresh);
+      setDepartmentCirculars(circulars);
 
-    // for timetable
-    ;(async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/department-timetable/${departmentValue}`
-        );
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: val.srNo,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Department: val.department,
-            Title: val.title,
-            Source: (
-              <Link to={val.timeTable}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button
-                onClick={() => deleteDepartmentRow(val?._id, "timetable")}
-              >
-                Delete
-              </Button>
-            ),
-          };
-        });
-        console.log(".......... time table", data);
-        setDepartmentTimeTable(temp);
-      } catch (error) {
-        console.log(".......... achivement", error);
-      }
-    })();
+      const timetable = await fetchTimetable(departmentValue, setRefresh);
+      setDepartmentTimeTable(timetable);
 
-    // for gallery
-    ;(async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/department-gallery/${departmentValue}`
-        );
-        console.log(".......... gallery", data.result);
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: val._id,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Department: val.department,
-            Source: (
-              <Link to={val.photo}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button onClick={() => deleteDepartmentRow(val?._id, "gallery")}>
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setDepartmentGallery(temp);
-      } catch (error) {
-        console.log(".......... gallery", error);
-      }
-    })();
+      const gallery = await fetchGallery(departmentValue, setRefresh);
+      setDepartmentGallery(gallery);
 
-    // for notes
-    ;(async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/department-notes/${departmentValue}`
-        );
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: val._id,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Title: val.title,
-            Uploaded_By: val.faculty.name,
-            Semester: val.sem,
-            Source: (
-              <Link to={val.file}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button onClick={() => deleteDepartmentRow(val?._id, "notes")}>
-                Delete
-              </Button>
-            ),
-          };
-        });
-        console.log(".......... notes", data);
-        setDepartmentNotes(temp);
-      } catch (error) {
-        console.log(".......... notes", error);
-      }
+      const notes = await fetchNotes(departmentValue, setRefresh);
+      setDepartmentNotes(notes);
     })();
-  }, [departmentValue]);
+  }, [departmentValue, refresh]);
 
   const cardData = [
     {
