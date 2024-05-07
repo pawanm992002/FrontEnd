@@ -69,7 +69,7 @@ const Home = () => {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Text in a modal
             </Typography>
-            <img src='/images/principal.jpg' style={{width:'60%'}} />
+            <img src='https://images.app.goo.gl/ijVR7siWWJmhZyRU8' style={{width:'80%'}} />
           </Box>
         </Modal>
       }

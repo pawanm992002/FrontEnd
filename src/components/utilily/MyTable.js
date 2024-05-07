@@ -19,7 +19,7 @@ export default function MyTable({data}) {
                             <TableRow key={i}>
                                 {
                                     Object.values(row).map((cell,j) => (
-                                        <TableCell key={j}>
+                                        <TableCell width={'15px'} key={j}>
                                             {cell}
                                         </TableCell>
                                     ))
