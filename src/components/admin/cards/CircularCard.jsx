@@ -96,7 +96,8 @@ const CircularCard = ({ data, link,typeOfUser='admin',dept_name='',dept_readonly
             </Button>
           </Flex>
 
-          {tableSection.includes(section) && <MyTable data={data.data} />}
+          {/* {tableSection.includes(section) && <MyTable data={data.data} />} */}
+          <MyTable data={data.data} />
 
           {/* ---------------- Bog Mom Stuff -----------------  */}
           {section === "Bog Mom Form" && <AdministrationForm />}

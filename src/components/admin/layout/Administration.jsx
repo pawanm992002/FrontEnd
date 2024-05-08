@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AdminApiInstance } from "../apis/ApiIntances";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { fetchAccountCircular, fetchBogMom, fetchExamCircular, fetchProctorCircular, fetchRegistrarCircular } from "../../../api/adminstration";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
@@ -18,170 +19,26 @@ const Administration = () => {
   const [AccountCircular, setAccountCircular] = useState([]);
   const [ProctorCircular, setProctorCircular] = useState([]);
   const [RegistrarCircular, setRegistrarCircular] = useState([]);
-
-  const deleteAdmistrationRow = async (_id, val) => {
-    console.log("......... gal", _id, val);
-    try {
-      const { data } = await AdminApiInstance.delete(
-        `/administration/${val}/${_id}`
-      );
-      toast.success(data?.message);
-    } catch (error) {
-      console.log(".......... del", error);
-      toast.error(error?.response?.data?.error);
-    }
-  };
+  const [refresh, setRefresh] = useState();
 
   useEffect(() => {
-    // for bog mom
-    (async () => {
-      try {
-        const { data } = await axios.get(`${url}/administration/bog-mom`);
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: i,
-            Meeting_No: val.meetingNo,
-            Date: new Date(val.date).toDateString(),
-            Created_At: new Date(val.createdAt).toDateString(),
-            Minute: (
-              <Link to={val.minute}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button onClick={() => deleteAdmistrationRow(val?._id, "bog-mom")}>
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setBogMom(temp);
-      } catch (error) {
-        console.log(".......... circular", error);
-      }
-    })();
+    ;(async () => {
+      const bogmom = await fetchBogMom(setRefresh);
+      setBogMom(bogmom);
 
-    // for exam circular
-    (async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/administration/circular/examination`
-        );
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: val.srNo,
-            Section: val.section,
-            Title: val.title,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Notice: (
-              <Link to={val.notice}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button onClick={() => deleteAdmistrationRow(val?._id, "examination-circular")}>
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setExamCircular(temp);
-      } catch (error) {
-        console.log(".......... circular", error);
-      }
-    })();
+      const examCir = await fetchExamCircular(setRefresh);
+      setExamCircular(examCir);
 
-    // for account circular
-    (async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/administration/circular/account`
-        );
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: val.srNo,
-            Section: val.section,
-            Title: val.title,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Notice: (
-              <Link to={val.notice}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button onClick={() => deleteAdmistrationRow(val?._id, "account-circular")}>
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setAccountCircular(temp);
-      } catch (error) {
-        //   console.log(".......... circular", error);
-      }
-    })();
+      const accountCir = await fetchAccountCircular(setRefresh);
+      setAccountCircular(accountCir);
 
-    // for proctor circular
-    (async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/administration/circular/proctor`
-        );
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: val.srNo,
-            Section: val.section,
-            Title: val.title,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Notice: (
-              <Link to={val.notice}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button onClick={() => deleteAdmistrationRow(val?._id, "proctor-circular")}>
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setProctorCircular(temp);
-      } catch (error) {
-        //   console.log(".......... circular", error);
-      }
-    })();
+      const proctorCir = await fetchProctorCircular(setRefresh);
+      setProctorCircular(proctorCir);
 
-    // for registrar circular
-    (async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/administration/circular/registrar`
-        );
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: val.srNo,
-            Section: val.section,
-            Title: val.title,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Notice: (
-              <Link to={val.notice}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button onClick={() => deleteAdmistrationRow(val?._id, "registrar-circular")}>
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setRegistrarCircular(temp);
-      } catch (error) {
-        //   console.log(".......... circular", error);
-      }
+      const registrarCir = await fetchRegistrarCircular(setRefresh);
+      setRegistrarCircular(registrarCir);
     })();
-
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     if (!ctx.isLoggedIn) {
