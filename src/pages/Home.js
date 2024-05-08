@@ -1,8 +1,8 @@
 
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import PlacementSection from '../components/Home/PlacementSection';
 import GallerySection from '../components/Home/GallerySection';
-import { Box, Typography, Modal, useMediaQuery } from '@mui/material';
+import { Box, Typography, Modal, Button } from '@mui/material';
 import EventsNews from '../components/Home/EventsNews';
 import PrincipalMsg from "../components/Home/PrincipalMsg"
 import Header from '../components/Layout/Header';
@@ -46,7 +46,6 @@ const Home = () => {
   ];
 
   const [homeModel, setHomeModal] = useState(true);
-  const navView = useMediaQuery("(min-width:1100px)");
   return (
     <>
       {homeModel &&
@@ -58,15 +57,15 @@ const Home = () => {
         >
           <Box sx={{
             position: 'absolute',
-            width: '80vw',
-            height:'80vh',
-            left:'10%',
-            top:'10%',
+            width: ['80vw','50%'],
+            left:['10%','25.9%'],
+            top:['15%','3%'],
             bgcolor: 'background.paper',
             border: '2px solid #000',
             boxShadow: 24,
           }}>
-            <img src='/images/principal.jpg' style={{width:'100%',height:'100%'}} />
+            <img src='https://www.ecajmer.ac.in/images/tpo.jpg' style={{width:'100%'}} alt='ECA:Engineering College Ajmer' />
+            <Button variant='contained'  sx={{width:'100%',backgroundColor:'var(--main-primary)'}} onClick={() => setHomeModal(false)} >Close</Button>
           </Box>
         </Modal>
       }

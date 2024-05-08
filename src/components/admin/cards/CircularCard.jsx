@@ -1,24 +1,26 @@
 import React from 'react'
-import { Button, Flex,Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { Button, Flex, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import AdminModal from '../AdminModal'
 import { AccountSectionForm, AdministrationForm, ExaminationForm, ProctorSectionForm, RegistrarSectionForm } from '../components/AdministrationForms'
 import { AcademicCalenderForm, FirstYearCircularForm } from '../components/AcademicsForms'
-import { AchievementForm, AddDepartmentNotesForm, AddDepartmentTimeTableForm, AddNewDepartmentGalleryForm } from '../components/DepartmentsForms'
+import { AchievementForm, AddDepartmentNotesForm, AddDepartmentTimeTableForm, AddNewDepartmentGalleryForm, FacultyMemberForm } from '../components/DepartmentsForms'
 import { AddNewEventForm } from '../components/EventsForms'
 import { Link, useSearchParams } from 'react-router-dom'
-import { AddCreativeArtSocietyCircular, AddCreativeArtSocietyGallery, AddHostelCircular, AddHostelGallery, AddNCCDataCircular, AddNCCDataGallery, AddStudentAchievementCircular, AddTransportationCircular } from '../components/StudentCornerForms'
+import { AddCreativeArtSocietyCircular, AddCreativeArtSocietyGallery, AddHostelCircular, AddHostelGallery, AddNCCDataCircular, AddNCCDataGallery, AddPlacementForm, AddStudentAchievementCircular, AddTransportationCircular } from '../components/StudentCornerForms'
 import { AddAlumniCellCircular } from '../components/CellForms'
 import { AddECAPressForm } from '../components/ECAPressForms'
 import MyTable from '../../utilily/MyTable'
+import { AddWebTeamForm } from '../components/WebTeamForms'
 
-const CircularCard = ({ data, link }) => {
+const CircularCard = ({ data, link,typeOfUser='admin',dept_name='',dept_readonly=false }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section");
 
+  console.log('dept ',dept_readonly,dept_name);
+
   let tableSection = [
     "Gallery",
-    "Circular",
     "Time Table",
     "Achievement",
     "Notes",
@@ -37,12 +39,13 @@ const CircularCard = ({ data, link }) => {
     "HostelData Gallery",
     "TransportationData Circular",
     "StudentAchievementData",
-    'Alumni Circular', 
+    'Alumni Circular',
     "NewsData Circular",
     "OrdersData Circular",
     'News Cutting',
     "Team Member",
-    "Faculty Member"
+    "Faculty Member",
+    "Placement"
   ];
 
   return (
@@ -55,7 +58,7 @@ const CircularCard = ({ data, link }) => {
           borderRadius: "12px",
           cursor: "pointer",
         }}
-        to={`/admin/${link}?section=${data?.title}`}
+        to={`/${typeOfUser}/${link}?section=${data?.title}`}
         onClick={onOpen}
       >
         <Text fontWeight="bold" fontSize="2xl" color={"white"}>
@@ -111,6 +114,7 @@ const CircularCard = ({ data, link }) => {
 
           {/* ---------------- Proctor Section Stuff -----------------  */}
           {section === "Registrar Circular Form" && <RegistrarSectionForm />}
+          {section === "Circular Form" && <RegistrarSectionForm />}
 
           {/* ---------------- Academic Calender Stuff -----------------  */}
           {section === "Academic Calender Form" && <AcademicCalenderForm />}
@@ -119,17 +123,22 @@ const CircularCard = ({ data, link }) => {
           {section === "First Year Circular Form" && <FirstYearCircularForm />}
 
           {/* ---------------- Achievement Stuff -----------------  */}
-          {section === "Achievement Form" && <AchievementForm />}
+          {section === "Achievement Form" && <AchievementForm dept_name={dept_name} dept_readonly={dept_readonly} />}
 
           {/* ------------- Notes Form -------------------  */}
-          {section === "Notes Form" && <AddDepartmentNotesForm />}
+          {section === "Notes Form" && <AddDepartmentNotesForm dept_name={dept_name} dept_readonly={dept_readonly} />}
+
+          {section === 'Faculty Member Form' && <FacultyMemberForm dept_name={dept_name} dept_readonly={dept_readonly} />}
 
 
           {/* ---------------- Time Table Stuff -----------------  */}
-          {section === "Time Table Form" && <AddDepartmentTimeTableForm />}
+          {section === "Time Table Form" && <AddDepartmentTimeTableForm dept_name={dept_name} dept_readonly={dept_readonly} />}
+
+          {/* ---------------- Time Table Stuff -----------------  */}
+          {section === "Placement Form" && <AddPlacementForm dept_readonly={true}  dept_name={dept_name} />}
 
           {/* ---------------- Gallery Stuff -----------------  */}
-          {section === "Gallery Form" && <AddNewDepartmentGalleryForm />}
+          {section === "Gallery Form" && <AddNewDepartmentGalleryForm dept_name={dept_name} dept_readonly={dept_readonly} />}
 
           {/* ---------------- Events Stuff -----------------  */}
           {section === "Event Form" && <AddNewEventForm />}
@@ -138,6 +147,9 @@ const CircularCard = ({ data, link }) => {
           {section === "CreativeArtData Circular Form" && (
             <AddCreativeArtSocietyCircular />
           )}
+
+          {/* --------------------- Team Member Form  */}
+          {section === 'Team Member Form' && <AddWebTeamForm />}
 
           {/* ---------------- Creative Art data gallery Stuff -----------------  */}
           {section === "CreativeArtData Gallery Form" && (
@@ -161,8 +173,8 @@ const CircularCard = ({ data, link }) => {
             <AddTransportationCircular />
           )}
 
-                        {/* ---------------- Transportation Data Stuff -----------------  */}
-                        { section === 'StudentAchievementData Form' && <AddStudentAchievementCircular /> }
+          {/* ---------------- Transportation Data Stuff -----------------  */}
+          {section === 'StudentAchievementData Form' && <AddStudentAchievementCircular />}
 
           {/* ---------------- Alumni Circular Stuff -----------------  */}
           {section === "Alumni Circular Form" && <AddAlumniCellCircular />}
@@ -170,19 +182,88 @@ const CircularCard = ({ data, link }) => {
           {/* ---------------- NewsData Circular Stuff -----------------  */}
           {section === "NewsData Circular Form" && <AddAlumniCellCircular />}
 
-                        {/* ---------------- ordersData Circular Stuff -----------------  */}
-                        { section === 'OrdersData Circular Form' && <AddAlumniCellCircular /> }
-
-                        
-                        {/* ---------------- ECA Press Stuff -----------------  */}
-                        { section === 'News Cutting Form' && <AddECAPressForm/> }
+          {/* ---------------- ordersData Circular Stuff -----------------  */}
+          {section === 'OrdersData Circular Form' && <AddAlumniCellCircular />}
 
 
+          {/* ---------------- ECA Press Stuff -----------------  */}
+          {section === 'News Cutting Form' && <AddECAPressForm />}
 
-                    </VStack>
-                </AdminModal>
-        </>
-    )
+
+
+        </VStack>
+      </AdminModal>
+    </>
+  )
 }
 
 export default CircularCard;
+
+
+//-------- Create the departments list
+export const DepartmentsSelection = ({ value, handleChange, name = 'department',dept_readonly=false }) => {
+  
+  return (
+    <>
+
+      <Select
+      value={value}
+        onChange={handleChange}
+        name={name}
+        isDisabled={dept_readonly}
+      >
+        <option value="cse">CSE</option>
+        <option value="civil">Civil</option>
+        <option value="eee">Electrical</option>
+        <option value="eic">Electronics</option>
+        <option value="ece">Electronics Communication</option>
+        <option value="mechanical">Mechanical</option>
+        <option value="mca">MCA</option>
+        <option value="mba">MBA</option>
+        <option value="physics">Physics</option>
+        <option value="chemistry">Chemistry</option>
+        <option value="maths">Maths</option>
+        <option value="english">English</option>
+        <option value="economics">Economics</option>
+      </Select>
+    </>
+  )
+}
+
+//-------- Create the designation list
+export const DesignationSelection = ({ value, handleChange }) => {
+  return (
+    <>
+      <Select
+        value={value}
+        onChange={handleChange}
+        name='designation'
+      >
+        <option value="Head Of Department">HOD</option>
+        <option value="Faculty">Faculty</option>
+      </Select>
+    </>
+  )
+}
+
+//-------- Create the designation list
+export const SemesterSelection = ({ value, handleChange }) => {
+  return (
+    <>
+      <Select
+        value={value}
+        onChange={handleChange}
+        name='sem'
+      >
+        <option value="1st">1st</option>
+        <option value="2nd">2nd</option>
+        <option value="3rd">3rd</option>
+        <option value="4th">4th</option>
+        <option value="5th">5th</option>
+        <option value="6th">6th</option>
+        <option value="7th">7th</option>
+        <option value="8th">8th</option>
+      </Select>
+    </>
+  )
+}

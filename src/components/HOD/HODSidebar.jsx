@@ -38,16 +38,12 @@ import { Link, useNavigate } from 'react-router-dom'
 
 
 export const LinkItems = [
-  { name: 'administration', icon: FiHome, href: '/admin/administration' },
-  { name: 'academics', icon: FiTrendingUp, href: '/admin/academics' },
-  { name: 'departments', icon: FiCompass, href: '/admin/departments' },
-  { name: 'event', icon: FiStar, href: '/admin/event' },
-  { name: 'student-corner', icon: FiSettings, href: '/admin/student-corner' },
-  { name: 'cells', icon: FiSettings, href: '/admin/cells' },
-  { name: 'placement', icon: FiSettings, href: '/admin/placement' },
-  { name: 'news-orders', icon: FiSettings, href: '/admin/news-orders' },
-  { name: 'eca-press', icon: FiSettings, href: '/admin/eca-press' },
-  { name: 'web-team', icon: FiSettings, href: '/admin/web-team' },
+    { name: 'profile', icon: FiSettings, href: '/hod/profile' },
+  { name: 'departments', icon: FiCompass, href: '/hod/departments' },
+  { name: 'student-corner', icon: FiSettings, href: '/hod/student-corner' },
+  { name: 'placement', icon: FiSettings, href: '/hod/placement' },
+  { name: 'eca-press', icon: FiSettings, href: '/hod/eca-press' },
+  { name: 'Change Password', icon: FiSettings, href: '/hod/change-password' }
 ]
 
 
@@ -177,7 +173,11 @@ const MobileNav = ({ onOpen, ...rest }) => {
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}>
+              <MenuItem>      <Link to={'/faculty/profile'} >Profile</Link>
+</MenuItem>
+              <MenuDivider />
               <MenuItem> <Link to={'/logout'} >Logout</Link> </MenuItem>
+
             </MenuList>
           </Menu>
         </Flex>
@@ -186,18 +186,19 @@ const MobileNav = ({ onOpen, ...rest }) => {
   )
 }
 
-const Sidebar = ({ content }) => {
+const HODSidebar = ({ content }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate();
 
   useEffect(()=>{
     if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
-      if (localStorage.getItem("typeOfUser") !== 'admin')
+      if (localStorage.getItem("typeOfUser") !== 'hod')
         navigate("/");
     }
-    console.log('run admin');
+    console.log('hod');
   },[])
+
 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -233,4 +234,4 @@ const Sidebar = ({ content }) => {
   )
 }
 
-export default Sidebar
+export default HODSidebar

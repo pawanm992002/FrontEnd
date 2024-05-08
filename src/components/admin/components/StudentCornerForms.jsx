@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 
 //-------- Packages Stuff
-import { VStack } from '@chakra-ui/react'
+import { FormControl, FormLabel, VStack } from '@chakra-ui/react'
 
 
 import { ButtonBox, FormBox, FormInputBox } from '../FormInputBox';
 import { AdminApiInstance } from '../apis/ApiIntances';
 import toast from 'react-hot-toast';
+import { DepartmentsSelection } from '../cards/CircularCard';
 
 //------------- Create the profile form
 export const AddCreativeArtSocietyCircular = () => {
@@ -21,7 +22,7 @@ export const AddCreativeArtSocietyCircular = () => {
         setForm({ ...form, notice: e.target.files[0] });
     };
 
-     const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
@@ -43,7 +44,7 @@ export const AddCreativeArtSocietyCircular = () => {
         }
 
         setLoading(false);
-        setForm({title:'',notice:''})
+        setForm({ title: '', notice: '' })
     };
 
     return (
@@ -68,6 +69,75 @@ export const AddCreativeArtSocietyCircular = () => {
     )
 }
 
+//------------- Create the placement form
+export const AddPlacementForm = ({dept_name='',dept_readonly=false}) => {
+    const [form, setForm] = useState({ studentName: '', companyName: '', branch: dept_name|| 'cse', year: '', package: '' });
+
+    const [loading, setLoading] = useState(false);
+
+    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+    const handleSubmit = async (e) => {
+
+        e.preventDefault();
+
+        setLoading(true);
+        console.log('form ',form);
+
+        const myForm = new FormData();
+
+        myForm.append('studentName', form.studentName);
+        myForm.append('companyName', form.companyName);
+        myForm.append('branch', form.branch);
+        myForm.append('year', form.year);
+        myForm.append('package', form.package);
+
+        try {
+            const { data, status } = await AdminApiInstance.post('/placement', myForm);
+
+            if (status === 200) toast.success(data?.message);
+            else toast.error(data?.message)
+
+        } catch (error) {
+            toast.error(error?.response?.data?.error);
+        }
+
+        setLoading(false);
+        setForm({ studentName:'',companyName:'',branch:'',year:'',package:''})
+    };
+
+    return (
+        <>
+            <FormBox title={"Students Placement Information"} >
+                <form onSubmit={handleSubmit}>
+                    <VStack spacing={4}>
+
+                        <FormInputBox label={"Name"} name={'studentName'} placeholder={"Pawan Mishra"} value={form.studentName} handleChange={handleChange} />
+
+                        <FormInputBox label={"companyName"} name={'companyName'} placeholder={"Amazon, Google etc"} value={form.companyName} handleChange={handleChange} />
+
+                        <FormControl>
+                            <FormLabel>{"Department"}</FormLabel>
+
+                            <DepartmentsSelection dept_readonly={dept_readonly} name='branch' value={form.branch} handleChange={handleChange} />
+                        </FormControl>
+
+                        <FormInputBox label={"Batch"} name={'year'} placeholder={"2020-24"} value={form.year} handleChange={handleChange} />
+
+                        <FormInputBox label={"Package (In LPA)"} name={'package'} placeholder={"30 LPA"} value={form.package} handleChange={handleChange} />
+
+
+
+
+                        <ButtonBox loading={loading} type='submit' title={'Add New Circular'} />
+                    </VStack>
+                </form>
+
+            </FormBox>
+        </>
+    )
+}
+
 //------------ Create the examination Section form
 export const AddCreativeArtSocietyGallery = () => {
     const [form, setForm] = useState({ image: '' });
@@ -76,7 +146,7 @@ export const AddCreativeArtSocietyGallery = () => {
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.files[0] });
 
-   const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
@@ -97,7 +167,7 @@ export const AddCreativeArtSocietyGallery = () => {
         }
 
         setLoading(false);
-        setForm({image:''})
+        setForm({ image: '' })
     };
 
 
@@ -132,7 +202,7 @@ export const AddNCCDataCircular = () => {
         setForm({ ...form, notice: e.target.files[0] });
     };
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
@@ -154,7 +224,7 @@ export const AddNCCDataCircular = () => {
         }
 
         setLoading(false);
-        setForm({title:'',notice:''})
+        setForm({ title: '', notice: '' })
     };
 
     return (
@@ -188,7 +258,7 @@ export const AddNCCDataGallery = () => {
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.files[0] });
 
-   const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
@@ -209,7 +279,7 @@ export const AddNCCDataGallery = () => {
         }
 
         setLoading(false);
-        setForm({image:''})
+        setForm({ image: '' })
     };
 
 
@@ -244,7 +314,7 @@ export const AddHostelCircular = () => {
         setForm({ ...form, notice: e.target.files[0] });
     };
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
@@ -266,7 +336,7 @@ export const AddHostelCircular = () => {
         }
 
         setLoading(false);
-        setForm({title:'',notice:''})
+        setForm({ title: '', notice: '' })
     };
 
     return (
@@ -300,7 +370,7 @@ export const AddHostelGallery = () => {
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.files[0] });
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
@@ -321,7 +391,7 @@ export const AddHostelGallery = () => {
         }
 
         setLoading(false);
-        setForm({image:''})
+        setForm({ image: '' })
     };
 
 
@@ -369,13 +439,13 @@ export const AddTransportationCircular = () => {
 
 
         try {
-            const { data, status, statusText } = await AdminApiInstance.post('/student-corner/transportation-circular', myForm);
+            const { data } = await AdminApiInstance.post('/student-corner/transportation-circular', myForm);
 
             if (data?.success === false) toast.error(data?.message);
             else toast.success(data?.message);
 
         } catch (error) {
-            toast.error("Internal Server Error");
+            toast.error(error?.response?.data?.error);
         }
         setLoading(false);
     };
@@ -430,13 +500,13 @@ export const AddStudentAchievementCircular = () => {
 
 
         try {
-            const { data, status, statusText } = await AdminApiInstance.post('/student-corner/student-achievemen', myForm);
+            const { data } = await AdminApiInstance.post('/student-corner/student-achievemen', myForm);
 
             if (data?.success === false) toast.error(data?.message);
             else toast.success(data?.message);
 
         } catch (error) {
-            toast.error("Internal Server Error");
+            toast.error(error?.response?.data?.message);
         }
 
         setLoading(false);

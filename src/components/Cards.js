@@ -31,8 +31,8 @@ export default function Cards() {
     },
     {
       icon: <PersonPinCircle sx={{ fontSize: "50px" }} />,
-      text: "Admission",
-      // link: "/media_news",
+      text: "Faculty Login",
+      link: "/faculty/login",
     },
     {
       icon: <Badge sx={{ fontSize: "50px" }} />,

@@ -33,23 +33,15 @@ import {
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 
 
 
-export const LinkItems = [
-  { name: 'administration', icon: FiHome, href: '/admin/administration' },
-  { name: 'academics', icon: FiTrendingUp, href: '/admin/academics' },
-  { name: 'departments', icon: FiCompass, href: '/admin/departments' },
-  { name: 'event', icon: FiStar, href: '/admin/event' },
-  { name: 'student-corner', icon: FiSettings, href: '/admin/student-corner' },
-  { name: 'cells', icon: FiSettings, href: '/admin/cells' },
-  { name: 'placement', icon: FiSettings, href: '/admin/placement' },
-  { name: 'news-orders', icon: FiSettings, href: '/admin/news-orders' },
-  { name: 'eca-press', icon: FiSettings, href: '/admin/eca-press' },
-  { name: 'web-team', icon: FiSettings, href: '/admin/web-team' },
+const LinkItems = [
+  { name: 'Profile', icon: FiHome, href: '/faculty/profile' },
+  { name: 'Notes', icon: FiTrendingUp, href: '/faculty/notes' },
+  { name: 'Change Password', icon: FiCompass, href: '/faculty/change-password' },
 ]
-
 
 const SidebarContent = ({ onClose, ...rest }) => {
   return (
@@ -69,7 +61,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       </Flex>
       {LinkItems?.map((link) => (
         <Link key={link.name} to={link.href} style={{ width: "100%", height: '100%' }}>
-          <NavItem onClick={onClose}  icon={link.icon} >
+          <NavItem onClick={onClose} icon={link.icon} >
             {link.name}
           </NavItem>
         </Link>
@@ -81,7 +73,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
 const NavItem = ({ icon, children, ...rest }) => {
 
   const href = (window.location.href).split('/');
-  const activeLink = href[href?.length-1];
+  const activeLink = href[href?.length - 1];
 
   // console.log(href,activeLink,children,'check link');
 
@@ -90,9 +82,9 @@ const NavItem = ({ icon, children, ...rest }) => {
       style={{ textDecoration: 'none' }}
       _focus={{ boxShadow: 'none' }}>
       <Flex
-      textTransform="capitalize"
-      bg = {activeLink === children && 'var(--main-primary)'}
-      color = {activeLink === children && 'white'}
+        textTransform="capitalize"
+        bg={activeLink === children && 'var(--main-primary)'}
+        color={activeLink === children && 'white'}
         align="center"
         p="4"
         mx="4"
@@ -177,7 +169,10 @@ const MobileNav = ({ onOpen, ...rest }) => {
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}>
+              <MenuItem>  <Link to={'/faculty/profile'} >Profile</Link> </MenuItem>
+              <MenuDivider />
               <MenuItem> <Link to={'/logout'} >Logout</Link> </MenuItem>
+
             </MenuList>
           </Menu>
         </Flex>
@@ -189,15 +184,76 @@ const MobileNav = ({ onOpen, ...rest }) => {
 const Sidebar = ({ content }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  //----------- function to set the department of the users
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   useEffect(()=>{
     if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
-      if (localStorage.getItem("typeOfUser") !== 'admin')
+      if (localStorage.getItem("typeOfUser") !== 'faculty')
         navigate("/");
     }
-    console.log('run admin');
+    console.log('run');
   },[])
+
+
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage?.getItem('userData'));
+    console.log('user at sidebar ', user);
+
+    if (user?.department === 'Civil Engineering')  setSearchParams({ dept_name: "civil" });
+
+   /* else if (department === 'cse') {
+      department = 'Computer Science and Engineering'
+    }
+
+    else if (department === 'eee') {
+      department = "Electrical Engineering"
+    }
+
+    else if (department === 'eic') {
+      department = "Electronic Instrumentation And Control Engineering"
+    }
+
+    else if (department === 'ece') {
+      department = "Electronics and Communication Engineering"
+    }
+
+    else if (department === 'mechanical') {
+      department = "Mechanical Engineering"
+    }
+
+    else if (department === 'mca') {
+      department = "Computer Applications"
+    }
+
+    else if (department === 'mba') {
+      department = "Department of Management Studies"
+    }
+
+    else if (department === 'physics') {
+      department = "Physics Department"
+    }
+
+    else if (department === 'chemistry') {
+      department = "Chemistry Department"
+    }
+
+    else if (department === 'maths') {
+      department = "Mathematics Department"
+    }
+
+    else if (department === 'english') {
+      department = "English Department"
+    }
+
+    else if (department === 'economics') {
+      department = "Economics Department"
+
+    }*/
+  }, [])
 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -234,3 +290,5 @@ const Sidebar = ({ content }) => {
 }
 
 export default Sidebar
+
+

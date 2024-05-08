@@ -8,15 +8,17 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { AdminApiInstance } from "../apis/ApiIntances";
-import CircularCard from "../cards/CircularCard";
+import { AdminApiInstance } from "../../components/admin/apis/ApiIntances";
+import CircularCard from "../../components/admin/cards/CircularCard";
+import { ReturnDepartmentValue } from "./Department";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
 const Placement = () => {
   const [placementData, setPlacementData] = useState([]);
+  const [departmentValue, setDepartmentValue] = useState("cse");
+
 
   const deleteNewCuttingRow = async (_id) => {
     console.log("......... gal", _id);
@@ -31,12 +33,22 @@ const Placement = () => {
   useEffect(() => {
     // for News cutting
     (async () => {
+      const user = JSON.parse(localStorage?.getItem('userData'));
+      console.log('user at sidebar ', user);
+      let department = user?.department;
+  
+      ReturnDepartmentValue(department,setDepartmentValue);
       try {
-        const { data } = await axios.get(`${url}/eca-press/news`);
+        const { data } = await axios.get(`${url}/placement`);
+        console.log('data',data)
         const temp = data.result.map((val, i) => {
           return {
             SR_NO: i+1,
-            Created_At: new Date(val.createdAt).toDateString(),
+            Student : val?.studentName,
+            Company:val?.companyName,
+            Branch : val?.branch,
+            Year : val?.year,
+            Package : val?.package,
             Delete: (
               <Button onClick={() => deleteNewCuttingRow(val?._id)}>
                 Delete
@@ -69,7 +81,7 @@ const Placement = () => {
             padding={2}
             borderColor={"red.700"}
           >
-            Eca in Press
+            Placement at : @ECA
           </Heading>
         </Flex>
         <SimpleGrid
@@ -77,7 +89,7 @@ const Placement = () => {
           spacing={{ base: 5, lg: 8 }}
         >
           {cardData.map((data) => {
-            return <CircularCard link={"placement"} data={data} />;
+            return <CircularCard dept_readonly={true}  dept_name={departmentValue} typeOfUser="hod" link={"placement"} data={data} />;
           })}
         </SimpleGrid>
       </Box>

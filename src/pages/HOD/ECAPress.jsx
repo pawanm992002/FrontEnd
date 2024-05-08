@@ -10,18 +10,18 @@ import {
 import axios from "axios";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { AdminApiInstance } from "../apis/ApiIntances";
-import CircularCard from "../cards/CircularCard";
+import { AdminApiInstance } from "../../components/admin/apis/ApiIntances";
+import CircularCard from "../../components/admin/cards/CircularCard";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
-const Placement = () => {
-  const [placementData, setPlacementData] = useState([]);
+const EcaPress = () => {
+  const [NewsCutting, setNewsCutting] = useState([]);
 
   const deleteNewCuttingRow = async (_id) => {
     console.log("......... gal", _id);
     try {
-      const { data } = await AdminApiInstance.delete(`/placement/${_id}`);
+      const { data } = await AdminApiInstance.delete(`/news/${_id}`);
       toast.success(data?.message);
     } catch (error) {
       console.log(".......... del", error);
@@ -37,6 +37,11 @@ const Placement = () => {
           return {
             SR_NO: i+1,
             Created_At: new Date(val.createdAt).toDateString(),
+            Image: (
+              <Link to={val.image}>
+                <Button>View</Button>
+              </Link>
+            ),
             Delete: (
               <Button onClick={() => deleteNewCuttingRow(val?._id)}>
                 Delete
@@ -44,7 +49,7 @@ const Placement = () => {
             ),
           };
         });
-        setPlacementData(temp);
+        setNewsCutting(temp);
       } catch (error) {
         console.log(".......... circular", error);
       }
@@ -52,9 +57,9 @@ const Placement = () => {
   }, []);
   const cardData = [
     {
-      title: "Placement",
-      length: placementData?.length,
-      data: placementData,
+      title: "News Cutting",
+      length: NewsCutting?.length,
+      data: NewsCutting,
     },
   ];
 
@@ -77,7 +82,7 @@ const Placement = () => {
           spacing={{ base: 5, lg: 8 }}
         >
           {cardData.map((data) => {
-            return <CircularCard link={"placement"} data={data} />;
+            return <CircularCard typeOfUser='hod' link={"eca-press"} data={data} />;
           })}
         </SimpleGrid>
       </Box>
@@ -85,4 +90,4 @@ const Placement = () => {
   );
 };
 
-export default Placement;
+export default EcaPress;
