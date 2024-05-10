@@ -25,7 +25,6 @@ export const fetchAlumni = async (setRefresh=null) => {
         SR_NO: val.srNo,
         Section: val.section,
         Title: val.title,
-        Created_At: new Date(val.createdAt).toDateString(),
         Notice: (
           <Link to={val.notice}>
             <Button>View</Button>

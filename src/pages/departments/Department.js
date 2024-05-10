@@ -61,9 +61,9 @@ export default function Department({ comp }) {
   const [circulars, setCirculars] = useState([]);
   const [timeTable, setTimeTable] = useState([]);
   const [gallery, setGallery] = useState([]);
-  console.log(".......... comp", comp);
   const [value, setValue] = useState(0);
   const Mobile = useMediaQuery("(min-width:400px)");
+  console.log(".......... comp", comp);
 
   useEffect(() => {
     (async () => {

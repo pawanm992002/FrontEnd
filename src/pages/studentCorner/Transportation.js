@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import MyTable from '../../components/utilily/MyTable';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { fetchTransportationCircular } from '../../api/studentCorner';
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -43,16 +44,31 @@ function a11yProps(index) {
 
 export default function Transportation() {
     const [value, setValue] = useState(0);
+    const [Circulars, setCirculars] = useState([]);
+  
+    useEffect(() => {
+      (async () => {
+        if (value === 0) {
+          const Circulars = await fetchTransportationCircular();
+          setCirculars(
+            Circulars?.map((val) => {
+              return {
+                SR_NO: val.SR_NO,
+                Title: val.Title,
+                Section: val.Section,
+                Notice: val.Notice,
+              };
+            })
+          );
+        }
+      })();
+    }, [value]);
     const members = [
         { Name: 'Dr. Pooja Tomar', Designation: 'Coordinator' },
         { Name: 'Sh. Lalit K Dusad', Designation: 'Co-Coordinator' },
         { Name: 'Dr. Shikha Agarwal', Designation: 'Co-Coordinator' },
     ]
-    const circulars = [
-        { SNO: '2024WEB0232', Date: '28/02/24', Title: 'Dash Derby Result', Link: 'https://www.ecajmer.ac.in/Content/Orders/CAS/Files/2024WEB0232-28-02-24-Result_Dash_Derby_Sprint_competition_AKAM_Feb_Activity_-_Copy[1]-vpEduQ.doc' },
-        { SNO: '2024WEB0224', Date: '26/02/24', Title: 'Sprint Competition Under AKAM', Link: 'https://www.ecajmer.ac.in/Content/Orders/CAS/Files/2024WEB0232-28-02-24-Result_Dash_Derby_Sprint_competition_AKAM_Feb_Activity_-_Copy[1]-vpEduQ.doc' },
-    ]
-
+    
     return (
         <Box
             sx={{
@@ -81,7 +97,7 @@ export default function Transportation() {
                         </Tabs>
                     </Box>
                     <CustomTabPanel value={value} index={0}>
-                        <MyTable data={circulars} />
+                        <MyTable data={Circulars} />
                     </CustomTabPanel>
                     <CustomTabPanel value={value} index={1}>
                         <MyTable data={members} />

@@ -29,7 +29,6 @@ export const fetchCreativeCircular = async (setRefresh = null) => {
         SR_NO: val.srNo,
         Title: val.title,
         Section: val.section,
-        Created_At: new Date(val.createdAt).toDateString(),
         Notice: (
           <Link to={val.notice}>
             <Button>View</Button>
@@ -57,7 +56,6 @@ export const fetchCreativeGallery = async (setRefresh = null) => {
     const temp = data.result.map((val, i) => {
       return {
         SR_NO: i,
-        Created_At: new Date(val.createdAt).toDateString(),
         Image: (
           <Link to={val.image}>
             <Button>View</Button>
@@ -89,7 +87,6 @@ export const fetchNccCircular = async (setRefresh = null) => {
         SR_NO: val.srNo,
         Title: val.title,
         Section: val.section,
-        Created_At: new Date(val.createdAt).toDateString(),
         Notice: (
           <Link to={val.notice}>
             <Button>View</Button>
@@ -115,7 +112,6 @@ export const fetchNccGallery = async (setRefresh = null) => {
     const temp = data.result.map((val, i) => {
       return {
         SR_NO: i,
-        Created_At: new Date(val.createdAt).toDateString(),
         Image: (
           <Link to={val.image}>
             <Button>View</Button>
@@ -145,7 +141,6 @@ export const fetchHostelCircular = async (setRefresh = null) => {
         SR_NO: val.srNo,
         Title: val.title,
         Section: val.section,
-        Created_At: new Date(val.createdAt).toDateString(),
         Notice: (
           <Link to={val.notice}>
             <Button>View</Button>
@@ -171,7 +166,6 @@ export const fetchHostelGallery = async (setRefresh = null) => {
     const temp = data.result.map((val, i) => {
       return {
         SR_NO: i,
-        Created_At: new Date(val.createdAt).toDateString(),
         Image: (
           <Link to={val.image}>
             <Button>View</Button>
@@ -203,7 +197,6 @@ export const fetchTransportationCircular = async (setRefresh = null) => {
         SR_NO: val.srNo,
         Title: val.title,
         Section: val.section,
-        Created_At: new Date(val.createdAt).toDateString(),
         Notice: (
           <Link to={val.notice}>
             <Button>View</Button>
@@ -236,7 +229,6 @@ export const fetchStudentAchievement = async (setRefresh = null) => {
         Title: val.title,
         Name: val.name,
         Description: val.description,
-        Created_At: new Date(val.createdAt).toDateString(),
         Image: (
           <Link to={val.image}>
             <Button>View</Button>
