@@ -80,6 +80,11 @@ const NavbarDropDownListData = [
       { name: "mechanical engineering", link: "/computer" },
       { name: "computer applications", link: "/computer" },
       { name: "managment studies", link: "/computer" },
+      { name: "Physics", link: "/computer" },
+      { name: "Chemistry", link: "/computer" },
+      { name: "Mathematics", link: "/computer" },
+      { name: "English", link: "/computer" },
+      { name: "Economics", link: "/computer" },
     ],
   ],
 
@@ -195,7 +200,7 @@ export default function Navbar() {
           <ListIcon fontSize="large" sx={{mr:1}} onClick={toggleDrawerOpen} />
           </Box>
         </Box>
-        <Drawer open={open} toggleDrawerOpen={toggleDrawerOpen} toggleDrawerClose={toggleDrawerClose} />
+        <Drawer open={open} toggleDrawerOpen={toggleDrawerOpen} toggleDrawerClose={toggleDrawerClose}  data={NavbarDropDownListData} />
        {navView && <Divider flexItem  sx={{bgcolor:'black'}}/> }
         <Box
           sx={{

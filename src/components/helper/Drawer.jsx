@@ -8,45 +8,98 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import { Drafts, ExpandLess, ExpandMore, Inbox, Login, Mail, Phone, PhoneAndroid, Send, Star } from '@mui/icons-material';
 import { useState } from 'react';
+import { Collapse, ListSubheader, useMediaQuery } from '@mui/material';
 
-export default function Drawer({open,toggleDrawerOpen,toggleDrawerClose}) {
+
+
+export default function Drawer({open,toggleDrawerOpen,toggleDrawerClose,data}) {
+  const [Opens, setOpens] = useState({
+    0:false,
+    1:false,
+    2:false,
+    3:false,
+    4:false,
+    5:false,
+    6:false
+  });
+
+const Small = useMediaQuery('(max-width:500px)')
+const handleClick = (propertyKey) => {
+  setOpens((prevState) => ({
+    ...prevState,
+    [propertyKey]: !prevState[propertyKey],
+  }));
+};
+
+const Links = (view)=>(
+  <Box
+  position=''
+  bottom={'0'}
+  width={'100%'}
+  >
+  <List>
+    {['info@ecajmer.ac.in', '556841568166'].map((text, index) => (
+      <ListItem key={text} disablePadding>
+        <ListItemButton>
+          <ListItemIcon>
+            {index % 2 === 0 ? <Mail /> : <Phone />}
+          </ListItemIcon>
+          <ListItemText primary={text} />
+        </ListItemButton>
+      </ListItem>
+    ))}
+  </List>
+  <Divider />
+  <List>
+    {['Faculty Login','Screen Reader'].map((text, index) => (
+      <ListItem key={text} disablePadding>
+        <ListItemButton>
+          <ListItemIcon>
+            {index % 2 === 0 ? <Login /> : <PhoneAndroid />}
+          </ListItemIcon>
+          <ListItemText primary={text} />
+        </ListItemButton>
+      </ListItem>
+    ))}
+  </List>
+</Box>
+  )
 
   const list = () => (
-    <Box
-      sx={{ width : 250 }}
-      role="presentation"
-    //   onClick={toggleDrawer(false)}
-    //   onKeyDown={toggleDrawer(false)}
-    >
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
+    <>
+  {data?.map((item,key)=>{
+    return(
+      <>
+  <ListItemButton onClick={()=>{handleClick(key)}}>
+  <ListItemIcon>
+    <Inbox />
+  </ListItemIcon>
+  <ListItemText primary={item[0]} />
+  {Opens[key] ? <ExpandLess /> : <ExpandMore />}
+</ListItemButton>
+<Collapse in={Opens[key]} timeout="auto" unmountOnExit>
+<List component="div" disablePadding>
+   {
+item[1].map((d,k)=>{
+  console.log("guygjk=>",d);
+  return(
+  <ListItemButton sx={{ pl: 4 }}>
+  <ListItemIcon>
+  <Star />
+  </ListItemIcon>
+  <ListItemText primary={d.name} />
+  </ListItemButton>
+  )
+})
+    }
+</List>
+</Collapse>
+</>
+)})
+}
+</>
   );
 
   return (
@@ -58,7 +111,18 @@ export default function Drawer({open,toggleDrawerOpen,toggleDrawerClose}) {
             onClose={toggleDrawerClose}
             onOpen={toggleDrawerOpen}
           >
-            {list()}
+          <Box
+          sx={{ width : 400 }}
+          role="presentation"
+        >
+        <List
+        sx={{ width: '100%', maxWidth: 600, bgcolor: 'background.paper' }}
+        component="nav"
+        aria-labelledby="nested-list-subheader"
+      >
+            {!Small && list()} 
+            {Links(Small)}
+          </List></Box>
           </SwipeableDrawer>
     </div>
   );
