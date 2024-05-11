@@ -28,7 +28,6 @@ export const fetchBogMom = async (setRefresh = null) => {
         SR_NO: i,
         Meeting_No: val.meetingNo,
         Date: new Date(val.date).toDateString(),
-        Created_At: new Date(val.createdAt).toDateString(),
         Minute: (
           <Link to={val.minute}>
             <Button>View</Button>
@@ -62,7 +61,6 @@ export const fetchExamCircular = async (setRefresh = null) => {
         SR_NO: val.srNo,
         Section: val.section,
         Title: val.title,
-        Created_At: new Date(val.createdAt).toDateString(),
         Notice: (
           <Link to={val.notice}>
             <Button>View</Button>
@@ -98,7 +96,6 @@ export const fetchAccountCircular = async (setRefresh = null) => {
         SR_NO: val.srNo,
         Section: val.section,
         Title: val.title,
-        Created_At: new Date(val.createdAt).toDateString(),
         Notice: (
           <Link to={val.notice}>
             <Button>View</Button>
@@ -130,7 +127,6 @@ export const fetchProctorCircular = async (setRefresh = null) => {
         SR_NO: val.srNo,
         Section: val.section,
         Title: val.title,
-        Created_At: new Date(val.createdAt).toDateString(),
         Notice: (
           <Link to={val.notice}>
             <Button>View</Button>
@@ -164,7 +160,6 @@ export const fetchRegistrarCircular = async (setRefresh = null) => {
         SR_NO: val.srNo,
         Section: val.section,
         Title: val.title,
-        Created_At: new Date(val.createdAt).toDateString(),
         Notice: (
           <Link to={val.notice}>
             <Button>View</Button>

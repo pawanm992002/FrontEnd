@@ -1,20 +1,10 @@
-import {
-  Box,
-  Container,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import { Box, Container } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { SectionSimulator } from "../Administration/Principal";
-import { Link } from "react-router-dom";
 import { fetchCalender } from "../../api/academics";
 import MyTable from "../../components/utilily/MyTable";
 
 const AcademicCalender = () => {
-
   const [Calender, setCalender] = useState([]);
 
   useEffect(() => {
@@ -26,12 +16,11 @@ const AcademicCalender = () => {
             SR_NO: val.SR_NO,
             Title: val.Title,
             Section: val.Section,
-            Title: val.Title,
             Notice: val.Notice,
           };
         })
       );
-      console.log("gggggggggggg", calender)
+      console.log("gggggggggggg", calender);
     })();
   }, []);
 
@@ -50,7 +39,7 @@ const AcademicCalender = () => {
         <section id="Academic Calender">
           <SectionSimulator title={"Academic Calender"} />
           <Box>
-          <MyTable data = {Calender} />
+            <MyTable data={Calender} />
             {/* <AcademicCalenderTable
               name="SEM"
               designation="link"
