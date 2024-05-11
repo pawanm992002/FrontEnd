@@ -80,6 +80,11 @@ const NavbarDropDownListData = [
       { name: "mechanical engineering", link: "/computer" },
       { name: "computer applications", link: "/computer" },
       { name: "managment studies", link: "/computer" },
+      { name: "Physics", link: "/computer" },
+      { name: "Chemistry", link: "/computer" },
+      { name: "Mathematics", link: "/computer" },
+      { name: "English", link: "/computer" },
+      { name: "Economics", link: "/computer" },
     ],
   ],
 
@@ -98,22 +103,37 @@ const NavbarDropDownListData = [
     "student corner",
     [
       { name: "scholarship details", link: "/scholarship" },
+      { name: "creative art society",link: "/society" },
       { name: "ncc", link: "/ncc" },
-      {
-        name: "creative art society",
-        link: "/society",
-      },
       { name: "nss", link: "/nss" },
+      { name: "Student Activity Center", link: "/sports" },
       { name: "sports", link: "/sports" },
+      { name: "Hostels", link: "/sports" },
+      { name: "Transportation", link: "/sports" },
+      { name: "Bank/ATM", link: "/sports" },
+      { name: "Student Achievements", link: "/sports" },
+      { name: "Student Achievement Registeration", link: "/sports" },
     ],
   ],
   [
     "cell ",
     [
+      { name: "AICTE Cell", link: "/eapCell" },
       { name: "alumni cell", link: "/alumni" },
-      // { name: "campus development & planning cell", link: "/campusDev" },
+      { name: "Campus Development & Planning Cell", link: "/eapCell" },
       { name: "central library", link: "/centralLibrary" },
       { name: "eap cell", link: "/eapCell" },
+      { name: "Environment cell", link: "/eapCell" },
+      { name: "erp cell", link: "/eapCell" },
+      { name: "IIC cell", link: "/eapCell" },
+      { name: "III cell", link: "/eapCell" },
+      { name: "NBA cell", link: "/eapCell" },
+      { name: "Sports Department", link: "/eapCell" },
+      { name: "StartUp cell", link: "/eapCell" },
+      { name: "Stores cell", link: "/eapCell" },
+      { name: "Unnat Bharat Abhiyan", link: "/eapCell" },
+      { name: "Value Cell", link: "/eapCell" },
+      { name: "Women Cell", link: "/eapCell" },
     ],
   ],
 ];
@@ -180,7 +200,7 @@ export default function Navbar() {
           <ListIcon fontSize="large" sx={{mr:1}} onClick={toggleDrawerOpen} />
           </Box>
         </Box>
-        <Drawer open={open} toggleDrawerOpen={toggleDrawerOpen} toggleDrawerClose={toggleDrawerClose} />
+        <Drawer open={open} toggleDrawerOpen={toggleDrawerOpen} toggleDrawerClose={toggleDrawerClose}  data={NavbarDropDownListData} />
        {navView && <Divider flexItem  sx={{bgcolor:'black'}}/> }
         <Box
           sx={{
