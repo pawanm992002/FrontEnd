@@ -45,7 +45,7 @@ const ForgetPassword = () => {
       setLoading(true);
 
       const {data,status,error} = await axios.post(`${url}/auth/faculty-forgot-password`, form)
-      console.log('data and status ',data , status,error);
+      
 
       if(status !== 200)
           toast.error(data?.error);
@@ -56,8 +56,8 @@ const ForgetPassword = () => {
       }
 
     } catch (error) {
-      console.log('error ',error);
-      toast.error(error?.message);
+    toast.error(error?.response?.data?.error);
+
     }
     setLoading(false);
     setForm({ email: "" });

@@ -22,7 +22,7 @@ import {
   Center,
   Image,
 } from '@chakra-ui/react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
   FiHome,
   FiTrendingUp,
@@ -64,7 +64,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         {/* Logo */}
-        <Image src='https://www.ecajmer.ac.in/images//white%20logo.png' />
+     <Link to={'/'}>  <Image src='https://www.ecajmer.ac.in/images//white%20logo.png' /></Link> 
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems?.map((link) => (
@@ -83,7 +83,6 @@ const NavItem = ({ icon, children, ...rest }) => {
   const href = (window.location.href).split('/');
   const activeLink = href[href?.length-1];
 
-  // console.log(href,activeLink,children,'check link');
 
   return (
     <Box
@@ -120,7 +119,7 @@ const NavItem = ({ icon, children, ...rest }) => {
   )
 }
 
-const MobileNav = ({ onOpen, ...rest }) => {
+const MobileNav = ({ onOpen,user, ...rest }) => {
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -164,7 +163,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm" textTransform={'capitalize'}>{user?.name}</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>
@@ -189,6 +188,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
 const Sidebar = ({ content }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [user, setUser] = useState({});
+
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -196,7 +197,8 @@ const Sidebar = ({ content }) => {
       if (localStorage.getItem("typeOfUser") !== 'admin')
         navigate("/");
     }
-    console.log('run admin');
+    const user = JSON.parse(localStorage?.getItem('userData'));
+    setUser(user);
   },[])
 
   return (
@@ -216,16 +218,18 @@ const Sidebar = ({ content }) => {
       </Drawer>
 
       {/* mobilenav */}
-      <MobileNav onOpen={onOpen} />
+      <MobileNav onOpen={onOpen} user={user} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {content ?
           content
           :
           <>
             <Center>
+              <Link to={'/'}>
               <Box maxH={'200px'} maxW={'500px'}>
                 <Image src='https://www.ecajmer.ac.in/images//white%20logo.png' />
               </Box>
+              </Link>
             </Center>
           </>}
       </Box>

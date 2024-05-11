@@ -8,7 +8,6 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AdminApiInstance } from "../apis/ApiIntances";
 import CircularCard from "../cards/CircularCard";
@@ -18,25 +17,30 @@ const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 const Placement = () => {
   const [placementData, setPlacementData] = useState([]);
 
+
+
   const deleteNewCuttingRow = async (_id) => {
-    console.log("......... gal", _id);
     try {
       const { data } = await AdminApiInstance.delete(`/placement/${_id}`);
       toast.success(data?.message);
     } catch (error) {
-      console.log(".......... del", error);
       toast.error(error?.response?.data?.error);
     }
   };
   useEffect(() => {
     // for News cutting
     (async () => {
+      
       try {
-        const { data } = await axios.get(`${url}/eca-press/news`);
+        const { data } = await axios.get(`${url}/placement`);
         const temp = data.result.map((val, i) => {
           return {
             SR_NO: i+1,
-            Created_At: new Date(val.createdAt).toDateString(),
+            Student : val?.studentName,
+            Company:val?.companyName,
+            Branch : val?.branch,
+            Year : val?.year,
+            Package : val?.package,
             Delete: (
               <Button onClick={() => deleteNewCuttingRow(val?._id)}>
                 Delete
@@ -46,7 +50,8 @@ const Placement = () => {
         });
         setPlacementData(temp);
       } catch (error) {
-        console.log(".......... circular", error);
+        toast.error(error?.response?.data?.error);
+
       }
     })();
   }, []);
@@ -69,7 +74,7 @@ const Placement = () => {
             padding={2}
             borderColor={"red.700"}
           >
-            Eca in Press
+            Placement at : @ECA
           </Heading>
         </Flex>
         <SimpleGrid

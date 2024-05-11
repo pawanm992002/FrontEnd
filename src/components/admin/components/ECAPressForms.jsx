@@ -15,33 +15,33 @@ export const AddECAPressForm = () => {
 
     const [loading,setLoading] = useState(false);
 
+    const handleChange = (e)=> setForm({...form,[e.target.name]:e.target.value});
+
     const handleFileChange = (e) => {
         setForm({...form,image:e.target.files[0]});
     };
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log('form', form);
 
         setLoading(true);
         const myForm = new FormData();
         myForm.append('image',form.image);
+        myForm.append('title',form.title);
 
         try {
             const {data,statusText,status} = await AdminApiInstance.post('/news',myForm);
-            console.log('data ',data,statusText,status);
 
             if (data?.success === false)
                 toast.error(data?.message);
             else toast.success(data?.message);
 
         } catch (error) {
-            console.log('error ',error,error?.message,error?.response,error?.response?.message);
-            toast.error(error?.message);
+            toast.error(error?.response?.data?.error);
         }
 
         setLoading(false);
-        setForm({image:''})
+        setForm({image:'',title:''})
     };
 
     return (
@@ -49,6 +49,13 @@ export const AddECAPressForm = () => {
         <FormBox title={"ECA Press"} >
             <form onSubmit={handleSubmit}>
                 <VStack spacing={4}>
+                <FormInputBox
+              label={"Title"}
+              name={"title"}
+              placeholder={"Title of news"}
+              value={form.title}
+              handleChange={handleChange}
+            />
 
                 <FormInputBox label={'News'} type='file' handleChange={handleFileChange} name={'image'} />
 

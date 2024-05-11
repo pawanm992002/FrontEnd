@@ -9,7 +9,6 @@ export default function Alumni() {
   const [Toggle, SetToggle] = useState(false);
   const ClickHandeller = (data) => {
     SetActiveBox(data);
-    console.log(ActiveBox);
   };
     
     const rows = [

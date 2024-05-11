@@ -41,7 +41,8 @@ export const AddWebTeamForm = () => {
             else toast.success(data?.message);
 
         } catch (error) {
-            console.log('error ', error, error?.message);
+            toast.error(error?.response?.data?.error);
+
         }
 
 

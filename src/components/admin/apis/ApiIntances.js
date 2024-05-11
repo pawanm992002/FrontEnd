@@ -17,10 +17,8 @@ export const AdminApiInstance = axios.create({
 export const handleAddSectionCircular = (form)=>{
     try {
         const {data,status,statusText} = AdminApiInstance.post('/circular',form);
-        console.log('data ',data,status,statusText);
         return data;
     } catch (error) {
-        console.log('error ',error,error?.message,error?.response,error?.response?.message);
-        throw new Error(error?.response?.message);
+        throw new Error(error?.response?.data?.error);
     }
 }

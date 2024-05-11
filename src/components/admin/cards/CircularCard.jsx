@@ -17,7 +17,6 @@ const CircularCard = ({ data, link,typeOfUser='admin',dept_name='',dept_readonly
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section");
 
-  console.log('dept ',dept_readonly,dept_name);
 
   let tableSection = [
     "Gallery",
@@ -96,8 +95,8 @@ const CircularCard = ({ data, link,typeOfUser='admin',dept_name='',dept_readonly
             </Button>
           </Flex>
 
-          {/* {tableSection.includes(section) && <MyTable data={data.data} />} */}
-          <MyTable data={data.data} />
+          {tableSection.includes(section) && <MyTable data={data.data} />}
+          {/* <MyTable data={data.data} /> */}
 
           {/* ---------------- Bog Mom Stuff -----------------  */}
           {section === "Bog Mom Form" && <AdministrationForm />}
@@ -208,6 +207,7 @@ export const DepartmentsSelection = ({ value, handleChange, name = 'department',
     <>
 
       <Select
+      cursor={'pointer'}
       value={value}
         onChange={handleChange}
         name={name}
@@ -240,14 +240,19 @@ export const DesignationSelection = ({ value, handleChange }) => {
         onChange={handleChange}
         name='designation'
       >
-        <option value="Head Of Department">HOD</option>
-        <option value="Faculty">Faculty</option>
+        <option value="Professor">Professor</option>
+        <option value="Assistant Professor">Assistant Professor</option>
+        <option value="Lecturer">Lecturer</option>
+        <option value="Head of Department">Head of Department</option>
+        <option value="Lab Attendant">Lab Attendant</option>
+        <option value="Technician">Technician</option>
+        <option value="Lab Incharge">Lab Incharge</option>
       </Select>
     </>
   )
 }
 
-//-------- Create the designation list
+//-------- Create the semester list
 export const SemesterSelection = ({ value, handleChange }) => {
   return (
     <>
@@ -268,3 +273,27 @@ export const SemesterSelection = ({ value, handleChange }) => {
     </>
   )
 }
+
+//-------- Create the year selections
+export const YearSelection = ({ value, handleChange,name='year' }) => {
+  return (
+    <>
+      <Select
+        value={value}
+        onChange={handleChange}
+        name='year'
+      >
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+      </Select>
+    </>
+  )
+}
+
+
+

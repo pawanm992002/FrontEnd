@@ -19,12 +19,10 @@ const EcaPress = () => {
   const [NewsCutting, setNewsCutting] = useState([]);
 
   const deleteNewCuttingRow = async (_id) => {
-    console.log("......... gal", _id);
     try {
       const { data } = await AdminApiInstance.delete(`/news/${_id}`);
       toast.success(data?.message);
     } catch (error) {
-      console.log(".......... del", error);
       toast.error(error?.response?.data?.error);
     }
   };
@@ -51,7 +49,7 @@ const EcaPress = () => {
         });
         setNewsCutting(temp);
       } catch (error) {
-        console.log(".......... circular", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
   }, []);

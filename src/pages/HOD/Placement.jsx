@@ -21,12 +21,10 @@ const Placement = () => {
 
 
   const deleteNewCuttingRow = async (_id) => {
-    console.log("......... gal", _id);
     try {
       const { data } = await AdminApiInstance.delete(`/placement/${_id}`);
       toast.success(data?.message);
     } catch (error) {
-      console.log(".......... del", error);
       toast.error(error?.response?.data?.error);
     }
   };
@@ -34,13 +32,11 @@ const Placement = () => {
     // for News cutting
     (async () => {
       const user = JSON.parse(localStorage?.getItem('userData'));
-      console.log('user at sidebar ', user);
       let department = user?.department;
   
       ReturnDepartmentValue(department,setDepartmentValue);
       try {
         const { data } = await axios.get(`${url}/placement`);
-        console.log('data',data)
         const temp = data.result.map((val, i) => {
           return {
             SR_NO: i+1,
@@ -58,7 +54,7 @@ const Placement = () => {
         });
         setPlacementData(temp);
       } catch (error) {
-        console.log(".......... circular", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
   }, []);

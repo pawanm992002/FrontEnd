@@ -1,8 +1,5 @@
 import {
-  AppBar,
   Box,
-  IconButton,
-  Toolbar,
   useMediaQuery,
   Typography,
   Stack,
@@ -10,14 +7,9 @@ import {
   Button,
 } from "@mui/material";
 import ListIcon from '@mui/icons-material/List';
-import MenuIcon from "@mui/icons-material/Menu";
 import MyDropdown from "../utilily/MyDropdown";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Mail, Phone } from "@mui/icons-material";
 import Drawer from "../helper/Drawer";
 
@@ -121,7 +113,6 @@ const NavbarDropDownListData = [
 export default function Navbar() {
   const navView = useMediaQuery("(min-width:1100px)");
   const MobileView = useMediaQuery("(min-width:550px)");
-  const [showNav, setShowNav] = useState(false);
 
   const [open, setOpen] = useState(false);
   const toggleDrawerOpen = () => setOpen(true);
@@ -134,7 +125,6 @@ export default function Navbar() {
         sx={{
           display: "flex",
           justifyContent: "center",
-          bgcolor: "var(--darkBG)",
           width: "100%",
           padding: !navView?"5px 0":"",
           flexDirection: "column",
@@ -222,7 +212,8 @@ export default function Navbar() {
                 />
               ))}
 </Box>
-<Button sx={{ height:45,textTransform:'uppercase',fontSize:'0.8rem' }}>Admission</Button>
+<a  href={'https://www.ecajmer.ac.in/mailDirectory'} target="_blank" rel="noopener noreferrer">
+<Button sx={{ height:45,textTransform:'uppercase',fontSize:'0.8rem' }}>Admission</Button></a>
               
             </Stack>
               }

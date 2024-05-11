@@ -54,7 +54,7 @@ const Profile = () => {
         try {
 
             const { data, status } = await FacultyApiInstance.put('/update-profile', myForm);
-            console.log('data status ', data, status);
+          
 
             if (status === 200){
                 toast.success(data?.message);
@@ -196,7 +196,7 @@ export const UploadPictureModal = ({ isOpen, onClose }) => {
         try {
 
             const { data, status } = await FacultyApiInstance.put('/update-profile', myForm);
-            console.log('data status ', data, status);
+           
 
             if (status === 200){
                 localStorage.setItem("userData", JSON.stringify(data?.result));

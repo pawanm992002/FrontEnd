@@ -12,7 +12,6 @@ const deleteEventRow = async (_id, setRefresh) => {
     toast.success(data?.message);
     setRefresh(_id)
   } catch (error) {
-    console.log(".......... del", error);
     toast.error(error?.response?.data?.error);
   }
 };
@@ -24,10 +23,9 @@ export const fetchEvents = async (setRefresh = null) => {
     const temp = data.result.map((val, i) => {
       return {
         SR_NO: i,
-        Title: val.title,
-        Description: val.description,
+        Title: val?.title,
+        Description: val?.description,
         Date: new Date(val.date).toDateString(),
-        Created_At: new Date(val.createdAt).toDateString(),
         Source: (
           <Link key={val._id} to={val.image}>
             <Button>View</Button>
@@ -40,6 +38,7 @@ export const fetchEvents = async (setRefresh = null) => {
     });
     return temp;
   } catch (error) {
-    console.log(".......... events", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };

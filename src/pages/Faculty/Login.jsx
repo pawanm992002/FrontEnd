@@ -47,7 +47,7 @@ const Login = () => {
       myForm.append('password', form.password);
 
       const { data, status, error } = await axios.post(`${url}/auth/faculty-login`, myForm)
-      console.log('data and status ', data, status, error);
+      
 
       if (status !== 200)
         toast.error("email and password not match");
@@ -85,7 +85,6 @@ const Login = () => {
         navigate("/faculty/profile");
       else navigate('/hod/profile');
     }
-    console.log('ruuning long');
   }, [handleSubmit]);
 
   return (

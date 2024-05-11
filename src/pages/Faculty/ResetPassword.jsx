@@ -31,7 +31,6 @@ const ResetPassword = () => {
   const [searchParams,setSearchParams] = useSearchParams();
   const token = searchParams.get('token');
 
-  console.log('token ',token);
 
   //-------------------- State management stuff
   const [form, setForm] = useState({ password: ""});
@@ -52,7 +51,6 @@ const ResetPassword = () => {
       const submitData = {'newPassword':`${form.password}`,'token':token}
 
       const {data,status,error} = await axios.post(`${url}/auth/faculty-reset-password`, submitData)
-      console.log('data and status ',data , status,error);
 
       if(status !== 200)
           toast.error(data?.error);
@@ -63,8 +61,8 @@ const ResetPassword = () => {
       }
 
     } catch (error) {
-      console.log('error ',error);
-      toast.error(error?.message);
+      toast.error(error?.response?.data?.error);
+
     }
     setLoading(false);
     setForm({ password: "" });

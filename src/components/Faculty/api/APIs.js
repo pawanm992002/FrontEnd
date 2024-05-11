@@ -3,7 +3,6 @@ import axios from "axios";
 const Token = localStorage?.getItem('token');
 
 export const url = process.env.REACT_APP_BACKEND_URL;
-console.log('token ',Token);
 
 //--------------- Create the instance for admin apis
 export const FacultyApiInstance = axios.create({

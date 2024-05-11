@@ -12,7 +12,6 @@ export const deleteCellsRow = async (_id, val, setRefresh=null) => {
     toast.success(data?.message);
     setRefresh(Math.random())
   } catch (error) {
-    console.log(".......... error .........", error);
     toast.error(error?.response?.data?.error);
   }
 };
@@ -40,6 +39,7 @@ export const fetchAlumni = async (setRefresh=null) => {
     });
     return temp;
   } catch (error) {
-    console.log(".......... error ......", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };

@@ -75,7 +75,6 @@ const NavItem = ({ icon, children, ...rest }) => {
   const href = (window.location.href).split('/');
   const activeLink = href[href?.length - 1];
 
-  // console.log(href,activeLink,children,'check link');
 
   return (
     <Box
@@ -194,14 +193,12 @@ const Sidebar = ({ content }) => {
       if (localStorage.getItem("typeOfUser") !== 'faculty')
         navigate("/");
     }
-    console.log('run');
   },[])
 
 
 
   useEffect(() => {
     const user = JSON.parse(localStorage?.getItem('userData'));
-    console.log('user at sidebar ', user);
 
     if (user?.department === 'Civil Engineering')  setSearchParams({ dept_name: "civil" });
 

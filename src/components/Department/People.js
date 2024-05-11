@@ -14,7 +14,6 @@ export default function People({ people }) {
       }}
     >
       <Box>
-        {console.log("..................gggg", people)}
         <img src={people?.Picture?.props?.src} style={{ maxHeight: "200px" }} />
       </Box>
       <Box

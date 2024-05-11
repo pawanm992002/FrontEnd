@@ -57,8 +57,7 @@ export default function PrincipalMsg() {
           </Typography>
           <Typography gutterBottom variant="body2" color="text.secondary">
             {message.slice(0, 350)} {" "}
-    {/*    <Link to='/administration/principal' style={{color:'blue'}} >Read More...</Link> */}
-            <Typography onClick={()=>setOpen(true)}>Read More...</Typography>
+       <Link to='/administration/principal' style={{color:'blue'}} >Read More...</Link>
             
           </Typography>
           <Typography fontWeight="bold" variant="body2">

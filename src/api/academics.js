@@ -12,7 +12,6 @@ const deleteAcademicRow = async (_id, val, setRefresh=null) => {
     toast.success(data?.message);
     setRefresh(_id)
   } catch (error) {
-    console.log(".......... del", error);
     toast.error(error?.response?.data?.error);
   }
 };
@@ -41,7 +40,7 @@ export const fetchCalender = async (setRefresh = null) => {
     });
     return temp;
   } catch (error) {
-    console.log(".......... academics", error);
+    toast.error(error?.response?.data?.error);
   }
 };
 
@@ -71,6 +70,7 @@ export const fetctFirstYearCircular = async (setRefresh = null) => {
     });
     return temp
   } catch (error) {
-    console.log(".......... academics", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };

@@ -10,7 +10,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 export default function MyDropdown({ dropdownList, dropdownName }) {
   const createHandleMenuClick = (menuItem) => {
     return () => {
-      console.log(`Clicked on ${menuItem}`);
     };
   };
 

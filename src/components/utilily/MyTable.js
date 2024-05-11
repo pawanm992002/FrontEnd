@@ -1,10 +1,11 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Typography } from "@mui/material";
 
 export default function MyTable({data}) {
-    const tableHeaders = Object.keys(data.length > 0 ? data[0] : {})
+    const tableHeaders = Object.keys(data?.length > 0 ? data?.[0] : {})
+
 
     return (
-        <Paper sx={{ width: "100%" }}>
+        <Paper sx={{ width: "100%",margin:'5px 0' }}>
             <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
@@ -15,7 +16,10 @@ export default function MyTable({data}) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.length > 0 && data.map((row, i) => (
+                     { data?.length <= 0 &&  <TableRow> <TableCell >
+                            <Typography sx={{fontSize:'15px',color:'red'}}>No Data Found</Typography>
+                        </TableCell> </TableRow>}
+                        {data?.length > 0 && data?.map((row, i) => (
                             <TableRow key={i}>
                                 {
                                     Object.values(row).map((cell,j) => (

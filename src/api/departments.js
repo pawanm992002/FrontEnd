@@ -12,7 +12,6 @@ const deleteDepartmentRow = async (_id, val, setRefresh=null) => {
     toast.success(data?.message);
     setRefresh(Math.random())
   } catch (error) {
-    console.log(".......... del", error);
     toast.error(error?.response?.data?.error);
   }
 };
@@ -45,7 +44,8 @@ export const fetchMembers = async (departmentValue, setRefresh=null) => {
     // setDepartmentMembers(temp);
     return temp;
   } catch (error) {
-    console.log("........ error ........", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };
 
@@ -77,7 +77,8 @@ export const fetchCircular = async (departmentValue, setRefresh=null) => {
     });
     return temp;
   } catch (error) {
-    console.log("........ error ........", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };
 
@@ -105,7 +106,8 @@ export const fetchAchievements = async (departmentValue, setRefresh=null) => {
     });
     return temp;
   } catch (error) {
-    console.log("........ error ........", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };
 
@@ -137,7 +139,8 @@ export const fetchTimetable = async (departmentValue, setRefresh=null) => {
     });
     return temp;
   } catch (error) {
-    console.log("........ error ........", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };
 
@@ -168,12 +171,13 @@ export const fetchGallery = async (departmentValue, setRefresh=null) => {
     });
     return temp;
   } catch (error) {
-    console.log("........ error ........", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };
 
 // for notes
-export const fetchNotes = async (departmentValue, setRefresh=null) => {
+export const fetchNotes = async (departmentValue, setRefresh=null,canDelete=true) => {
   try {
     const { data } = await axios.get(
       `${url}/department-notes/${departmentValue}`
@@ -192,15 +196,17 @@ export const fetchNotes = async (departmentValue, setRefresh=null) => {
         Delete: (
           <Button
             key={val?._id}
-            onClick={() => deleteDepartmentRow(val?._id, "notes", setRefresh)}
+
+            onClick={() => {canDelete && deleteDepartmentRow(val?._id, "notes", setRefresh)}}
           >
-            Delete
+            {canDelete ? 'Delete':'Click on view'}
           </Button>
         ),
       };
     });
     return temp;
   } catch (error) {
-    console.log("........ error ........", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };

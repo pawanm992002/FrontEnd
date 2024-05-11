@@ -7,7 +7,6 @@ import { AdminApiInstance } from "../components/admin/apis/ApiIntances";
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
 const deleteStudentCornerRow = async (_id, val, setRefresh = null) => {
-  console.log("......... gal", _id, val);
   try {
     const { data } = await AdminApiInstance.delete(
       `/student-corner/${val}/${_id}`
@@ -15,7 +14,6 @@ const deleteStudentCornerRow = async (_id, val, setRefresh = null) => {
     toast.success(data?.message);
     setRefresh(_id)
   } catch (error) {
-    console.log(".......... del", error);
     toast.error(error?.response?.data?.error);
   }
 };
@@ -76,7 +74,8 @@ export const fetchCreativeGallery = async (setRefresh = null) => {
     });
     return temp;
   } catch (error) {
-    console.log(".......... testttt", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };
 
@@ -132,7 +131,8 @@ export const fetchNccGallery = async (setRefresh = null) => {
     });
     return temp;
   } catch (error) {
-    console.log(".......... testttt", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };
 
@@ -188,7 +188,8 @@ export const fetchHostelGallery = async (setRefresh = null) => {
     });
     return temp;
   } catch (error) {
-    console.log(".......... testttt", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };
 

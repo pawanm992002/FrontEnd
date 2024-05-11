@@ -26,14 +26,12 @@ const StudentCorner = () => {
   const [StudentAchievement, setStudentAchievement] = useState([]);
 
   const deleteStudentCornerRow = async (_id, val) => {
-    console.log("......... gal", _id, val);
     try {
       const { data } = await AdminApiInstance.delete(
         `/student-corner/${val}/${_id}`
       );
       toast.success(data?.message);
     } catch (error) {
-      console.log(".......... del", error);
       toast.error(error?.response?.data?.error);
     }
   };
@@ -93,10 +91,9 @@ const StudentCorner = () => {
             ),
           };
         });
-        console.log(".......... testttttt", data);
         setCreativeGallery(temp);
       } catch (error) {
-        console.log(".......... testttt", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
 
@@ -150,10 +147,9 @@ const StudentCorner = () => {
             ),
           };
         });
-        console.log(".......... testttttt", data);
         setNccGallery(temp);
       } catch (error) {
-        console.log(".......... testttt", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
 
@@ -211,10 +207,9 @@ const StudentCorner = () => {
             ),
           };
         });
-        console.log(".......... testttttt", data);
         setHostelGallery(temp);
       } catch (error) {
-        console.log(".......... testttt", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
 

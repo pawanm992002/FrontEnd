@@ -149,6 +149,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
           <Menu>
             <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
               <HStack>
+                
                 <Avatar
                   size={'sm'}
                   src={
@@ -196,7 +197,6 @@ const HODSidebar = ({ content }) => {
       if (localStorage.getItem("typeOfUser") !== 'hod')
         navigate("/");
     }
-    console.log('hod');
   },[])
 
 

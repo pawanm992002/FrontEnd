@@ -84,21 +84,18 @@ const Department = () => {
   const [departmentValue, setDepartmentValue] = useState("cse");
 
   const deleteDepartmentRow = async (_id, val) => {
-    console.log("......... gal", _id, val);
     try {
       const { data } = await AdminApiInstance.delete(
         `/department/${val}/${_id}`
       );
       toast.success(data?.message);
     } catch (error) {
-      console.log(".......... del", error);
       toast.error(error?.response?.data?.error);
     }
   };
 
   useEffect(() => {
     const user = JSON.parse(localStorage?.getItem('userData'));
-    console.log('user at sidebar ', user);
     let department = user?.department;
 
     ReturnDepartmentValue(department,setDepartmentValue);
@@ -109,7 +106,6 @@ const Department = () => {
         const { data } = await axios.get(
           `${url}/department-people/${departmentValue}`
         );
-        console.log(".......... members", data);
         const temp = data.result.map((val, i) => {
           return {
             SR_NO: i,
@@ -138,7 +134,6 @@ const Department = () => {
         const { data } = await axios.get(
           `${url}/department-notice/${departmentValue}`
         );
-        console.log(".......... circular", data);
         const temp = data.result.map((val, i) => {
           return {
             SR_NO: val.srNo,
@@ -160,7 +155,7 @@ const Department = () => {
         });
         setDepartmentCirculars(temp);
       } catch (error) {
-        console.log(".......... circular", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
 
@@ -186,10 +181,9 @@ const Department = () => {
             ),
           };
         });
-        console.log(".......... achivement", data);
         setDepartmentAchivements(temp);
       } catch (error) {
-        console.log(".......... achivement", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
 
@@ -219,10 +213,9 @@ const Department = () => {
             ),
           };
         });
-        console.log(".......... time table", data);
         setDepartmentTimeTable(temp);
       } catch (error) {
-        console.log(".......... achivement", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
 
@@ -232,7 +225,6 @@ const Department = () => {
         const { data } = await axios.get(
           `${url}/department-gallery/${departmentValue}`
         );
-        console.log(".......... gallery", data.result);
         const temp = data.result.map((val, i) => {
           return {
             SR_NO: val._id,
@@ -252,7 +244,7 @@ const Department = () => {
         });
         setDepartmentGallery(temp);
       } catch (error) {
-        console.log(".......... gallery", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
 
@@ -281,10 +273,10 @@ const Department = () => {
             ),
           };
         });
-        console.log(".......... notes", data);
+        
         setDepartmentNotes(temp);
       } catch (error) {
-        console.log(".......... notes", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
   }, [departmentValue]);

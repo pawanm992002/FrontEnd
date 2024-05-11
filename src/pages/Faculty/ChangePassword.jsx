@@ -43,7 +43,6 @@ const ForgetPassword = () => {
       setLoading(true);
 
       const {data,status,error} = await FacultyApiInstance.put(`/update-password`, form)
-      console.log('data and status ',data , status,error);
 
       if(status !== 200)
           toast.error(data?.error);

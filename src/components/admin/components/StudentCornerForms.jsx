@@ -82,7 +82,6 @@ export const AddPlacementForm = ({dept_name='',dept_readonly=false}) => {
         e.preventDefault();
 
         setLoading(true);
-        console.log('form ',form);
 
         const myForm = new FormData();
 
