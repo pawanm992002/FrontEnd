@@ -25,7 +25,6 @@ export const fetchCalender = async (setRefresh = null) => {
         SR_NO: i,
         Session: val.session,
         Semester: val.sem,
-        Created_At: val.createdAt,
         Calender: (
           <Link key={val._id} to={val.calender}>
             <Button>View</Button>
@@ -53,7 +52,6 @@ export const fetctFirstYearCircular = async (setRefresh = null) => {
         SR_NO: val.srNo,
         Section: val.section,
         Title: val.title,
-        Created_At: val.createdAt,
         Notice: (
           <Link key={val._id} to={val.notice}>
             <Button>View</Button>

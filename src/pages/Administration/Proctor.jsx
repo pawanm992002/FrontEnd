@@ -1,12 +1,31 @@
 import { Box, Container, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SectionSimulator } from './Principal'
-import Circulars from '../../components/Circulars';
 import Members from '../../components/Members';
+import { fetchProctorCircular } from '../../api/adminstration';
+import MyTable from '../../components/utilily/MyTable';
 
 const Proctor = () => {
-    
-    const [active, setActive] = useState('circulars'); 
+    const [active, setActive] = useState('circulars');
+    const [Circulars, setCirculars] = useState([]);
+
+    useEffect(() => {
+      (async () => {
+        if (active === "circulars") {
+          const circulars = await fetchProctorCircular();
+          setCirculars(
+            circulars?.map((val) => {
+              return {
+                SR_NO: val.SR_NO,
+                Title: val.Title,
+                Section: val.Section,
+                Notice: val.Notice,
+              };
+            })
+          );
+        }
+      })();
+    }, [active]); 
 
     const proctorFacultyMembers = [
         { name: 'Dr. R. K. Motwani', designation: 'Chief Coordinator' },
@@ -53,7 +72,7 @@ const Proctor = () => {
 
                     <Box>
                         {active === 'circulars' ?
-                            <Circulars /> :<>
+                            <MyTable data={Circulars} /> :<>
                             <Typography variant='h6' sx={{margin:'10px auto'}} >Faculty Members</Typography>
                             <Members members={proctorFacultyMembers} />
 

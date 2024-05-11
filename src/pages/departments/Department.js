@@ -63,6 +63,7 @@ export default function Department({ comp }) {
   const [gallery, setGallery] = useState([]);
   const [value, setValue] = useState(0);
   const Mobile = useMediaQuery("(min-width:400px)");
+  console.log(".......... comp", comp);
 
   useEffect(() => {
     (async () => {

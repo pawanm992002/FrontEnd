@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 import MyTable from '../../components/utilily/MyTable';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import GallerySection from '../../components/Home/GallerySection';
+import { fetchHostelCircular, fetchHostelGallery } from '../../api/studentCorner';
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -43,6 +45,34 @@ function a11yProps(index) {
 
 export default function Hostel() {
     const [value, setValue] = useState(0);
+    const [Gallery, setGallery] = useState([]);
+    const [Circulars, setCirculars] = useState([]);
+  
+    useEffect(() => {
+      (async () => {
+        if (value === 1) {
+          const Circulars = await fetchHostelCircular();
+          setCirculars(
+            Circulars?.map((val) => {
+              return {
+                SR_NO: val.SR_NO,
+                Title: val.Title,
+                Section: val.Section,
+                Notice: val.Notice,
+              };
+            })
+          );
+        }
+        if (value === 3) {
+          const Gallery = await fetchHostelGallery();
+          setGallery(
+            Gallery?.map((val) => {
+              return val?.Image?.props?.to;
+            })
+          );
+        }
+      })();
+    }, [value]);
     const members = [
         { Name: 'Dr. Pooja Tomar', Designation: 'Coordinator' },
         { Name: 'Sh. Lalit K Dusad', Designation: 'Co-Coordinator' },
@@ -78,18 +108,20 @@ export default function Hostel() {
                             <Tab label="Members" {...a11yProps(0)} />
                             <Tab label="Circulars" {...a11yProps(1)} />
                             <Tab label="Manual" {...a11yProps(2)} />
-                            <Tab label={<Link style={{ color: 'white' }} to={'/gallery'} variant='contained'>Gallery</Link>} {...a11yProps(3)} />
-
+                            <Tab label="Gallery" {...a11yProps(3)} />
                         </Tabs>
                     </Box>
                     <CustomTabPanel value={value} index={0}>
                     <MyTable data={members} />
                     </CustomTabPanel>
                     <CustomTabPanel value={value} index={1}>
-                        <MyTable data={circulars} />
+                        <MyTable data={Circulars} />
                     </CustomTabPanel>
                     <CustomTabPanel value={value} index={2}>
                         pdf he bhai
+                    </CustomTabPanel>
+                    <CustomTabPanel value={value} index={3}>
+                        <GallerySection images={Gallery} />
                     </CustomTabPanel>
                 </Box>
             </Box>
