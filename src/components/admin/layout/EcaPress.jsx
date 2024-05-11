@@ -12,49 +12,21 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AdminApiInstance } from '../apis/ApiIntances';
+import { fetchNewsCutting } from "../../../api/ecapress";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
 const EcaPress = () => {
   const [NewsCutting, setNewsCutting] = useState([]);
+  const [refresh, setRefresh] = useState()
 
-  const deleteNewCuttingRow = async (_id) => {
-    console.log("......... gal", _id);
-    try {
-      const { data } = await AdminApiInstance.delete(`/news/${_id}`);
-      toast.success(data?.message);
-    } catch (error) {
-      console.log(".......... del", error);
-      toast.error(error?.response?.data?.error);
-    }
-  };
+
   useEffect(() => {
-    // for News cutting
-    (async () => {
-      try {
-        const { data } = await axios.get(`${url}/eca-press/news`);
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: i+1,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Image: (
-              <Link to={val.image}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button onClick={() => deleteNewCuttingRow(val?._id)}>
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setNewsCutting(temp);
-      } catch (error) {
-        console.log(".......... circular", error);
-      }
+    ;(async () => {
+      const news = await fetchNewsCutting(setRefresh);
+      setNewsCutting(news);
     })();
-  }, []);
+  }, [refresh]);
   const cardData = [
     {
       title: "News Cutting",

@@ -47,7 +47,7 @@ const ProfileCard = ({ data, tableHeading, dataArray, link }) => {
 
                     {/* ----------------- WEb Team Stuff ---------------  */}
                     {section === 'Team Member' && <ProfileTable dataArray={dataArray} tableHeading={tableHeading} />}
-                    {section === 'Team Member Form' && <AddWebTeamForm handleSubmit />}
+                    {section === 'Team Member Form' && <AddWebTeamForm />}
 
 
                 </VStack>

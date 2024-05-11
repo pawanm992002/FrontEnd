@@ -1,11 +1,31 @@
-import { Box, Container, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import { Box, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import { SectionSimulator } from './Principal'
-import Circulars from '../../components/Circulars';
 import Members from '../../components/Members';
+import { fetchAccountCircular } from '../../api/adminstration';
+import MyTable from '../../components/utilily/MyTable';
 
 const Accounts = () => {
     const [active, setActive] = useState('circulars');
+    const [Circulars, setCirculars] = useState([]);
+
+    useEffect(() => {
+      (async () => {
+        if (active === "circulars") {
+          const circulars = await fetchAccountCircular();
+          setCirculars(
+            circulars?.map((val) => {
+              return {
+                SR_NO: val.SR_NO,
+                Title: val.Title,
+                Section: val.Section,
+                Notice: val.Notice,
+              };
+            })
+          );
+        }
+      })();
+    }, [active]);
 
     const accountMembers = [
         { name: 'Dr. Kamlesh Upadhyay', designation: 'Dy. Registrar (F)' },
@@ -39,16 +59,12 @@ const Accounts = () => {
                         </Box>
                     </Box>
 
-                    <Box>
+                    <Box sx={{marginBottom: '10px'}}>
                         {active === 'circulars' ?
-                            <Circulars /> :
+                            <MyTable data={Circulars} /> :
                             <Members members = {accountMembers} />}
                     </Box>
-
-
-
                 </section>
-
             </Box>
         </>
     )

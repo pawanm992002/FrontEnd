@@ -7,6 +7,7 @@ import Research from '../pages/Academics/Research'
 import PGCourses from '../pages/Academics/PGCourses'
 import UGCourses from '../pages/Academics/UGCourses'
 import AcademicSection from '../pages/Academics/AcademicSection'
+import AcademicCalender from '../pages/Academics/AcademicCalender'
 import Layout from '../components/Layout/Layout'
 
 const AcademicsPageRoutes = [
@@ -16,6 +17,7 @@ const AcademicsPageRoutes = [
     <Route exact path='/academics/PGCourses' element={<Layout><PGCourses /></Layout>} />,
     <Route exact path='/academics/UGCourses' element={<Layout><UGCourses /></Layout>} />,
     <Route exact path='/academics/section' element={<Layout><AcademicSection /></Layout>} />,
+    <Route exact path='/academics/AcademicCalender' element={<Layout><AcademicCalender /></Layout>} />,
 ]
 
 export default AcademicsPageRoutes

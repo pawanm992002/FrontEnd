@@ -4,13 +4,13 @@ export default function MyTable({data}) {
     const tableHeaders = Object.keys(data.length > 0 ? data[0] : {})
 
     return (
-        <Paper sx={{ width: '100%' }}>
+        <Paper sx={{ width: "100%" }}>
             <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
                             {tableHeaders.length > 0 && tableHeaders?.map((header, index) => (
-                                <TableCell sx={{backgroundColor: 'var(--cardBG)', color: 'var(--darkBG)'}} key={index}>{header}</TableCell>
+                                <TableCell sx={{backgroundColor: 'var(--cardBG)', color: 'var(--darkBG)', border: '1px solid grey'}} key={index}>{header}</TableCell>
                             ))}
                         </TableRow>
                     </TableHead>
@@ -19,7 +19,7 @@ export default function MyTable({data}) {
                             <TableRow key={i}>
                                 {
                                     Object.values(row).map((cell,j) => (
-                                        <TableCell key={j}>
+                                        <TableCell width={'15px'} sx={{border:'1px solid grey'}} key={j}>
                                             {cell}
                                         </TableCell>
                                     ))

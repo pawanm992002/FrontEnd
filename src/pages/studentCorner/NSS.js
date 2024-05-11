@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import MyTable from '../../components/utilily/MyTable';
-import { Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { fetchNccCircular, fetchNccGallery } from '../../api/studentCorner';
+import GallerySection from '../../components/Home/GallerySection';
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -43,14 +43,38 @@ function a11yProps(index) {
 
 export default function NSS() {
     const [value, setValue] = useState(0);
+    const [Gallery, setGallery] = useState([]);
+    const [Circulars, setCirculars] = useState([]);
+  
+    useEffect(() => {
+      (async () => {
+        if (value === 2) {
+          const NccCirculars = await fetchNccCircular();
+          setCirculars(
+            NccCirculars?.map((val) => {
+              return {
+                SR_NO: val.SR_NO,
+                Title: val.Title,
+                Section: val.Section,
+                Notice: val.Notice,
+              };
+            })
+          );
+        }
+        if (value === 4) {
+          const NccGallery = await fetchNccGallery();
+          setGallery(
+            NccGallery?.map((val) => {
+              return val?.Image?.props?.to;
+            })
+          );
+        }
+      })();
+    }, [value]);
     const members = [
         { Name: 'Dr. Pooja Tomar', Designation: 'Coordinator' },
         { Name: 'Sh. Lalit K Dusad', Designation: 'Co-Coordinator' },
         { Name: 'Dr. Shikha Agarwal', Designation: 'Co-Coordinator' },
-    ]
-    const circulars = [
-        { SNO: '2024WEB0232', Date: '28/02/24', Title: 'Dash Derby Result', Link: 'https://www.ecajmer.ac.in/Content/Orders/CAS/Files/2024WEB0232-28-02-24-Result_Dash_Derby_Sprint_competition_AKAM_Feb_Activity_-_Copy[1]-vpEduQ.doc' },
-        { SNO: '2024WEB0224', Date: '26/02/24', Title: 'Sprint Competition Under AKAM', Link: 'https://www.ecajmer.ac.in/Content/Orders/CAS/Files/2024WEB0232-28-02-24-Result_Dash_Derby_Sprint_competition_AKAM_Feb_Activity_-_Copy[1]-vpEduQ.doc' },
     ]
 
     return (
@@ -77,9 +101,8 @@ export default function NSS() {
                             <Tab label="About Us" {...a11yProps(0)} />
                             <Tab label="Members" {...a11yProps(1)} />
                             <Tab label="Circulars" {...a11yProps(2)} />
-                            <Tab label="List of Students" {...a11yProps(4)} />
-                            <Tab label={<Link style={{ color: 'white' }} to={'/gallery'} variant='contained'>Gallery</Link>} {...a11yProps(5)} />
-
+                            <Tab label="List of Students" {...a11yProps(3)} />
+                            <Tab label="Gallery" {...a11yProps(4)} />
                         </Tabs>
                     </Box>
                     <CustomTabPanel value={value} index={0}>
@@ -127,10 +150,13 @@ export default function NSS() {
                         <MyTable data={members} />
                     </CustomTabPanel>
                     <CustomTabPanel value={value} index={2}>
-                        <MyTable data={circulars} />
+                        <MyTable data={Circulars} />
                     </CustomTabPanel>
                     <CustomTabPanel value={value} index={3}>
                         <MyTable data={members} />
+                    </CustomTabPanel>
+                    <CustomTabPanel value={value} index={4}>
+                        <GallerySection images={Gallery} />
                     </CustomTabPanel>
                 </Box>
             </Box>

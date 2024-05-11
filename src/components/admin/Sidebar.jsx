@@ -22,6 +22,7 @@ import {
   Center,
   Image,
 } from '@chakra-ui/react'
+import { useEffect } from 'react'
 import {
   FiHome,
   FiTrendingUp,
@@ -32,9 +33,11 @@ import {
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-const LinkItems = [
+
+
+export const LinkItems = [
   { name: 'administration', icon: FiHome, href: '/admin/administration' },
   { name: 'academics', icon: FiTrendingUp, href: '/admin/academics' },
   { name: 'departments', icon: FiCompass, href: '/admin/departments' },
@@ -46,6 +49,7 @@ const LinkItems = [
   { name: 'eca-press', icon: FiSettings, href: '/admin/eca-press' },
   { name: 'web-team', icon: FiSettings, href: '/admin/web-team' },
 ]
+
 
 const SidebarContent = ({ onClose, ...rest }) => {
   return (
@@ -63,7 +67,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <Image src='https://www.ecajmer.ac.in/images//white%20logo.png' />
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
+      {LinkItems?.map((link) => (
         <Link key={link.name} to={link.href} style={{ width: "100%", height: '100%' }}>
           <NavItem onClick={onClose}  icon={link.icon} >
             {link.name}
@@ -145,7 +149,6 @@ const MobileNav = ({ onOpen, ...rest }) => {
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
-        <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />
         <Flex alignItems={'center'}>
           <Menu>
             <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
@@ -174,11 +177,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
-              <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem> <Link to={'/logout'} >Logout</Link> </MenuItem>
             </MenuList>
           </Menu>
         </Flex>
@@ -190,6 +189,15 @@ const MobileNav = ({ onOpen, ...rest }) => {
 const Sidebar = ({ content }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
+      if (localStorage.getItem("typeOfUser") !== 'admin')
+        navigate("/");
+    }
+    console.log('run admin');
+  },[])
 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>

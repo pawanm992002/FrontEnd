@@ -12,6 +12,16 @@ import toast from "react-hot-toast";
 import { AdminApiInstance } from "../apis/ApiIntances";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import {
+  fetchCreativeCircular,
+  fetchCreativeGallery,
+  fetchHostelCircular,
+  fetchHostelGallery,
+  fetchNccCircular,
+  fetchNccGallery,
+  fetchStudentAchievement,
+  fetchTransportationCircular,
+} from "../../../api/studentCorner";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
@@ -24,261 +34,35 @@ const StudentCorner = () => {
   const [HostelGallery, setHostelGallery] = useState([]);
   const [TransportationCircular, setTransportationCircular] = useState([]);
   const [StudentAchievement, setStudentAchievement] = useState([]);
-
-  const deleteStudentCornerRow = async (_id, val) => {
-    console.log("......... gal", _id, val);
-    try {
-      const { data } = await AdminApiInstance.delete(
-        `/student-corner/${val}/${_id}`
-      );
-      toast.success(data?.message);
-    } catch (error) {
-      console.log(".......... del", error);
-      toast.error(error?.response?.data?.error);
-    }
-  };
+  const [refresh, setRefresh] = useState();
 
   useEffect(() => {
-    // for creative circular
-    ;(async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/student-corner/circular/creative`
-        );
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: val.srNo,
-            Title: val.title,
-            Section: val.section,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Notice: (
-              <Link to={val.notice}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button
-                onClick={() => deleteStudentCornerRow(val?._id, "creative-art-circular")}
-              >
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setCreativeCircular(temp);
-      } catch (error) {}
-    })();
+    (async () => {
+      const creativeCir = await fetchCreativeCircular(setRefresh);
+      setCreativeCircular(creativeCir);
 
-    // for creative gallery
-    ;(async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/student-corner/gallery/creative`
-        );
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: i,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Image: (
-              <Link to={val.image}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button
-                onClick={() => deleteStudentCornerRow(val?._id, "creative-art-gallery")}
-              >
-                Delete
-              </Button>
-            ),
-          };
-        });
-        console.log(".......... testttttt", data);
-        setCreativeGallery(temp);
-      } catch (error) {
-        console.log(".......... testttt", error);
-      }
-    })();
+      const creativeGal = await fetchCreativeGallery(setRefresh);
 
-    // for ncc circular
-    ;(async () => {
-      try {
-        const { data } = await axios.get(`${url}/student-corner/circular/ncc`);
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: val.srNo,
-            Title: val.title,
-            Section: val.section,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Notice: (
-              <Link to={val.notice}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button
-                onClick={() => deleteStudentCornerRow(val?._id, "ncc-circular")}
-              >
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setNccCircular(temp);
-      } catch (error) {}
-    })();
+      setCreativeGallery(creativeGal);
+      const nccCir = await fetchNccCircular(setRefresh);
+      setNccCircular(nccCir);
 
-    // for ncc gallery
-    ;(async () => {
-      try {
-        const { data } = await axios.get(`${url}/student-corner/gallery/ncc`);
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: i,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Image: (
-              <Link to={val.image}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button
-                onClick={() => deleteStudentCornerRow(val?._id, "ncc-gallery")}
-              >
-                Delete
-              </Button>
-            ),
-          };
-        });
-        console.log(".......... testttttt", data);
-        setNccGallery(temp);
-      } catch (error) {
-        console.log(".......... testttt", error);
-      }
-    })();
+      const nccGal = await fetchNccGallery(setRefresh);
+      setNccGallery(nccGal);
 
-    // for hostel circular
-    ;(async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/student-corner/circular/hostel`
-        );
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: val.srNo,
-            Title: val.title,
-            Section: val.section,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Notice: (
-              <Link to={val.notice}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button
-                onClick={() => deleteStudentCornerRow(val?._id, "hostel-circular")}
-              >
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setHostelCircular(temp);
-      } catch (error) {}
-    })();
+      const hostelCir = await fetchHostelCircular(setRefresh);
+      setHostelCircular(hostelCir);
 
-    // for hostel gallery
-    ;(async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/student-corner/gallery/hostel`
-        );
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: i,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Image: (
-              <Link to={val.image}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button
-                onClick={() => deleteStudentCornerRow(val?._id, "hostel-gallery")}
-              >
-                Delete
-              </Button>
-            ),
-          };
-        });
-        console.log(".......... testttttt", data);
-        setHostelGallery(temp);
-      } catch (error) {
-        console.log(".......... testttt", error);
-      }
-    })();
+      const hostelGal = await fetchHostelGallery(setRefresh);
+      setHostelGallery(hostelGal);
 
-    // for transportation circular
-    ;(async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/student-corner/circular/transport`
-        );
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: val.srNo,
-            Title: val.title,
-            Section: val.section,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Notice: (
-              <Link to={val.notice}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button
-                onClick={() => deleteStudentCornerRow(val?._id, "transportation-circulars")}
-              >
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setTransportationCircular(temp);
-      } catch (error) {}
-    })();
+      const transportationCir = await fetchTransportationCircular(setRefresh);
+      setTransportationCircular(transportationCir);
 
-    // for student acheivement
-    ;(async () => {
-      try {
-        const { data } = await axios.get(
-          `${url}/student-corner/student-achievement`
-        );
-        const temp = data.result.map((val, i) => {
-          return {
-            SR_NO: i,
-            Title: val.title,
-            Name: val.name,
-            Description: val.description,
-            Created_At: new Date(val.createdAt).toDateString(),
-            Image: (
-              <Link to={val.image}>
-                <Button>View</Button>
-              </Link>
-            ),
-            Delete: (
-              <Button
-                onClick={() => deleteStudentCornerRow(val?._id, "student-achievement")}
-              >
-                Delete
-              </Button>
-            ),
-          };
-        });
-        setStudentAchievement(temp);
-      } catch (error) {}
+      const studnentAch = await fetchStudentAchievement(setRefresh);
+      setStudentAchievement(studnentAch);
     })();
-  }, []);
+  }, [refresh]);
 
   const creativeArtData = [
     {

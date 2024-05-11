@@ -2,7 +2,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 export default function About({ comp }) {
-  if (comp === "computer")
+  if (comp === "cse")
     return (
       <Box sx={{overflowY:'auto', height:'600px'}}>
         <Typography variant="h6">About Us</Typography>

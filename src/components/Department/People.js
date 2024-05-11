@@ -14,7 +14,8 @@ export default function People({ people }) {
       }}
     >
       <Box>
-        <img src={people?.img} style={{ maxHeight: "200px" }} />
+        {console.log("..................gggg", people)}
+        <img src={people?.Picture?.props?.src} style={{ maxHeight: "200px" }} />
       </Box>
       <Box
         sx={{
@@ -22,10 +23,10 @@ export default function People({ people }) {
           minWidth: "220px",
         }}
       >
-        <Typography variant="h6">{people?.name}</Typography>
-        <Typography variant="body2">{people?.post}</Typography>
-        <Typography variant="body2">{people?.email}</Typography>
-        <Typography variant="body2">{people?.room}</Typography>
+        <Typography variant="h6">{people?.Name}</Typography>
+        <Typography variant="body2">{people?.Designation}</Typography>
+        <Typography variant="body2">{people?.Email}</Typography>
+        <Typography variant="body2">{people?.Room_NO}</Typography>
         <Button variant="contained">View Details</Button>
       </Box>
     </Box>

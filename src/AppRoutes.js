@@ -19,6 +19,9 @@ import Admin from "./PagesRoutes/Admin";
 import DepartmentsRoutes from "./PagesRoutes/DepartmentsRoutes";
 import { AuthContext } from "./AuthContext";
 import { useContext } from "react";
+import FacultyPageRoutes from "./PagesRoutes/FacultyPageRoutes";
+import ChakraUIPages from "./PagesRoutes/ChakraUIPages";
+import Logout from "./pages/Logout";
 
 const AppRoutes = () => {
   return (
@@ -56,7 +59,12 @@ const AppRoutes = () => {
               {DepartmentsRoutes}
 
               {/* ------------ Admin Pages Routes ------------------ X  */}
-              <Route path="/admin/*" element={<Admin />} />
+        {/* {ChakraUIPages} */}
+              <Route path="/*" element={<ChakraUIPages />} />
+
+              <Route path="/logout" element={<Logout />} />
+
+
 
               <Route
                 path="*"

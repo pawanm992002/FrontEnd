@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 
 //-------- Packages Stuff
-import { VStack } from '@chakra-ui/react'
+import { FormControl, FormLabel, VStack } from '@chakra-ui/react'
 
 import { ButtonBox, FormBox, FormInputBox } from '../FormInputBox';
 
 import toast from 'react-hot-toast';
 import { AdminApiInstance } from '../apis/ApiIntances';
+import { DepartmentsSelection } from '../cards/CircularCard';
 
 //------------- Create the profile form
 export const AddWebTeamForm = () => {
@@ -64,9 +65,11 @@ return (
 
 
                     <FormInputBox label={' Thumbnail'} type='file' handleChange={handleFileChange} name={'image'} />
+                    <FormControl>
+              <FormLabel>{"Branch"}</FormLabel>
 
-
-                    <FormInputBox label={"Branch"} name={'branch'} placeholder={"CSE"} value={form.branch} handleChange={handleChange} />
+              <DepartmentsSelection name='branch' value={form.branch} handleChange={handleChange} />
+            </FormControl>
 
                     <FormInputBox label={"Duration"} name={'duration'} placeholder={"2023-24"} value={form.duration} handleChange={handleChange} />
 

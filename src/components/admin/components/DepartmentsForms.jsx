@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 
 //-------- Packages Stuff
-import {VStack } from "@chakra-ui/react";
+import { FormControl, FormLabel, VStack } from "@chakra-ui/react";
 
 import { ButtonBox, FormBox, FormInputBox } from "../FormInputBox";
-import axios from "axios";
 import toast from "react-hot-toast";
-import { AdminApiInstance, url } from "../apis/ApiIntances";
+import { AdminApiInstance } from "../apis/ApiIntances";
+import { DepartmentsSelection, DesignationSelection, SemesterSelection } from "../cards/CircularCard";
+import { FacultyApiInstance } from "../../Faculty/api/APIs";
 
 //------------- Create the profile form
-export const FacultyMemberForm = () => {
+export const FacultyMemberForm = ({dept_name='',dept_readonly=false}) => {
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
     designation: "",
     roomNo: "",
-    department: "",
+    department: dept_name || '',
     profile: "",
   });
 
@@ -55,11 +56,11 @@ export const FacultyMemberForm = () => {
       else toast.error(data?.message)
 
     } catch (error) {
-      toast.error("Internal Server Error");
+      toast.error(error?.response?.data?.error);
     }
 
     setLoading(false);
-    // setForm({name:'',email:'',password:'',department:'',designation:'',roomNo:'',profile:''})
+    setForm({ name: '', email: '', password: '', department: '', designation: '', roomNo: '', profile: '' })
   };
 
   return (
@@ -99,22 +100,16 @@ export const FacultyMemberForm = () => {
               handleChange={handleFileChange}
               name={"profile"}
             />
+            <FormControl>
+              <FormLabel>{"Department"}</FormLabel>
 
-            <FormInputBox
-              label={"Faculty Department"}
-              name={"department"}
-              placeholder={"CSE"}
-              value={form.department}
-              handleChange={handleChange}
-            />
+              <DepartmentsSelection dept_readonly={dept_readonly} value={form.department} handleChange={handleChange} />
+            </FormControl>
 
-            <FormInputBox
-              label={"Faculty Designation"}
-              name={"designation"}
-              placeholder={"HOD"}
-              value={form.designation}
-              handleChange={handleChange}
-            />
+            <FormControl>
+              <FormLabel>{'Designation'}</FormLabel>
+              <DesignationSelection value={form.designation} handleChange={handleChange} />
+            </FormControl>
 
             <FormInputBox
               label={"Faculty RoomNo."}
@@ -133,9 +128,9 @@ export const FacultyMemberForm = () => {
 };
 
 //------------ Create the examination Section form
-export const AchievementForm = () => {
+export const AchievementForm = ({dept_name='',dept_readonly=false}) => {
   const [form, setForm] = useState({
-    department: "",
+    department: dept_name || "",
     achievement: "",
     category: "Department",
   });
@@ -150,11 +145,13 @@ export const AchievementForm = () => {
       setLoading(true);
       console.log("form ..............", form);
 
-      const { data,status } = await AdminApiInstance.post("/department/achievement", form,{headers:{
-        'Content-Type':'application/json'
-      }});
+      const { data, status } = await AdminApiInstance.post("/department/achievement", form, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
-      if(status === 200) toast.success(data?.message);
+      if (status === 200) toast.success(data?.message);
       else toast.error(data?.message);
 
     } catch (error) {
@@ -162,7 +159,7 @@ export const AchievementForm = () => {
     }
 
     setLoading(false);
-    setForm({department:'',achievement:'',category:'Department'})
+    setForm({ department: '', achievement: '', category: 'Department' })
   };
 
 
@@ -171,13 +168,11 @@ export const AchievementForm = () => {
       <FormBox title={"Add Achievements"}>
         <form onSubmit={handleSubmit}>
           <VStack spacing={4}>
-            <FormInputBox
-              label={"Department"}
-              name={"department"}
-              placeholder={"CSE"}
-              value={form.department}
-              handleChange={handleChange}
-            />
+          <FormControl>
+              <FormLabel>{"Department"}</FormLabel>
+
+              <DepartmentsSelection  dept_readonly={dept_readonly} value={form.department} handleChange={handleChange} />
+            </FormControl>
 
             <FormInputBox
               label={"Achievement"}
@@ -187,13 +182,13 @@ export const AchievementForm = () => {
               handleChange={handleChange}
             />
 
-<FormInputBox
+            <FormInputBox
               label={"Category"}
               name={"category"}
               placeholder={"Department"}
               value={form.category}
               handleChange={handleChange}
-              readonly = {true}
+              readonly={true}
             />
 
 
@@ -211,8 +206,8 @@ export const AchievementForm = () => {
 };
 
 //------------ add new gallery in department
-export const AddNewDepartmentGalleryForm = () => {
-  const [form, setForm] = useState({ department: "", file: "" });
+export const AddNewDepartmentGalleryForm = ({dept_name='',dept_readonly=false}) => {
+  const [form, setForm] = useState({ department: dept_name || "", file: "" });
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) =>
@@ -224,14 +219,14 @@ export const AddNewDepartmentGalleryForm = () => {
     try {
       e.preventDefault();
       setLoading(true);
-      
+
       const myForm = new FormData();
-      myForm.append('department',form.department)
-      myForm.append('file',form.file)
+      myForm.append('department', form.department)
+      myForm.append('file', form.file)
 
-      const { data,status } = await AdminApiInstance.post("/department/gallery", myForm);
+      const { data, status } = await AdminApiInstance.post("/department/gallery", myForm);
 
-      if(status === 200) toast.success(data?.message);
+      if (status === 200) toast.success(data?.message);
       else toast.error(data?.message);
 
     } catch (error) {
@@ -239,7 +234,7 @@ export const AddNewDepartmentGalleryForm = () => {
     }
 
     setLoading(false);
-    setForm({department:'',file:''})
+    setForm({ department: '', file: '' })
   };
 
 
@@ -248,13 +243,11 @@ export const AddNewDepartmentGalleryForm = () => {
       <FormBox title={"Add Department Gallery"}>
         <form onSubmit={handleSubmit}>
           <VStack spacing={4}>
-            <FormInputBox
-              label={"Department"}
-              name={"department"}
-              placeholder={"CSE"}
-              value={form.department}
-              handleChange={handleChange}
-            />
+            <FormControl>
+              <FormLabel>{"Department"}</FormLabel>
+
+              <DepartmentsSelection dept_readonly={dept_readonly} value={form.department} title={'Department'} handleChange={handleChange} />
+            </FormControl>
 
             <FormInputBox
               label={"File"}
@@ -272,9 +265,9 @@ export const AddNewDepartmentGalleryForm = () => {
 };
 
 //------------ add new gallery in department
-export const AddDepartmentTimeTableForm = () => {
+export const AddDepartmentTimeTableForm = ({dept_name='',dept_readonly=false}) => {
   const [form, setForm] = useState({
-    department: "",
+    department: dept_name || "",
     timetable: "",
     title: "",
   });
@@ -286,29 +279,31 @@ export const AddDepartmentTimeTableForm = () => {
   const handleFileChange = (e) =>
     setForm({ ...form, timetable: e.target.files[0] });
 
- 
-    const handleSubmit = async (e) => {
-      try {
-        e.preventDefault();
-        setLoading(true);
-        
-        const myForm = new FormData();
-        myForm.append('department',form.department)
-        myForm.append('timetable',form.timetable)
-        myForm.append('title',form.title)
-  
-        const { data,status } = await AdminApiInstance.post("/department/timetable", myForm);
-  
-        if(status === 200) toast.success(data?.message);
-        else toast.error(data?.message);
-  
-      } catch (error) {
-        toast.error(error?.response?.data?.error);
-      }
-  
-      setLoading(false);
-      setForm({department:'',timetable:'',title:''})
-    };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      setLoading(true);
+
+      console.log('form ',form);
+
+      const myForm = new FormData();
+      myForm.append('department', form.department)
+      myForm.append('timetable', form.timetable)
+      myForm.append('title', form.title)
+
+      const { data, status } = await AdminApiInstance.post("/department/timetable", myForm);
+
+      if (status === 200) toast.success(data?.message);
+      else toast.error(data?.message);
+
+    } catch (error) {
+      toast.error(error?.response?.data?.error);
+    }
+
+    setLoading(false);
+    // setForm({ department: '', timetable: '', title: '' })
+  };
 
   return (
     <>
@@ -323,13 +318,11 @@ export const AddDepartmentTimeTableForm = () => {
               handleChange={handleChange}
             />
 
-            <FormInputBox
-              label={"Department"}
-              name={"department"}
-              placeholder={"CSE"}
-              value={form.department}
-              handleChange={handleChange}
-            />
+            <FormControl>
+              <FormLabel>{"Department"}</FormLabel>
+
+              <DepartmentsSelection dept_readonly={dept_readonly} value={form.department} handleChange={handleChange} />
+            </FormControl>
 
             <FormInputBox
               label={"Upload Timetable"}
@@ -351,9 +344,10 @@ export const AddDepartmentTimeTableForm = () => {
 };
 
 //------------ add department notes
-export const AddDepartmentNotesForm = () => {
+export const AddDepartmentNotesForm = ({ dept_readonly = false, dept_name = '' }) => {
+  console.log('temp ', dept_readonly, dept_name)
   const [form, setForm] = useState({
-   sem:'',branc:'',notes:'',
+    sem: '1st', department: dept_readonly ? dept_name : '', notes: '',
     title: "",
   });
   const [loading, setLoading] = useState(false);
@@ -364,30 +358,36 @@ export const AddDepartmentNotesForm = () => {
   const handleFileChange = (e) =>
     setForm({ ...form, notes: e.target.files[0] });
 
- 
-    const handleSubmit = async (e) => {
-      try {
-        e.preventDefault();
-        setLoading(true);
-        
-        const myForm = new FormData();
-        myForm.append('sem',form.sem)
-        myForm.append('department',form.department)
-        myForm.append('notes',form.notes)
-        myForm.append('title',form.title)
-  
-        const { data,status } = await axios.post(`${url}/faculty/notes`,myForm);
-  
-        if(status === 200) toast.success(data?.message);
-        else toast.error(data?.message);
-  
-      } catch (error) {
-        toast.error(error?.response?.data?.error);
-      }
-  
-      setLoading(false);
-      setForm({department:'',timetable:'',title:''})
-    };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      setLoading(true);
+
+      console.log('form ', form);
+
+      const myForm = new FormData();
+      myForm.append('sem', form.sem)
+      // if (dept_name) myForm.append('branch', dept_name)
+      // else 
+      myForm.append('branch', form.department)
+
+      myForm.append('notes', form.notes)
+      myForm.append('title', form.title)
+
+      const { data, status } = await FacultyApiInstance.post(`/notes`, myForm);
+      console.log('notes', data);
+
+      if (status === 200) toast.success(data?.message);
+      else toast.error(data?.message);
+
+    } catch (error) {
+      toast.error(error?.response?.data?.error);
+    }
+
+    setLoading(false);
+    // setForm({ department: '', timetable: '', title: '' })
+  };
 
   return (
     <>
@@ -402,20 +402,15 @@ export const AddDepartmentNotesForm = () => {
               handleChange={handleChange}
             />
 
-            <FormInputBox
-              label={"Department"}
-              name={"department"}
-              placeholder={"CSE"}
-              value={form.department}
-              handleChange={handleChange}
-            />
-            <FormInputBox
-              label={"Sem"}
-              name={"sem"}
-              placeholder={"even"}
-              value={form.sem}
-              handleChange={handleChange}
-            />
+            <FormControl>
+              <FormLabel>{"Department"}</FormLabel>
+
+              <DepartmentsSelection dept_readonly={dept_readonly} value={form.department} handleChange={handleChange} />
+            </FormControl>
+            <FormControl>
+              <FormLabel>{"Semester"}</FormLabel>
+             <SemesterSelection value={form.sem} handleChange={handleChange} />
+            </FormControl>
 
             <FormInputBox
               label={"Notes"}
