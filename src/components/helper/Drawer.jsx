@@ -8,7 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Drafts, ExpandLess, ExpandMore, Inbox, Login, Mail, Phone, PhoneAndroid, Send, Star } from '@mui/icons-material';
+import { ExpandLess, ExpandMore, Inbox, Login, Mail, Phone, PhoneAndroid, Star } from '@mui/icons-material';
 import { useState } from 'react';
 import { Collapse, ListSubheader, useMediaQuery } from '@mui/material';
 
@@ -25,7 +25,7 @@ export default function Drawer({open,toggleDrawerOpen,toggleDrawerClose,data}) {
     6:false
   });
 
-const Small = useMediaQuery('(max-width:500px)')
+const Small = useMediaQuery('(max-width:1100px)')
 const handleClick = (propertyKey) => {
   setOpens((prevState) => ({
     ...prevState,
@@ -103,26 +103,30 @@ item[1].map((d,k)=>{
   );
 
   return (
-    <div>
+    <div style={{maxWidth:'90vw'}}>
 
           <SwipeableDrawer
             anchor={'right'}
             open={open}
             onClose={toggleDrawerClose}
             onOpen={toggleDrawerOpen}
+            sx={{maxWidth:'90%'}}
           >
           <Box
-          sx={{ width : 400 }}
+          sx={{ width : 400,maxWidth:'90vw',display:'flex',flexDirection:'column',justifyContent:'space-between',height:'100vh' }}
           role="presentation"
         >
+        {Small &&
         <List
-        sx={{ width: '100%', maxWidth: 600, bgcolor: 'background.paper' }}
+        sx={{ width: '100%',maxWidth:'90%', bgcolor: 'background.paper'}}
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
-            {!Small && list()} 
+            {list()} 
+            </List>
+        }    
             {Links(Small)}
-          </List></Box>
+          </Box>
           </SwipeableDrawer>
     </div>
   );
