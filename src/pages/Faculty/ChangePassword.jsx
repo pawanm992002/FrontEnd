@@ -21,7 +21,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import {FacultyApiInstance, url} from '../../components/Faculty/api/APIs'
+import { FacultyApiInstance, url } from '../../components/Faculty/api/APIs'
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
@@ -43,7 +43,6 @@ const ForgetPassword = () => {
       setLoading(true);
 
       const {data,status,error} = await FacultyApiInstance.put(`/update-password`, form)
-      console.log('data and status ',data , status,error);
 
       if(status !== 200)
           toast.error(data?.error);

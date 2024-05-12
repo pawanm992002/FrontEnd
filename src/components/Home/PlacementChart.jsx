@@ -8,9 +8,8 @@ import { Line } from 'react-chartjs-2'
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, ArcElement, Tooltip, Legend)
 
 // --------------- A line chart, is help we show how many subscribe or un subscribe users 
-export const LineChart = ({ placements = ['23','12','20','17','1','9','40','21'] }) => {
+export const LineChart = ({ placements = ['23','12','20','17','1','9','40','21'],labels }) => {
 
-    const labels = ["2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016"];
 
 
     const options = {

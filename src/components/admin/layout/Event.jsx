@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import CircularCard from "../cards/CircularCard";
+import CircularCard, { tableSection } from "../cards/CircularCard";
 import { Button, SimpleGrid } from "@chakra-ui/react";
 import axios from "axios";
 import { AdminApiInstance } from "../apis/ApiIntances";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { fetchEvents } from "../../../api/events";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
@@ -12,13 +12,16 @@ const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 const Event = () => {
   const [Events, setEvents] = useState([]);
   const [refresh, setRefresh] = useState([]);
+  const [searchParams,setSearchParams] = useSearchParams();
+  const section = searchParams.get('section');
+  
   useEffect(() => {
     // for events
     ;(async () => {
       const events = await fetchEvents(setRefresh);
       setEvents(events);
     })();
-  }, [refresh]);
+  }, [refresh,tableSection.includes(section)]);
   const cardData = [
     {
       title: "Event",

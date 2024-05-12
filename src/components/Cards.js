@@ -1,18 +1,25 @@
 import { Link } from "react-router-dom";
-import { Box, Typography, Modal, Button, ListItem, ListItemText, ListSubheader, List,useMediaQuery } from "@mui/material";
+import { Box, Typography, Modal, Button, ListItem, ListItemText, ListSubheader, List, useMediaQuery, FormControl, FormLabel } from "@mui/material";
 import Groups2 from "@mui/icons-material/Groups2";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
-import Description from "@mui/icons-material/Description";
 import Badge from "@mui/icons-material/Badge";
 import School from "@mui/icons-material/School";
-import PersonPinCircle from "@mui/icons-material/PersonPinCircle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AboutECA from "./Home/AboutECA";
 import { MyList } from "./utilily/MyList";
+import ModalComponent from "./Modal";
+import MyTable from "./utilily/MyTable";
+import { DepartmentsSelection } from "./admin/cards/CircularCard";
+import { fetchNotes } from "../api/departments";
 
 
 
 export default function Cards() {
+
+
+  //--------finding the notes by the departments
+  const [notes, setNotes] = useState([]);
+
   const cards = [
     {
       icon: <Groups2 sx={{ fontSize: "50px" }} />,
@@ -30,21 +37,20 @@ export default function Cards() {
       // link: "/Accounts",
     },
     {
-      icon: <PersonPinCircle sx={{ fontSize: "50px" }} />,
-      text: "Faculty Login",
-      link: "/faculty/login",
-    },
-    {
       icon: <Badge sx={{ fontSize: "50px" }} />,
       text: "Department",
       // link: "/facultylogin",
     },
   ];
+
   const departments = [{ name: 'Computer Science', link: '/computer' }, { name: 'Electical', }, { name: 'Civil' }, { name: 'Mechanical' }, { name: 'Electronics' }]
-  const notes = [{ name: 'Note 1', link: '' }, { name: 'Note 2', }, { name: 'Note 3' }, { name: 'Note 4' }, { name: 'Note 5' }]
+  
   const [openAbout, setOpenAbout] = useState(false);
   const [openDep, setOpenDep] = useState(false);
+
   const [openNotes, setOpenNotes] = useState(false);
+  const [departmentValue, setDepartmentValue] = useState('cse');
+
   const handleClick = (comp) => {
     if (comp === "Department") {
       setOpenDep(true)
@@ -55,7 +61,17 @@ export default function Cards() {
     }
 
   }
+
+
   const ExtraSmall = useMediaQuery('(max-width:450px)');
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetchNotes(departmentValue,null,false);
+      setNotes(data)
+    })()
+  }, [departmentValue]);
+
   return (
     <Box
       sx={{
@@ -66,9 +82,9 @@ export default function Cards() {
       }}
     >
       <Box sx={{ maxWidth: "var(--maxWidth)" }}>
-      <Box sx={{ display:'flex',margin:'auto',width:'100%',justifyContent:'center' }} >
-      <Typography variant='h5' className='double-line-bottom' > Student@ECA </Typography>
-      </Box>
+        <Box sx={{ display: 'flex', margin: 'auto', width: '100%', justifyContent: 'center' }} >
+          <Typography variant='h5' className='double-line-bottom' > Student@ECA </Typography>
+        </Box>
 
         <Box
           sx={{
@@ -135,44 +151,34 @@ export default function Cards() {
               <MyList list={departments} />
             </Box>
           </Modal>
-          <Modal
-            open={openNotes}
-            onClose={() => setOpenNotes(false)}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              bgcolor: 'background.paper',
-              overflowY: 'auto',
-              height: '90%',
-              borderRadius: '8px',
-              boxShadow: 24,
-              maxHeight: '800px',
-              display: 'flex',
-              flexDirection: 'column',
-              width: '80%',
-              maxWidth: '350px'
-            }} id="modal-modal-description">
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '15px 8px', bgcolor: 'var(--cardBG)', color: 'var(--darkBG)' }}>
 
-                <Typography variant="h5">Note's</Typography>
-                <Button variant="contained" onClick={() => setOpenNotes(false)}>Close</Button>
-              </Box>
-              <MyList list={notes} />
-            </Box>
-          </Modal>
+          <ModalComponent
+            open={openNotes}
+            handleClose={() => setOpenNotes(false)}
+            content={
+              <>
+                <section id="Notes">
+                  <Typography>Notes</Typography>
+
+                  <DepartmentsSelection value={departmentValue} handleChange={(e) => setDepartmentValue(e.target.value)} />
+
+
+                  {/* ----------------- Showing notes here ------------ */}
+                  {notes && <MyTable data={notes} />}
+                </section>
+              </>
+            }
+          />
+
+
           {cards.map((val, i) => (
             <Link to={val?.link} key={i} onClick={() => handleClick(val?.text)}>
               <Box
                 sx={{
                   bgcolor: "var(--cardBG)",
                   minWidth: "160px",
-                  width: ExtraSmall?'90vw':"200px",
-                  height: ExtraSmall?'150px':"130px",
+                  width: ExtraSmall ? '90vw' : "250px",
+                  height: ExtraSmall ? '150px' : "130px",
                   borderRadius: "8px",
                   alignItems: "center",
                   justifyContent: "center",

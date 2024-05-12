@@ -7,13 +7,11 @@ import { AdminApiInstance } from "../components/admin/apis/ApiIntances";
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
 const deleteWebTeamRow = async (_id, setRefresh) => {
-    console.log("......... gal", _id);
     try {
       const { data } = await AdminApiInstance.delete(`/web-team/${_id}`);
       toast.success(data?.message);
       setRefresh(_id)
     } catch (error) {
-      console.log(".......... del", error);
       toast.error(error?.response?.data?.error);
     }
   };
@@ -38,6 +36,7 @@ const deleteWebTeamRow = async (_id, setRefresh) => {
           });
           return temp
         } catch (error) {
-          console.log(".......... error ...", error);
+          toast.error(error?.response?.data?.error);
+
         }
       }

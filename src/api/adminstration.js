@@ -14,7 +14,6 @@ const deleteAdmistrationRow = async (_id, val, setRefresh = null) => {
     toast.success(data?.message);
     setRefresh(_id);
   } catch (error) {
-    console.log(".......... del", error);
     toast.error(error?.response?.data?.error);
   }
 };
@@ -46,7 +45,8 @@ export const fetchBogMom = async (setRefresh = null) => {
     });
     return temp;
   } catch (error) {
-    console.log(".......... circular", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };
 
@@ -83,7 +83,8 @@ export const fetchExamCircular = async (setRefresh = null) => {
     });
     return temp;
   } catch (error) {
-    console.log(".......... circular", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };
 
@@ -114,7 +115,8 @@ export const fetchAccountCircular = async (setRefresh = null) => {
     });
     return temp;
   } catch (error) {
-    console.log(".......... circular", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };
 
@@ -145,7 +147,8 @@ export const fetchProctorCircular = async (setRefresh = null) => {
     });
     return temp;
   } catch (error) {
-    console.log(".......... circular", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };
 
@@ -178,6 +181,7 @@ export const fetchRegistrarCircular = async (setRefresh = null) => {
     });
     return temp;
   } catch (error) {
-    console.log(".......... circular", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };

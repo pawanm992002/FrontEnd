@@ -14,7 +14,6 @@ const Notes = () => {
   const section = searchParams.get("section");
   const dept_name = searchParams.get('dept_name');
 
-  console.log('section', section, dept_name);
 const [loading,setLoading] = useState(false);
 
   const [DepartmentNotes, setDepartmentNotes] = useState([]);
@@ -32,7 +31,6 @@ const [loading,setLoading] = useState(false);
       }
 
     } catch (error) {
-      console.log(".......... del", error);
       toast.error(error?.response?.data?.error);
     }
     setLoading(false);
@@ -48,7 +46,6 @@ const [loading,setLoading] = useState(false);
       setLoading(true);
 
     const user = JSON.parse(localStorage?.getItem('userData'));
-    console.log('user at sidebar ', user);
       let department = user?.department;
 
     if (department === 'Civil Engineering') {
@@ -140,14 +137,13 @@ const [loading,setLoading] = useState(false);
             ),
           };
         });
-        console.log(".......... notes", data, temp);
         setDepartmentNotes(temp);
       } catch (error) {
-        console.log(".......... notes", error);
+        toast.error(error?.response?.data?.error);
+
       }
       setLoading(false);
     })();
-    console.log('runn')
   }, [section === 'Notes'])
 
 

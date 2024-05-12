@@ -7,7 +7,7 @@ import { ButtonBox, FormBox, FormInputBox } from '../FormInputBox';
 
 import toast from 'react-hot-toast';
 import { AdminApiInstance } from '../apis/ApiIntances';
-import { DepartmentsSelection } from '../cards/CircularCard';
+import { DepartmentsSelection, YearSelection } from '../cards/CircularCard';
 
 //------------- Create the profile form
 export const AddWebTeamForm = () => {
@@ -41,7 +41,8 @@ export const AddWebTeamForm = () => {
             else toast.success(data?.message);
 
         } catch (error) {
-            console.log('error ', error, error?.message);
+            toast.error(error?.response?.data?.error);
+
         }
 
 
@@ -71,7 +72,7 @@ return (
               <DepartmentsSelection name='branch' value={form.branch} handleChange={handleChange} />
             </FormControl>
 
-                    <FormInputBox label={"Duration"} name={'duration'} placeholder={"2023-24"} value={form.duration} handleChange={handleChange} />
+            <YearSelection value={form.duration} handleChange={handleChange} name='duration' label='Duration' />
 
                     <ButtonBox loading={loading} type='submit' title={'Add New Team'} />
                 </VStack>

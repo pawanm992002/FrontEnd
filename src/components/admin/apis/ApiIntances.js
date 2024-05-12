@@ -8,7 +8,7 @@ export const url = process.env.REACT_APP_BACKEND_URL;
 export const AdminApiInstance = axios.create({
     baseURL : `${url}/admin`,
     headers: {
-        'Authorization': `Bearer ${Token}`,
+        'authorization': `Bearer ${Token}`,
       }
 });
 
@@ -17,10 +17,8 @@ export const AdminApiInstance = axios.create({
 export const handleAddSectionCircular = (form)=>{
     try {
         const {data,status,statusText} = AdminApiInstance.post('/circular',form);
-        console.log('data ',data,status,statusText);
         return data;
     } catch (error) {
-        console.log('error ',error,error?.message,error?.response,error?.response?.message);
-        throw new Error(error?.response?.message);
+        throw new Error(error?.response?.data?.error);
     }
 }

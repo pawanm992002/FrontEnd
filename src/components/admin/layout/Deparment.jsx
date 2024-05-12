@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import CircularCard from "../cards/CircularCard";
+import CircularCard, { tableSection } from "../cards/CircularCard";
 import { Button, Select, SimpleGrid } from "@chakra-ui/react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AdminApiInstance } from "../apis/ApiIntances";
 import {
@@ -27,6 +27,9 @@ const Department = () => {
   const [departmentValue, setDepartmentValue] = useState("cse");
   const [refresh, setRefresh] = useState();
 
+  const [searchParams,setSearchParams] = useSearchParams();
+const section = searchParams.get('section');
+
   useEffect(() => {
     (async () => {
       const members = await fetchMembers(departmentValue, setRefresh);
@@ -47,7 +50,7 @@ const Department = () => {
       const notes = await fetchNotes(departmentValue, setRefresh);
       setDepartmentNotes(notes);
     })();
-  }, [departmentValue, refresh]);
+  }, [departmentValue, refresh,tableSection.includes(section)]);
 
   const cardData = [
     {

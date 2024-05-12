@@ -82,7 +82,6 @@ export const AchievementForm = ()=>{
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('pawan form', form);
 
         setLoading(true);
 
@@ -130,7 +129,6 @@ export const AddNewDepartmentGalleryForm = ()=>{
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('form', form);
 
         setLoading(true);
 
@@ -176,7 +174,6 @@ export const AddDepartmentTimeTableForm = ()=>{
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('form', form);
 
         setLoading(true);
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CircularCard from "../cards/CircularCard";
+import CircularCard, { tableSection } from "../cards/CircularCard";
 import {
   Box,
   Button,
@@ -11,7 +11,7 @@ import {
 import toast from "react-hot-toast";
 import { AdminApiInstance } from "../apis/ApiIntances";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   fetchCreativeCircular,
   fetchCreativeGallery,
@@ -35,6 +35,9 @@ const StudentCorner = () => {
   const [TransportationCircular, setTransportationCircular] = useState([]);
   const [StudentAchievement, setStudentAchievement] = useState([]);
   const [refresh, setRefresh] = useState();
+
+  const [searchParams,setSearchParams] = useSearchParams();
+  const section = searchParams.get('section')
 
   useEffect(() => {
     (async () => {
@@ -62,7 +65,7 @@ const StudentCorner = () => {
       const studnentAch = await fetchStudentAchievement(setRefresh);
       setStudentAchievement(studnentAch);
     })();
-  }, [refresh]);
+  }, [refresh,tableSection.includes(section)]);
 
   const creativeArtData = [
     {

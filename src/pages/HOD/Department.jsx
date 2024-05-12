@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Button, SimpleGrid } from "@chakra-ui/react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import CircularCard from "../../components/admin/cards/CircularCard";
+import CircularCard, { tableSection } from "../../components/admin/cards/CircularCard";
 import { AdminApiInstance } from "../../components/admin/apis/ApiIntances";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
@@ -84,21 +84,21 @@ const Department = () => {
   const [departmentValue, setDepartmentValue] = useState("cse");
 
   const deleteDepartmentRow = async (_id, val) => {
-    console.log("......... gal", _id, val);
     try {
       const { data } = await AdminApiInstance.delete(
         `/department/${val}/${_id}`
       );
       toast.success(data?.message);
     } catch (error) {
-      console.log(".......... del", error);
       toast.error(error?.response?.data?.error);
     }
   };
 
+  const [searchParams,setSearchParams] = useSearchParams();
+  const section = searchParams.get('section');
+
   useEffect(() => {
     const user = JSON.parse(localStorage?.getItem('userData'));
-    console.log('user at sidebar ', user);
     let department = user?.department;
 
     ReturnDepartmentValue(department,setDepartmentValue);
@@ -109,7 +109,6 @@ const Department = () => {
         const { data } = await axios.get(
           `${url}/department-people/${departmentValue}`
         );
-        console.log(".......... members", data);
         const temp = data.result.map((val, i) => {
           return {
             SR_NO: i,
@@ -138,7 +137,6 @@ const Department = () => {
         const { data } = await axios.get(
           `${url}/department-notice/${departmentValue}`
         );
-        console.log(".......... circular", data);
         const temp = data.result.map((val, i) => {
           return {
             SR_NO: val.srNo,
@@ -160,7 +158,7 @@ const Department = () => {
         });
         setDepartmentCirculars(temp);
       } catch (error) {
-        console.log(".......... circular", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
 
@@ -186,10 +184,9 @@ const Department = () => {
             ),
           };
         });
-        console.log(".......... achivement", data);
         setDepartmentAchivements(temp);
       } catch (error) {
-        console.log(".......... achivement", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
 
@@ -219,10 +216,9 @@ const Department = () => {
             ),
           };
         });
-        console.log(".......... time table", data);
         setDepartmentTimeTable(temp);
       } catch (error) {
-        console.log(".......... achivement", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
 
@@ -232,7 +228,6 @@ const Department = () => {
         const { data } = await axios.get(
           `${url}/department-gallery/${departmentValue}`
         );
-        console.log(".......... gallery", data.result);
         const temp = data.result.map((val, i) => {
           return {
             SR_NO: val._id,
@@ -252,7 +247,7 @@ const Department = () => {
         });
         setDepartmentGallery(temp);
       } catch (error) {
-        console.log(".......... gallery", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
 
@@ -265,7 +260,6 @@ const Department = () => {
         const temp = data.result.map((val, i) => {
           return {
             SR_NO: val._id,
-            Created_At: new Date(val.createdAt).toDateString(),
             Title: val.title,
             Uploaded_By: val.faculty.name,
             Semester: val.sem,
@@ -281,13 +275,13 @@ const Department = () => {
             ),
           };
         });
-        console.log(".......... notes", data);
+        
         setDepartmentNotes(temp);
       } catch (error) {
-        console.log(".......... notes", error);
+        toast.error(error?.response?.data?.error);
       }
     })();
-  }, [departmentValue]);
+  }, [departmentValue,tableSection.includes(section)]);
 
   const cardData = [
     {

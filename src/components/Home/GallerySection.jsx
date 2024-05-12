@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -10,7 +10,7 @@ import {
 
 import ModalComponent from "../Modal";
 
-const GallerySection = ({ images }) => {
+const GallerySection = ({ images,achievements }) => {
   //------------- Control the modal component
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -19,7 +19,7 @@ const GallerySection = ({ images }) => {
   const small = useMediaQuery("(max-width:800px)");
   const Xsmall = useMediaQuery("(max-width:700px)");
   const XXS = useMediaQuery("(max-width:620px)");
-  console.log("large => ", large, " small => ", small);
+
 
   return (
     <>
@@ -36,26 +36,36 @@ const GallerySection = ({ images }) => {
                   margin: "auto",
                 }}
               >
-                <Grid container sx={{ width: "100%", margin: "auto" }}>
-                  {images?.map((val, i) => (
-                    <Grid
-                      key={i}
-                      item
-                      xs={12}
-                      md={4}
-                      sx={{
-                        border: "1px solid black",
-                        height: "175px",
-                        width: "30px",
-                        padding: "0",
-                        overflow: "hidden",
-                        margin: "2px",
-                      }}
-                    >
-                      <img src={val} alt="gallery" width={"100%"} />
-                    </Grid>
-                  ))}
-                </Grid>
+                <Grid
+              container
+              spacing={2}
+              sx={{
+                // display: "grid",
+                // gridTemplateColumns: XXS
+                //   ? "1fr"
+                //   : Xsmall
+                //   ? "1fr 1fr"
+                //   : "1fr 1fr 1fr",
+                width: "100%",
+                margin: "auto",
+                // gap: "5px",
+              }}
+            >
+              {achievements?.map((val, i) => (
+                <Grid
+                key={i}
+                item
+                xs={5}
+                md={4}
+                // sx={{
+                //   width:'445px',
+                //   margin: "0px",
+                // }}
+              >
+                <img src={val?.image} alt="gallery" width={'100%'} style={{content:'fit'}} />
+              </Grid>
+              ))}
+            </Grid>
               </Box>
             </>
           }
@@ -71,7 +81,7 @@ const GallerySection = ({ images }) => {
             }}
           >
             <Typography variant="h5" className="double-line-bottom">
-              Galery@ECA
+              Student Achievements @ECA
             </Typography>
           </Box>
 
@@ -84,33 +94,32 @@ const GallerySection = ({ images }) => {
           >
             <Grid
               container
+              spacing={2}
               sx={{
-                display: "grid",
-                gridTemplateColumns: XXS
-                  ? "1fr"
-                  : Xsmall
-                  ? "1fr 1fr"
-                  : "1fr 1fr 1fr",
+                // display: "grid",
+                // gridTemplateColumns: XXS
+                //   ? "1fr"
+                //   : Xsmall
+                //   ? "1fr 1fr"
+                //   : "1fr 1fr 1fr",
                 width: "100%",
                 margin: "auto",
-                gap: "5px",
+                // gap: "5px",
               }}
             >
-              {images?.map((val, i) => (
-                <Grid
-                  key={i}
-                  item
-                  sx={{
-                    border: "1px solid black",
-                    height: "250px",
-                    width: "100%",
-                    padding: "0",
-                    overflow: "hidden",
-                    margin: "2px",
-                  }}
-                >
-                  <img src={val} width={"100%"} height={"100%"} />
-                </Grid>
+              {achievements?.map((val, i) => (
+               i<=4 && <Grid
+                key={i}
+                item
+                xs={5}
+                md={4}
+                // sx={{
+                //   width:'445px',
+                //   margin: "0px",
+                // }}
+              >
+                <img src={val?.image} alt="gallery" width={'100%'} style={{content:'fit'}} />
+              </Grid>
               ))}
             </Grid>
 

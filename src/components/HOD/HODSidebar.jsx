@@ -60,7 +60,8 @@ const SidebarContent = ({ onClose, ...rest }) => {
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         {/* Logo */}
-        <Image src='https://www.ecajmer.ac.in/images//white%20logo.png' />
+        <Link to={'/'}>
+        <Image src='https://www.ecajmer.ac.in/images//white%20logo.png' /></Link>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems?.map((link) => (
@@ -149,6 +150,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
           <Menu>
             <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
               <HStack>
+                
                 <Avatar
                   size={'sm'}
                   src={
@@ -160,9 +162,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
                   <Text fontSize="xs" color="gray.600">
-                    Admin
+                    Head Of Departement
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
@@ -191,13 +192,19 @@ const HODSidebar = ({ content }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
+
     if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
-      if (localStorage.getItem("typeOfUser") !== 'hod')
-        navigate("/");
+      
+      const userType = localStorage.getItem("typeOfUser");
+      console.log('user typ e',userType)
+      if (localStorage.getItem("typeOfUser") === 'admin')
+        navigate("/admin/administration");
+      else if (localStorage.getItem("typeOfUser") !== 'Head of Department')
+        navigate('/faculty/profile');
+      else navigate('/hod/profile')
     }
-    console.log('hod');
-  },[])
+  }, [])
 
 
   return (
@@ -224,9 +231,11 @@ const HODSidebar = ({ content }) => {
           :
           <>
             <Center>
+              <Link to={'/'}>
               <Box maxH={'200px'} maxW={'500px'}>
                 <Image src='https://www.ecajmer.ac.in/images//white%20logo.png' />
               </Box>
+              </Link>
             </Center>
           </>}
       </Box>

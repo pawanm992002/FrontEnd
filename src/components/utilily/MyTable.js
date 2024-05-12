@@ -15,7 +15,10 @@ export default function MyTable({data,styles}) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.length > 0 && data.map((row, i) => (
+                     { data?.length <= 0 &&  <TableRow> <TableCell >
+                            <Typography sx={{fontSize:'15px',color:'red'}}>No Data Found</Typography>
+                        </TableCell> </TableRow>}
+                        {data?.length > 0 && data?.map((row, i) => (
                             <TableRow key={i}>
                                 {
                                     Object.values(row).map((cell,j) => (

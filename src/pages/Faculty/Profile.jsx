@@ -20,7 +20,8 @@ import toast from 'react-hot-toast';
 import { RxAvatar } from 'react-icons/rx'
 import { ButtonBox, FormInputBox } from '../../components/admin/FormInputBox';
 import Loading from '../../components/Layout/Loading';
-import { FacultyApiInstance } from '../../components/Faculty/api/APIs';
+import {FacultyApiInstance}  from'../../components/Faculty/api/APIs';
+import { DepartmentsSelection, DesignationSelection } from '../../components/admin/cards/CircularCard';
 
 //Components Stuff
 
@@ -32,8 +33,8 @@ const Profile = () => {
     const [loading, setLoading] = useState(false);
     const [isUpdateProfile, setIsUpdateProfile] = useState(false);
 
-    const [form, setForm] = useState({ name: '', email: '', department: '', roomNo: '', designation: ''})
-    const [user,setUser] = useState(form);
+    const [form, setForm] = useState({ name: '', email: '', department: '', roomNo: '', designation: '' })
+    const [user, setUser] = useState(form);
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
@@ -54,17 +55,17 @@ const Profile = () => {
         try {
 
             const { data, status } = await FacultyApiInstance.put('/update-profile', myForm);
-            console.log('data status ', data, status);
 
-            if (status === 200){
+            if (status === 200) {
                 toast.success(data?.message);
 
                 localStorage.setItem("userData", JSON.stringify(data?.result));
                 setUser(data?.result);
-            } 
+            }
             else toast.error(data?.message);
 
         } catch (error) {
+            console.log('eror ',error);
             toast.error(error?.response?.data?.error);
         }
         setLoading(false);
@@ -76,7 +77,7 @@ const Profile = () => {
 
         setForm({ name: user?.name, email: user?.email, department: user?.department, roomNo: user?.roomNo, designation: user?.designation })
 
-    }, [])
+    }, [setUser,isOpen === false])
 
     if (loading)
         return <Loading />
@@ -133,10 +134,16 @@ const Profile = () => {
 
                         <FormInputBox name={'roomNo'} label={'Room No'} readonly={isUpdateProfile ? false : true} value={form.roomNo} handleChange={handleChange} />
 
-                        <FormInputBox name={'department'} label={'Department'} readonly={isUpdateProfile ? false : true} value={form.department} handleChange={handleChange} />
+                        {!isUpdateProfile ?
+                            <FormInputBox name={'department'} label={'Department'} readonly={isUpdateProfile ? false : true} value={form.department} handleChange={handleChange} />
+                            :
+                            <DepartmentsSelection value={form.department} handleChange={handleChange} name='department' label={'Department'} />
+                        }
 
-                        <FormInputBox name={'designation'} label={'Designation'} readonly={isUpdateProfile ? false : true} value={form.designation}
+                      { !isUpdateProfile ?   <FormInputBox name={'designation'} label={'Designation'} readonly={isUpdateProfile ? false : true} value={form.designation}
                             handleChange={handleChange} />
+                        : <DesignationSelection label={'Designation'} value={form.designation} handleChange={handleChange} />
+                        }
                     </Stack>
 
                 </Box>
@@ -196,12 +203,11 @@ export const UploadPictureModal = ({ isOpen, onClose }) => {
         try {
 
             const { data, status } = await FacultyApiInstance.put('/update-profile', myForm);
-            console.log('data status ', data, status);
 
-            if (status === 200){
+            if (status === 200) {
                 localStorage.setItem("userData", JSON.stringify(data?.result));
                 toast.success(data?.message);
-            } 
+            }
             else toast.error(data?.message);
 
         } catch (error) {

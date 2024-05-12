@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import CircularCard from '../cards/CircularCard'
+import CircularCard, { tableSection } from '../cards/CircularCard'
 import { Box, Flex, Heading, SimpleGrid, VStack } from '@chakra-ui/react'
 import { fetchAlumni } from '../../../api/cells';
+import { useSearchParams } from 'react-router-dom';
 
 const Cells = () => {
     const [AlumniCircular, setAlumniCircular] = useState([]);
     const [refresh, setRefresh] = useState();
+
+    
+  const [searchParams,setSearchParams] = useSearchParams();
+  const section = searchParams.get('section')
   
     useEffect(() => {
       // for alumni circular
@@ -13,7 +18,7 @@ const Cells = () => {
         const alumni = await fetchAlumni(setRefresh);
         setAlumniCircular(alumni);
       })();
-    }, [refresh]);
+    }, [refresh,section === 'Alumni Circular']);
 
     const cardData = [
         {

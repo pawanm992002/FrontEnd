@@ -15,10 +15,12 @@ import {
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { MyList } from "../utilily/MyList";
 import { Link } from "react-router-dom";
+import ModalComponent from "../Modal";
 
 export default function EventsNews({ events, name }) {
   const [open, setOpen] = useState(false);
   const Small = useMediaQuery("(max-width:900px)");
+
 
   return (
     <Card
@@ -26,6 +28,9 @@ export default function EventsNews({ events, name }) {
         width: Small ? "90%" : "30%",
         minWidth: "240px",
         boxShadow: "2px 1px 6px 2px black",
+        height:'500px',
+        position:'relative',
+        top:'0%'
       }}
     >
       <CardActionArea>
@@ -34,14 +39,20 @@ export default function EventsNews({ events, name }) {
           sx={{ bgcolor: "var(--cardBG)", color: "var(--darkBG)" }}
         />
         <CardContent>
-          {events?.map((item, i) => (
-            i < 4 && <Box key={i}>
+          
+        {events?.length <=0 && <Typography color={'red'} >No Data Found</Typography>}
+        
+          {events && events?.map((item, i) => (
+        i<=4 &&  <Box key={i} >
+          <a href={item?.notice} target="_blank" rel="noopener noreferrer">
               <Typography
-                sx={{ fontWeight: "10px", fontSize: "17px", mt: 1 }}
+                sx={{ fontWeight: "10px", fontSize: "17px", mb: 1.2,textTransform:'capitalize',mt:1.2 }}
                 variant="h6"
               >
-                {item?.text?.slice(0, 30)}...
+                { item?.text ? item?.text?.slice(0, 30) : item?.title?.slice(0, 30)} ...
               </Typography>
+              </a>
+             
               <Box
                 sx={{
                   display: "flex",
@@ -58,7 +69,7 @@ export default function EventsNews({ events, name }) {
                     verticalAlign: "middle",
                   }}
                 >
-                  <CalendarMonthIcon fontSize="small" /> {item?.date}
+                  <CalendarMonthIcon fontSize="small" />  {item?.createdAt?.split('T')?.[0]}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -72,42 +83,51 @@ export default function EventsNews({ events, name }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Modal
+
+        <ModalComponent
           open={open}
-          onClose={() => setOpen(false)}
-          aria-labelledby="child-modal-title"
-          aria-describedby="child-modal-description"
-        >
+          handleClose={()=> setOpen(false)}
+          content={
+        <>
           <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              bgcolor: "background.paper",
-              borderRadius: 2,
-              boxShadow: 24,
-              p: 4,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "90%",
-              maxWidth: "400px",
-            }}
+            // sx={{
+            //   position: "absolute",
+            //   top: "50%",
+            //   left: "50%",
+            //   transform: "translate(-50%, -50%)",
+            //   bgcolor: "background.paper",
+            //   borderRadius: 2,
+            //   boxShadow: 24,
+            //   p: 4,
+            //   display: "flex",
+            //   flexDirection: "column",
+            //   justifyContent: "center",
+            //   alignItems: "center",
+            //   width: "90%",
+            // }}
           >
             <h2 id="parent-modal-title"> {name} </h2>
             <p id="parent-modal-description">
-              {events?.map((item, i) => (
-                <Box key={i} sx={{ borderBottom: "1px solid black" }}>
-                  <Link to={item?.link}>
+
+              {events?.length <=0 && <Typography color={'red'} >No Data Found</Typography>}
+
+              {events && events?.map((item, i) => (
+                <Box key={i} sx={{ borderBottom: "1px solid black",width:'100%' }}>
+                  <a href={item?.notice} target="_blank" rel="noopener noreferrer">
                     <Typography
                       sx={{ fontWeight: "10px", fontSize: "17px", mt: 1 }}
                       variant="h6"
+                      textTransform={'capitalize'}
                     >
-                      {item?.text}
+                      { item?.text ? item?.text?.slice(0, 30) : item?.title?.slice(0, 30)}
                     </Typography>
-                  </Link>
+                  </a>
+                  <Typography
+                sx={{ fontWeight: "10px", fontSize: "17px", mt: 1 }}
+                variant="h6"
+              >
+                {item?.description} 
+              </Typography>
                   <Box
                     sx={{
                       display: "flex",
@@ -124,26 +144,20 @@ export default function EventsNews({ events, name }) {
                         verticalAlign: "middle",
                       }}
                     >
-                      <CalendarMonthIcon fontSize="small" /> {item?.date}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: "blue", fontSize: "12px" }}
-                    >
-                      NEW
+                      <CalendarMonthIcon fontSize="small" /> {item?.createdAt?.split('T')?.[0]}
                     </Typography>
                   </Box>
                 </Box>
               ))}
             </p>
-          </Box>
-        </Modal>
+          </Box> </>} />
 
         <Button
           size="small"
           color="primary"
           variant="contained"
           onClick={() => setOpen(true)}
+          sx={{position:'absolute',bottom:'4%'}}
         >
           View All
         </Button>

@@ -7,7 +7,7 @@ import { ButtonBox, FormBox, FormInputBox } from "../FormInputBox";
 import toast from "react-hot-toast";
 import { AdminApiInstance } from "../apis/ApiIntances";
 import { DepartmentsSelection, DesignationSelection, SemesterSelection } from "../cards/CircularCard";
-import { FacultyApiInstance } from "../../Faculty/api/APIs";
+import { FacultyApiInstance}  from "../../Faculty/api/APIs";
 
 //------------- Create the profile form
 export const FacultyMemberForm = ({dept_name='',dept_readonly=false}) => {
@@ -50,7 +50,6 @@ export const FacultyMemberForm = ({dept_name='',dept_readonly=false}) => {
     try {
       const { data, status } = await AdminApiInstance.post('/department/member', myForm);
 
-      console.log('achievme', data)
 
       if (status === 200) toast.success(data?.message);
       else toast.error(data?.message)
@@ -143,7 +142,6 @@ export const AchievementForm = ({dept_name='',dept_readonly=false}) => {
     try {
       e.preventDefault();
       setLoading(true);
-      console.log("form ..............", form);
 
       const { data, status } = await AdminApiInstance.post("/department/achievement", form, {
         headers: {
@@ -285,7 +283,6 @@ export const AddDepartmentTimeTableForm = ({dept_name='',dept_readonly=false}) =
       e.preventDefault();
       setLoading(true);
 
-      console.log('form ',form);
 
       const myForm = new FormData();
       myForm.append('department', form.department)
@@ -345,7 +342,6 @@ export const AddDepartmentTimeTableForm = ({dept_name='',dept_readonly=false}) =
 
 //------------ add department notes
 export const AddDepartmentNotesForm = ({ dept_readonly = false, dept_name = '' }) => {
-  console.log('temp ', dept_readonly, dept_name)
   const [form, setForm] = useState({
     sem: '1st', department: dept_readonly ? dept_name : '', notes: '',
     title: "",
@@ -364,7 +360,6 @@ export const AddDepartmentNotesForm = ({ dept_readonly = false, dept_name = '' }
       e.preventDefault();
       setLoading(true);
 
-      console.log('form ', form);
 
       const myForm = new FormData();
       myForm.append('sem', form.sem)
@@ -376,7 +371,6 @@ export const AddDepartmentNotesForm = ({ dept_readonly = false, dept_name = '' }
       myForm.append('title', form.title)
 
       const { data, status } = await FacultyApiInstance.post(`/notes`, myForm);
-      console.log('notes', data);
 
       if (status === 200) toast.success(data?.message);
       else toast.error(data?.message);
@@ -407,10 +401,9 @@ export const AddDepartmentNotesForm = ({ dept_readonly = false, dept_name = '' }
 
               <DepartmentsSelection dept_readonly={dept_readonly} value={form.department} handleChange={handleChange} />
             </FormControl>
-            <FormControl>
-              <FormLabel>{"Semester"}</FormLabel>
-             <SemesterSelection value={form.sem} handleChange={handleChange} />
-            </FormControl>
+
+             <SemesterSelection value={form.sem} handleChange={handleChange} label="Semester" />
+          
 
             <FormInputBox
               label={"Notes"}

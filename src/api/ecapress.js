@@ -7,13 +7,11 @@ import { AdminApiInstance } from "../components/admin/apis/ApiIntances";
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
 const deleteNewCuttingRow = async (_id, setRefresh) => {
-  console.log("......... gal", _id);
   try {
     const { data } = await AdminApiInstance.delete(`/news/${_id}`);
     toast.success(data?.message);
     setRefresh(_id)
   } catch (error) {
-    console.log(".......... del", error);
     toast.error(error?.response?.data?.error);
   }
 };
@@ -25,7 +23,7 @@ export const fetchNewsCutting = async (setRefresh = null) => {
     const temp = data.result.map((val, i) => {
       return {
         SR_NO: i + 1,
-        Created_At: new Date(val.createdAt).toDateString(),
+        title:val?.title,
         Image: (
           <Link to={val.image}>
             <Button>View</Button>
@@ -38,6 +36,7 @@ export const fetchNewsCutting = async (setRefresh = null) => {
     });
     return temp
   } catch (error) {
-    console.log(".......... circular", error);
+    toast.error(error?.response?.data?.error);
+
   }
 };

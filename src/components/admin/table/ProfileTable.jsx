@@ -17,7 +17,6 @@ import {
 } from '@chakra-ui/react';
 const ProfileTable = ({ tableHeading, dataArray }) => {
 
-    console.log('data array ',dataArray);
 
     const handleDelete = (id) => {
         alert(`circular ${id} deleted`)

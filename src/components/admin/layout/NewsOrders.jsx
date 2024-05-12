@@ -20,12 +20,10 @@ const NewsOrders = () => {
   const [OrderCircular, setOrderCircular] = useState([]);
 
   const deleteNewsOrderRow = async (_id, val) => {
-    console.log("......... gal", _id, val);
     try {
       const { data } = await AdminApiInstance.delete(`/cells/${val}/${_id}`);
       toast.success(data?.message);
     } catch (error) {
-      console.log(".......... del", error);
       toast.error(error?.response?.data?.error);
     }
   };

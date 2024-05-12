@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Box, Flex, Heading, SimpleGrid, VStack } from '@chakra-ui/react'
 import CircularCard from '../cards/CircularCard';
 import { fetchTeamMember } from '../../../api/webTeam';
+import { useSearchParams } from 'react-router-dom';
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
@@ -10,12 +11,16 @@ const WebTeam = () => {
   const [WebTeam, setWebTeam] = useState([]);
   const [refresh, setRefresh] = useState([]);
 
+  
+  const [searchParams,setSearchParams] = useSearchParams();
+  const section = searchParams.get('section')
+
   useEffect(() => {
     ;(async () => {
       const team = await fetchTeamMember(setRefresh);
       setWebTeam(team);
     })();
-  }, [refresh]);
+  }, [refresh,section==='Team Member']);
 
   const cardData = [
     {

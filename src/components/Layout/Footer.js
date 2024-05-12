@@ -63,9 +63,9 @@ const Footer = () => {
 
               <Box>
                 <List style={{padding:0}}>
-                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',fontSize:extraSmall?'14px':""}} >About US</Link> </ListItem>
-                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',fontSize:extraSmall?'14px':""}} >Departments</Link> </ListItem>
-                  <ListItem sx={{padding:'0 5px'}}> <Link style={{color:'white',fontSize:extraSmall?'14px':""}} >Administration</Link> </ListItem>
+                  <ListItem sx={{padding:'0 5px'}}> <Link target="_blank" rel="noopener noreferrer" to={'/about/vision'} style={{color:'white',fontSize:extraSmall?'14px':""}} >About US</Link> </ListItem>
+                  <ListItem sx={{padding:'0 5px'}}> <Link target="_blank" rel="noopener noreferrer" to={'//computer'}  style={{color:'white',fontSize:extraSmall?'14px':""}} >Departments</Link> </ListItem>
+                  <ListItem sx={{padding:'0 5px'}}> <Link target="_blank" rel="noopener noreferrer" to={'/administration/bog'}  style={{color:'white',fontSize:extraSmall?'14px':""}} >Administration</Link> </ListItem>
                 </List>
               </Box>
 

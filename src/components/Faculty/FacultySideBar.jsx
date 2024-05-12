@@ -75,7 +75,6 @@ const NavItem = ({ icon, children, ...rest }) => {
   const href = (window.location.href).split('/');
   const activeLink = href[href?.length - 1];
 
-  // console.log(href,activeLink,children,'check link');
 
   return (
     <Box
@@ -156,9 +155,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
+                  {/* <Text fontSize="sm">Justina Clark</Text> */}
                   <Text fontSize="xs" color="gray.600">
-                    Admin
+                    Faculty
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
@@ -189,70 +188,73 @@ const Sidebar = ({ content }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
-      if (localStorage.getItem("typeOfUser") !== 'faculty')
-        navigate("/");
+      const userType = localStorage.getItem("typeOfUser");
+      console.log('user typ e',userType)
+      if (localStorage.getItem("typeOfUser") === 'admin')
+        navigate("/admin/administration");
+      else if (localStorage.getItem("typeOfUser") !== 'Head of Department')
+        navigate('/faculty/profile');
+      else navigate('/hod/profile')
     }
-    console.log('run');
-  },[])
+  }, [])
 
 
 
   useEffect(() => {
     const user = JSON.parse(localStorage?.getItem('userData'));
-    console.log('user at sidebar ', user);
 
-    if (user?.department === 'Civil Engineering')  setSearchParams({ dept_name: "civil" });
+    if (user?.department === 'Civil Engineering') setSearchParams({ dept_name: "civil" });
 
-   /* else if (department === 'cse') {
-      department = 'Computer Science and Engineering'
-    }
-
-    else if (department === 'eee') {
-      department = "Electrical Engineering"
-    }
-
-    else if (department === 'eic') {
-      department = "Electronic Instrumentation And Control Engineering"
-    }
-
-    else if (department === 'ece') {
-      department = "Electronics and Communication Engineering"
-    }
-
-    else if (department === 'mechanical') {
-      department = "Mechanical Engineering"
-    }
-
-    else if (department === 'mca') {
-      department = "Computer Applications"
-    }
-
-    else if (department === 'mba') {
-      department = "Department of Management Studies"
-    }
-
-    else if (department === 'physics') {
-      department = "Physics Department"
-    }
-
-    else if (department === 'chemistry') {
-      department = "Chemistry Department"
-    }
-
-    else if (department === 'maths') {
-      department = "Mathematics Department"
-    }
-
-    else if (department === 'english') {
-      department = "English Department"
-    }
-
-    else if (department === 'economics') {
-      department = "Economics Department"
-
-    }*/
+    /* else if (department === 'cse') {
+       department = 'Computer Science and Engineering'
+     }
+ 
+     else if (department === 'eee') {
+       department = "Electrical Engineering"
+     }
+ 
+     else if (department === 'eic') {
+       department = "Electronic Instrumentation And Control Engineering"
+     }
+ 
+     else if (department === 'ece') {
+       department = "Electronics and Communication Engineering"
+     }
+ 
+     else if (department === 'mechanical') {
+       department = "Mechanical Engineering"
+     }
+ 
+     else if (department === 'mca') {
+       department = "Computer Applications"
+     }
+ 
+     else if (department === 'mba') {
+       department = "Department of Management Studies"
+     }
+ 
+     else if (department === 'physics') {
+       department = "Physics Department"
+     }
+ 
+     else if (department === 'chemistry') {
+       department = "Chemistry Department"
+     }
+ 
+     else if (department === 'maths') {
+       department = "Mathematics Department"
+     }
+ 
+     else if (department === 'english') {
+       department = "English Department"
+     }
+ 
+     else if (department === 'economics') {
+       department = "Economics Department"
+ 
+     }*/
   }, [])
 
   return (
@@ -279,9 +281,11 @@ const Sidebar = ({ content }) => {
           :
           <>
             <Center>
+              <Link  to={'/'}>
               <Box maxH={'200px'} maxW={'500px'}>
-                <Image src='https://www.ecajmer.ac.in/images//white%20logo.png' />
-              </Box>
+                <Link to={'/'}>
+                <Image src='https://www.ecajmer.ac.in/images//white%20logo.png' /></Link>
+              </Box></Link>
             </Center>
           </>}
       </Box>
