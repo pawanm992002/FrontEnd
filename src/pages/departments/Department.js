@@ -64,6 +64,8 @@ export default function Department({ comp }) {
   const [value, setValue] = useState(0);
   const Mobile = useMediaQuery("(min-width:400px)");
   console.log(".......... comp", comp);
+  const medium = useMediaQuery("(max-width:1100px)");
+
 
   const styles = {
     myCustomList: {
@@ -266,7 +268,7 @@ console.log("Student = > ",studentAchivement)
             </Box>
           </TabPanel>
           <TabPanel value={value} index={3}>
-            <MyTable data={announcement} styles={{width:"calc(100vw - 400px)",height:440}}/>
+            <MyTable data={announcement} styles={{width:medium?"calc(100vw - 250px)":"calc(100vw - 400px)",height:440}}/>
           </TabPanel>
           <TabPanel value={value} index={4}>
             <Box sx={styles.myCustomList}>
@@ -308,11 +310,11 @@ console.log("Student = > ",studentAchivement)
           </TabPanel>
           <TabPanel value={value} index={5}>
             <Box sx={{ width: "100%"}} >
-              <MyTable data={circulars} />
+              <MyTable data={circulars} styles={{width:medium?"calc(100vw - 250px)":"calc(100vw - 400px)",height:440}}/>
             </Box>
           </TabPanel>
           <TabPanel value={value} index={6}>
-            <MyTable data={timeTable} />
+            <MyTable data={timeTable} styles={{width:medium?"calc(100vw - 250px)":"calc(100vw - 400px)",height:440}}/>
           </TabPanel>
           <TabPanel value={value} index={7}>
             <GallerySection images={gallery} />

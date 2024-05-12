@@ -179,7 +179,7 @@ const [loading,setLoading] = useState(false);
         </Flex>
         {loading && <Loading />}
 
-        {(section === 'Notes' || section === null || !section) && <MyTable data={DepartmentNotes} />}
+        {(section === 'Notes' || section === null || !section) && <MyTable data={DepartmentNotes} styles={{width:"calc(100% - 400px)",height:440}} />}
 
         {/* ------------- Notes Form -------------------  */}
         {section === "Notes Form" && <AddDepartmentNotesForm dept_readonly={true} dept_name={searchParams.get('dept_name')} />}

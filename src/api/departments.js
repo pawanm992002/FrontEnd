@@ -4,7 +4,7 @@ import { AdminApiInstance } from "../components/admin/apis/ApiIntances";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const url = `${process.env.REACT_APP_BACKEND_URL}`;
+const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
 const deleteDepartmentRow = async (_id, val, setRefresh=null) => {
   try {
@@ -78,7 +78,6 @@ export const fetchCircular = async (departmentValue, setRefresh=null) => {
     return temp;
   } catch (error) {
     toast.error(error?.response?.data?.error);
-
   }
 };
 

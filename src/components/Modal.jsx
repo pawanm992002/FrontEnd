@@ -4,7 +4,7 @@ import {Box, Modal} from '@mui/material'
 
 
 //------------- Create the model component
-export const ModalComponent = ({ open, handleClose, content }) => {
+export const ModalComponent = ({ open, handleClose, content,styles }) => {
     const style = {
       position: 'absolute',
       top: '50%',
@@ -12,7 +12,7 @@ export const ModalComponent = ({ open, handleClose, content }) => {
       transform: 'translate(-50%, -50%)',
       width: "90%",
       height: '90vh',
-      overflow:'scroll',
+      overflow:styles?.overflow?styles.overflow:'scroll',
       bgcolor: 'background.paper',
       border: '2px solid #000',
       boxShadow: '2px 3px 23px black',
