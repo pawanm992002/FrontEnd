@@ -2,9 +2,23 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 export default function About({ comp }) {
+  const styles = {
+    myCustomList: {
+        '&::-webkit-scrollbar': {
+            width: '2px',
+            // backgroundColor: '#5f6f9c',
+        },
+        '&::-webkit-scrollbar-thumb': {
+            borderRadius: '10px',
+            // WebkitBoxShadow: 'inset 0 0 6px rgba(0, 0, 0, 0.3)',
+        },
+        overflowY:'auto',
+        height:'600px',
+    },
+};
   if (comp === "cse")
     return (
-      <Box sx={{overflowY:'auto', height:'600px'}}>
+      <Box sx={styles.myCustomList}>
         <Typography variant="h6">About Us</Typography>
         <Typography variant="body2">
           The Department of Computer Science and Engineering at Engineering

@@ -18,7 +18,7 @@ import {
   fetchMembers,
   fetchTimetable,
 } from "../../api/departments";
-
+// import {dept,Student} from '../../Dummydata/dept';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -65,33 +65,50 @@ export default function Department({ comp }) {
   const Mobile = useMediaQuery("(min-width:400px)");
   console.log(".......... comp", comp);
 
+  const styles = {
+    myCustomList: {
+        '&::-webkit-scrollbar': {
+            width: '2px',
+            // backgroundColor: '#5f6f9c',
+        },
+        '&::-webkit-scrollbar-thumb': {
+            borderRadius: '10px',
+        },
+        overflowY:'auto',
+        height:'600px',
+    },
+};
+
+
   useEffect(() => {
     (async () => {
       const members = await fetchMembers(comp);
       setHod(
-        members.filter((val) => {
+        members?.filter((val) => {
           return val.Designation === "Head of Department";
         })
       );
       setProfessor(
-        members.filter((val) => {
+        members?.filter((val) => {
           return val.Designation === "Professor";
         })
       );
       setAssProfessor(
-        members.filter((val) => {
+        members?.filter((val) => {
           return val.Designation === "Assistant Professor";
         })
       );
 
       const achievements = await fetchAchievements(comp);
       setDepartmentAchivement(
-        achievements.filter((val) => {
+        //  dept  
+        achievements?.filter((val) => {
           return val?.Category === "Department";
         })
       );
       setStudentAchivement(
-        achievements.filter((val) => {
+        // Student
+        achievements?.filter((val) => {
           return val?.Category === "Students";
         })
       );
@@ -104,7 +121,7 @@ export default function Department({ comp }) {
 
       const gallery = await fetchGallery(comp);
       setGallery(
-        gallery.map((val) => {
+        gallery?.map((val) => {
           return val.Source.props.to;
         })
       );
@@ -162,7 +179,8 @@ export default function Department({ comp }) {
       BY: "Dr. Satya Narayan Tazi",
     },
   ];
-
+console.log("department = > ",departmentAchivement)
+console.log("Student = > ",studentAchivement)
   return (
     <Box
       sx={{
@@ -199,6 +217,7 @@ export default function Department({ comp }) {
               borderColor: "divider",
               width: !Mobile ? "100% " : "180px",
               minWidth: Mobile && "180px",
+              scrollbarWidth:'0px'
             }}
           >
             <Tab label="ABOUT" {...a11yProps(0)} />
@@ -219,12 +238,12 @@ export default function Department({ comp }) {
                 Head Of Department
               </Typography>
               {hod?.length > 0 &&
-                hod.map((people) => <People people={people} />)}
+                hod?.map((people) => <People people={people} />)}
               <Typography variant="h5" fontWeight="bold">
                 Professors
               </Typography>
               {professor?.length > 0 &&
-                professor.map((people) => <People people={people} />)}
+                professor?.map((people) => <People people={people} />)}
               <Typography variant="h5" fontWeight="bold">
                 Faculty - Assistant Professors
               </Typography>
@@ -243,14 +262,14 @@ export default function Department({ comp }) {
               }}
             >
               {labs?.length > 0 &&
-                labs.map((lab) => <Lab key={lab?.id} lab={lab} />)}
+                labs?.map((lab) => <Lab key={lab?.id} lab={lab} />)}
             </Box>
           </TabPanel>
           <TabPanel value={value} index={3}>
-            <MyTable data={announcement} />
+            <MyTable data={announcement} styles={{width:"calc(100vw - 400px)",height:440}}/>
           </TabPanel>
           <TabPanel value={value} index={4}>
-            <Box sx={{ overflowY: "auto", height: "600px" }}>
+            <Box sx={styles.myCustomList}>
               <Typography variant="h5" marginY="10px">
                 Department Achievements
               </Typography>
@@ -265,6 +284,7 @@ export default function Department({ comp }) {
               >
                 {departmentAchivement.map((item, i) => (
                   <li key={i}> {item?.Achievement} </li>
+                  // <li key={i}> {item} </li>
                 ))}
               </ul>
               <Typography variant="h5" marginY="10px">
@@ -281,6 +301,7 @@ export default function Department({ comp }) {
               >
                 {studentAchivement.map((item, i) => (
                   <li key={i}> {item?.Achievement} </li>
+                  // <li key={i}> {item} </li>
                 ))}
               </ul>
             </Box>

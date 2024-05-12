@@ -4,7 +4,7 @@ import { AdminApiInstance } from "../components/admin/apis/ApiIntances";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
+const url = `${process.env.REACT_APP_BACKEND_URL}`;
 
 const deleteDepartmentRow = async (_id, val, setRefresh=null) => {
   try {
@@ -55,7 +55,7 @@ export const fetchCircular = async (departmentValue, setRefresh=null) => {
     const { data } = await axios.get(
       `${url}/department-notice/${departmentValue}`
     );
-    const temp = data.result.map((val, i) => {
+    const temp = data?.result?.map((val, i) => {
       return {
         SR_NO: val.srNo,
         Department: val.department,
@@ -85,10 +85,11 @@ export const fetchCircular = async (departmentValue, setRefresh=null) => {
 // for achievements
 export const fetchAchievements = async (departmentValue, setRefresh=null) => {
   try {
+    console.log('url => ',url)
     const { data } = await axios.get(
       `${url}/department-achievement/${departmentValue}`
     );
-    const temp = data.result.map((val, i) => {
+    const temp = data?.result?.map((val, i) => {
       return {
         SR_NO: val._id,
         Department: val.department,
