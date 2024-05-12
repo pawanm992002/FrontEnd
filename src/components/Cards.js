@@ -12,8 +12,6 @@ import MyTable from "./utilily/MyTable";
 import { DepartmentsSelection } from "./admin/cards/CircularCard";
 import { fetchNotes } from "../api/departments";
 
-
-
 export default function Cards() {
 
 
@@ -155,16 +153,16 @@ export default function Cards() {
           <ModalComponent
             open={openNotes}
             handleClose={() => setOpenNotes(false)}
+            styles={{overflow:'hidden'}}
             content={
               <>
-                <section id="Notes">
+                <section id="Notes" style={{display:'flex',flexDirection:'column',gap:5}}>
                   <Typography>Notes</Typography>
 
                   <DepartmentsSelection value={departmentValue} handleChange={(e) => setDepartmentValue(e.target.value)} />
 
-
                   {/* ----------------- Showing notes here ------------ */}
-                  {notes && <MyTable data={notes} />}
+                  {notes && <MyTable data={notes} styles={{width:"calc(100vw - 400px)",height:440}} />}
                 </section>
               </>
             }

@@ -209,7 +209,7 @@ export const DepartmentsSelection = ({ value, handleChange, name = 'department',
     <>
 
 <FormControl>
-                <FormLabel>{label}</FormLabel>
+     <FormLabel requiredIndicator={null} >{label}</FormLabel>
       <Select
       cursor={'pointer'}
       value={value}
