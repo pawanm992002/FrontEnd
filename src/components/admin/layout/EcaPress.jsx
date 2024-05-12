@@ -9,7 +9,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AdminApiInstance } from '../apis/ApiIntances';
 import { fetchNewsCutting } from "../../../api/ecapress";
@@ -19,6 +19,10 @@ const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 const EcaPress = () => {
   const [NewsCutting, setNewsCutting] = useState([]);
   const [refresh, setRefresh] = useState()
+  const [searchParams,setSearchParams] = useSearchParams();
+  const section = searchParams.get('section')
+
+  
 
 
   useEffect(() => {
@@ -26,7 +30,7 @@ const EcaPress = () => {
       const news = await fetchNewsCutting(setRefresh);
       setNewsCutting(news);
     })();
-  }, [refresh]);
+  }, [refresh,section === 'News Cutting']);
   const cardData = [
     {
       title: "News Cutting",

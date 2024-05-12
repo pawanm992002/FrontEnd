@@ -8,7 +8,7 @@ export const url = process.env.REACT_APP_BACKEND_URL;
 export const AdminApiInstance = axios.create({
     baseURL : `${url}/admin`,
     headers: {
-        'Authorization': `Bearer ${Token}`,
+        'authorization': `Bearer ${Token}`,
       }
 });
 

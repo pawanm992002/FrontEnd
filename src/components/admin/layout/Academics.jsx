@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import CircularCard from "../cards/CircularCard";
+import CircularCard, { tableSection } from "../cards/CircularCard";
 import { SimpleGrid } from "@chakra-ui/react";
 import { fetchCalender, fetctFirstYearCircular } from "../../../api/academics";
+import { useSearchParams } from "react-router-dom";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
@@ -9,6 +10,9 @@ const Academics = () => {
   const [AcademicCalender, setAcademicCalender] = useState([]);
   const [FirstYearCircular, setFirstYearCircular] = useState([]);
   const [refresh, setRefresh] = useState();
+
+  const [searchParams,setSearchParams] = useSearchParams();
+  const section = searchParams.get('section')
 
   useEffect(() => {
     (async () => {
@@ -18,7 +22,7 @@ const Academics = () => {
       const firstCircular = await fetctFirstYearCircular(setRefresh);
       setFirstYearCircular(firstCircular);
     })();
-  }, [refresh]);
+  }, [refresh,tableSection.includes(section)]);
 
   const cardData = [
     {

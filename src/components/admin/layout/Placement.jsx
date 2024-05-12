@@ -11,11 +11,16 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { AdminApiInstance } from "../apis/ApiIntances";
 import CircularCard from "../cards/CircularCard";
+import { useSearchParams } from "react-router-dom";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
 const Placement = () => {
   const [placementData, setPlacementData] = useState([]);
+
+  
+  const [searchParams,setSearchParams] = useSearchParams();
+  const section = searchParams.get('section')
 
 
 
@@ -54,7 +59,7 @@ const Placement = () => {
 
       }
     })();
-  }, []);
+  }, [section === 'Placement']);
   const cardData = [
     {
       title: "Placement",

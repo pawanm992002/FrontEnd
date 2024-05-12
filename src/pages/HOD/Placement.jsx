@@ -12,12 +12,16 @@ import toast from "react-hot-toast";
 import { AdminApiInstance } from "../../components/admin/apis/ApiIntances";
 import CircularCard from "../../components/admin/cards/CircularCard";
 import { ReturnDepartmentValue } from "./Department";
+import { useSearchParams } from "react-router-dom";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
 const Placement = () => {
   const [placementData, setPlacementData] = useState([]);
   const [departmentValue, setDepartmentValue] = useState("cse");
+
+  const [searchParams,setSearchParams] = useSearchParams();
+  const section = searchParams.get('section');
 
 
   const deleteNewCuttingRow = async (_id) => {
@@ -57,7 +61,7 @@ const Placement = () => {
         toast.error(error?.response?.data?.error);
       }
     })();
-  }, []);
+  }, [section === 'Placement']);
   const cardData = [
     {
       title: "Placement",

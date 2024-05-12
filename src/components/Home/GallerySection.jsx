@@ -36,22 +36,36 @@ const GallerySection = ({ images,achievements }) => {
                   margin: "auto",
                 }}
               >
-                <Grid container sx={{ width: "100%", margin: "auto" }}>
-                  {achievements?.map((val, i) => (
-                    <Grid
-                      key={i}
-                      item
-                      xs={12}
-                      md={4}
-                      sx={{
-                        miniHeight:'34vh',
-                        margin: "0px",
-                      }}
-                    >
-                      <img src={val?.image} alt="gallery" width={'auto'} style={{content:'fit'}} />
-                    </Grid>
-                  ))}
-                </Grid>
+                <Grid
+              container
+              spacing={2}
+              sx={{
+                // display: "grid",
+                // gridTemplateColumns: XXS
+                //   ? "1fr"
+                //   : Xsmall
+                //   ? "1fr 1fr"
+                //   : "1fr 1fr 1fr",
+                width: "100%",
+                margin: "auto",
+                // gap: "5px",
+              }}
+            >
+              {achievements?.map((val, i) => (
+                <Grid
+                key={i}
+                item
+                xs={5}
+                md={4}
+                // sx={{
+                //   width:'445px',
+                //   margin: "0px",
+                // }}
+              >
+                <img src={val?.image} alt="gallery" width={'100%'} style={{content:'fit'}} />
+              </Grid>
+              ))}
+            </Grid>
               </Box>
             </>
           }
@@ -80,30 +94,31 @@ const GallerySection = ({ images,achievements }) => {
           >
             <Grid
               container
+              spacing={2}
               sx={{
-                display: "grid",
-                gridTemplateColumns: XXS
-                  ? "1fr"
-                  : Xsmall
-                  ? "1fr 1fr"
-                  : "1fr 1fr 1fr",
+                // display: "grid",
+                // gridTemplateColumns: XXS
+                //   ? "1fr"
+                //   : Xsmall
+                //   ? "1fr 1fr"
+                //   : "1fr 1fr 1fr",
                 width: "100%",
                 margin: "auto",
-                gap: "5px",
+                // gap: "5px",
               }}
             >
-              {images?.map((val, i) => (
-                <Grid
+              {achievements?.map((val, i) => (
+               i<=4 && <Grid
                 key={i}
                 item
-                xs={12}
+                xs={5}
                 md={4}
-                sx={{
-                  miniHeight:'34vh',
-                  margin: "0px",
-                }}
+                // sx={{
+                //   width:'445px',
+                //   margin: "0px",
+                // }}
               >
-                <img src={val?.image} alt="gallery" width={'auto'} style={{content:'fit'}} />
+                <img src={val?.image} alt="gallery" width={'100%'} style={{content:'fit'}} />
               </Grid>
               ))}
             </Grid>

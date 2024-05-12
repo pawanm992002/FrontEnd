@@ -7,6 +7,7 @@ import {VStack} from '@chakra-ui/react'
 import { ButtonBox, FormBox, FormInputBox } from '../FormInputBox';
 import { AdminApiInstance } from '../apis/ApiIntances';
 import toast from 'react-hot-toast';
+import { SemesterSelection, YearSelection } from '../cards/CircularCard';
 
 //------------- Create the calender form
 export const AcademicCalenderForm = () => {
@@ -28,6 +29,8 @@ export const AcademicCalenderForm = () => {
         setLoading(true);
         const myForm = new FormData();
 
+        console.log('form ',form);
+
         myForm.append('session',form.session)
         myForm.append('sem',form.sem)
         myForm.append('calender',form.calender)
@@ -39,11 +42,11 @@ export const AcademicCalenderForm = () => {
             else toast.error(data?.message)
 
         } catch (error) {
-            toast.error("Internal Server Error");
+            toast.error(error?.response?.data?.error);
         }
 
         setLoading(false);
-        setForm({session:'',sem:'',calender:''})
+        // setForm({session:'',sem:'',calender:''})
     };
 
     return (
@@ -52,9 +55,11 @@ export const AcademicCalenderForm = () => {
             <form onSubmit={handleSubmit}>
                 <VStack spacing={4}>
 
-                    <FormInputBox label={"Session Year"} name={'session'} placeholder={"2023-24"} value={form.session} handleChange={handleChange} />
+                    {/* <FormInputBox label={"Session Year"} name={'session'} placeholder={"2023-24"} value={form.session} handleChange={handleChange} /> */}
+                    <YearSelection value={form.session} handleChange={handleChange} name='session' label='Session' />
 
-                    <FormInputBox label={"Semester"} name={'sem'} placeholder={"Even"} value={form.sem} handleChange={handleChange} />
+                    <SemesterSelection value={form.sem} handleChange={handleChange} label='Semster' name='sem' />
+
 
                     <FormInputBox label={'Calender Time-Table'} type='file' handleChange={handleFileChange} name={'calender'} />
 

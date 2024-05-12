@@ -43,10 +43,10 @@ export default function EventsNews({ events, name }) {
         {events?.length <=0 && <Typography color={'red'} >No Data Found</Typography>}
         
           {events && events?.map((item, i) => (
-        i<=4 &&  <Box key={i}>
+        i<=4 &&  <Box key={i} >
           <a href={item?.notice} target="_blank" rel="noopener noreferrer">
               <Typography
-                sx={{ fontWeight: "10px", fontSize: "17px", mb: 1.2,textTransform:'capitalize' }}
+                sx={{ fontWeight: "10px", fontSize: "17px", mb: 1.2,textTransform:'capitalize',mt:1.2 }}
                 variant="h6"
               >
                 { item?.text ? item?.text?.slice(0, 30) : item?.title?.slice(0, 30)} ...

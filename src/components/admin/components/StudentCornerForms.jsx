@@ -7,7 +7,7 @@ import { FormControl, FormLabel, VStack } from '@chakra-ui/react'
 import { ButtonBox, FormBox, FormInputBox } from '../FormInputBox';
 import { AdminApiInstance } from '../apis/ApiIntances';
 import toast from 'react-hot-toast';
-import { DepartmentsSelection } from '../cards/CircularCard';
+import { DepartmentsSelection, YearSelection } from '../cards/CircularCard';
 
 //------------- Create the profile form
 export const AddCreativeArtSocietyCircular = () => {
@@ -40,7 +40,7 @@ export const AddCreativeArtSocietyCircular = () => {
             else toast.error(data?.message)
 
         } catch (error) {
-            toast.error("Internal Server Error");
+            toast.error(error?.response?.data?.error);
         }
 
         setLoading(false);
@@ -121,7 +121,7 @@ export const AddPlacementForm = ({dept_name='',dept_readonly=false}) => {
                             <DepartmentsSelection dept_readonly={dept_readonly} name='branch' value={form.branch} handleChange={handleChange} />
                         </FormControl>
 
-                        <FormInputBox label={"Batch"} name={'year'} placeholder={"2020-24"} value={form.year} handleChange={handleChange} />
+                       <YearSelection value={form.year} name='year' handleChange={handleChange} />
 
                         <FormInputBox label={"Package (In LPA)"} name={'package'} placeholder={"30 LPA"} value={form.package} handleChange={handleChange} />
 
@@ -162,7 +162,7 @@ export const AddCreativeArtSocietyGallery = () => {
             else toast.error(data?.message)
 
         } catch (error) {
-            toast.error("Internal Server Error");
+            toast.error(error?.response?.data?.error);
         }
 
         setLoading(false);
@@ -499,7 +499,7 @@ export const AddStudentAchievementCircular = () => {
 
 
         try {
-            const { data } = await AdminApiInstance.post('/student-corner/student-achievemen', myForm);
+            const { data } = await AdminApiInstance.post('/student-corner/student-achievement', myForm);
 
             if (data?.success === false) toast.error(data?.message);
             else toast.success(data?.message);
@@ -509,6 +509,7 @@ export const AddStudentAchievementCircular = () => {
         }
 
         setLoading(false);
+        setForm({ title: '', name: '', description: '', image: '' })
     };
 
     return (

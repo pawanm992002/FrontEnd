@@ -83,6 +83,7 @@ const NavItem = ({ icon, children, ...rest }) => {
   const href = (window.location.href).split('/');
   const activeLink = href[href?.length-1];
 
+  // console.log(href,activeLink,children,'check link');
 
   return (
     <Box
@@ -227,7 +228,8 @@ const Sidebar = ({ content }) => {
             <Center>
               <Link to={'/'}>
               <Box maxH={'200px'} maxW={'500px'}>
-                <Image src='https://www.ecajmer.ac.in/images//white%20logo.png' />
+                <Link to={'/'}>
+                <Image src='https://www.ecajmer.ac.in/images//white%20logo.png' /></Link>
               </Box>
               </Link>
             </Center>

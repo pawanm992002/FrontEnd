@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Flex,
   Heading,
@@ -20,6 +20,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { url } from "../apis/ApiIntances";
+import { AuthContext } from "../../../AuthContext";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
@@ -30,6 +31,9 @@ const Login = () => {
   //-------------------- State management stuff
   const [form, setForm] = useState({ username: "", password: "" });
   const [loading, setLoading] = useState(false);
+
+  const temp = useContext(AuthContext);
+  console.log('temp ',temp)
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -70,8 +74,9 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("isLoggedIn")))
+    if (localStorage?.getItem('isLoggedIn') && localStorage?.getItem('typeOfUser') === 'admin')
       navigate("/admin/administration");
+    console.log('getmp ',temp);
   }, []);
 
   return (

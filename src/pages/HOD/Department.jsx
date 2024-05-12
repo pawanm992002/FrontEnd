@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Button, SimpleGrid } from "@chakra-ui/react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import CircularCard from "../../components/admin/cards/CircularCard";
+import CircularCard, { tableSection } from "../../components/admin/cards/CircularCard";
 import { AdminApiInstance } from "../../components/admin/apis/ApiIntances";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
@@ -93,6 +93,9 @@ const Department = () => {
       toast.error(error?.response?.data?.error);
     }
   };
+
+  const [searchParams,setSearchParams] = useSearchParams();
+  const section = searchParams.get('section');
 
   useEffect(() => {
     const user = JSON.parse(localStorage?.getItem('userData'));
@@ -257,7 +260,6 @@ const Department = () => {
         const temp = data.result.map((val, i) => {
           return {
             SR_NO: val._id,
-            Created_At: new Date(val.createdAt).toDateString(),
             Title: val.title,
             Uploaded_By: val.faculty.name,
             Semester: val.sem,
@@ -279,7 +281,7 @@ const Department = () => {
         toast.error(error?.response?.data?.error);
       }
     })();
-  }, [departmentValue]);
+  }, [departmentValue,tableSection.includes(section)]);
 
   const cardData = [
     {

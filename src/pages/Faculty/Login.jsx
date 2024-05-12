@@ -66,7 +66,7 @@ const Login = () => {
           localStorage.setItem("typeOfUser", "faculty");
           navigate("/faculty/profile");
         } else {
-          localStorage.setItem("typeOfUser", "hod");
+          localStorage.setItem("typeOfUser", "Head of Department");
           navigate("/hod/profile");
         }
 

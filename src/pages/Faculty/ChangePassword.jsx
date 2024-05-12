@@ -21,7 +21,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import {FacultyApiInstance, url} from '../../components/Faculty/api/APIs'
+import { FacultyApiInstance, url } from '../../components/Faculty/api/APIs'
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);

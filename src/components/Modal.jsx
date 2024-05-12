@@ -12,6 +12,7 @@ export const ModalComponent = ({ open, handleClose, content }) => {
       transform: 'translate(-50%, -50%)',
       width: "90%",
       height: '90vh',
+      overflow:'scroll',
       bgcolor: 'background.paper',
       border: '2px solid #000',
       boxShadow: '2px 3px 23px black',

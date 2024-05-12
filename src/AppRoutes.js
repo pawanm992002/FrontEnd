@@ -15,11 +15,8 @@ import AdministrationPageRoutes from "./PagesRoutes/AdministrationPageRoutes";
 import AcademicsPageRoutes from "./PagesRoutes/AcademicsPageRoutes";
 import GrievancePageRoutes from "./PagesRoutes/GrievancePageRoutes";
 import StudentCornerRoutes from "./PagesRoutes/StudentCornerRoutes";
-import Admin from "./PagesRoutes/Admin";
 import DepartmentsRoutes from "./PagesRoutes/DepartmentsRoutes";
 import { AuthContext } from "./AuthContext";
-import { useContext } from "react";
-import FacultyPageRoutes from "./PagesRoutes/FacultyPageRoutes";
 import ChakraUIPages from "./PagesRoutes/ChakraUIPages";
 import Logout from "./pages/Logout";
 

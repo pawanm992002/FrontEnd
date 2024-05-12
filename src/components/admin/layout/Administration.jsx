@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import CircularCard from "../cards/CircularCard";
+import CircularCard, { tableSection } from "../cards/CircularCard";
 import { Button, SimpleGrid } from "@chakra-ui/react";
 import MyContext from "../../../AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { AdminApiInstance } from "../apis/ApiIntances";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -13,6 +13,9 @@ const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 const Administration = () => {
   const ctx = MyContext();
   const navigate = useNavigate();
+
+  const [searchParams,setSearchParams] = useSearchParams();
+  const section = searchParams.get('section');
 
   const [BogMom, setBogMom] = useState([]);
   const [ExamCircular, setExamCircular] = useState([]);
@@ -38,7 +41,8 @@ const Administration = () => {
       const registrarCir = await fetchRegistrarCircular(setRefresh);
       setRegistrarCircular(registrarCir);
     })();
-  }, [refresh]);
+    console.log('runnin ')
+  }, [refresh,tableSection?.includes(section)]);
 
   useEffect(() => {
     if (!ctx.isLoggedIn) {

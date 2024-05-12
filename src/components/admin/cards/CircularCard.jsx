@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Flex, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { Button, Flex, FormControl, FormLabel, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import AdminModal from '../AdminModal'
 import { AccountSectionForm, AdministrationForm, ExaminationForm, ProctorSectionForm, RegistrarSectionForm } from '../components/AdministrationForms'
 import { AcademicCalenderForm, FirstYearCircularForm } from '../components/AcademicsForms'
@@ -12,40 +12,42 @@ import { AddECAPressForm } from '../components/ECAPressForms'
 import MyTable from '../../utilily/MyTable'
 import { AddWebTeamForm } from '../components/WebTeamForms'
 
+export const tableSection = [
+  "Gallery",
+  "Time Table",
+  "Achievement",
+  "Notes",
+  "Academic Calender",
+  "First Year Circular",
+  "Event",
+  "Bog Mom",
+  "Examination Circular",
+  "Account Section Circular",
+  "Proctor Circular",
+  "Registrar Circular",
+  "CreativeArtData Circular",
+  "NCCData Circular",
+  "NCCData Gallery",
+  "HostelData Circular",
+  "HostelData Gallery",
+  "TransportationData Circular",
+  "StudentAchievementData",
+  'Alumni Circular',
+  "NewsData Circular",
+  "OrdersData Circular",
+  'News Cutting',
+  "Team Member",
+  "Faculty Member",
+  "Placement"
+];
+
 const CircularCard = ({ data, link,typeOfUser='admin',dept_name='',dept_readonly=false }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section");
 
 
-  let tableSection = [
-    "Gallery",
-    "Time Table",
-    "Achievement",
-    "Notes",
-    "Academic Calender",
-    "First Year Circular",
-    "Event",
-    "Bog Mom",
-    "Examination Circular",
-    "Account Section Circular",
-    "Proctor Circular",
-    "Registrar Circular",
-    "CreativeArtData Circular",
-    "NCCData Circular",
-    "NCCData Gallery",
-    "HostelData Circular",
-    "HostelData Gallery",
-    "TransportationData Circular",
-    "StudentAchievementData",
-    'Alumni Circular',
-    "NewsData Circular",
-    "OrdersData Circular",
-    'News Cutting',
-    "Team Member",
-    "Faculty Member",
-    "Placement"
-  ];
+ 
 
   return (
     <>
@@ -201,11 +203,13 @@ export default CircularCard;
 
 
 //-------- Create the departments list
-export const DepartmentsSelection = ({ value, handleChange, name = 'department',dept_readonly=false }) => {
+export const DepartmentsSelection = ({ value, handleChange, name = 'department',dept_readonly=false,label }) => {
   
   return (
     <>
 
+<FormControl>
+                <FormLabel>{label}</FormLabel>
       <Select
       cursor={'pointer'}
       value={value}
@@ -227,18 +231,22 @@ export const DepartmentsSelection = ({ value, handleChange, name = 'department',
         <option value="english">English</option>
         <option value="economics">Economics</option>
       </Select>
+      </FormControl>
     </>
   )
 }
 
 //-------- Create the designation list
-export const DesignationSelection = ({ value, handleChange }) => {
+export const DesignationSelection = ({ value, handleChange,label,name= 'designation'}) => {
   return (
     <>
+    
+    <FormControl>
+                <FormLabel>{label}</FormLabel>
       <Select
         value={value}
         onChange={handleChange}
-        name='designation'
+        name={name}
       >
         <option value="Professor">Professor</option>
         <option value="Assistant Professor">Assistant Professor</option>
@@ -248,18 +256,21 @@ export const DesignationSelection = ({ value, handleChange }) => {
         <option value="Technician">Technician</option>
         <option value="Lab Incharge">Lab Incharge</option>
       </Select>
+      </FormControl>
     </>
   )
 }
 
 //-------- Create the semester list
-export const SemesterSelection = ({ value, handleChange }) => {
+export const SemesterSelection = ({ value, handleChange,label="Semester",name='sem' }) => {
   return (
     <>
+    <FormControl>
+                <FormLabel>{label}</FormLabel>
       <Select
         value={value}
         onChange={handleChange}
-        name='sem'
+        name={name}
       >
         <option value="1st">1st</option>
         <option value="2nd">2nd</option>
@@ -270,18 +281,21 @@ export const SemesterSelection = ({ value, handleChange }) => {
         <option value="7th">7th</option>
         <option value="8th">8th</option>
       </Select>
+      </FormControl>
     </>
   )
 }
 
 //-------- Create the year selections
-export const YearSelection = ({ value, handleChange,name='year' }) => {
+export const YearSelection = ({ value, handleChange,name='year',label='Year' }) => {
   return (
     <>
+    <FormControl>
+                <FormLabel>{label}</FormLabel>
       <Select
         value={value}
         onChange={handleChange}
-        name='year'
+        name={name}
       >
         <option value="2018">2018</option>
         <option value="2019">2019</option>
@@ -291,6 +305,7 @@ export const YearSelection = ({ value, handleChange,name='year' }) => {
         <option value="2023">2023</option>
         <option value="2024">2024</option>
       </Select>
+      </FormControl>
     </>
   )
 }

@@ -8,7 +8,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AdminApiInstance } from "../../components/admin/apis/ApiIntances";
 import CircularCard from "../../components/admin/cards/CircularCard";
@@ -17,6 +17,10 @@ const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
 const EcaPress = () => {
   const [NewsCutting, setNewsCutting] = useState([]);
+
+  
+  const [searchParams,setSearchParams] = useSearchParams();
+  const section = searchParams.get('section');
 
   const deleteNewCuttingRow = async (_id) => {
     try {
@@ -34,7 +38,7 @@ const EcaPress = () => {
         const temp = data.result.map((val, i) => {
           return {
             SR_NO: i+1,
-            Created_At: new Date(val.createdAt).toDateString(),
+            Title:val?.title,
             Image: (
               <Link to={val.image}>
                 <Button>View</Button>
@@ -52,7 +56,7 @@ const EcaPress = () => {
         toast.error(error?.response?.data?.error);
       }
     })();
-  }, []);
+  }, [section === 'News Cutting']);
   const cardData = [
     {
       title: "News Cutting",

@@ -36,15 +36,12 @@ const ForgetPassword = () => {
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const [showResetLink, setShowResetLink] = useState(false);
-
-
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
       setLoading(true);
 
-      const {data,status,error} = await axios.post(`${url}/auth/faculty-forgot-password`, form)
+      const {data,status} = await axios.post(`${url}/auth/faculty-forgot-password`, form)
       
 
       if(status !== 200)
@@ -52,7 +49,6 @@ const ForgetPassword = () => {
       else {
 
         toast.success(data?.message);
-        setShowResetLink(data?.emailText);
       }
 
     } catch (error) {
@@ -81,7 +77,6 @@ const ForgetPassword = () => {
       >
         <Avatar bg="var(--main-primary)" />
         <Heading color="var(--main-primary)">Faculty Forget Password</Heading>
-        {showResetLink && <Text> Click the following link to reset password <Link color={'red'} href={showResetLink}>Click Here</Link> </Text> }
         <Box minW={{ base: "90%", md: "468px" }}>
           <form onSubmit={handleSubmit}>
             <Stack
