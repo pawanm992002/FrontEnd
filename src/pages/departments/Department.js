@@ -174,8 +174,8 @@ export default function Department({ comp }) {
     >
       <Box
         sx={{
-          maxWidth: "var(--maxWidth)",
-          width: "100%",
+          // maxWidth: "var(--maxWidth)",
+          width: '100%'
         }}
       >
         <Box
