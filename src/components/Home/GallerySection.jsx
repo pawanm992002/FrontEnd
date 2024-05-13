@@ -10,7 +10,7 @@ import {
 
 import ModalComponent from "../Modal";
 
-const GallerySection = ({ images,achievements }) => {
+const GallerySection = ({ images }) => {
   //------------- Control the modal component
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -51,7 +51,7 @@ const GallerySection = ({ images,achievements }) => {
                 // gap: "5px",
               }}
             >
-              {achievements?.map((val, i) => (
+              {images?.map((val, i) => (
                 <Grid
                 key={i}
                 item
@@ -62,7 +62,7 @@ const GallerySection = ({ images,achievements }) => {
                 //   margin: "0px",
                 // }}
               >
-                <img src={val?.image} alt="gallery" width={'100%'} style={{content:'fit'}} />
+                <img src={val} alt="gallery" width={'100%'} style={{content:'fit'}} />
               </Grid>
               ))}
             </Grid>
@@ -107,7 +107,7 @@ const GallerySection = ({ images,achievements }) => {
                 // gap: "5px",
               }}
             >
-              {achievements?.map((val, i) => (
+              {images?.map((val, i) => (
                i<=4 && <Grid
                 key={i}
                 item
@@ -118,7 +118,7 @@ const GallerySection = ({ images,achievements }) => {
                 //   margin: "0px",
                 // }}
               >
-                <img src={val?.image} alt="gallery" width={'100%'} style={{content:'fit'}} />
+                <img src={val} alt="gallery" width={'100%'} style={{content:'fit'}} />
               </Grid>
               ))}
             </Grid>

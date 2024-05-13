@@ -90,7 +90,7 @@ const Home = () => {
         if (status !== 200) toast.error(data?.message);
         else {
           setStudentAchievements(data?.result);
-          setTopImages(data?.result?.slice(0, 3))
+          setTopImages(data?.result?.slice(0, 3).map(item => (item.image)))
         }
 
       } catch (error) {
@@ -233,7 +233,7 @@ const Home = () => {
       </div>
 
 
-      <GallerySection achievements={studentAchievements} images={topImages} />
+      <GallerySection images={topImages} />
     </>
   );
 };
