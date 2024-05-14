@@ -6,18 +6,18 @@ import { Link } from "react-router-dom";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
-const deleteDepartmentRow = async (_id, val, setRefresh=null) => {
+const deleteDepartmentRow = async (_id, val, setRefresh = null) => {
   try {
     const { data } = await AdminApiInstance.delete(`/department/${val}/${_id}`);
     toast.success(data?.message);
-    setRefresh(Math.random())
+    setRefresh(Math.random());
   } catch (error) {
     toast.error(error?.response?.data?.error);
   }
 };
 
 // for members
-export const fetchMembers = async (departmentValue, setRefresh=null) => {
+export const fetchMembers = async (departmentValue, setRefresh = null) => {
   try {
     const { data } = await axios.get(
       `${url}/department-people/${departmentValue}`
@@ -45,12 +45,11 @@ export const fetchMembers = async (departmentValue, setRefresh=null) => {
     return temp;
   } catch (error) {
     toast.error(error?.response?.data?.error);
-
   }
 };
 
 // for circulars
-export const fetchCircular = async (departmentValue, setRefresh=null) => {
+export const fetchCircular = async (departmentValue, setRefresh = null) => {
   try {
     const { data } = await axios.get(
       `${url}/department-notice/${departmentValue}`
@@ -82,9 +81,9 @@ export const fetchCircular = async (departmentValue, setRefresh=null) => {
 };
 
 // for achievements
-export const fetchAchievements = async (departmentValue, setRefresh=null) => {
+export const fetchAchievements = async (departmentValue, setRefresh = null) => {
   try {
-    console.log('url => ',url)
+    console.log("url => ", url);
     const { data } = await axios.get(
       `${url}/department-achievement/${departmentValue}`
     );
@@ -97,7 +96,9 @@ export const fetchAchievements = async (departmentValue, setRefresh=null) => {
         Delete: (
           <Button
             key={val?._id}
-            onClick={() => deleteDepartmentRow(val?._id, "achievement", setRefresh)}
+            onClick={() =>
+              deleteDepartmentRow(val?._id, "achievement", setRefresh)
+            }
           >
             Delete
           </Button>
@@ -107,12 +108,11 @@ export const fetchAchievements = async (departmentValue, setRefresh=null) => {
     return temp;
   } catch (error) {
     toast.error(error?.response?.data?.error);
-
   }
 };
 
 // for timetable
-export const fetchTimetable = async (departmentValue, setRefresh=null) => {
+export const fetchTimetable = async (departmentValue, setRefresh = null) => {
   try {
     const { data } = await axios.get(
       `${url}/department-timetable/${departmentValue}`
@@ -130,7 +130,9 @@ export const fetchTimetable = async (departmentValue, setRefresh=null) => {
         Delete: (
           <Button
             key={val?._id}
-            onClick={() => deleteDepartmentRow(val?._id, "timetable", setRefresh)}
+            onClick={() =>
+              deleteDepartmentRow(val?._id, "timetable", setRefresh)
+            }
           >
             Delete
           </Button>
@@ -140,12 +142,11 @@ export const fetchTimetable = async (departmentValue, setRefresh=null) => {
     return temp;
   } catch (error) {
     toast.error(error?.response?.data?.error);
-
   }
 };
 
 // for gallery
-export const fetchGallery = async (departmentValue, setRefresh=null) => {
+export const fetchGallery = async (departmentValue, setRefresh = null) => {
   try {
     const { data } = await axios.get(
       `${url}/department-gallery/${departmentValue}`
@@ -172,12 +173,15 @@ export const fetchGallery = async (departmentValue, setRefresh=null) => {
     return temp;
   } catch (error) {
     toast.error(error?.response?.data?.error);
-
   }
 };
 
 // for notes
-export const fetchNotes = async (departmentValue, setRefresh=null,canDelete=true) => {
+export const fetchNotes = async (
+  departmentValue,
+  setRefresh = null,
+  canDelete = true
+) => {
   try {
     const { data } = await axios.get(
       `${url}/department-notes/${departmentValue}`
@@ -196,10 +200,11 @@ export const fetchNotes = async (departmentValue, setRefresh=null,canDelete=true
         Delete: (
           <Button
             key={val?._id}
-
-            onClick={() => {canDelete && deleteDepartmentRow(val?._id, "notes", setRefresh)}}
+            onClick={() => {
+              canDelete && deleteDepartmentRow(val?._id, "notes", setRefresh);
+            }}
           >
-            {canDelete ? 'Delete':'Click on view'}
+            {canDelete ? "Delete" : "Click on view"}
           </Button>
         ),
       };
@@ -207,6 +212,43 @@ export const fetchNotes = async (departmentValue, setRefresh=null,canDelete=true
     return temp;
   } catch (error) {
     toast.error(error?.response?.data?.error);
+  }
+};
 
+// for labs
+export const fetchLabs = async (departmentValue, setRefresh = null) => {
+  try {
+    const { data } = await axios.get(
+      `${url}/department-lab/${departmentValue}`
+    );
+    const temp = data.result.map((val, i) => {
+      return {
+        SR_NO: i + 1,
+        Department: val.department,
+        Name: val.name,
+        Room_NO: val.roomNo,
+        Lab_Incharge: val.labIncharge,
+        Lab_Technician: val.labTechnician,
+        Lab_Attendent: val.labAttendent,
+        Image: (
+          <Link key={val?._id} to={val.image}>
+            <Button>View</Button>
+          </Link>
+        ),
+        Delete: (
+          <Button
+            key={val?._id}
+            onClick={() => {
+              deleteDepartmentRow(val?._id, "lab", setRefresh);
+            }}
+          >
+            Delete
+          </Button>
+        ),
+      };
+    });
+    return temp;
+  } catch (error) {
+    toast.error(error?.response?.data?.error);
   }
 };

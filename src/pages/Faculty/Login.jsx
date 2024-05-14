@@ -43,35 +43,43 @@ const Login = () => {
       e.preventDefault();
       setLoading(true);
       const myForm = new FormData();
-      myForm.append('email', form.email);
-      myForm.append('password', form.password);
+      myForm.append("email", form.email);
+      myForm.append("password", form.password);
 
-      const { data, status, error } = await axios.post(`${url}/auth/faculty-login`, myForm)
-      
+      const { data, status, error } = await axios.post(
+        `${url}/auth/faculty-login`,
+        myForm
+      );
 
-      if (status !== 200)
-        toast.error("email and password not match");
+      if (status !== 200) toast.error("email and password not match");
       else {
-
         localStorage.setItem("token", data.token);
-        localStorage.setItem("isLoggedIn", true)
+        localStorage.setItem("isLoggedIn", true);
 
         toast.success(data?.message);
+        if (data?.faculty) {
+          if (data?.faculty?.designation === "Head of Department") {
+            localStorage.setItem("typeOfUser", "Head of Department");
+            navigate("/hod/profile");
+          } else {
+            localStorage.setItem("typeOfUser", "faculty");
+            navigate("/faculty/profile");
+          }
 
-        localStorage.setItem("userData", JSON.stringify(data?.faculty));
-        localStorage.setItem("typeOfUser", "faculty");
-
-        if (data?.faculty?.designation === 'Faculty') {
-
-          localStorage.setItem("typeOfUser", "faculty");
-          navigate("/faculty/profile");
-        } else {
-          localStorage.setItem("typeOfUser", "Head of Department");
-          navigate("/hod/profile");
+          localStorage.setItem("userData", JSON.stringify(data.admin));
         }
 
-      }
+        // localStorage.setItem("userData", JSON.stringify(data?.faculty));
+        // localStorage.setItem("typeOfUser", "faculty");
+        // if (data?.faculty?.designation === 'Faculty') {
 
+        //   localStorage.setItem("typeOfUser", "faculty");
+        //   navigate("/faculty/profile");
+        // } else {
+        //   localStorage.setItem("typeOfUser", "Head of Department");
+        //   navigate("/hod/profile");
+        // }
+      }
     } catch (error) {
       toast.error(error?.response?.data?.error);
     }
@@ -81,9 +89,10 @@ const Login = () => {
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
-      if (localStorage.getItem("typeOfUser") === 'faculty')
+      if (localStorage.getItem("typeOfUser") === "faculty")
         navigate("/faculty/profile");
-      else navigate('/hod/profile');
+      else if (localStorage.getItem("typeOfUser") === "Head of Department")
+        navigate("/hod/profile");
     }
   }, [handleSubmit]);
 
@@ -152,7 +161,7 @@ const Login = () => {
                   </InputRightElement>
                 </InputGroup>
                 <FormHelperText textAlign="right">
-                  <Link href='/faculty/forget-password'>forgot password?</Link>
+                  <Link href="/faculty/forget-password">forgot password?</Link>
                 </FormHelperText>
               </FormControl>
               <Button

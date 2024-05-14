@@ -31,7 +31,7 @@ const Home = () => {
       else {
         setEvents(data?.result);
       }
-
+      
     } catch (error) {
       toast.error(error?.response?.data?.error);
     }
@@ -41,7 +41,16 @@ const Home = () => {
       const { data, status } = await PublicApiInstance.get('/academics/first-year-circular');
       if (status !== 200) toast.error(data?.message);
       else {
-        setCirculars(data?.result);
+        setCirculars(data?.result?.map((item) => {
+          return {
+            image: item.notice,
+            srNo: item.srNo,
+            title: item.title,
+            _id: item._id,
+            createdAt: item.createdAt,
+            section: item.section,
+          }
+        }));
       }
 
     } catch (error) {
@@ -239,7 +248,7 @@ const HandellingClose = ()=>{
 
               <Typography variant='h5' className='double-line-bottom' sx={{ marginBottom: '20px' }} > Latest@ECA </Typography>
               <Box sx={{ width: "100%", display: 'flex', gap: '15px', flexWrap: ['wrap', 'no wap'], justifyContent: ['center'], alignItems: 'center' }}>
-                <EventsNews events={ events} name="Events" />
+                <EventsNews events={events} name="Events" />
                 <EventsNews events={circulars} name="Circulars" />
                 <EventsNews events={news} name="News" />
               </Box>

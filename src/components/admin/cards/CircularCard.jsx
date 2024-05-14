@@ -1,16 +1,50 @@
-import React from 'react'
-import { Button, Flex, FormControl, FormLabel, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
-import AdminModal from '../AdminModal'
-import { AccountSectionForm, AdministrationForm, ExaminationForm, ProctorSectionForm, RegistrarSectionForm } from '../components/AdministrationForms'
-import { AcademicCalenderForm, FirstYearCircularForm } from '../components/AcademicsForms'
-import { AchievementForm, AddDepartmentNotesForm, AddDepartmentTimeTableForm, AddNewDepartmentGalleryForm, FacultyMemberForm } from '../components/DepartmentsForms'
-import { AddNewEventForm } from '../components/EventsForms'
-import { Link, useSearchParams } from 'react-router-dom'
-import { AddCreativeArtSocietyCircular, AddCreativeArtSocietyGallery, AddHostelCircular, AddHostelGallery, AddNCCDataCircular, AddNCCDataGallery, AddPlacementForm, AddStudentAchievementCircular, AddTransportationCircular } from '../components/StudentCornerForms'
-import { AddAlumniCellCircular } from '../components/CellForms'
-import { AddECAPressForm } from '../components/ECAPressForms'
-import MyTable from '../../utilily/MyTable'
-import { AddWebTeamForm } from '../components/WebTeamForms'
+import React from "react";
+import {
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Select,
+  Text,
+  VStack,
+  useDisclosure,
+} from "@chakra-ui/react";
+import AdminModal from "../AdminModal";
+import {
+  AccountSectionForm,
+  AdministrationForm,
+  ExaminationForm,
+  ProctorSectionForm,
+  RegistrarSectionForm,
+} from "../components/AdministrationForms";
+import {
+  AcademicCalenderForm,
+  FirstYearCircularForm,
+} from "../components/AcademicsForms";
+import {
+  AchievementForm,
+  AddDepartmentNotesForm,
+  AddDepartmentTimeTableForm,
+  AddNewDepartmentGalleryForm,
+  FacultyMemberForm,
+} from "../components/DepartmentsForms";
+import { AddNewEventForm } from "../components/EventsForms";
+import { Link, useSearchParams } from "react-router-dom";
+import {
+  AddCreativeArtSocietyCircular,
+  AddCreativeArtSocietyGallery,
+  AddHostelCircular,
+  AddHostelGallery,
+  AddNCCDataCircular,
+  AddNCCDataGallery,
+  AddPlacementForm,
+  AddStudentAchievementCircular,
+  AddTransportationCircular,
+} from "../components/StudentCornerForms";
+import { AddAlumniCellCircular } from "../components/CellForms";
+import { AddECAPressForm } from "../components/ECAPressForms";
+import MyTable from "../../utilily/MyTable";
+import { AddWebTeamForm } from "../components/WebTeamForms";
 
 export const tableSection = [
   "Gallery",
@@ -32,22 +66,26 @@ export const tableSection = [
   "HostelData Gallery",
   "TransportationData Circular",
   "StudentAchievementData",
-  'Alumni Circular',
+  "Alumni Circular",
   "NewsData Circular",
   "OrdersData Circular",
-  'News Cutting',
+  "News Cutting",
   "Team Member",
   "Faculty Member",
-  "Placement"
+  "Placement",
+  'Labs'
 ];
 
-const CircularCard = ({ data, link,typeOfUser='admin',dept_name='',dept_readonly=false }) => {
+const CircularCard = ({
+  data,
+  link,
+  typeOfUser = "admin",
+  dept_name = "",
+  dept_readonly = false,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section");
-
-
- 
 
   return (
     <>
@@ -125,22 +163,48 @@ const CircularCard = ({ data, link,typeOfUser='admin',dept_name='',dept_readonly
           {section === "First Year Circular Form" && <FirstYearCircularForm />}
 
           {/* ---------------- Achievement Stuff -----------------  */}
-          {section === "Achievement Form" && <AchievementForm dept_name={dept_name} dept_readonly={dept_readonly} />}
+          {section === "Achievement Form" && (
+            <AchievementForm
+              dept_name={dept_name}
+              dept_readonly={dept_readonly}
+            />
+          )}
 
           {/* ------------- Notes Form -------------------  */}
-          {section === "Notes Form" && <AddDepartmentNotesForm dept_name={dept_name} dept_readonly={dept_readonly} />}
+          {section === "Notes Form" && (
+            <AddDepartmentNotesForm
+              dept_name={dept_name}
+              dept_readonly={dept_readonly}
+            />
+          )}
 
-          {section === 'Faculty Member Form' && <FacultyMemberForm dept_name={dept_name} dept_readonly={dept_readonly} />}
-
+          {section === "Faculty Member Form" && (
+            <FacultyMemberForm
+              dept_name={dept_name}
+              dept_readonly={dept_readonly}
+            />
+          )}
 
           {/* ---------------- Time Table Stuff -----------------  */}
-          {section === "Time Table Form" && <AddDepartmentTimeTableForm dept_name={dept_name} dept_readonly={dept_readonly} />}
+          {section === "Time Table Form" && (
+            <AddDepartmentTimeTableForm
+              dept_name={dept_name}
+              dept_readonly={dept_readonly}
+            />
+          )}
 
           {/* ---------------- Time Table Stuff -----------------  */}
-          {section === "Placement Form" && <AddPlacementForm dept_readonly={true}  dept_name={dept_name} />}
+          {section === "Placement Form" && (
+            <AddPlacementForm dept_readonly={true} dept_name={dept_name} />
+          )}
 
           {/* ---------------- Gallery Stuff -----------------  */}
-          {section === "Gallery Form" && <AddNewDepartmentGalleryForm dept_name={dept_name} dept_readonly={dept_readonly} />}
+          {section === "Gallery Form" && (
+            <AddNewDepartmentGalleryForm
+              dept_name={dept_name}
+              dept_readonly={dept_readonly}
+            />
+          )}
 
           {/* ---------------- Events Stuff -----------------  */}
           {section === "Event Form" && <AddNewEventForm />}
@@ -151,7 +215,7 @@ const CircularCard = ({ data, link,typeOfUser='admin',dept_name='',dept_readonly
           )}
 
           {/* --------------------- Team Member Form  */}
-          {section === 'Team Member Form' && <AddWebTeamForm />}
+          {section === "Team Member Form" && <AddWebTeamForm />}
 
           {/* ---------------- Creative Art data gallery Stuff -----------------  */}
           {section === "CreativeArtData Gallery Form" && (
@@ -176,7 +240,9 @@ const CircularCard = ({ data, link,typeOfUser='admin',dept_name='',dept_readonly
           )}
 
           {/* ---------------- Transportation Data Stuff -----------------  */}
-          {section === 'StudentAchievementData Form' && <AddStudentAchievementCircular />}
+          {section === "StudentAchievementData Form" && (
+            <AddStudentAchievementCircular />
+          )}
 
           {/* ---------------- Alumni Circular Stuff -----------------  */}
           {section === "Alumni Circular Form" && <AddAlumniCellCircular />}
@@ -185,130 +251,128 @@ const CircularCard = ({ data, link,typeOfUser='admin',dept_name='',dept_readonly
           {section === "NewsData Circular Form" && <AddAlumniCellCircular />}
 
           {/* ---------------- ordersData Circular Stuff -----------------  */}
-          {section === 'OrdersData Circular Form' && <AddAlumniCellCircular />}
-
+          {section === "OrdersData Circular Form" && <AddAlumniCellCircular />}
 
           {/* ---------------- ECA Press Stuff -----------------  */}
-          {section === 'News Cutting Form' && <AddECAPressForm />}
-
-
-
+          {section === "News Cutting Form" && <AddECAPressForm />}
         </VStack>
       </AdminModal>
     </>
-  )
-}
+  );
+};
 
 export default CircularCard;
 
-
 //-------- Create the departments list
-export const DepartmentsSelection = ({ value, handleChange, name = 'department',dept_readonly=false,label }) => {
-  
+export const DepartmentsSelection = ({
+  value,
+  handleChange,
+  name = "department",
+  dept_readonly = false,
+  label,
+}) => {
   return (
     <>
-
-<FormControl>
-     <FormLabel requiredIndicator={null} >{label}</FormLabel>
-      <Select
-      cursor={'pointer'}
-      value={value}
-        onChange={handleChange}
-        name={name}
-        isDisabled={dept_readonly}
-      >
-        <option value="cse">CSE</option>
-        <option value="civil">Civil</option>
-        <option value="eee">Electrical</option>
-        <option value="eic">Electronics</option>
-        <option value="ece">Electronics Communication</option>
-        <option value="mechanical">Mechanical</option>
-        <option value="mca">MCA</option>
-        <option value="mba">MBA</option>
-        <option value="physics">Physics</option>
-        <option value="chemistry">Chemistry</option>
-        <option value="maths">Maths</option>
-        <option value="english">English</option>
-        <option value="economics">Economics</option>
-      </Select>
+      <FormControl>
+        <FormLabel requiredIndicator={null}>{label}</FormLabel>
+        <Select
+          cursor={"pointer"}
+          value={value}
+          onChange={handleChange}
+          name={name}
+          isDisabled={dept_readonly}
+        >
+          <option value="cse">CSE</option>
+          <option value="civil">Civil</option>
+          <option value="eee">Electrical</option>
+          <option value="eic">Electronics</option>
+          <option value="ece">Electronics Communication</option>
+          <option value="mechanical">Mechanical</option>
+          <option value="mca">MCA</option>
+          <option value="mba">MBA</option>
+          <option value="physics">Physics</option>
+          <option value="chemistry">Chemistry</option>
+          <option value="maths">Maths</option>
+          <option value="english">English</option>
+          <option value="economics">Economics</option>
+        </Select>
       </FormControl>
     </>
-  )
-}
+  );
+};
 
 //-------- Create the designation list
-export const DesignationSelection = ({ value, handleChange,label,name= 'designation'}) => {
+export const DesignationSelection = ({
+  value,
+  handleChange,
+  label,
+  name = "designation",
+}) => {
   return (
     <>
-    
-    <FormControl>
-                <FormLabel>{label}</FormLabel>
-      <Select
-        value={value}
-        onChange={handleChange}
-        name={name}
-      >
-        <option value="Professor">Professor</option>
-        <option value="Assistant Professor">Assistant Professor</option>
-        <option value="Lecturer">Lecturer</option>
-        <option value="Head of Department">Head of Department</option>
-        <option value="Lab Attendant">Lab Attendant</option>
-        <option value="Technician">Technician</option>
-        <option value="Lab Incharge">Lab Incharge</option>
-      </Select>
+      <FormControl>
+        <FormLabel>{label}</FormLabel>
+        <Select value={value} onChange={handleChange} name={name}>
+          <option value="Professor">Professor</option>
+          <option value="Assistant Professor">Assistant Professor</option>
+          <option value="Lecturer">Lecturer</option>
+          <option value="Head of Department">Head of Department</option>
+          <option value="Lab Attendant">Lab Attendant</option>
+          <option value="Technician">Technician</option>
+          <option value="Lab Incharge">Lab Incharge</option>
+        </Select>
       </FormControl>
     </>
-  )
-}
+  );
+};
 
 //-------- Create the semester list
-export const SemesterSelection = ({ value, handleChange,label="Semester",name='sem' }) => {
+export const SemesterSelection = ({
+  value,
+  handleChange,
+  label = "Semester",
+  name = "sem",
+}) => {
   return (
     <>
-    <FormControl>
-                <FormLabel>{label}</FormLabel>
-      <Select
-        value={value}
-        onChange={handleChange}
-        name={name}
-      >
-        <option value="1st">1st</option>
-        <option value="2nd">2nd</option>
-        <option value="3rd">3rd</option>
-        <option value="4th">4th</option>
-        <option value="5th">5th</option>
-        <option value="6th">6th</option>
-        <option value="7th">7th</option>
-        <option value="8th">8th</option>
-      </Select>
+      <FormControl>
+        <FormLabel>{label}</FormLabel>
+        <Select value={value} onChange={handleChange} name={name}>
+          <option value="1st">1st</option>
+          <option value="2nd">2nd</option>
+          <option value="3rd">3rd</option>
+          <option value="4th">4th</option>
+          <option value="5th">5th</option>
+          <option value="6th">6th</option>
+          <option value="7th">7th</option>
+          <option value="8th">8th</option>
+        </Select>
       </FormControl>
     </>
-  )
-}
+  );
+};
 
 //-------- Create the year selections
-export const YearSelection = ({ value, handleChange,name='year',label='Year' }) => {
+export const YearSelection = ({
+  value,
+  handleChange,
+  name = "year",
+  label = "Year",
+}) => {
   return (
     <>
-    <FormControl>
-                <FormLabel>{label}</FormLabel>
-      <Select
-        value={value}
-        onChange={handleChange}
-        name={name}
-      >
-        <option value="2018">2018</option>
-        <option value="2019">2019</option>
-        <option value="2020">2020</option>
-        <option value="2021">2021</option>
-        <option value="2022">2022</option>
-        <option value="2023">2023</option>
-        <option value="2024">2024</option>
-      </Select>
+      <FormControl>
+        <FormLabel>{label}</FormLabel>
+        <Select value={value} onChange={handleChange} name={name}>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+        </Select>
       </FormControl>
     </>
-  )
-}
-
-
-
+  );
+};

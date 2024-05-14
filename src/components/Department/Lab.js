@@ -9,14 +9,15 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 export default function Lab({ lab }) {
+  console.log("ttttttt", lab)
   return (
     <Card sx={{ width: 345 }}>
-      <CardMedia sx={{ height: 140 }} image={lab?.img} title="green iguana" />
+      <CardMedia sx={{ height: 140 }} image={lab?.Image?.props?.to} title="green iguana" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {lab?.name}
+          {lab?.Name}
         </Typography>
-        <Typography variant="body2">Room: {lab?.room}</Typography>
+        <Typography variant="body2">Room: {lab?.Room_NO}</Typography>
         <Typography variant="body2">
           Lab Incharge: {lab?.Lab_Incharge}
         </Typography>
@@ -27,11 +28,11 @@ export default function Lab({ lab }) {
           Lab_Attendent: {lab?.Lab_Attendent}
         </Typography>
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         <Button variant="contained" size="small">
           View Details
         </Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }
