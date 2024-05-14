@@ -8,84 +8,28 @@ import {
   SimpleGrid,
   VStack,
 } from "@chakra-ui/react";
-import { AdminApiInstance } from '../apis/ApiIntances';
+import { AdminApiInstance } from "../apis/ApiIntances";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { fetchNewsCircular, fetchOrderCircular } from "../../../api/newsOrders";
 
 const url = `${process.env.REACT_APP_BACKEND_URL}/public`;
 
 const NewsOrders = () => {
   const [NewsCircular, setNewsCircular] = useState([]);
   const [OrderCircular, setOrderCircular] = useState([]);
-
-  const deleteNewsOrderRow = async (_id, val) => {
-    try {
-      const { data } = await AdminApiInstance.delete(`/cells/${val}/${_id}`);
-      toast.success(data?.message);
-    } catch (error) {
-      toast.error(error?.response?.data?.error);
-    }
-  };
+  const [refresh, setRefresh] = useState();
 
   useEffect(() => {
-    // for news circular
-    //   ;(async () => {
-    //     try {
-    //       const { data } = await axios.get(`${url}/cells/alumni`);
-    //       const temp = data.result.map((val, i) => {
-    //         return {
-    //           SR_NO: val.srNo,
-    //           Section: val.section,
-    //           Title: val.title,
-    //           Created_At: new Date(val.createdAt).toDateString(),
-    //           Notice: (
-    //             <Link to={val.notice}>
-    //               {" "}
-    //               <Button>View</Button>{" "}
-    //             </Link>
-    //           ),
-    //           Delete: (
-    //             <Button onClick={() => deleteAdmistrationRow(val?._id, "alumni-circular")}>
-    //               Delete
-    //             </Button>
-    //           ),
-    //         };
-    //       });
-    //       setAlumniCircular(temp);
-    //     } catch (error) {
-    //       console.log(".......... circular", error);
-    //     }
-    //   })();
-    // for orders circular
-    //   ;(async () => {
-    //     try {
-    //       const { data } = await axios.get(`${url}/cells/alumni`);
-    //       const temp = data.result.map((val, i) => {
-    //         return {
-    //           SR_NO: val.srNo,
-    //           Section: val.section,
-    //           Title: val.title,
-    //           Created_At: new Date(val.createdAt).toDateString(),
-    //           Notice: (
-    //             <Link to={val.notice}>
-    //               {" "}
-    //               <Button>View</Button>{" "}
-    //             </Link>
-    //           ),
-    //           Delete: (
-    //             <Button onClick={() => deleteAdmistrationRow(val?._id, "alumni-circular")}>
-    //               Delete
-    //             </Button>
-    //           ),
-    //         };
-    //       });
-    //       setAlumniCircular(temp);
-    //     } catch (error) {
-    //       console.log(".......... circular", error);
-    //     }
-    //   })();
-  }, []);
+    (async () => {
+      const circulars = await fetchNewsCircular(setRefresh);
+      setNewsCircular(circulars);
+
+      const orders = await fetchOrderCircular(setRefresh);
+      setOrderCircular(orders);
+    })();
+  }, [refresh]);
 
   const newsData = [
     {

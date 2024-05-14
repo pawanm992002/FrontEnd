@@ -39,6 +39,5 @@ export const fetchAlumni = async (setRefresh=null) => {
     return temp;
   } catch (error) {
     toast.error(error?.response?.data?.error);
-
   }
 };
