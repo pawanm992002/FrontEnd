@@ -22,7 +22,7 @@ export const fetchEvents = async (setRefresh = null) => {
     const { data } = await axios.get(`${url}/event`);
     const temp = data.result.map((val, i) => {
       return {
-        SR_NO: i,
+        SR_NO: i+1,
         Title: val?.title,
         Description: val?.description,
         Date: new Date(val.date).toDateString(),

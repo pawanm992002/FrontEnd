@@ -24,7 +24,7 @@ export const fetchMembers = async (departmentValue, setRefresh = null) => {
     );
     const temp = data.result.map((val, i) => {
       return {
-        SR_NO: i,
+        SR_NO: i+1,
         Name: val.name,
         Picture: <img src={`${val.profile}`} style={{ borderRadius: "50%" }} />,
         Email: val.email,
@@ -89,7 +89,7 @@ export const fetchAchievements = async (departmentValue, setRefresh = null) => {
     );
     const temp = data?.result?.map((val, i) => {
       return {
-        SR_NO: val._id,
+        SR_NO: i+1,
         Department: val.department,
         Achievement: val.achievement,
         Category: val.category,
@@ -153,7 +153,7 @@ export const fetchGallery = async (departmentValue, setRefresh = null) => {
     );
     const temp = data.result.map((val, i) => {
       return {
-        SR_NO: val._id,
+        SR_NO: i+1,
         Department: val.department,
         Source: (
           <Link key={val?._id} to={val.photo}>
@@ -188,7 +188,7 @@ export const fetchNotes = async (
     );
     const temp = data.result.map((val, i) => {
       return {
-        SR_NO: val._id,
+        SR_NO: i+1,
         Title: val.title,
         Uploaded_By: val.faculty.name,
         Semester: val.sem,

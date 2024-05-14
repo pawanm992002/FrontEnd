@@ -53,7 +53,7 @@ export const fetchCreativeGallery = async (setRefresh = null) => {
     const { data } = await axios.get(`${url}/student-corner/gallery/creative`);
     const temp = data.result.map((val, i) => {
       return {
-        SR_NO: i,
+        SR_NO: i+1,
         Image: (
           <Link to={val.image}>
             <Button>View</Button>
@@ -110,7 +110,7 @@ export const fetchNccGallery = async (setRefresh = null) => {
     const { data } = await axios.get(`${url}/student-corner/gallery/ncc`);
     const temp = data.result.map((val, i) => {
       return {
-        SR_NO: i,
+        SR_NO: i+1,
         Image: (
           <Link to={val.image}>
             <Button>View</Button>
@@ -165,7 +165,7 @@ export const fetchHostelGallery = async (setRefresh = null) => {
     const { data } = await axios.get(`${url}/student-corner/gallery/hostel`);
     const temp = data.result.map((val, i) => {
       return {
-        SR_NO: i,
+        SR_NO: i+1,
         Image: (
           <Link to={val.image}>
             <Button>View</Button>
@@ -226,7 +226,7 @@ export const fetchStudentAchievement = async (setRefresh = null) => {
     );
     const temp = data.result.map((val, i) => {
       return {
-        SR_NO: i,
+        SR_NO: i+1,
         Title: val.title,
         Name: val.name,
         Description: val.description,

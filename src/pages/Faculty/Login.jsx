@@ -66,7 +66,7 @@ const Login = () => {
             navigate("/faculty/profile");
           }
 
-          localStorage.setItem("userData", JSON.stringify(data.admin));
+          localStorage.setItem("userData", JSON.stringify(data.faculty));
         }
 
         // localStorage.setItem("userData", JSON.stringify(data?.faculty));
