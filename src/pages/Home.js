@@ -127,13 +127,38 @@ const Home = () => {
   }, [])
 
 
-  const [homeModel, setHomeModal] = useState(true);
+  const [homeModel, setHomeModal] = useState(null);
+
+  useEffect(() => {
+    // Function to retrieve the value of hasSeenModal from Session Storage
+    const getItemFromSessionStorage = () => {
+        // Retrieve the value of hasSeenModal from Session Storage
+        const storedValue = sessionStorage.getItem('hasSeenModal');
+
+        // If a value is found, parse it and set it as the state
+        if (storedValue) {
+          setHomeModal(JSON.parse(storedValue));
+        }
+    };
+
+    // Call the function to retrieve the value of hasSeenModal from Session Storage
+    getItemFromSessionStorage();
+}, []);
+const HandellingClose = ()=>{
+    sessionStorage.setItem('hasSeenModal', 'false');
+    const storedValue = sessionStorage.getItem('hasSeenModal');
+    console.log("session =>",storedValue); 
+        // If a value is found, parse it and set it as the state
+        if (storedValue) {
+          setHomeModal(JSON.parse(storedValue));
+        }
+}
   return (
     <>
       {homeModel &&
         <Modal
           open={homeModel}
-          onClose={() => setHomeModal(false)}
+          onClose={() => HandellingClose() }
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
@@ -147,7 +172,7 @@ const Home = () => {
             boxShadow: 24,
           }}>
             <img src='https://www.ecajmer.ac.in/images/tpo.jpg' style={{ width: '100%' }} alt='ECA:Engineering College Ajmer' />
-            <Button variant='contained' sx={{ width: '100%', backgroundColor: 'var(--main-primary)' }} onClick={() => setHomeModal(false)} >Close</Button>
+            <Button variant='contained' sx={{ width: '100%', backgroundColor: 'var(--main-primary)' }} onClick={() => HandellingClose()} >Close</Button>
           </Box>
         </Modal>
       }
@@ -213,7 +238,7 @@ const Home = () => {
             <Box sx={{ width: '100%', maxWidth: "var(--maxWidth)", display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
               <Typography variant='h5' className='double-line-bottom' sx={{ marginBottom: '20px' }} > Latest@ECA </Typography>
-              <Box sx={{ width: "100%", display: 'flex', gap: '15px', flexWrap: ['wrap', 'no wap'], justifyContent: ['space-between', 'center'], alignItems: 'center' }}>
+              <Box sx={{ width: "100%", display: 'flex', gap: '15px', flexWrap: ['wrap', 'no wap'], justifyContent: ['center'], alignItems: 'center' }}>
                 <EventsNews events={ events} name="Events" />
                 <EventsNews events={circulars} name="Circulars" />
                 <EventsNews events={news} name="News" />
