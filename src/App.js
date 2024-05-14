@@ -4,10 +4,17 @@ import "./App.css";
 
 //------------ Our all pages routes section
 import AppRoutes from "./AppRoutes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { calc } from "@chakra-ui/react";
 
 function App() {
+
+  useEffect(() => {
+      const hasSeenModal = sessionStorage.getItem('hasSeenModal');
+      if (!hasSeenModal || hasSeenModal === 'false') {
+          sessionStorage.setItem('hasSeenModal', true);
+      }
+  }, []);
 
 
 // const boxStyle = {

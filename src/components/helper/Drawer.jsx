@@ -10,6 +10,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { ExpandLess, ExpandMore, Inbox, Login, Mail, Phone, PhoneAndroid, Star } from '@mui/icons-material';
 import { useState } from 'react';
 import { Collapse, ListSubheader, useMediaQuery } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 
 
@@ -53,6 +54,7 @@ const Links = (view)=>(
   <Divider />
   <List>
     {['Faculty Login','Screen Reader'].map((text, index) => (
+    <Link to={'/'}>
       <ListItem key={text} disablePadding>
         <ListItemButton>
           <ListItemIcon>
@@ -61,6 +63,7 @@ const Links = (view)=>(
           <ListItemText primary={text} />
         </ListItemButton>
       </ListItem>
+    </Link>
     ))}
   </List>
 </Box>
@@ -82,14 +85,15 @@ const Links = (view)=>(
 <List component="div" disablePadding>
    {
 item[1].map((d,k)=>{
-  console.log("guygjk=>",d);
   return(
+  <Link to={`${d.link}`}>  
   <ListItemButton sx={{ pl: 4 }}>
   <ListItemIcon>
   <Star />
   </ListItemIcon>
   <ListItemText primary={d.name} />
   </ListItemButton>
+  </Link>
   )
 })
     }

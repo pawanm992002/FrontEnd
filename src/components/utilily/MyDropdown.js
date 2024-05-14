@@ -6,6 +6,7 @@ import { MenuItem as BaseMenuItem, menuItemClasses } from '@mui/base/MenuItem';
 import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import zIndex from '@mui/material/styles/zIndex';
 
 export default function MyDropdown({ dropdownList, dropdownName }) {
   const createHandleMenuClick = (menuItem) => {
@@ -14,10 +15,9 @@ export default function MyDropdown({ dropdownList, dropdownName }) {
   };
 
   return (
-    <Dropdown>
+    <Dropdown sx={{}}>
       <MenuButton sx={{background:'none',cursor:'pointer', border: 'none',textTransform:'capitalize'}}> {dropdownName} <ExpandMoreIcon /> </MenuButton>
-      
-      <Menu slots={{ listbox: Listbox }}>
+      <Menu slots={{ listbox: Listbox }} style={{zIndex:5}} >
         {dropdownList?.map((item,i) => (<Link key={i} to={item.link} style={{color:'black',cursor:'pointer',textTransform:'capitalize'}}>
           <MenuItem sx={{cursor:'pointer'}} onClick={createHandleMenuClick(item.name)}>{item.name}</MenuItem>
         </Link>))}
