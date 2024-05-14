@@ -53,14 +53,14 @@ const Links = (view)=>(
   </List>
   <Divider />
   <List>
-    {['Faculty Login','Screen Reader'].map((text, index) => (
-    <Link to={'/'}>
+    {[{name : 'Faculty Login',link:'/admin/login'},{name:'Screen Reader',link:'/screen/Reader'}].map((text, index) => (
+    <Link to={`${text.link}`}>
       <ListItem key={text} disablePadding>
         <ListItemButton>
           <ListItemIcon>
             {index % 2 === 0 ? <Login /> : <PhoneAndroid />}
           </ListItemIcon>
-          <ListItemText primary={text} />
+          <ListItemText primary={text.name} />
         </ListItemButton>
       </ListItem>
     </Link>
@@ -121,7 +121,7 @@ item[1].map((d,k)=>{
         >
         {Small &&
         <List
-        sx={{ width: '100%',maxWidth:'90%', bgcolor: 'background.paper'}}
+        sx={{ width: '100%',maxWidth:'90%', bgcolor: 'background.paper',textTransform:'capitalize'}}
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
