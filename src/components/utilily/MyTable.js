@@ -1,7 +1,7 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Typography } from "@mui/material";
 
 export default function MyTable({data,styles}) {
-    const tableHeaders = Object.keys(data.length > 0 ? data[0] : {})
+    const tableHeaders = Object.keys(data?.length > 0 ? data[0] : {})
 
     return (
         <Paper sx={{ width: styles?.width?styles?.width:600 }}>
@@ -9,7 +9,7 @@ export default function MyTable({data,styles}) {
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-                            {tableHeaders.length > 0 && tableHeaders?.map((header, index) => (
+                            {tableHeaders?.length > 0 && tableHeaders?.map((header, index) => (
                                 <TableCell sx={{backgroundColor: 'var(--cardBG)', color: 'var(--darkBG)', border: '1px solid grey'}} key={index}>{header}</TableCell>
                             ))}
                         </TableRow>

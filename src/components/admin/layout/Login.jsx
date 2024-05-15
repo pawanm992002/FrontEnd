@@ -33,7 +33,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const temp = useContext(AuthContext);
-  console.log('temp ',temp)
+  console.log("temp ", temp);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -46,21 +46,17 @@ const Login = () => {
     try {
       e.preventDefault();
       setLoading(true);
-      const {data} = await axios.post(`${url}/auth/admin-login`, form)
+      const { data } = await axios.post(`${url}/auth/admin-login`, form);
 
       if (data) {
-        if(data?.admin) {
+        if (data?.admin) {
           localStorage.setItem("userData", JSON.stringify(data.admin));
           localStorage.setItem("typeOfUser", "admin");
         }
-
-        if(data?.faculty) {
-          localStorage.setItem("userData", JSON.stringify(data.admin));
-          localStorage.setItem("typeOfUser", "faculty");
-        }
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("isLoggedIn", true)
         
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("isLoggedIn", true);
+
         toast.success(data?.message);
         navigate("/admin/administration");
       } else {
@@ -74,9 +70,12 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (localStorage?.getItem('isLoggedIn') && localStorage?.getItem('typeOfUser') === 'admin')
+    if (
+      localStorage?.getItem("isLoggedIn") &&
+      localStorage?.getItem("typeOfUser") === "admin"
+    )
       navigate("/admin/administration");
-    console.log('getmp ',temp);
+    console.log("getmp ", temp);
   }, []);
 
   return (

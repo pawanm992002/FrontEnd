@@ -44,12 +44,6 @@ const Administration = () => {
     console.log('runnin ')
   }, [refresh,tableSection?.includes(section)]);
 
-  useEffect(() => {
-    if (!ctx.isLoggedIn) {
-      navigate("/");
-    }
-  }, []);
-
   const cardData = [
     {
       title: "Bog Mom",

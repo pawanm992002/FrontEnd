@@ -9,6 +9,7 @@ import {
   fetchAchievements,
   fetchCircular,
   fetchGallery,
+  fetchLabs,
   fetchMembers,
   fetchNotes,
   fetchTimetable,
@@ -24,6 +25,7 @@ const Department = () => {
   const [DepartmentTimeTable, setDepartmentTimeTable] = useState([]);
   const [DepartmentGallery, setDepartmentGallery] = useState([]);
   const [DepartmentNotes, setDepartmentNotes] = useState([]);
+  const [Labs, setLabs] = useState([]);
   const [departmentValue, setDepartmentValue] = useState("cse");
   const [refresh, setRefresh] = useState();
 
@@ -49,6 +51,9 @@ const section = searchParams.get('section');
 
       const notes = await fetchNotes(departmentValue, setRefresh);
       setDepartmentNotes(notes);
+
+      const labs = await fetchLabs(departmentValue, setRefresh);
+      setLabs(labs);
     })();
   }, [departmentValue, refresh,tableSection.includes(section)]);
 
@@ -82,6 +87,11 @@ const section = searchParams.get('section');
       title: "Notes",
       length: DepartmentNotes?.length,
       data: DepartmentNotes,
+    },
+    {
+      title: "Labs",
+      length: Labs?.length,
+      data: Labs,
     },
   ];
 

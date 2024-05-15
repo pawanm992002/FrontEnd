@@ -26,7 +26,6 @@ const deleteWebTeamRow = async (_id, setRefresh) => {
               Picture: (<img src={`${val.image}`} style={{borderRadius: '50%'}} />),
               Branch: val.branch,
               Duration: val.duration,
-              Created_At: new Date(val.createdAt).toDateString(),
               Delete: (
                 <Button onClick={() => deleteWebTeamRow(val?._id, setRefresh)}>
                   Delete

@@ -24,7 +24,7 @@ export const fetchBogMom = async (setRefresh = null) => {
     const { data } = await axios.get(`${url}/administration/bog-mom`);
     const temp = data.result.map((val, i) => {
       return {
-        SR_NO: i,
+        SR_NO: i+1,
         Meeting_No: val.meetingNo,
         Date: new Date(val.date).toDateString(),
         Minute: (

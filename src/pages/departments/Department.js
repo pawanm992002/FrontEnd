@@ -14,6 +14,7 @@ import {
   fetchAchievements,
   fetchCircular,
   fetchGallery,
+  fetchLabs,
   fetchMembers,
   fetchNotes,
   fetchTimetable,
@@ -61,10 +62,39 @@ export default function Department({ comp }) {
   const [timeTable, setTimeTable] = useState([]);
   const [gallery, setGallery] = useState([]);
   const [announcement, setAnnoucement] = useState([]);
+  const [labs, setLabs] = useState([]);
   const [value, setValue] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const Mobile = useMediaQuery("(min-width:400px)");
   const medium = useMediaQuery("(max-width:1100px)");
+
+  const getTittle = () => {
+    const departmentTitle = [
+      { name: "Civil engineering", link: "civil" },
+      { name: "Electrical engineering", link: "electrical" },
+      { name: "Computer Science and Engineering", link: "cse" },
+      {
+        name: "Elctronic instrumentation and control engineering",
+        link: "EIC",
+      },
+      { name: "Electronics & communication engineering", link: "ECE" },
+      { name: "Mechanical engineering", link: "mechanical" },
+      { name: "Computer applications", link: "mca" },
+      { name: "Managment studies", link: "mba" },
+      { name: "Physics", link: "physics" },
+      { name: "Chemistry", link: "chemistry" },
+      { name: "Mathematics", link: "maths" },
+      { name: "English", link: "english" },
+      { name: "Economics", link: "economics" },
+      { name: "Alumini", link: "alumni" },
+    ];
+    console.log(
+      "jjjjjj",
+      comp,
+      departmentTitle.filter((item) => comp === item.link)
+    );
+    return departmentTitle.filter((item) => comp === item.link)[0]?.name;
+  };
 
   const styles = {
     myCustomList: {
@@ -101,6 +131,10 @@ export default function Department({ comp }) {
           })
         );
       }
+      if (value === 2) {
+        const labs = await fetchLabs(comp);
+        setLabs(labs);
+      }
       if (value === 3) {
         const annouces = await fetchNotes(comp);
         setAnnoucement(
@@ -122,7 +156,6 @@ export default function Department({ comp }) {
           })
         );
         setStudentAchivement(
-          // Student
           achievements?.filter((val) => {
             return val?.Category === "Students";
           })
@@ -161,27 +194,6 @@ export default function Department({ comp }) {
       setIsLoading(false);
     })();
   }, [comp, value]);
-
-  const labs = [
-    {
-      id: "1",
-      img: "./images/principal.jpg",
-      name: "Aryabhata",
-      room: "G-31",
-      Lab_Incharge: "Mr. Satish Kumar Ray and Mr. Pawan Kumar",
-      Lab_Technician: "Sh. Deepankar Das Gupta",
-      Lab_Attendent: "Sh. Charan Singh Panwar",
-    },
-    {
-      id: "2",
-      img: "./images/principal.jpg",
-      name: "C. V. Raman",
-      room: "G-23",
-      Lab_Incharge: "Ms. Shalini Yadav",
-      Lab_Technician: "Sh. Indersain",
-      Lab_Attendent: "Sh. Charan Singh Panwar",
-    },
-  ];
 
   return (
     <Box
@@ -231,101 +243,59 @@ export default function Department({ comp }) {
             <Tab label="TIME-TABLES" {...a11yProps(6)} />
             <Tab label="GALLERY" {...a11yProps(7)} />
           </Tabs>
-          {isLoading ? (
-            <Box sx={{ display: "flex", margin: "auto" }}>
-              <CircularProgress />
-            </Box>
-          ) : (
-            <>
-              <TabPanel value={value} index={0}>
-                <About comp={comp} />
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-                <Box sx={{ overflowY: "auto", height: "600px" }}>
-                  <Typography variant="h5" fontWeight="bold">
-                    Head Of Department
-                  </Typography>
-                  {hod?.length > 0 &&
-                    hod?.map((people) => <People people={people} />)}
-                  <Typography variant="h5" fontWeight="bold">
-                    Professors
-                  </Typography>
-                  {professor?.length > 0 &&
-                    professor?.map((people) => <People people={people} />)}
-                  <Typography variant="h5" fontWeight="bold">
-                    Faculty - Assistant Professors
-                  </Typography>
-                  {assProfessor?.length > 0 &&
-                    assProfessor?.map((people) => <People people={people} />)}
-                </Box>
-              </TabPanel>
-              <TabPanel value={value} index={2}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: "12px",
-                    overflowY: "auto",
-                    height: "600px",
-                  }}
-                >
-                  {labs?.length > 0 &&
-                    labs?.map((lab) => <Lab key={lab?.id} lab={lab} />)}
-                </Box>
-              </TabPanel>
-              <TabPanel value={value} index={3}>
-                <MyTable
-                  data={announcement}
-                  styles={{
-                    width: medium
-                      ? "calc(100vw - 250px)"
-                      : "calc(100vw - 400px)",
-                    height: 440,
-                  }}
-                />
-              </TabPanel>
-              <TabPanel value={value} index={4}>
-                <Box sx={styles.myCustomList}>
-                  <Typography variant="h5" marginY="10px">
-                    Department Achievements
-                  </Typography>
-                  <ul
-                    style={{
+          <Box>
+            <Typography
+              variant="h5"
+              className="double-line-bottom"
+              sx={{ marginLeft: "20px" }}
+            >
+              {getTittle()}
+            </Typography>
+            {isLoading ? (
+              <Box sx={{ display: "flex", margin: "auto" }}>
+                <CircularProgress />
+              </Box>
+            ) : (
+              <>
+                <TabPanel value={value} index={0}>
+                  <About comp={comp} />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                  <Box sx={{ overflowY: "auto", height: "600px" }}>
+                    <Typography variant="h5" fontWeight="bold">
+                      Head Of Department
+                    </Typography>
+                    {hod?.length > 0 &&
+                      hod?.map((people) => <People people={people} />)}
+                    <Typography variant="h5" fontWeight="bold">
+                      Professors
+                    </Typography>
+                    {professor?.length > 0 &&
+                      professor?.map((people) => <People people={people} />)}
+                    <Typography variant="h5" fontWeight="bold">
+                      Faculty - Assistant Professors
+                    </Typography>
+                    {assProfessor?.length > 0 &&
+                      assProfessor?.map((people) => <People people={people} />)}
+                  </Box>
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                  <Box
+                    sx={{
                       display: "flex",
-                      gap: "10px",
-                      flexDirection: "column",
-                      paddingLeft: "18px",
-                      marginTop: "10px",
+                      flexWrap: "wrap",
+                      gap: "12px",
+                      overflowY: "auto",
+                      height: "600px",
                     }}
                   >
-                    {departmentAchivement?.map((item, i) => (
-                      <li key={i}> {item?.Achievement} </li>
-                      // <li key={i}> {item} </li>
-                    ))}
-                  </ul>
-                  <Typography variant="h5" marginY="10px">
-                    Students Achievements
-                  </Typography>
-                  <ul
-                    style={{
-                      display: "flex",
-                      gap: "10px",
-                      flexDirection: "column",
-                      paddingLeft: "18px",
-                      marginTop: "10px",
-                    }}
-                  >
-                    {studentAchivement?.map((item, i) => (
-                      <li key={i}> {item?.Achievement} </li>
-                      // <li key={i}> {item} </li>
-                    ))}
-                  </ul>
-                </Box>
-              </TabPanel>
-              <TabPanel value={value} index={5}>
-                <Box sx={{ width: "100%" }}>
+                    {labs?.length > 0 &&
+                      labs?.map((lab) => <Lab key={lab?.id} lab={lab} />)}
+                  </Box>
+                </TabPanel>
+                <TabPanel value={value} index={3}>
                   <MyTable
-                    data={circulars}
+                    data={announcement}
                     styles={{
                       width: medium
                         ? "calc(100vw - 250px)"
@@ -333,24 +303,75 @@ export default function Department({ comp }) {
                       height: 440,
                     }}
                   />
-                </Box>
-              </TabPanel>
-              <TabPanel value={value} index={6}>
-                <MyTable
-                  data={timeTable}
-                  styles={{
-                    width: medium
-                      ? "calc(100vw - 250px)"
-                      : "calc(100vw - 400px)",
-                    height: 440,
-                  }}
-                />
-              </TabPanel>
-              <TabPanel value={value} index={7}>
-                <GallerySection images={gallery} />
-              </TabPanel>
-            </>
-          )}
+                </TabPanel>
+                <TabPanel value={value} index={4}>
+                  <Box sx={styles.myCustomList}>
+                    <Typography variant="h5" marginY="10px">
+                      Department Achievements
+                    </Typography>
+                    <ul
+                      style={{
+                        display: "flex",
+                        gap: "10px",
+                        flexDirection: "column",
+                        paddingLeft: "18px",
+                        marginTop: "10px",
+                      }}
+                    >
+                      {departmentAchivement?.map((item, i) => (
+                        <li key={i}> {item?.Achievement} </li>
+                        // <li key={i}> {item} </li>
+                      ))}
+                    </ul>
+                    <Typography variant="h5" marginY="10px">
+                      Students Achievements
+                    </Typography>
+                    <ul
+                      style={{
+                        display: "flex",
+                        gap: "10px",
+                        flexDirection: "column",
+                        paddingLeft: "18px",
+                        marginTop: "10px",
+                      }}
+                    >
+                      {studentAchivement?.map((item, i) => (
+                        <li key={i}> {item?.Achievement} </li>
+                        // <li key={i}> {item} </li>
+                      ))}
+                    </ul>
+                  </Box>
+                </TabPanel>
+                <TabPanel value={value} index={5}>
+                  <Box sx={{ width: "100%" }}>
+                    <MyTable
+                      data={circulars}
+                      styles={{
+                        width: medium
+                          ? "calc(100vw - 250px)"
+                          : "calc(100vw - 400px)",
+                        height: 440,
+                      }}
+                    />
+                  </Box>
+                </TabPanel>
+                <TabPanel value={value} index={6}>
+                  <MyTable
+                    data={timeTable}
+                    styles={{
+                      width: medium
+                        ? "calc(100vw - 250px)"
+                        : "calc(100vw - 400px)",
+                      height: 440,
+                    }}
+                  />
+                </TabPanel>
+                <TabPanel value={value} index={7}>
+                  <GallerySection images={gallery} />
+                </TabPanel>
+              </>
+            )}
+          </Box>
         </Box>
       </Box>
     </Box>

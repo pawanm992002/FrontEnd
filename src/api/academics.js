@@ -22,7 +22,7 @@ export const fetchCalender = async (setRefresh = null) => {
     const { data } = await axios.get(`${url}/academics/academic-calender`);
     const temp = data?.result.map((val, i) => {
       return {
-        SR_NO: i,
+        SR_NO: i+1,
         Session: val.session,
         Semester: val.sem,
         Calender: (
