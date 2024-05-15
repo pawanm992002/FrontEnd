@@ -105,7 +105,7 @@ const NavbarDropDownListData = [
       { name: "Transportation", link: "/Transportation" },
       { name: "Bank/ATM", link: "/Bank" },
       { name: "Student Achievements", link: "/view_student_achievement" },
-      { name: "Student Achievement Registeration", link: "/sports" },
+      { name: "Student Achievement Registeration", link: "https://www.ecajmer.ac.in/student_achievement" },
     ],
   ],
   [
