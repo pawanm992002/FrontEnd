@@ -66,7 +66,13 @@ export default function Cards() {
   useEffect(() => {
     (async () => {
       const data = await fetchNotes(departmentValue,null,false);
-      setNotes(data)
+      setNotes(data?.map((item) => ({
+        SR_NO: item.SR_NO,
+        Title: item.Title,
+        Semester: item.Semester,
+        Uploaded_By: item.Up,
+        Source: item.Source
+      })))
     })()
   }, [departmentValue]);
 
