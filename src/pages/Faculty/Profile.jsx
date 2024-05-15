@@ -22,12 +22,13 @@ import { ButtonBox, FormInputBox } from '../../components/admin/FormInputBox';
 import Loading from '../../components/Layout/Loading';
 import {FacultyApiInstance}  from'../../components/Faculty/api/APIs';
 import { DepartmentsSelection, DesignationSelection } from '../../components/admin/cards/CircularCard';
+import MyContext from '../../AuthContext';
 
 //Components Stuff
 
 
 const Profile = () => {
-
+const ctx = MyContext();
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const [loading, setLoading] = useState(false);
@@ -54,7 +55,11 @@ const Profile = () => {
 
         try {
 
-            const { data, status } = await FacultyApiInstance.put('/update-profile', myForm);
+            const { data, status } = await FacultyApiInstance.put('/update-profile', myForm,{
+                headers: {
+                    'authorization': `Bearer ${ctx.token}`,
+                  }
+            });
 
             if (status === 200) {
                 toast.success(data?.message);

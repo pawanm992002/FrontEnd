@@ -34,7 +34,7 @@ const PlacementSection = () => {
     try {
 
 
-      const { data, status } = await PublicApiInstance.get(`/placement-count?year=${year}`);
+      const { data, status } = await PublicApiInstance.get(`/placement-year-branch?year=${year}`);
 
       if (data?.result?.length <= 0) setPlacementData(initialPlacementState);
       else {

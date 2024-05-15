@@ -58,6 +58,8 @@ const Login = () => {
         localStorage.setItem("isLoggedIn", true);
 
         toast.success(data?.message);
+    navigate(0)
+      
         navigate("/admin/administration");
       } else {
         toast.error("Username or password is not valid");

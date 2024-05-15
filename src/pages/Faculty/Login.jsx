@@ -85,14 +85,16 @@ const Login = () => {
     }
     setLoading(false);
     setForm({ email: "", password: "" });
+
+    navigate(0)
   };
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
-      if (localStorage.getItem("typeOfUser") === "faculty")
-        navigate("/faculty/profile");
-      else if (localStorage.getItem("typeOfUser") === "Head of Department")
+      if (localStorage.getItem("typeOfUser") === "Head of Department")
         navigate("/hod/profile");
+       else navigate("/faculty/profile");
+        
     }
   }, [handleSubmit]);
 

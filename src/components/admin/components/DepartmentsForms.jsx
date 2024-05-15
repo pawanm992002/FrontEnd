@@ -9,6 +9,9 @@ import { AdminApiInstance } from "../apis/ApiIntances";
 import { DepartmentsSelection, DesignationSelection, SemesterSelection } from "../cards/CircularCard";
 import { FacultyApiInstance}  from "../../Faculty/api/APIs";
 
+import MyContext from '../../../AuthContext'
+
+
 //------------- Create the profile form
 export const FacultyMemberForm = ({dept_name='',dept_readonly=false}) => {
   const [form, setForm] = useState({
@@ -119,6 +122,126 @@ export const FacultyMemberForm = ({dept_name='',dept_readonly=false}) => {
             />
 
             <ButtonBox loading={loading} type="submit" title={"Add Faculty"} />
+          </VStack>
+        </form>
+      </FormBox>
+    </>
+  );
+};
+
+//------------- Create lab data
+export const DepartmentLabForm = ({dept_name='',dept_readonly=false}) => {
+  const ctx = MyContext();
+
+  const [form, setForm] = useState({
+    department:'cse', name:'', roomNo:'', labIncharge:'', labTechnician:'', labAttendent:'',image:''
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleFileChange = (e) => {
+    setForm({ ...form, profile: e.target.files[0] });
+  };
+
+
+  const handleSubmit = async (e) => {
+
+    e.preventDefault();
+
+    setLoading(true);
+    const myForm = new FormData();
+
+    myForm.append('name', form.name)
+    myForm.append('department', form.department)
+    myForm.append('roomNo', form.roomNo)
+    myForm.append('labAttendent', form.labAttendent)
+    myForm.append('labIncharge', form.labIncharge)
+    myForm.append('labTechnician', form.labTechnician)
+    myForm.append('image', form.image)
+
+
+    try {
+      const { data, status } = await AdminApiInstance.post('/department/lab', myForm,{ headers: {
+        'authorization': `Bearer ${ctx.token}`,
+      }});
+
+
+      if (status === 200) toast.success(data?.message);
+      else toast.error(data?.message)
+
+    } catch (error) {
+      toast.error(error?.response?.data?.error);
+    }
+
+    setLoading(false);
+    setForm({ department:'cse', name:'', roomNo:'', labIncharge:'', labTechnician:'', labAttendent:'',image:'' })
+  };
+
+  return (
+    <>
+      <FormBox title={"Add New Lab"}>
+        <form onSubmit={handleSubmit}>
+          <VStack spacing={4}>
+            <FormInputBox
+              label={"Lab Name"}
+              name={"name"}
+              placeholder={"CSE Lab"}
+              value={form.name}
+              handleChange={handleChange}
+            />
+
+            <FormInputBox
+              label={"Lab Technician"}
+              name={"labTechnician"}
+              type="text"
+              placeholder={"Lab Technician"}
+              value={form.labTechnician}
+              handleChange={handleChange}
+            />
+
+            <FormInputBox
+              label={"Lab Attendent"}
+              name={"labAttendent"}
+              type="text"
+              placeholder={"Lab Attendent"}
+              value={form.labAttendent}
+              handleChange={handleChange}
+            />
+
+            <FormInputBox
+              label={"Lab Incharge"}
+              name={"labIncharge"}
+              type="text"
+              placeholder={"Pawan Mishra"}
+              value={form.labIncharge}
+              handleChange={handleChange}
+            />
+
+            <FormInputBox
+              label={"Lab Image"}
+              type="file"
+              handleChange={handleFileChange}
+              name={"image"}
+            />
+            
+            <FormControl>
+              <FormLabel>{"Department"}</FormLabel>
+
+              <DepartmentsSelection name="department"  value={form.department} handleChange={handleChange} />
+            </FormControl>
+
+            <FormInputBox
+              label={"Lab RoomNo."}
+              name={"roomNo"}
+              placeholder={"C-7"}
+              value={form.roomNo}
+              handleChange={handleChange}
+            />
+
+            <ButtonBox loading={loading} type="submit" title={"Add Lab"} />
           </VStack>
         </form>
       </FormBox>
