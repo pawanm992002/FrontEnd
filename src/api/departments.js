@@ -54,6 +54,7 @@ export const fetchCircular = async (departmentValue, setRefresh = null) => {
     const { data } = await axios.get(
       `${url}/department-notice/${departmentValue}`
     );
+    console.log("data", data);
     const temp = data?.result?.map((val, i) => {
       return {
         SR_NO: val.srNo,

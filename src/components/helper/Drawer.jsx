@@ -53,7 +53,7 @@ const Links = (view)=>(
   </List>
   <Divider />
   <List>
-    {[{name : 'Faculty Login',link:'/admin/login'},{name:'Screen Reader',link:'/screen/Reader'}].map((text, index) => (
+    {[{name : 'Faculty Login',link:'/faculty/login'},{name:'Screen Reader',link:'/screenReader'}].map((text, index) => (
     <Link to={`${text.link}`}>
       <ListItem key={text} disablePadding>
         <ListItemButton>

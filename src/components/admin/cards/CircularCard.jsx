@@ -74,7 +74,8 @@ export const tableSection = [
   "Team Member",
   "Faculty Member",
   "Placement",
-  'Labs'
+  'Labs', 
+  'Circular'
 ];
 
 const CircularCard = ({

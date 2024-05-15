@@ -11,6 +11,7 @@ import { Facebook, LinkedIn, YouTube } from '@mui/icons-material';
 import './Home.css';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 //-------------- Create the public api instance
 export const PublicApiInstance = axios.create({
@@ -260,10 +261,10 @@ const HandellingClose = ()=>{
           <Cards />
         </section>
       </Box>
-      <div style={{ position: 'fixed', top: '50%', color: 'white',cursor:'pointer' }}>
-        <div className="box" style={{ backgroundColor: 'red', top: 'calc( 50% - 80px)' }} ><span>Youtube</span>  <YouTube htmlColor="white" fontSize="large" />  </div>
-        <div className="box" style={{ backgroundColor: 'skyblue', top: 'calc( 50% - 40px)' }}><span>Linkedin</span> <LinkedIn htmlColor="white" fontSize="large" /> </div>
-        <div className="box" style={{ backgroundColor: 'blue' }}><span>Facebook</span> <Facebook htmlColor="white" fontSize="large" /> </div>
+      <div style={{ position: 'fixed', top: '50%', color: 'white',cursor:'pointer' }}> 
+       <div className="box" style={{ backgroundColor: 'red', top: 'calc( 50% - 80px)' }} > <Link to={'https://www.youtube.com/channel/UCVGF7iH2BAda13cfORqIz2A'}> <span style={{color:'white'}} >Youtube</span> </Link> <YouTube htmlColor="white" fontSize="large" /> </div> 
+       <div className="box" style={{ backgroundColor: 'skyblue', top: 'calc( 50% - 40px)' }}><Link to={'https://www.linkedin.com/school/government-engineering-college-ajmer/'}> <span style={{color:'white'}}>Linkedin</span> </Link> <LinkedIn htmlColor="white" fontSize="large" /> </div>
+       <div className="box" style={{ backgroundColor: 'blue' }}><Link to={'https://www.facebook.com/gecajmerofficial/'}> <span style={{color:'white'}}>Facebook</span>  </Link> <Facebook htmlColor="white" fontSize="large" /></div>
       </div>
 
 
