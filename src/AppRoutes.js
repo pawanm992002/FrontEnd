@@ -19,6 +19,7 @@ import DepartmentsRoutes from "./PagesRoutes/DepartmentsRoutes";
 import { AuthContext } from "./AuthContext";
 import ChakraUIPages from "./PagesRoutes/ChakraUIPages";
 import Logout from "./pages/Logout";
+import ScreenReader from "./components/utilily/ScreenReader";
 
 const AppRoutes = () => {
   return (
@@ -54,7 +55,7 @@ const AppRoutes = () => {
 
               {/* ------------ Departments Pages Routes ------------------ X  */}
               {DepartmentsRoutes}
-
+              <Route path="/screenReader" element={<ScreenReader />} />
               {/* ------------ Admin Pages Routes ------------------ X  */}
         {/* {ChakraUIPages} */}
               <Route path="/*" element={<ChakraUIPages />} />
