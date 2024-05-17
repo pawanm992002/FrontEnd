@@ -7,7 +7,7 @@ import { PublicApiInstance } from '../../pages/Home';
 import toast from 'react-hot-toast';
 import { YearSelection } from '../admin/cards/CircularCard';
 
-export const branches = ["Economics Department", "English Department", "Mathematics Department", "Chemistry Department", "Physics Department", "Department of Management Studies", "Computer Applications", "Mechanical Engineering", "Electronics and Communication Engineering", "Electronic Instrumentation And Control Engineering", "Civil Engineering", "Electrical Engineering", 'Computer Science and Engineering', 'Information Technology'];
+export const branches = ["Mechanical Engineering", "Electronic Instrumentation And Control Engineering", "Electronics and Communication Engineering", "Civil Engineering", "Electrical Engineering", 'Computer Science and Engineering', 'Information Technology'];
 
 
 const PlacementSection = () => {
@@ -33,19 +33,31 @@ const PlacementSection = () => {
   const handleFindPlacements = async () => {
     try {
 
+      setPlacementData(initialPlacementState)
+      const { data, status } = await PublicApiInstance.get(`/placement-year-branch?year=${year}`);
 
-      const { data, status } = await PublicApiInstance.get(`/placement-count?year=${year}`);
-
-      if (data?.result?.length <= 0) setPlacementData(initialPlacementState);
-      else {
-        data?.result?.map((item, i) => {
-          setPlacementData(prevState => {
-            const newArray = [...prevState];
-            newArray[branches.indexOf(item?._id)] = item?.count;
-            return newArray;
-          });
-        })
+      // if (data?.result?.length <= 0) setPlacementData(initialPlacementState);
+      // else {
+      //   data?.result?.map((item, i) => {
+      //     setPlacementData(prevState => {
+      //       const newArray = [...prevState];
+      //       newArray[branches.indexOf(item?._id)] = item?.count;
+      //       return newArray;
+      //     });
+      //   })
+      // }
+      
+      if (data?.result?.length > 0) {
+        const updatedPlacementData = [...initialPlacementState];
+        data.result.forEach(item => {
+          const index = branches.indexOf(item._id);
+          if (index >= 0) {
+            updatedPlacementData[index] = item.count;
+          }
+        });
+        setPlacementData(updatedPlacementData);
       }
+
 
       if (status !== 200) toast.error(data?.message);
     } catch (error) {
@@ -56,17 +68,15 @@ const PlacementSection = () => {
 
 
   const handleYearChange = (e) => {
-    setYear(e.target.value);
-    handleFindPlacements();
+    setYear(e.target.value)
   }
 
 
   useEffect(() => {
     (async () => {
-
       handleFindPlacements();
     })()
-  }, [year, setYear]);
+  }, [year]);
 
   return (
     <>
@@ -76,7 +86,7 @@ const PlacementSection = () => {
         <ModalComponent open={open} handleClose={handleClose} content={
           <>
             <FormControl fullWidth>
-             <YearSelection value={year} handleChange={handleYearChange} />
+              <YearSelection value={year} handleChange={handleYearChange} />
             </FormControl>
             {/* ----------- Placement data to show the users   */}
             <Box sx={{ width: '80%', margin: 'auto' }}>
@@ -91,9 +101,9 @@ const PlacementSection = () => {
         <Box sx={{ width: !Medium ? "100%" : '90%', margin: 'auto' }} >
 
           <Box sx={{ display: 'flex', flexDirection: navView ? 'row' : 'column', alignItems: 'flex-start', justifyContent: 'space-evenly', width: Medium ? "80%" : smallMed ? '90%' : "95%", margin: 'auto', height: '100%' }} >
-            <img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/group-of-happy-international-students-posing-outdoors-near-university-building.jpg" alt="placements" width={"50%"} style={{ borderRadius: '12px', boxShadow: '2px 4px 9px black', minWidth: smallMed ? "500px" : navView ? "400px" : "100%", height: navView ? "auto" : "300px" ,marginBottom:'8px'}} />
+            <img src="https://tebewebe.online/edupreme/wp-content/uploads/sites/63/2023/11/group-of-happy-international-students-posing-outdoors-near-university-building.jpg" alt="placements" width={"50%"} style={{ borderRadius: '12px', boxShadow: '2px 4px 9px black', minWidth: smallMed ? "500px" : navView ? "400px" : "100%", height: navView ? "auto" : "300px", marginBottom: '8px' }} />
 
-            <Container sx={{ padding: '0px 5px 5px 5px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: Medium ? "360px" : '100%',my:'5' }} >
+            <Container sx={{ padding: '0px 5px 5px 5px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: Medium ? "360px" : '100%', my: '5' }} >
               {/*  <small>About Placements</small> */}
               <Typography sx={{ marginBottom: '5px', fontSize: Medium ? 50 : 40 }} variant='h3' >Placements In <span style={{ color: '#1976d2', fontSize: Medium ? 50 : 40 }}> ECA  </span></Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.2 }}>
