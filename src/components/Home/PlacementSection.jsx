@@ -36,26 +36,15 @@ const PlacementSection = () => {
       setPlacementData(initialPlacementState)
       const { data, status } = await PublicApiInstance.get(`/placement-year-branch?year=${year}`);
 
-      // if (data?.result?.length <= 0) setPlacementData(initialPlacementState);
-      // else {
-      //   data?.result?.map((item, i) => {
-      //     setPlacementData(prevState => {
-      //       const newArray = [...prevState];
-      //       newArray[branches.indexOf(item?._id)] = item?.count;
-      //       return newArray;
-      //     });
-      //   })
-      // }
-      
-      if (data?.result?.length > 0) {
-        const updatedPlacementData = [...initialPlacementState];
-        data.result.forEach(item => {
-          const index = branches.indexOf(item._id);
-          if (index >= 0) {
-            updatedPlacementData[index] = item.count;
-          }
-        });
-        setPlacementData(updatedPlacementData);
+      if (data?.result?.length <= 0) setPlacementData(initialPlacementState);
+      else {
+        data?.result?.map((item, i) => {
+          setPlacementData(prevState => {
+            const newArray = [...prevState];
+            newArray[branches.indexOf(item?._id)] = item?.count;
+            return newArray;
+          });
+        })
       }
 
 

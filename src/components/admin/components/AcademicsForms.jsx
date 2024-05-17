@@ -8,9 +8,13 @@ import { ButtonBox, FormBox, FormInputBox } from '../FormInputBox';
 import { AdminApiInstance } from '../apis/ApiIntances';
 import toast from 'react-hot-toast';
 import { SemesterSelection, YearSelection } from '../cards/CircularCard';
+import MyContext from '../../../AuthContext';
+
 
 //------------- Create the calender form
 export const AcademicCalenderForm = () => {
+    
+const ctx = MyContext();
     const [form,setForm] = useState({session:'',sem:'',calender:''});
     const [loading,setLoading] = useState(false);
 
@@ -36,7 +40,11 @@ export const AcademicCalenderForm = () => {
         myForm.append('calender',form.calender)
 
         try {
-            const { data, status } = await AdminApiInstance.post('/academic/calender', myForm);
+            const { data, status } = await AdminApiInstance.post('/academic/calender', myForm,{
+                headers: {
+                    'authorization': `Bearer ${ctx.token}`,
+                  }
+            });
 
             if (status === 200) toast.success(data?.message);
             else toast.error(data?.message)

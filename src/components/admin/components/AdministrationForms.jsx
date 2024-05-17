@@ -242,7 +242,7 @@ export const ProctorSectionForm = ()=>{
 }
 
 //------------ Create the examination Section form
-export const RegistrarSectionForm = ()=>{
+export const RegistrarSectionForm = ({title='Add Registrar Section Notice',btn='Add Registrar'})=>{
     const [form,setForm] = useState({title:'',notice:''});
     const [loading,setLoading] = useState(false);
 
@@ -279,7 +279,7 @@ export const RegistrarSectionForm = ()=>{
 
     return(
         <>
-            <FormBox title={"Add new registrar section circular"} >
+            <FormBox title={title} >
             <form onSubmit={handleSubmit}>
                 <VStack spacing={4}>
 
@@ -287,7 +287,7 @@ export const RegistrarSectionForm = ()=>{
 
                     <FormInputBox label={'Notice'} type='file' handleChange={handleFileChange} name={'notice'} />
 
-                    <ButtonBox loading={loading} type='submit' title={'Add Registrar Section Notice'} />
+                    <ButtonBox loading={loading} type='submit' title={btn} />
                 </VStack>
             </form>
 

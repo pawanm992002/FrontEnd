@@ -55,7 +55,7 @@ const section = searchParams.get('section');
       const labs = await fetchLabs(departmentValue, setRefresh);
       setLabs(labs);
     })();
-  }, [departmentValue, refresh,tableSection.includes(section)]);
+  }, [refresh,tableSection.includes(section)]);
 
   const cardData = [
     {

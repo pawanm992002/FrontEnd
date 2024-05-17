@@ -26,6 +26,7 @@ import {
   AddDepartmentNotesForm,
   AddDepartmentTimeTableForm,
   AddNewDepartmentGalleryForm,
+  DepartmentLabForm,
   FacultyMemberForm,
 } from "../components/DepartmentsForms";
 import { AddNewEventForm } from "../components/EventsForms";
@@ -155,7 +156,7 @@ const CircularCard = ({
 
           {/* ---------------- Proctor Section Stuff -----------------  */}
           {section === "Registrar Circular Form" && <RegistrarSectionForm />}
-          {section === "Circular Form" && <RegistrarSectionForm />}
+          {section === "Circular Form" && <RegistrarSectionForm title="Circular" btn="Add Circular" />}
 
           {/* ---------------- Academic Calender Stuff -----------------  */}
           {section === "Academic Calender Form" && <AcademicCalenderForm />}
@@ -256,6 +257,9 @@ const CircularCard = ({
 
           {/* ---------------- ECA Press Stuff -----------------  */}
           {section === "News Cutting Form" && <AddECAPressForm />}
+
+          {/* ---------------- ECA Labs Stuff -----------------  */}
+          {section === "Labs Form" && <DepartmentLabForm />}
         </VStack>
       </AdminModal>
     </>
