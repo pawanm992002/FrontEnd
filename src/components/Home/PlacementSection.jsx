@@ -33,7 +33,6 @@ const PlacementSection = () => {
   const handleFindPlacements = async () => {
     try {
 
-      setPlacementData(initialPlacementState)
       const { data, status } = await PublicApiInstance.get(`/placement-year-branch?year=${year}`);
 
       if (data?.result?.length <= 0) setPlacementData(initialPlacementState);
