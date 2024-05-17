@@ -252,7 +252,13 @@ export default function Department({ comp }) {
               {getTittle()}
             </Typography>
             {isLoading ? (
-              <Box sx={{ display: "flex", margin: "auto" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  margin: "10px",
+                  justifyContent: "center",
+                }}
+              >
                 <CircularProgress />
               </Box>
             ) : (
