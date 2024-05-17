@@ -6,7 +6,7 @@ import {
   Divider,
   Button,
 } from "@mui/material";
-import ListIcon from '@mui/icons-material/List';
+import ListIcon from "@mui/icons-material/List";
 import MyDropdown from "../utilily/MyDropdown";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -105,28 +105,7 @@ const NavbarDropDownListData = [
       { name: "Transportation", link: "/Transportation" },
       { name: "Bank/ATM", link: "/Bank" },
       { name: "Student Achievements", link: "/view_student_achievement" },
-      { name: "Student Achievement Registeration", link: "https://www.ecajmer.ac.in/student_achievement" },
-    ],
-  ],
-  [
-    "cell ",
-    [
-      { name: "AICTE Cell", link: "/eapCell" },
-      { name: "alumni cell", link: "/alumni" },
-      { name: "Campus Development & Planning Cell", link: "/eapCell" },
-      { name: "central library", link: "/centralLibrary" },
-      { name: "eap cell", link: "/eapCell" },
-      { name: "Environment cell", link: "/eapCell" },
-      { name: "erp cell", link: "/eapCell" },
-      { name: "IIC cell", link: "/eapCell" },
-      { name: "III cell", link: "/eapCell" },
-      { name: "NBA cell", link: "/eapCell" },
-      { name: "Sports Department", link: "/eapCell" },
-      { name: "StartUp cell", link: "/eapCell" },
-      { name: "Stores cell", link: "/eapCell" },
-      { name: "Unnat Bharat Abhiyan", link: "/eapCell" },
-      { name: "Value Cell", link: "/eapCell" },
-      { name: "Women Cell", link: "/eapCell" },
+      // { name: "Student Achievement Registeration", link: "/sports" },
     ],
   ],
   // [
@@ -158,8 +137,7 @@ export default function Navbar() {
 
   const [open, setOpen] = useState(false);
   const toggleDrawerOpen = () => setOpen(true);
-  const toggleDrawerClose  = () => setOpen(false);
-
+  const toggleDrawerClose = () => setOpen(false);
 
   return (
     <>
@@ -168,52 +146,64 @@ export default function Navbar() {
           display: "flex",
           justifyContent: "center",
           width: "100%",
-          padding: !navView?"5px 0":"",
+          padding: !navView ? "5px 0" : "",
           flexDirection: "column",
-          bgcolor:!navView?"var(--cardBG)":"",
-          color:!navView?"white":""
+          bgcolor: !navView ? "var(--cardBG)" : "",
+          color: !navView ? "white" : "",
         }}
       >
         <Box
           sx={{
-            width:!navView?"100%":"80%",
-            display:'flex',
-            padding:!navView?"0 5px":"auto",
-            justifyContent:'space-between',
-            alignItems:'center',
-            margin:'auto'
+            width: !navView ? "100%" : "80%",
+            display: "flex",
+            padding: !navView ? "0 5px" : "auto",
+            justifyContent: "space-between",
+            alignItems: "center",
+            margin: "auto",
           }}
-         >
+        >
           <img
-            src= {!navView?"/images/mobileLogo.png":"https://www.ecajmer.ac.in/images//white%20logo.png"}
+            src={
+              !navView
+                ? "/images/mobileLogo.png"
+                : "https://www.ecajmer.ac.in/images//white%20logo.png"
+            }
             alt="ecajmer_logo"
             srcset=""
-            width= {!navView?"50px":"400px"}
-            height={!navView?"50px":"80px"}
-            
-            style={{borderRadius:!navView?"50%":""}}
+            width={!navView ? "50px" : "400px"}
+            height={!navView ? "50px" : "80px"}
+            style={{ borderRadius: !navView ? "50%" : "" }}
           />
-          <Box 
+          <Box
             sx={{
-              display:'flex',
-              gap:2
+              display: "flex",
+              gap: 2,
             }}
           >
-          <Box sx={{display:'flex',alignItems:'center',gap:1}}>
-           <Mail fontSize={'small'}/>
-         {MobileView && <Typography>info@ecajmer.ac.in</Typography> }
-          </Box>
-          <Divider orientation="vertical" flexItem />
-          <Box sx={{display:'flex',alignItems:'center',gap:1}}>
-          <Phone/>
-        { MobileView && <Typography>645948465168</Typography> }
-          </Box>
-          <Divider orientation="vertical" flexItem />
-          <ListIcon fontSize="large" sx={{mr:1}} onClick={toggleDrawerOpen} />
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Mail fontSize={"small"} />
+              {MobileView && <Typography>info@ecajmer.ac.in</Typography>}
+            </Box>
+            <Divider orientation="vertical" flexItem />
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Phone />
+              {MobileView && <Typography>645948465168</Typography>}
+            </Box>
+            <Divider orientation="vertical" flexItem />
+            <ListIcon
+              fontSize="large"
+              sx={{ mr: 1 }}
+              onClick={toggleDrawerOpen}
+            />
           </Box>
         </Box>
-        <Drawer open={open} toggleDrawerOpen={toggleDrawerOpen} toggleDrawerClose={toggleDrawerClose}  data={NavbarDropDownListData} />
-       {navView && <Divider flexItem  sx={{bgcolor:'black'}}/> }
+        <Drawer
+          open={open}
+          toggleDrawerOpen={toggleDrawerOpen}
+          toggleDrawerClose={toggleDrawerClose}
+          data={NavbarDropDownListData}
+        />
+        {navView && <Divider flexItem sx={{ bgcolor: "black" }} />}
         <Box
           sx={{
             // maxWidth: "var(--maxWidth)",
@@ -221,44 +211,60 @@ export default function Navbar() {
             flexDirection: "column",
           }}
         >
-          {navView && 
+          {navView && (
             <Stack
               direction="row"
               bgcolor="#white"
-              sx={{ width: "80%", justifyContent: "center",margin:'auto',alignItems:'center' }}
+              sx={{
+                width: "80%",
+                justifyContent: "center",
+                margin: "auto",
+                alignItems: "center",
+              }}
             >
-            <Box sx={{display:"flex",flex:1,alignItems:'baseline'}}>
-              <Link
-                to="/"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  color: "black",
-                  fontWeight: 500,
-                  fontSize: "0.8rem",
-                  margin: "8px 6px",
-                  transition: "all 150ms ease",
-                  cursor: "pointer",
-                  marginLeft:20
-                  // padding: "8px 6px",
-                }}
+              <Box sx={{ display: "flex", flex: 1, alignItems: "baseline" }}>
+                <Link
+                  to="/"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    color: "black",
+                    fontWeight: 500,
+                    fontSize: "0.8rem",
+                    margin: "8px 6px",
+                    transition: "all 150ms ease",
+                    cursor: "pointer",
+                    marginLeft: 20,
+                    // padding: "8px 6px",
+                  }}
+                >
+                  Home
+                </Link>
+                {NavbarDropDownListData?.map((item, i) => (
+                  <MyDropdown
+                    key={i}
+                    dropdownName={item[0]}
+                    dropdownList={item[1]}
+                  />
+                ))}
+              </Box>
+              <a
+                href={"https://www.ecajmer.ac.in/mailDirectory"}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Home
-              </Link>
-              {NavbarDropDownListData?.map((item, i) => (
-                <MyDropdown
-                  key={i}
-                  dropdownName={item[0]}
-                  dropdownList={item[1]}
-                  
-                />
-              ))}
-</Box>
-<a  href={'https://www.ecajmer.ac.in/mailDirectory'} target="_blank" rel="noopener noreferrer">
-<Button sx={{ height:45,textTransform:'uppercase',fontSize:'0.8rem' }}>Admission</Button></a>
-              
+                <Button
+                  sx={{
+                    height: 45,
+                    textTransform: "uppercase",
+                    fontSize: "0.8rem",
+                  }}
+                >
+                  Admission
+                </Button>
+              </a>
             </Stack>
-              }
+          )}
         </Box>
       </Box>
     </>
